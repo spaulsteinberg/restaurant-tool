@@ -1,0 +1,10 @@
+@import './resets';
+@import './variables';
+
+.appWrapper {
+    font-weight: $global-font-weight;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}

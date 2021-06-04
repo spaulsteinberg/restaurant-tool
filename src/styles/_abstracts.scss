@@ -1,0 +1,5 @@
+@import './variables';
+
+@function alignment($align) {
+    @return map-get($alignment-values, $align);
+};
