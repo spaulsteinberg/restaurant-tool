@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import { Card, Form, Button, Alert } from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import LoadingSpinner from '../utility/LoadingSpinner';
 import './auth-styles.scss';
 
-const Login = () => {
+const ResetPassword = () => {
 
-    const initialState = {email: '', password: ''}
-    const [form, setFormValues] = useState(initialState);
+    const [email, setEmailValue] = useState('');
     const [error, setErrorState] = useState('');
-    const [isLoading, setLoadState] = useState(false)
-    const { login } = useAuth();
-    const history = useHistory();
+    const [success, setSuccessState] = useState('');
+    const [isLoading, setLoadState] = useState(false);
+    const { resetPassword } = useAuth();
 
     const handleInputChange = event => {
-        let { name, value } = event.target;
-        setFormValues({...form, [name]: value})
+        setEmailValue(event.target.value)
     }
 
     // redirect to dash on success
@@ -24,25 +22,26 @@ const Login = () => {
         event.preventDefault();
         setLoadState(true);
         setErrorState('');
-        if (!form.email || !form.password) {
+        setSuccessState('')
+        if (!email) {
             setLoadState(false)
-            return setErrorState("Must provide an email and password")
+            return setErrorState("Must provide an email")
         }
         try {
-            await login(form.email, form.password);
+            await resetPassword(email);
             setLoadState(false)
-            history.push("/")
+            setSuccessState("Reset instructions sent to inbox.")
         } catch (err) {
             setLoadState(false)
-            setErrorState(`Login failed. Please try again.`)
+            setErrorState(`Failed to reset password.`)
         }
     }
 
     return (
-        <React.Fragment>
-            <Card className=" card-wrapper my-4" id="login">
+        <div className="card-wrapper">
+            <Card className="my-4" id="reset-password">
                 <Card.Body>
-                    <h2 className="text-center mb-2">Login</h2>
+                    <h2 className="text-center mb-2">Reset Password</h2>
                 </Card.Body>
                 <Form className="mx-4">
                     <Form.Group id="email-group">
@@ -51,35 +50,26 @@ const Login = () => {
                             type="email" 
                             aria-labelledby="email" 
                             name="email" 
-                            value={form.email} 
+                            value={email} 
                             onChange={handleInputChange}
                             required/>
                     </Form.Group>
-                    <Form.Group id="password-group">
-                        <Form.Label id="password">Password</Form.Label>
-                        <Form.Control 
-                            type="password" 
-                            aria-labelledby="password" 
-                            name="password" 
-                            value={form.password}
-                            onChange={handleInputChange}
-                            required />
-                    </Form.Group>
                     <div className="text-center">
-                        <Button type="submit" className="w-100 my-3" variant="primary" onClick={handleSubmit}>Login</Button>
+                        <Button type="submit" className="w-100 my-3" variant="primary" onClick={handleSubmit}>Reset</Button>
                     </div>
                     <div className="text-center mb-2">
-                        <Link exact={`${true}`} to="/forgot-password">Forgot Password?</Link>
+                        <Link exact={`${true}`} to="/login">Back to Login</Link>
                     </div>
                     {isLoading ? <LoadingSpinner alignment="center">Loading...</LoadingSpinner> : null}
                     {error && <Alert variant="danger" className="text-center">{error}</Alert>}
+                    {success && <Alert variant="success" className="text-center">{success}</Alert>}
                 </Form>
             </Card>
-                <div className="w-100 text-center mt-2">
+                <div className="w-100 text-center">
                     Dont have an account yet? <Link exact={`${true}`} to="/signup">Sign Up</Link>
                 </div>
-        </React.Fragment>
+        </div>
     )
 }
 
-export default Login;
+export default ResetPassword;

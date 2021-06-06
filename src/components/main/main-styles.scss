@@ -2,4 +2,9 @@
 
 .profile-card {
     @include card-dimensions;
+    padding: 0 !important;
+}
+
+.alignTextLeft {
+    text-align: left;
 }

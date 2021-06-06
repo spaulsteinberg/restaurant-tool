@@ -13,13 +13,18 @@ export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true)
 
-    const signup = (email, password) => {
-        return auth.createUserWithEmailAndPassword(email, password);
-    }
+    const signup = (email, password) => auth.createUserWithEmailAndPassword(email, password);
 
-    const login = (email, password) => {
-        return auth.signInWithEmailAndPassword(email, password);
-    }
+    const login = (email, password) => auth.signInWithEmailAndPassword(email, password);
+
+    const logout = () => auth.signOut();
+
+    const resetPassword = email => auth.sendPasswordResetEmail(email);
+
+    /* current user will have update email and password functions for firebase updating */
+    const updateEmail = email => currentUser.updateEmail(email)
+
+    const updatePassword = password => currentUser.updatePassword(password)
     
     // create a subscription to firebase auth state change. put in useEffect to only call once (verify there is a user)
     useEffect(() => {
@@ -34,7 +39,11 @@ export const AuthProvider = ({children}) => {
     const value = {
         currentUser,
         signup,
-        login
+        login,
+        logout,
+        resetPassword,
+        updateEmail,
+        updatePassword
     }
 
     // this allows the auth context provider to be used as a wrapper component, and display the site content as children

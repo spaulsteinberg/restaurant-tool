@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import PageNotFound from './utility/PageNotFound';
 import Dashboard from './main/Dashboard';
 import Login from './auth/Login';
+import PrivateRoute from './utility/PrivateRoute';
+import ResetPassword from './auth/ResetPassword';
+import UpdateProfile from './main/profile/UpdateProfile';
 
 const App = () => {
   return (
@@ -15,9 +18,11 @@ const App = () => {
           <Container fluid className="appWrapper">
             <Row className="justify-content-center">
               <Switch>
-                <Route exact path="/" component={Dashboard} />
+                <PrivateRoute exact path="/" component={Dashboard} />
                 <Route exact path="/signup" component={SignUp} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/forgot-password" component={ResetPassword} />
+                <Route path="/update/profile" component={UpdateProfile} />
                 <Route exact path="*" component={PageNotFound} />
               </Switch>
             </Row>
