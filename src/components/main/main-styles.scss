@@ -1,4 +1,5 @@
 @import '../../styles/abstracts';
+@import '../../styles/variables';
 
 .profile-card {
     @include card-dimensions;
@@ -7,4 +8,53 @@
 
 .alignTextLeft {
     text-align: left;
+}
+
+.navbar-toggler {
+    font-size: 1rem !important;
+    button {
+        padding-left: 80px
+    }
+}
+
+.navbar {
+    justify-content: space-between !important;
+}
+.navbar-brand {
+    padding: auto space-element("nav");
+}
+
+.navLink, .navbar-brand {
+    @include nav-link-no-decorate;
+}
+
+.navLink {
+    font-size: $navigation-link-size;
+    padding: 0 space-element("nav");
+}
+
+/************* Profile styles *************/
+.gradient-profile {
+    background: #C6FFDD;
+    background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);
+    background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);
+}
+
+.dropdownMenu {
+    right: 0;
+    .navLinkDropdown {
+        color: black;
+        font-size: 16px;
+        text-decoration: none;
+    }
+}
+
+
+@media screen and (min-width: 500px) {
+    .navbar {
+        justify-content: space-between !important;
+    }
+    .navbar-brand {
+        margin: 0;
+    }
 }

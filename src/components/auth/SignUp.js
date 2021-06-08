@@ -3,6 +3,7 @@ import { Card, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import LoadingSpinner from '../utility/LoadingSpinner';
+import {EMAIL_REGEX} from '../../constants/constants';
 import './auth-styles.scss';
 
 const SignUp = () => {
@@ -13,7 +14,6 @@ const SignUp = () => {
     const [isLoading, setLoadState] = useState(false)
     const { signup } = useAuth();
     const history = useHistory();
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const handleInputChange = event => {
         let { name, value } = event.target;
@@ -27,7 +27,7 @@ const SignUp = () => {
             setLoadState(false);
             return setErrorState("Passwords do not match.")
         }
-        if (!emailRegex.test(form.email)) {
+        if (!EMAIL_REGEX.test(form.email)) {
             setLoadState(false);
             return setErrorState("Email is not valid")
         }

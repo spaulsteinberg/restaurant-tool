@@ -4,10 +4,19 @@
     @return map-get($alignment-values, $align);
 };
 
+@function space-element($space) {
+    @return map-get($static-element-space, $key: $space);
+};
+
 /* set default card dimensions */
 @mixin card-dimensions {
     width: 100%;
     max-width: 400px;
     min-width: 200px;
     margin: alignment("centered");
+}
+
+@mixin nav-link-no-decorate {
+    color: white !important;
+    text-decoration: none;
 }

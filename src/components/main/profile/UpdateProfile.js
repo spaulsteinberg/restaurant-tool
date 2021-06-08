@@ -3,6 +3,7 @@ import { Card, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import LoadingSpinner from '../../utility/LoadingSpinner';
+import { EMAIL_REGEX } from '../../../constants/constants'
 import '../main-styles.scss';
 
 const UpdateProfile = () => {
@@ -13,7 +14,6 @@ const UpdateProfile = () => {
     const [error, setErrorState] = useState('');
     const [isLoading, setLoadState] = useState(false);
     const history = useHistory();
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const placeholderText = "Leave blank to keep the same"
 
     const handleInputChange = event => {
@@ -28,7 +28,7 @@ const UpdateProfile = () => {
             return setErrorState("Passwords do not match.")
         }
 
-        if (!emailRegex.test(form.email)) {
+        if (!EMAIL_REGEX.test(form.email)) {
             return setErrorState("Email is not valid")
         }
 
