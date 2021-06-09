@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useUserContext } from '../../contexts/UserContext';
 import LoadingSpinner from '../utility/LoadingSpinner';
 import './auth-styles.scss';
 
@@ -12,6 +13,7 @@ const Login = () => {
     const [error, setErrorState] = useState('');
     const [isLoading, setLoadState] = useState(false)
     const { login } = useAuth();
+    const { setUserDataInLocalStorage } = useUserContext();
     const history = useHistory();
 
     const handleInputChange = event => {
@@ -30,6 +32,7 @@ const Login = () => {
         }
         try {
             await login(form.email, form.password);
+            await setUserDataInLocalStorage(form.email)
             setLoadState(false)
             history.push("/")
         } catch (err) {

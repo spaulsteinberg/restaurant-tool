@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useUserContext } from '../../../contexts/UserContext';
 import '../../main/main-styles.scss';
 
 const ProfileDropdown = () => {
 
     const { logout } = useAuth();
+    const { clearUserDataFromLocalStorage } = useUserContext();
     const [error, setError] = useState("");
     const history = useHistory();
 
@@ -14,6 +16,7 @@ const ProfileDropdown = () => {
         setError('')
         try {
             await logout();
+            clearUserDataFromLocalStorage();
             history.push('/login');
         } catch (err) {
             setError("Failed to logout. Please try again")
