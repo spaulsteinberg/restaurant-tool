@@ -3,7 +3,7 @@ import {Navbar, Nav} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import '../../main/main-styles.scss';
-import Profile from '../profile/Profile';
+import ProfileDropdown from '../profile/ProfileDropdown';
 
 const NavigationBar = () => {
   const {currentUser} = useAuth();
@@ -59,11 +59,12 @@ useEffect(() => {
           <React.Fragment>
             <Navbar.Toggle aria-controls="collapsed-nav-items" />
             <Navbar.Brand>Admin Tool</Navbar.Brand>
-            <Profile />
+            <ProfileDropdown />
             <Navbar.Collapse id="collapsed-nav-items">
               <Nav className="alignTextLeft">
                 <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
                 <NavLink className="navLink" to="/profile">Profile</NavLink>
+                {/* Also add inventory and past order links*/}
               </Nav>
             </Navbar.Collapse>
           </React.Fragment>
@@ -77,7 +78,7 @@ useEffect(() => {
             </Navbar.Collapse>
             <Navbar.Toggle aria-controls="collapsed-nav-items" />
         <Navbar.Brand>Admin Tool</Navbar.Brand>
-        <Profile />
+        <ProfileDropdown />
           </React.Fragment>
         }
       </Navbar>

@@ -1,34 +1,21 @@
-import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import './main-styles.scss';
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 const Root = (props) => {
 
-    const { currentUser, logout } = useAuth();
-    const [error, setError] = useState("");
-    const history = useHistory();
-
-    const handleLogout = async () => {
-        setError('')
-        try {
-            await logout();
-            history.push('/login');
-        } catch (err) {
-            setError("Failed to logout. Please try again")
-        }
-    } 
+    
 
     return (
-        <>
-            <React.StrictMode>
-            <div>
-            Im the dash!
-            <Button variant="success" className="btn" onClick={handleLogout}>Log out</Button>
-            </div>
-            </React.StrictMode>
-        </>
+        <React.Fragment>
+        <React.StrictMode>
+          <Container fluid className="appWrapper">
+            <Row>
+                {props.children}
+            </Row>
+          </Container>
+        </React.StrictMode>
+        </React.Fragment>
     )
 }
 

@@ -33,6 +33,7 @@ const Login = () => {
             setLoadState(false)
             history.push("/")
         } catch (err) {
+            console.log(err)
             setLoadState(false)
             setErrorState(`Login failed. Please try again.`)
         }

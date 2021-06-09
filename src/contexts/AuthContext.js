@@ -43,7 +43,7 @@ export const AuthProvider = ({children}) => {
         logout,
         resetPassword,
         updateEmail,
-        updatePassword
+        updatePassword,
     }
 
     // this allows the auth context provider to be used as a wrapper component, and display the site content as children
