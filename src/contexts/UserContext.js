@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { userReducer, ADD_USER, CLEAR_USER, UPDATE_USER_EMAIL } from '../components/reducers/userReducer';
-import {db} from '../firebase'
+import {db} from '../firebase';
 
 const UserContext = React.createContext();
 
@@ -19,11 +19,18 @@ export const UserProvider = (props) => {
         userDispatch({type: CLEAR_USER})
     }
 
-    const updateUserContextEmail = email => userDispatch({type: UPDATE_USER_EMAIL, payload: email})
+    
+    const updateUserContextEmail = (email, key) => {
+        db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
+            .doc(key)
+            .set({email: email}, {merge: true})
+            .then(() => userDispatch({type: UPDATE_USER_EMAIL, payload: email}))
+            .catch(err => Promise.reject(err))
+    }
 
-    const setOrCreateUserProfile = (payload, email) => {
+    const setOrCreateUserProfile = (payload, key) => {
        db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
-         .doc(email)
+         .doc(key)
          .set(payload)
          .then(() => {
             userDispatch({type: ADD_USER, payload: payload});
@@ -32,15 +39,16 @@ export const UserProvider = (props) => {
          .catch(err => Promise.reject(err))
     }
     
-    const setUserDataInLocalStorage = email => {
-        console.log("GET USER VIA EMAIL", email)
+    const getUserCallToDispatch = (payload, email) => userDispatch({ type: ADD_USER, payload: {...payload, email} })
+
+    const getUserFromProfile = (uid, email) => {
         setProfileError(false)
         db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
-            .doc(email)
+            .doc(uid)
             .get()
             .then(doc => {
                 if (doc.exists){
-                    userDispatch({type: ADD_USER, payload: {email, ...doc.data()}})
+                    getUserCallToDispatch(doc.data(), email)
                 }
             })
             .catch((err) => setProfileError(true))
@@ -52,11 +60,12 @@ export const UserProvider = (props) => {
 
     const value = {
         clearUserDataFromLocalStorage,
-        setUserDataInLocalStorage,
+        getUserCallToDispatch,
         userDispatch,
         setOrCreateUserProfile,
         updateUserContextEmail,
         profileError,
+        getUserFromProfile,
         user,
     }
 

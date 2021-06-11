@@ -11,12 +11,12 @@ export const useAuth = () => {
 export const AuthProvider = ({children}) => {
 
     const [currentUser, setCurrentUser] = useState();
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
 
     const signup = (email, password) => auth.createUserWithEmailAndPassword(email, password);
 
-    const login = (email, password) => auth.signInWithEmailAndPassword(email, password);
-
+    const login = (email, password) => auth.signInWithEmailAndPassword(email, password).then(res => Promise.resolve([res.user.uid, res.user.email]))
+    
     const logout = () => auth.signOut();
 
     const resetPassword = email => auth.sendPasswordResetEmail(email);

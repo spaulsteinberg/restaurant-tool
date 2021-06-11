@@ -6,7 +6,7 @@ import PageNotFound from './utility/PageNotFound';
 import Login from './auth/Login';
 import PrivateRoute from './utility/PrivateRoute';
 import ResetPassword from './auth/ResetPassword';
-import UpdateProfile from './main/profile/UpdateProfile';
+import UpdateCredentials from './main/profile/UpdateCredentials';
 import Root from './main/Root';
 import NavigationBar from './main/navbar/NavigationBar';
 import Dashboard from './main/content/Dashboard';
@@ -27,7 +27,7 @@ const App = () => {
                     <PrivateRoute exact path="/" component={Dashboard} />
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
                     <PrivateRoute exact path="/profile/view" component={ViewProfile} />
-                    <PrivateRoute path="/profile/update" component={UpdateProfile} />
+                    <PrivateRoute path="/profile/update" component={UpdateCredentials} />
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/forgot-password" component={ResetPassword} />

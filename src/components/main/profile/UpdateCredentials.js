@@ -7,7 +7,7 @@ import { EMAIL_REGEX } from '../../../constants/constants'
 import '../main-styles.scss';
 import { useUserContext } from '../../../contexts/UserContext';
 
-const UpdateProfile = () => {
+const UpdateCredentials = () => {
 
     const { currentUser, updateEmail, updatePassword } = useAuth();
     const { updateUserContextEmail } = useUserContext();
@@ -53,7 +53,7 @@ const UpdateProfile = () => {
         Promise.all(promisesToResolve)
         .then(() => {
             setLoadState(false)
-            shouldChangeEmailContext && updateUserContextEmail(form.email)
+            shouldChangeEmailContext && updateUserContextEmail(form.email, currentUser.uid)
             history.push("/")
         })
         .catch(err => {
@@ -66,7 +66,7 @@ const UpdateProfile = () => {
         <React.Fragment>
             <Card className="card-wrapper alignTextLeft my-4">
                 <Card.Body>
-                    <h2 className="text-center mb-2">Update Profile</h2>
+                    <h2 className="text-center mb-2">Update Credentials</h2>
                 </Card.Body>
                 <Form className="mx-4">
                     <Form.Group id="email-group">
@@ -115,4 +115,4 @@ const UpdateProfile = () => {
     )
 }
 
-export default UpdateProfile;
+export default UpdateCredentials;

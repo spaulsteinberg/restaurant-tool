@@ -12,7 +12,7 @@ const ViewProfile = () => {
     const {user, setOrCreateUserProfile, profileError} = useUserContext();
     const [edit, setEdit] = useState(false);
     // if the user is not null/undefined, has keys and there is no error grabbing the profile have the current state be that user. else empty form
-    const initialState = user && Object.keys(user).length !== 0 && !profileError ? user : {FirstName: '', LastName: '', Restaurant: '', Role: ''}
+    const initialState = user && Object.keys(user).length !== 0 && !profileError ? user : {firstName: '', lastName: '', restaurant: '', role: ''}
     const [form, setFormState] = useState(initialState)
 
     const handleInputChange = event => {
@@ -28,14 +28,14 @@ const ViewProfile = () => {
     const handleEditClick = async () => {
         if (edit) {
             const requestObj = {
-                FirstName: form.FirstName,
-                LastName: form.LastName,
-                Restaurant: form.Restaurant,
-                Role: form.Role
+                firstName: form.firstName,
+                lastName: form.lastName,
+                restaurant: form.restaurant,
+                role: form.role,
+                email: currentUser.email
             }
             try {
-                console.log(requestObj)
-                await setOrCreateUserProfile(requestObj, currentUser.email)
+                await setOrCreateUserProfile(requestObj, currentUser.uid)
             } catch (err) {
                 console.log(err)
             }
@@ -63,7 +63,7 @@ const ViewProfile = () => {
                                     <Form.Label id="view-firstname" className="profile-label-text">First Name: </Form.Label>
                                 </div>
                                 <div className="profile-control-col">
-                                    <Form.Control type="text" aria-labelledby="view-firstname" name="FirstName" onChange={handleInputChange} value={form.FirstName} readOnly={!edit}/>
+                                    <Form.Control type="text" aria-labelledby="view-firstname" name="firstName" onChange={handleInputChange} value={form.firstName} readOnly={!edit}/>
                                 </div>
                             </div>
                             <div className="profile-form-row row mt-3">
@@ -71,7 +71,7 @@ const ViewProfile = () => {
                                     <Form.Label id="view-lastname" className="profile-label-text">Last Name: </Form.Label>
                                 </div>
                                 <div className="profile-control-col">
-                                    <Form.Control type="text" aria-labelledby="view-lastname" name="LastName" onChange={handleInputChange} value={form.LastName} readOnly={!edit}/>
+                                    <Form.Control type="text" aria-labelledby="view-lastname" name="lastName" onChange={handleInputChange} value={form.lastName} readOnly={!edit}/>
                                 </div>
                             </div>
                             <div className="profile-form-row row mt-3">
@@ -79,7 +79,7 @@ const ViewProfile = () => {
                                     <Form.Label id="view-restaurant" className="profile-label-text">Restaurant: </Form.Label>
                                 </div>
                                 <div className="profile-control-col">
-                                    <Form.Control type="text" aria-labelledby="view-restaurant" name="Restaurant" onChange={handleInputChange} value={form.Restaurant} readOnly={!edit}/>
+                                    <Form.Control type="text" aria-labelledby="view-restaurant" name="restaurant" onChange={handleInputChange} value={form.restaurant} readOnly={!edit}/>
                                 </div>
                             </div>
                             <div className="profile-form-row row mt-3">
@@ -87,7 +87,7 @@ const ViewProfile = () => {
                                     <Form.Label id="view-role" className="profile-label-text">Role: </Form.Label>
                                 </div>
                                 <div className="profile-control-col">
-                                    <Form.Control type="text" aria-labelledby="view-role" name="Role" onChange={handleInputChange} value={form.Role} readOnly={!edit}/>
+                                    <Form.Control type="text" aria-labelledby="view-role" name="role" onChange={handleInputChange} value={form.role} readOnly={!edit}/>
                                 </div>
                             </div>
                             

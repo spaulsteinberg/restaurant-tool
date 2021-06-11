@@ -5,7 +5,7 @@ export const userReducer = (state = initialState, action) => {
         case ADD_USER:
             return {...state, ...action.payload};
         case UPDATE_USER_EMAIL:
-            return {...state, ...action.payload}
+            return {...state, email: action.payload}
         case CLEAR_USER:
             return initialState;
         default:

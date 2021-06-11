@@ -13,7 +13,7 @@ const Login = () => {
     const [error, setErrorState] = useState('');
     const [isLoading, setLoadState] = useState(false)
     const { login } = useAuth();
-    const { setUserDataInLocalStorage } = useUserContext();
+    const {getUserFromProfile} = useUserContext();
     const history = useHistory();
 
     const handleInputChange = event => {
@@ -31,8 +31,8 @@ const Login = () => {
             return setErrorState("Must provide an email and password")
         }
         try {
-            await login(form.email, form.password);
-            await setUserDataInLocalStorage(form.email)
+            let [uid, email] = await login(form.email, form.password);
+            await getUserFromProfile(uid, email);
             setLoadState(false)
             history.push("/")
         } catch (err) {
