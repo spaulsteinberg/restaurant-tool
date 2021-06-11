@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useReducer } from 'react';
-import { userReducer, ADD_USER, CLEAR_USER } from '../components/reducers/userReducer';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { userReducer, ADD_USER, CLEAR_USER, UPDATE_USER_EMAIL } from '../components/reducers/userReducer';
 import {db} from '../firebase'
 
 const UserContext = React.createContext();
@@ -11,22 +11,39 @@ export const UserProvider = (props) => {
         // this function returns default val.
         const localUser = localStorage.getItem(process.env.REACT_APP_LOCAL_USER_INFO);
         return localUser ? JSON.parse(localUser) : {}
-    })
+    });
+
+    const [profileError, setProfileError] = useState(false);
 
     const clearUserDataFromLocalStorage = () => {
         userDispatch({type: CLEAR_USER})
     }
+
+    const updateUserContextEmail = email => userDispatch({type: UPDATE_USER_EMAIL, payload: email})
+
+    const setOrCreateUserProfile = (payload, email) => {
+       db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
+         .doc(email)
+         .set(payload)
+         .then(() => {
+            userDispatch({type: ADD_USER, payload: payload});
+            Promise.resolve();
+         })
+         .catch(err => Promise.reject(err))
+    }
     
     const setUserDataInLocalStorage = email => {
+        console.log("GET USER VIA EMAIL", email)
+        setProfileError(false)
         db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
             .doc(email)
             .get()
             .then(doc => {
                 if (doc.exists){
-                    userDispatch({type: ADD_USER, payload: doc.data()})
+                    userDispatch({type: ADD_USER, payload: {email, ...doc.data()}})
                 }
             })
-            .catch((err) => console.log("swallow user err for now"))
+            .catch((err) => setProfileError(true))
     }
 
     useEffect(() => {
@@ -37,6 +54,9 @@ export const UserProvider = (props) => {
         clearUserDataFromLocalStorage,
         setUserDataInLocalStorage,
         userDispatch,
+        setOrCreateUserProfile,
+        updateUserContextEmail,
+        profileError,
         user,
     }
 

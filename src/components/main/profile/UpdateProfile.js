@@ -5,10 +5,12 @@ import { useAuth } from '../../../contexts/AuthContext';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import { EMAIL_REGEX } from '../../../constants/constants'
 import '../main-styles.scss';
+import { useUserContext } from '../../../contexts/UserContext';
 
 const UpdateProfile = () => {
 
     const { currentUser, updateEmail, updatePassword } = useAuth();
+    const { updateUserContextEmail } = useUserContext();
     const initialState = { email: currentUser.email, password: '', confirm: ''}
     const [form, setFormValues] = useState(initialState);
     const [error, setErrorState] = useState('');
@@ -39,8 +41,10 @@ const UpdateProfile = () => {
         // set load state after the initial checks
         setLoadState(true)
         const promisesToResolve = [];
+        let shouldChangeEmailContext = false;
         if (form.email !== currentUser.email) {
             promisesToResolve.push(updateEmail(form.email))
+            shouldChangeEmailContext = true;
         }
         if (form.password) {
             promisesToResolve.push(updatePassword(form.password))
@@ -49,6 +53,7 @@ const UpdateProfile = () => {
         Promise.all(promisesToResolve)
         .then(() => {
             setLoadState(false)
+            shouldChangeEmailContext && updateUserContextEmail(form.email)
             history.push("/")
         })
         .catch(err => {
@@ -100,7 +105,7 @@ const UpdateProfile = () => {
                         <Button type="submit" className="w-100 my-3" variant="warning" onClick={handleSubmit}>Update</Button>
                     </div>
                     {isLoading ? <LoadingSpinner alignment="center">Updating...</LoadingSpinner> : null}
-                    {error && <Alert variant="danger" className="text-center">{error}</Alert>}
+                    {error && <Alert variant="danger" className="text-center">{error} Try logging out and logging in to try again.</Alert>}
                 </Form>
             </Card>
                 <div className="w-100 text-center mt-2">

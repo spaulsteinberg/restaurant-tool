@@ -44,7 +44,7 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <Card className=" card-wrapper my-4" id="login">
+            <Card className="card-wrapper my-4" id="login">
                 <Card.Body>
                     <h2 className="text-center mb-2">Login</h2>
                 </Card.Body>

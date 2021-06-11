@@ -49,6 +49,34 @@
     }
 }
 
+.profile-header {
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+.profile-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    .profile-label-text {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .profile-label-col {
+        flex: 0 0 auto;
+        width: 100%;
+        margin: alignment("centered")
+    }
+    .profile-control-col {
+        flex: 0 0 auto;
+        width: 100%;
+        margin: alignment("centered");
+    }
+}
+
+/****************** Queries *********************/
 
 @media screen and (min-width: 500px) {
     .navbar {
@@ -56,5 +84,23 @@
     }
     .navbar-brand {
         margin: 0;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .profile-form-row {
+        flex-direction: row;
+        .profile-label-col {
+            width: 20%;
+            text-align: left;
+        }
+        .profile-control-col {
+            width: 70%;
+        }
+    }
+
+    .form-label {
+        margin-bottom: 0;
+        padding-top: .5rem;
     }
 }
