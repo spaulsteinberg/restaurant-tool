@@ -8,7 +8,6 @@ import PrivateRoute from './utility/PrivateRoute';
 import ResetPassword from './auth/ResetPassword';
 import UpdateCredentials from './main/profile/UpdateCredentials';
 import Root from './main/Root';
-import NavigationBar from './main/navbar/NavigationBar';
 import Dashboard from './main/content/Dashboard';
 import '../styles/styles.scss';
 import ViewProfile from './main/profile/ViewProfile';
@@ -21,7 +20,6 @@ const App = () => {
           <AuthProvider>
             <UserProvider>
               <Router>
-                <NavigationBar />
                 <Root>
                   <Switch>
                     <PrivateRoute exact path="/" component={Dashboard} />

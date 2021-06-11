@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Button';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useUserContext } from '../../../contexts/UserContext';
-import '../main-styles.scss';
-import { Button } from 'react-bootstrap';
+import LoadingSpinner from '../../utility/LoadingSpinner';
 import { pencilEditIconPath, checkMarkSavePath, circleSlashForCancelPaths } from '../../../constants/svg/svgs';
+import '../main-styles.scss';
 
 const ViewProfile = () => {
     const {currentUser} = useAuth();
@@ -14,6 +16,9 @@ const ViewProfile = () => {
     // if the user is not null/undefined, has keys and there is no error grabbing the profile have the current state be that user. else empty form
     const initialState = user && Object.keys(user).length !== 0 && !profileError ? user : {firstName: '', lastName: '', restaurant: '', role: ''}
     const [form, setFormState] = useState(initialState)
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('')
 
     const handleInputChange = event => {
         const {name, value} = event.target;
@@ -26,6 +31,8 @@ const ViewProfile = () => {
     }
     
     const handleEditClick = async () => {
+        setSuccess('');
+        setError('');
         if (edit) {
             const requestObj = {
                 firstName: form.firstName,
@@ -35,9 +42,15 @@ const ViewProfile = () => {
                 email: currentUser.email
             }
             try {
+                setLoading(true);
                 await setOrCreateUserProfile(requestObj, currentUser.uid)
+                setSuccess('Profile edits saved successfully!')
             } catch (err) {
                 console.log(err)
+                setFormState(initialState);
+                setError('Failed to save edits. Please try again.')
+            } finally {
+                setLoading(false)
             }
         }
         setEdit(prevState => !prevState);
@@ -107,6 +120,21 @@ const ViewProfile = () => {
                                     <path d={circleSlashForCancelPaths[1]}/>
                                 </svg>
                             </Button>}
+                            {loading && 
+                                <div className="profile-form-state-div">
+                                    <LoadingSpinner alignment="center">Updating...</LoadingSpinner>
+                                </div>
+                            }
+                            {error && 
+                                <div className="profile-form-state-div">
+                                    <Alert variant="danger">{error}</Alert>
+                                </div>
+                            }
+                            {success && 
+                                <div className="profile-form-state-div">
+                                    <Alert variant="success">{success}</Alert>
+                                </div>
+                            }
                         </React.Fragment>
                         : <p>Could not load profile. Please login and try again.</p>}
                 </Form>

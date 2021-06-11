@@ -20,3 +20,9 @@
     color: white !important;
     text-decoration: none;
 }
+
+@mixin center-content-flex {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

@@ -22,6 +22,8 @@
 }
 .navbar-brand {
     padding: auto space-element("nav");
+    font-size: 1.5rem;
+    font-weight: 750;
 }
 
 .navLink, .navbar-brand {
@@ -31,6 +33,12 @@
 .navLink {
     font-size: $navigation-link-size;
     padding: 0 space-element("nav");
+    &:active {
+        color: red !important;
+    }
+    &:hover {
+        color: orange !important
+    }
 }
 
 /************* Profile styles *************/
@@ -74,6 +82,10 @@
         width: 100%;
         margin: alignment("centered");
     }
+}
+
+.profile-form-state-div {
+    @include center-content-flex;
 }
 
 /****************** Queries *********************/

@@ -5,20 +5,9 @@ import { useAuth } from '../../../contexts/AuthContext';
 import '../../main/main-styles.scss';
 import ProfileDropdown from '../profile/ProfileDropdown';
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
   const {currentUser} = useAuth();
   const [showProfileIcon, setShowProfileIcon] = useState(true);
-
-  /*
-useEffect(() => {
-  window.addEventListener('mousemove', () => {});
-
-  // returned function will be called on component unmount 
-  return () => {
-    window.removeEventListener('mousemove', () => {})
-  }
-}, [])
-  */
 
   useEffect(() => {
     let widthCheck = null;
@@ -49,7 +38,7 @@ useEffect(() => {
       </Navbar>
     );
     const loggedInNav = (
-      <Navbar bg="primary" expand="lg" ref={(nodeExists) => {
+      <Navbar bg="primary" expand="md" ref={(nodeExists) => {
         if (nodeExists){
           nodeExists.style.setProperty("justify-content", "inherit")
         }
@@ -63,7 +52,8 @@ useEffect(() => {
             <Navbar.Collapse id="collapsed-nav-items">
               <Nav className="alignTextLeft">
                 <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
-                <NavLink className="navLink" to="/profile">Profile</NavLink>
+                <NavLink className="navLink" to="/profile">Inventory</NavLink>
+                <NavLink className="navLink" to="/orders">Orders</NavLink>
                 {/* Also add inventory and past order links*/}
               </Nav>
             </Navbar.Collapse>
@@ -73,7 +63,8 @@ useEffect(() => {
             <Navbar.Collapse id="collapsed-nav-items">
               <Nav className="alignTextLeft">
                 <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
-                <NavLink className="navLink" to="/profile">Profile</NavLink>
+                <NavLink className="navLink" to="/inventory">Inventory</NavLink>
+                <NavLink className="navLink" to="/orders">Orders</NavLink>
               </Nav>
             </Navbar.Collapse>
             <Navbar.Toggle aria-controls="collapsed-nav-items" />
