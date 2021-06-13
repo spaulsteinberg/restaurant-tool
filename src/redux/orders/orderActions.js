@@ -26,7 +26,11 @@ export const getAllOrders = () => {
         dispatch(getOrders());
         await db.collection(process.env.REACT_APP_ORDER_DB_COLLECTION)
                 .get()
-                .then(response => response.docs.map(d => d.data()))
+                .then(response => response.docs.map(d => {
+                    let snapShot = d.data();
+                    snapShot.date = snapShot.date.toDate();
+                    return snapShot;
+                }))
                 .then(docs => dispatch(getOrdersSuccess(docs)))
                 .catch(err => dispatch(getOrdersError('Error retrieving orders. Please try again later.')))
     }
