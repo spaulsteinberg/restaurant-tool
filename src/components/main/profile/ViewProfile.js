@@ -55,6 +55,24 @@ const ViewProfile = () => {
         }
         setEdit(prevState => !prevState);
     }
+    const renderForm = () => {
+        const formLabels = ["First Name: ", "Last Name: ", "Restaurant: ", "Role: "];
+        const formKeys = ["firstName", "lastName", "restaurant", "role"]
+        let formValuesToBind = [];
+        for (let i = 0; i < formLabels.length; i++){
+            formValuesToBind.push(
+                <>
+                    <div className="profile-label-col">
+                        <Form.Label id={`view-${formKeys[i]}`} className="profile-label-text">{formLabels[i]}</Form.Label>
+                    </div>
+                    <div className="profile-control-col">
+                        <Form.Control type="text" aria-labelledby={`view-${formKeys[i]}`} name={formKeys[i]} onChange={handleInputChange} value={form[formKeys[i]]} readOnly={!edit} />
+                    </div>
+                </>
+            );
+        }
+        return formValuesToBind.map((k,i) => <div className="profile-form-row row mt-3" key={i}>{k}</div>);
+    }
     return (
         <Card className="profile-card my-4 text-left">
             <Card.Header className="profile-header mb-2">
@@ -71,39 +89,7 @@ const ViewProfile = () => {
                         </div>
                     </div>
                         { user && !profileError ? <React.Fragment>
-                            <div className="profile-form-row row mt-3">
-                                <div className="profile-label-col">
-                                    <Form.Label id="view-firstname" className="profile-label-text">First Name: </Form.Label>
-                                </div>
-                                <div className="profile-control-col">
-                                    <Form.Control type="text" aria-labelledby="view-firstname" name="firstName" onChange={handleInputChange} value={form.firstName} readOnly={!edit}/>
-                                </div>
-                            </div>
-                            <div className="profile-form-row row mt-3">
-                                <div className="profile-label-col">
-                                    <Form.Label id="view-lastname" className="profile-label-text">Last Name: </Form.Label>
-                                </div>
-                                <div className="profile-control-col">
-                                    <Form.Control type="text" aria-labelledby="view-lastname" name="lastName" onChange={handleInputChange} value={form.lastName} readOnly={!edit}/>
-                                </div>
-                            </div>
-                            <div className="profile-form-row row mt-3">
-                                <div className="profile-label-col">
-                                    <Form.Label id="view-restaurant" className="profile-label-text">Restaurant: </Form.Label>
-                                </div>
-                                <div className="profile-control-col">
-                                    <Form.Control type="text" aria-labelledby="view-restaurant" name="restaurant" onChange={handleInputChange} value={form.restaurant} readOnly={!edit}/>
-                                </div>
-                            </div>
-                            <div className="profile-form-row row mt-3">
-                                <div className="profile-label-col">
-                                    <Form.Label id="view-role" className="profile-label-text">Role: </Form.Label>
-                                </div>
-                                <div className="profile-control-col">
-                                    <Form.Control type="text" aria-labelledby="view-role" name="role" onChange={handleInputChange} value={form.role} readOnly={!edit}/>
-                                </div>
-                            </div>
-                            
+                            {renderForm()}
                             <Button variant={!edit ? "warning" : "success"} className="btn mt-3 mb-2 mx-1" onClick={handleEditClick}>
                                 { !edit ? <svg xmlns="http://www.w3.org/2000/svg" 
                                     width="16" height="16" fill="black" viewBox="0 0 16 16">
