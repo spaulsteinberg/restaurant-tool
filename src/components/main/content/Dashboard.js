@@ -1,36 +1,36 @@
-import React, {useEffect, useState} from 'react';
-import {db} from'../../../firebase';
+import React, {useEffect} from 'react';
+import { getAllOrders } from '../../../redux/orders/orderActions';
+import { connect } from 'react-redux';
+import LoadingSpinner from '../../utility/LoadingSpinner';
 
-const Dashboard = () => {
-
-    const [dbData, setDbData] = useState();
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await db.collection(process.env.REACT_APP_ORDER_DB_COLLECTION)
-                    .get()
-                    .then(response => response.docs)
-                    .then(docs => docs.map(d => console.log(d.data())))
-                    .catch(err => console.log(err))
-            } catch (err) {
-                console.log("here")
-                setError(err)
-            } finally {
-                console.log("here finally")
-                setLoading(false)
-            }
-        }
-        fetchData()
-    }, [])
-
+const Dashboard = ({orderData, retrieveUsers}) => {
+     useEffect(() => {
+        retrieveUsers();
+    }, [retrieveUsers])
     return (
-        <div>
-            Hi im the dashboard bruh
-        </div>
+        <React.Fragment>
+            {
+            orderData &&
+                <div>
+                    {orderData.loading && <LoadingSpinner alignment="center">Retrieving data...</LoadingSpinner>}
+                    {(!orderData.loading && orderData.data) &&  orderData.data.map(order => <div key={order.lastName}>{order.firstName + " " + order.lastName}</div>)}
+                    {orderData.error && <p className="text-danger">{orderData.error}</p>}
+                </div>
+            }
+        </React.Fragment>
     )
 }
 
-export default Dashboard;
+const mapStateToProps = state => {
+    return {
+        orderData: state.orders
+    }
+}
+// map the dispatch function in props
+const mapDispatchToProps = dispatch => {
+    return {
+        retrieveUsers: () => dispatch(getAllOrders())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
