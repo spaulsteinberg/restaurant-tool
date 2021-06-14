@@ -92,11 +92,45 @@
 
 .dashboard-chart-centered {
     margin: alignment("centered");
-    background-color: whitesmoke;
 }
 .dashboard-chart-wrapper {
     width: 100%;
     height: 200px;
+}
+
+.top-nav-body-wrapper {
+    @include flex-full-column;
+    justify-content: center;
+    .top-nav-item {
+        flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        width: 100%;
+        min-width: $icon-text-min-width;
+        .block-svg-wrapper {
+            @include flex-full-column;
+            align-items: center;
+            justify-content: center;
+            min-width: $icon-text-min-width;
+            padding: 3%;
+            .block-svg-item-icon {
+                flex: 0 0 30%;
+                -ms-flex: 0 0 30%;
+                width: 30%;
+            }
+            .block-svg-item-desc {
+                flex: 0 0 70%;
+                -ms-flex: 0 0 70%;
+                width: 70%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.dash-icon-title {
+    font-weight: bold;
+    font-size: 12px;
+    color: gray;
 }
 
 /****************** Queries *********************/
@@ -107,6 +141,23 @@
     }
     .navbar-brand {
         margin: 0;
+    }
+    .top-nav-body-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .top-nav-item {
+            flex: 0 0 25%;
+            -ms-flex: 0 0 25%;
+            width: 25%;
+            flex-direction: row;
+            .block-svg-wrapper {
+                flex-direction: row;
+                .block-svg-item-desc {
+                    text-align: left;
+                }
+            }
+        }
     }
 }
 
@@ -128,8 +179,6 @@
     }
 
     .dashboard-chart-wrapper {
-        width: 40%;
         height: 300px;
-        margin: alignment("centered")
     }
 }

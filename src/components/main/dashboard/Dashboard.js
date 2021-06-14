@@ -3,6 +3,7 @@ import { getAllOrders } from '../../../redux/orders/orderActions';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import RevenueChart from './RevenueChart';
+import TopBar from './TopBar';
 
 const Dashboard = ({orderData, retrieveUsers}) => {
 
@@ -21,7 +22,7 @@ const Dashboard = ({orderData, retrieveUsers}) => {
         }
         let structureDataForChart = [];
         for (const [key, value] of Object.entries(revenueData)) {
-            structureDataForChart.push({date: key, totalCost: value})
+            structureDataForChart.push({date: key, Revenue: value})
         }
         return <RevenueChart data={structureDataForChart} />;
     }
@@ -32,7 +33,11 @@ const Dashboard = ({orderData, retrieveUsers}) => {
             orderData &&
                 <div className="mt-5">
                     {orderData.loading && <LoadingSpinner alignment="center">Loading Dash...</LoadingSpinner>}
-                    {(!orderData.loading && orderData.data) && renderRevenueDataChart() }
+                    {(!orderData.loading && orderData.data) && 
+                    <React.Fragment>
+                        <TopBar numOrders={orderData.data.length}/>
+                        {renderRevenueDataChart()}
+                    </React.Fragment> }
                     {orderData.error && <p className="text-danger">{orderData.error}</p>}
                 </div>
             }
