@@ -88,6 +88,17 @@
     @include center-content-flex;
 }
 
+/****************** Dashboard *******************/
+
+.dashboard-chart-centered {
+    margin: alignment("centered");
+    background-color: whitesmoke;
+}
+.dashboard-chart-wrapper {
+    width: 100%;
+    height: 200px;
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: 500px) {
@@ -114,5 +125,11 @@
     .form-label {
         margin-bottom: 0;
         padding-top: .5rem;
+    }
+
+    .dashboard-chart-wrapper {
+        width: 40%;
+        height: 300px;
+        margin: alignment("centered")
     }
 }

@@ -8,7 +8,7 @@ import PrivateRoute from './utility/PrivateRoute';
 import ResetPassword from './auth/ResetPassword';
 import UpdateCredentials from './main/profile/UpdateCredentials';
 import Root from './main/Root';
-import Dashboard from './main/content/Dashboard';
+import Dashboard from './main/dashboard/Dashboard';
 import '../styles/styles.scss';
 import ViewProfile from './main/profile/ViewProfile';
 import ErrorBoundary from './ErrorBoundary';

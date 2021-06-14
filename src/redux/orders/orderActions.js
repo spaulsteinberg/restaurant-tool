@@ -1,4 +1,5 @@
 import * as orderActions from './orderTypes';
+import * as moment from 'moment';
 import { db } from '../../firebase';
 
 export const getOrders = () => {
@@ -28,7 +29,7 @@ export const getAllOrders = () => {
                 .get()
                 .then(response => response.docs.map(d => {
                     let snapShot = d.data();
-                    snapShot.date = snapShot.date.toDate();
+                    snapShot.date = moment(snapShot.date.toDate()).format('MM/DD/YYYY');
                     return snapShot;
                 }))
                 .then(docs => dispatch(getOrdersSuccess(docs)))
