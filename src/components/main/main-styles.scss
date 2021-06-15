@@ -133,6 +133,26 @@
     color: gray;
 }
 
+#refresh-dashboard-button {
+    padding-top: 4px !important;
+}
+
+.dashboard-top-container {
+    @include flex-full-column;
+    justify-content: center;
+    .dashboard-top-header-container {
+        @include full-width-flex;
+        flex-direction: column;
+    }
+    .dashboard-top-refresh-container {
+        @include full-width-flex;
+        flex-direction: column;
+    }
+    .empty-div {
+        @include flex-small;
+    }
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: 500px) {
@@ -157,6 +177,21 @@
                     text-align: left;
                 }
             }
+        }
+    }
+    .dashboard-top-container {
+        flex-direction: row;
+        justify-content: space-between;
+        .dashboard-top-header-container {
+            @include flex-display("medium", center);
+            flex-direction: row;
+        }
+        .dashboard-top-refresh-container {
+            @include flex-display("small", flex-end);
+            flex-direction: row;
+        }
+        .empty-div {
+            @include flex-small;
         }
     }
 }

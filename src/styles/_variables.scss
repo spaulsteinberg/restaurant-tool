@@ -8,4 +8,12 @@ $alignment-values: (
 );
 $static-element-space: (
     "nav": 10px
+);
+$flex-width: (
+    "small": 0 0 20%,
+    "medium": 0 0 60%
+);
+$flex-width-single: (
+    "small": 20%,
+    "medium": 60%
 )

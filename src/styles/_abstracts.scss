@@ -5,7 +5,11 @@
 };
 
 @function space-element($space) {
-    @return map-get($static-element-space, $key: $space);
+    @return map-get($static-element-space, $space);
+};
+
+@function set-flex-width($width) {
+    @return map-get($flex-width, $width);
 };
 
 /* set default card dimensions */
@@ -31,4 +35,35 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+}
+
+@mixin flex-small {
+    flex: set-flex-width("small");
+    -ms-flex: set-flex-width("small");
+    width: map-get($flex-width-single, "small")
+}
+
+@mixin flex-medium {
+    flex: set-flex-width("medium");
+    -ms-flex: set-flex-width("medium");
+    width: map-get($flex-width-single, "medium")
+}
+
+@mixin flex-display($width, $justify){
+    @if ($width == "small"){
+        @include flex-small;
+    }
+    @else {
+        @include flex-medium;
+    }
+    display: flex;
+    justify-content: $justify;
+}
+
+@mixin full-width-flex {
+    flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
