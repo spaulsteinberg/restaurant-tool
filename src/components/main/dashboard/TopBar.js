@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import TopBarIconShortcut from './TopBarIconShortcut';
 import { cashCoinIconPaths, cartIconPath, tagIconPath } from '../../../constants/svg/svgs';
+import {Link} from 'react-router-dom'
 
 
 const TopBar = (props) => {
@@ -15,7 +16,7 @@ const TopBar = (props) => {
                         <path d={cashCoinIconPaths[3]} />
                     </svg>),
             title: "Revenue",
-            data: "$17,000",
+            data: `$${props.sumRevenue().toFixed(2)}`,
             timeframe: "Last Week"
         },
         {
@@ -33,7 +34,7 @@ const TopBar = (props) => {
                 </svg>
             ),
             title: "Avg Sale",
-            data: "$14.32",
+            data: `$${props.avgOrderPrice().toFixed(2)}`,
             timeframe: "Last Week"
         }
     ]
@@ -46,7 +47,7 @@ const TopBar = (props) => {
                 {iconData.map((icon, ind) => <TopBarIconShortcut iconData={icon} key={ind} />)}
             </Card.Body>
             <Card.Footer>
-                <Button variant="primary">View More</Button>
+                <Button variant="primary" as={Link} to="/orders">View More in Orders</Button>
             </Card.Footer>
         </Card>
     )

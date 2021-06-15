@@ -23,4 +23,4 @@ const TopBarIconShortcut = ({iconData}) => {
     )
 }
 
-export default TopBarIconShortcut;
+export default React.memo(TopBarIconShortcut);

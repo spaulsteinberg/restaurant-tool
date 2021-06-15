@@ -15,6 +15,7 @@ import ErrorBoundary from './ErrorBoundary';
 import { UserProvider } from '../contexts/UserContext';
 import {Provider} from 'react-redux';
 import store from '../redux/store';
+import Orders from './main/orders/Orders';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
                     <Switch>
                       <PrivateRoute exact path="/" component={Dashboard} />
                       <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                      <PrivateRoute exact path="/orders" component={Orders} />
                       <PrivateRoute exact path="/profile/view" component={ViewProfile} />
                       <PrivateRoute path="/profile/update" component={UpdateCredentials} />
                       <Route exact path="/signup" component={SignUp} />

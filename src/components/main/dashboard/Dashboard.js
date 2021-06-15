@@ -27,6 +27,10 @@ const Dashboard = ({orderData, retrieveUsers}) => {
         return <RevenueChart data={structureDataForChart} />;
     }
 
+    const sumOrderCostForRevenue = () => orderData.data.map(order => order.totalCost).reduce((acc, cur) => acc += cur)
+
+    const averageOrderPrice = () => sumOrderCostForRevenue() / orderData.data.length
+
     return (
         <React.Fragment>
             {
@@ -35,7 +39,7 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                     {orderData.loading && <LoadingSpinner alignment="center">Loading Dash...</LoadingSpinner>}
                     {(!orderData.loading && orderData.data) && 
                     <React.Fragment>
-                        <TopBar numOrders={orderData.data.length}/>
+                        <TopBar numOrders={orderData.data.length} sumRevenue={sumOrderCostForRevenue} avgOrderPrice={averageOrderPrice}/>
                         {renderRevenueDataChart()}
                     </React.Fragment> }
                     {orderData.error && <p className="text-danger">{orderData.error}</p>}
