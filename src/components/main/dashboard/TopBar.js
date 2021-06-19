@@ -50,11 +50,11 @@ const TopBar = (props) => {
             <Card.Header className="dashboard-top-container">
                 <div className="empty-div"></div>
                 <div className="dashboard-top-header-container">
-                    <h2 className="profile-header mb-2">Recent Performance</h2>
+                    <h2 className="profile-header mb-2">Recent Activity</h2>
                 </div>
                 <div className="dashboard-top-refresh-container">
                     <button type="button" className="btn btn-secondary" id="refresh-dashboard-button" onClick={handleRefreshClick}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="lightblue" viewBox="0 0 16 16">
                             <path fillRule="evenodd" d={refreshIconPath[0]} />
                             <path d={refreshIconPath[1]} />
                         </svg>

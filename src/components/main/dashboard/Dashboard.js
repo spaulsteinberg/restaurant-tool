@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import RevenueChart from './RevenueChart';
 import TopBar from './TopBar';
+import PopularityChart from './PopularityChart';
 
 const Dashboard = ({orderData, retrieveUsers}) => {
 
@@ -40,7 +41,14 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                     {(!orderData.loading && orderData.data) && 
                     <React.Fragment>
                         <TopBar numOrders={orderData.data.length} sumRevenue={sumOrderCostForRevenue} avgOrderPrice={averageOrderPrice}/>
-                        {renderRevenueDataChart()}
+                        <div className="dashboard-body">
+                            <div className="dashboard-body-item">
+                                {renderRevenueDataChart()}
+                            </div>
+                            <div className="dashboard-body-item">
+                                <PopularityChart />
+                            </div>
+                        </div>
                     </React.Fragment> }
                     {orderData.error && <p className="text-danger">{orderData.error}</p>}
                 </div>

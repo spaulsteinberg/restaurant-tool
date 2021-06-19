@@ -43,6 +43,12 @@
     width: map-get($flex-width-single, "small")
 }
 
+@mixin flex-quarter {
+    flex: set-flex-width("quarter");
+    -ms-flex: set-flex-width("quarter");
+    width: map-get($flex-width-single, "quarter")
+}
+
 @mixin flex-medium {
     flex: set-flex-width("medium");
     -ms-flex: set-flex-width("medium");

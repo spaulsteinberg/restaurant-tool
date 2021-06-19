@@ -153,6 +153,17 @@
     }
 }
 
+.dashboard-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .dashboard-body-item {
+        flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        width: 100%;
+    }
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: 500px) {
@@ -167,9 +178,7 @@
         flex-direction: row;
         justify-content: space-between;
         .top-nav-item {
-            flex: 0 0 25%;
-            -ms-flex: 0 0 25%;
-            width: 25%;
+            @include flex-quarter;
             flex-direction: row;
             .block-svg-wrapper {
                 flex-direction: row;
@@ -192,6 +201,15 @@
         }
         .empty-div {
             @include flex-small;
+        }
+    }
+    .dashboard-body {
+        flex-direction: row;
+        justify-content: center;
+        .dashboard-body-item {
+            flex: 0 0 45%;
+            -ms-flex: 0 0 45%;
+            width: 45%;
         }
     }
 }
