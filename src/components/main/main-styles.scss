@@ -95,7 +95,7 @@
 }
 .dashboard-chart-wrapper {
     width: 100%;
-    height: 200px;
+    height: auto;
 }
 
 .top-nav-body-wrapper {
@@ -162,11 +162,15 @@
         -ms-flex: 0 0 100%;
         width: 100%;
     }
+    .dashboard-card {
+        @include card-dimensions;
+        width: 100%;
+    }
 }
 
 /****************** Queries *********************/
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: resolution("mobile")) {
     .navbar {
         justify-content: space-between !important;
     }
@@ -214,7 +218,7 @@
     }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: resolution("tablet")) {
     .profile-form-row {
         flex-direction: row;
         .profile-label-col {
@@ -229,9 +233,5 @@
     .form-label {
         margin-bottom: 0;
         padding-top: .5rem;
-    }
-
-    .dashboard-chart-wrapper {
-        height: 300px;
     }
 }

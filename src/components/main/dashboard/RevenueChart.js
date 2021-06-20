@@ -6,7 +6,7 @@ const RevenueChart = ({data}) => {
     const yLabel = { value: 'Revenue', angle: -90, position: 'insideLeft' };
     const xLabel = { value: 'Date', offset: 0, postition: 'bottom'}
     return (
-        <Card className="profile-card my-4 text-left">
+        <Card className="dashboard-card my-4 text-left">
             <Card.Header className="profile-header mb-2">
                 <h2>My Revenue</h2>
             </Card.Header>

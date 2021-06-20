@@ -18,4 +18,10 @@ $flex-width-single: (
     "small": 20%,
     "quarter": 25%,
     "medium": 60%
-)
+);
+$resolution-names: (
+    "mobile": 500px,
+    "tablet": 768px,
+    "laptop": 992px,
+    "desktop": 1200px
+);

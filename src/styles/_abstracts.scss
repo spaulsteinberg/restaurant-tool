@@ -12,6 +12,10 @@
     @return map-get($flex-width, $width);
 };
 
+@function resolution($size) {
+    @return map-get($resolution-names, $size);
+};
+
 /* set default card dimensions */
 @mixin card-dimensions {
     width: 90%;

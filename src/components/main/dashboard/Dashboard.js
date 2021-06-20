@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { getAllOrders } from '../../../redux/orders/orderActions';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../../utility/LoadingSpinner';
@@ -11,22 +11,6 @@ const Dashboard = ({orderData, retrieveUsers}) => {
      useEffect(() => {
         retrieveUsers();
     }, [retrieveUsers]);
-
-    const renderRevenueDataChart = () => {
-        let revenueData = {};
-        for (let order of orderData.data) {
-            if (revenueData.hasOwnProperty(order.date)){
-                revenueData[order.date] += order.totalCost
-            } else {
-                revenueData[order.date] = order.totalCost
-            }
-        }
-        let structureDataForChart = [];
-        for (const [key, value] of Object.entries(revenueData)) {
-            structureDataForChart.push({date: key, Revenue: value})
-        }
-        return <RevenueChart data={structureDataForChart} />;
-    }
 
     const sumOrderCostForRevenue = () => orderData.data.map(order => order.totalCost).reduce((acc, cur) => acc += cur)
 
@@ -43,7 +27,7 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                         <TopBar numOrders={orderData.data.length} sumRevenue={sumOrderCostForRevenue} avgOrderPrice={averageOrderPrice}/>
                         <div className="dashboard-body">
                             <div className="dashboard-body-item">
-                                {renderRevenueDataChart()}
+                                revenue chart here
                             </div>
                             <div className="dashboard-body-item">
                                 <PopularityChart />
