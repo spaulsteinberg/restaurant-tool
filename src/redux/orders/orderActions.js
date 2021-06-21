@@ -26,10 +26,12 @@ export const getAllOrders = () => {
     return async (dispatch) => {
         dispatch(getOrders());
         await db.collection(process.env.REACT_APP_ORDER_DB_COLLECTION)
+                .where("date", ">=", moment().subtract(7, "days").startOf('day').toDate())
                 .get()
                 .then(response => response.docs.map(d => {
                     let snapShot = d.data();
                     snapShot.date = moment(snapShot.date.toDate()).format('MM/DD/YYYY');
+                    snapShot.totalCost = parseFloat(snapShot.totalCost)
                     return snapShot;
                 }))
                 .then(docs => dispatch(getOrdersSuccess(docs)))

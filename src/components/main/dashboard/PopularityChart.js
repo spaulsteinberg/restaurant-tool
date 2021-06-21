@@ -2,31 +2,15 @@ import React, {useState, useEffect, useCallback} from 'react';
 import { Bar } from 'react-chartjs-2';
 import Card from 'react-bootstrap/Card';
 import {useSelector} from 'react-redux'
+import { buildChartWithData } from '../../utility/utility';
 
 const PopularityChart = (props) => {
 
     const [orderFrequency, setOrderFrequency] = useState({labels: [], data: []});
-    const orders = useSelector(state => state.orders)
+    const orders = useSelector(state => state.orders);
 
     const buildFrequencyChart = useCallback(() => {
-        let revenueData = {};
-        for (let order of orders.data) {
-            // if date exists
-            if (revenueData.hasOwnProperty(order.date)){
-                revenueData[order.date].revenue += order.totalCost
-                revenueData[order.date].orders += 1
-            } else {
-                revenueData[order.date] = {
-                    revenue: order.totalCost,
-                    orders: 1
-                }
-            }
-        }
-        let structureDataForChart = [];
-        for (const [key, value] of Object.entries(revenueData)) {
-            structureDataForChart.push([key, value.orders])
-        }
-        return structureDataForChart;
+        return buildChartWithData(orders, "orders")
     }, [orders])
 
     useEffect(() => {
@@ -40,28 +24,29 @@ const PopularityChart = (props) => {
     const chartOptions = {
         responsive: true,
         scales: {
-            yAxes: [ {
+            yAxes: {
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    precision: 0
                 }
-            }]
+            },
         },
         plugins: {
             legend: {display: false},
         },
     }
-    const testChart = {
+    const chartData = {
         labels: [...orderFrequency.labels],
         datasets: [{
             label: 'Orders',
             data: [...orderFrequency.data],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
@@ -81,9 +66,10 @@ const PopularityChart = (props) => {
                 <h2>Last Weeks Orders</h2>
             </Card.Header>
             <Card.Body>
-                {orders.data && <div className="dashboard-chart-wrapper">
-                    <Bar data={testChart} options={chartOptions} />
+                {orders.data && orders.data.length > 0 && <div className="dashboard-chart-wrapper">
+                    <Bar data={chartData} options={chartOptions} />
                 </div>}
+                {orders.data.length === 0 && <p>No data to display</p>}
             </Card.Body>
         </Card>
     )

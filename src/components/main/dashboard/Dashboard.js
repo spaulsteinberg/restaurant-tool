@@ -12,9 +12,9 @@ const Dashboard = ({orderData, retrieveUsers}) => {
         retrieveUsers();
     }, [retrieveUsers]);
 
-    const sumOrderCostForRevenue = () => orderData.data.map(order => order.totalCost).reduce((acc, cur) => acc += cur)
+    const sumOrderCostForRevenue = () => orderData.data.length > 0 ? orderData.data.map(order => order.totalCost).reduce((acc, cur) => acc += cur) : 0
 
-    const averageOrderPrice = () => sumOrderCostForRevenue() / orderData.data.length
+    const averageOrderPrice = () => orderData.data.length > 0 ? sumOrderCostForRevenue() / orderData.data.length : 0
 
     return (
         <React.Fragment>
@@ -27,7 +27,7 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                         <TopBar numOrders={orderData.data.length} sumRevenue={sumOrderCostForRevenue} avgOrderPrice={averageOrderPrice}/>
                         <div className="dashboard-body">
                             <div className="dashboard-body-item">
-                                revenue chart here
+                                <RevenueChart />
                             </div>
                             <div className="dashboard-body-item">
                                 <PopularityChart />

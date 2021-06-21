@@ -90,9 +90,6 @@
 
 /****************** Dashboard *******************/
 
-.dashboard-chart-centered {
-    margin: alignment("centered");
-}
 .dashboard-chart-wrapper {
     width: 100%;
     height: auto;
@@ -214,6 +211,7 @@
             flex: 0 0 45%;
             -ms-flex: 0 0 45%;
             width: 45%;
+            margin: 1rem;
         }
     }
 }
