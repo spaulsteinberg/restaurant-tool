@@ -1,9 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import Card from 'react-bootstrap/Card';
-import { Bar } from 'react-chartjs-2';
 import {useSelector} from 'react-redux'
 import { buildChartWithData } from '../../../utils';
 import { ChartBarConfig, DashboardBarChart } from '../../../models/charts/dashboardCharts';
+import DefaultBarChart from '../../utility/DefaultBarChart';
 
 const RevenueChart = (props) => {
     const [revenue, setRevenue] = useState({labels: [], data: []});
@@ -28,18 +27,7 @@ const RevenueChart = (props) => {
     const chartData = new DashboardBarChart([...revenue.labels], [...revenue.data], "Revenue")
 
     return (
-        <Card className="dashboard-card my-4 text-left">
-            <Card.Header className="profile-header mb-2">
-                <h2>My Revenue</h2>
-            </Card.Header>
-            <Card.Body>
-                {orders.data && orders.data.length > 0 &&
-                <div className="dashboard-chart-wrapper">
-                    <Bar data={chartData} options={chartOptions} />
-                </div>}
-                {orders.data.length === 0 && <p>No data to display</p>}
-            </Card.Body>
-        </Card>
+        <DefaultBarChart title="My Revenue" masterData={revenue.data} chartData={chartData} chartOptions={chartOptions} />
     )
 }
 export default RevenueChart;

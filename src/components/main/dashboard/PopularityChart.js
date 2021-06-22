@@ -1,9 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { Bar } from 'react-chartjs-2';
-import Card from 'react-bootstrap/Card';
 import {useSelector} from 'react-redux'
 import { buildChartWithData } from '../../../utils';
 import { ChartBarConfig, DashboardBarChart } from '../../../models/charts/dashboardCharts';
+import DefaultBarChart from '../../utility/DefaultBarChart';
 
 const PopularityChart = (props) => {
 
@@ -26,17 +25,7 @@ const PopularityChart = (props) => {
     const chartData = new DashboardBarChart([...orderFrequency.labels],[...orderFrequency.data], "Orders");
 
     return (
-        <Card className="dashboard-card my-4 text-left">
-            <Card.Header className="profile-header mb-2">
-                <h2>Last Weeks Orders</h2>
-            </Card.Header>
-            <Card.Body>
-                {orders.data && orders.data.length > 0 && <div className="dashboard-chart-wrapper">
-                    <Bar data={chartData} options={chartOptions} />
-                </div>}
-                {orders.data.length === 0 && <p>No data to display</p>}
-            </Card.Body>
-        </Card>
+        <DefaultBarChart title="Last Weeks Orders" masterData={orderFrequency.data} chartData={chartData} chartOptions={chartOptions} />
     )
 }
 

@@ -5,7 +5,8 @@ import LoadingSpinner from '../../utility/LoadingSpinner';
 import RevenueChart from './RevenueChart';
 import TopBar from './TopBar';
 import PopularityChart from './PopularityChart';
-import MostPurchasedChart from './MostPurchasedChart';
+import MPFood from './MPFood';
+import MPBeverages from './MPBeverages';
 
 const Dashboard = ({orderData, retrieveUsers}) => {
 
@@ -34,7 +35,10 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                                 <PopularityChart />
                             </div>
                             <div className="dashboard-body-item">
-                                <MostPurchasedChart />
+                                <MPFood />
+                            </div>
+                            <div className="dashboard-body-item">
+                                <MPBeverages />
                             </div>
                         </div>
                     </React.Fragment> }
