@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { getAllOrders } from '../../../redux/orders/orderActions';
+import { getAllOrders } from '../../../redux/dashboard/orderActions';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import RevenueChart from './RevenueChart';
 import TopBar from './TopBar';
 import PopularityChart from './PopularityChart';
+import MostPurchasedChart from './MostPurchasedChart';
 
 const Dashboard = ({orderData, retrieveUsers}) => {
 
@@ -31,6 +32,9 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                             </div>
                             <div className="dashboard-body-item">
                                 <PopularityChart />
+                            </div>
+                            <div className="dashboard-body-item">
+                                <MostPurchasedChart />
                             </div>
                         </div>
                     </React.Fragment> }

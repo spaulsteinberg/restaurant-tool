@@ -12,12 +12,14 @@ $static-element-space: (
 $flex-width: (
     "small": 0 0 20%,
     "quarter": 0 0 25%,
-    "medium": 0 0 60%
+    "medium": 0 0 60%,
+    "large": 0 0 100%
 );
 $flex-width-single: (
     "small": 20%,
     "quarter": 25%,
-    "medium": 60%
+    "medium": 60%,
+    "large": 100%
 );
 $resolution-names: (
     "mobile": 500px,

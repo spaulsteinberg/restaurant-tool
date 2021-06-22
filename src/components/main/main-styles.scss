@@ -146,13 +146,12 @@
         flex-direction: column;
     }
     .empty-div {
-        @include flex-small;
+        @include set-flex-container("small");
     }
 }
 
 .dashboard-body {
-    display: flex;
-    flex-direction: column;
+    @include flex-full-column;
     justify-content: center;
     .dashboard-body-item {
         flex: 0 0 100%;
@@ -179,7 +178,7 @@
         flex-direction: row;
         justify-content: space-between;
         .top-nav-item {
-            @include flex-quarter;
+            @include set-flex-container("quarter");
             flex-direction: row;
             .block-svg-wrapper {
                 flex-direction: row;
@@ -201,7 +200,7 @@
             flex-direction: row;
         }
         .empty-div {
-            @include flex-small;
+            @include set-flex-container("small");
         }
     }
     .dashboard-body {

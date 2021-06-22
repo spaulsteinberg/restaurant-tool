@@ -41,30 +41,18 @@
     flex-wrap: wrap;
 }
 
-@mixin flex-small {
-    flex: set-flex-width("small");
-    -ms-flex: set-flex-width("small");
-    width: map-get($flex-width-single, "small")
-}
-
-@mixin flex-quarter {
-    flex: set-flex-width("quarter");
-    -ms-flex: set-flex-width("quarter");
-    width: map-get($flex-width-single, "quarter")
-}
-
-@mixin flex-medium {
-    flex: set-flex-width("medium");
-    -ms-flex: set-flex-width("medium");
-    width: map-get($flex-width-single, "medium")
+@mixin set-flex-container($width) {
+    flex: set-flex-width($width);
+    -ms-flex: set-flex-width($width);
+    width: map-get($flex-width-single, $width);
 }
 
 @mixin flex-display($width, $justify){
     @if ($width == "small"){
-        @include flex-small;
+        @include set-flex-container("small");
     }
     @else {
-        @include flex-medium;
+        @include set-flex-container("medium");
     }
     display: flex;
     justify-content: $justify;
