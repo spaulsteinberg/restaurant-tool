@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {useSelector} from 'react-redux'
 import { buildChartWithData } from '../../../utils';
-import { ChartBarConfig, DashboardBarChart } from '../../../models/charts/dashboardCharts';
-import DefaultBarChart from '../../utility/DefaultBarChart';
+import { ChartConfig, DashboardLineChart } from '../../../models/charts/dashboardCharts';
+import DefaultChart from '../../utility/DefaultChart';
 
 const PopularityChart = (props) => {
 
@@ -21,11 +21,11 @@ const PopularityChart = (props) => {
         })
     }, [buildFrequencyChart])
 
-    const chartOptions = new ChartBarConfig(0);
-    const chartData = new DashboardBarChart([...orderFrequency.labels],[...orderFrequency.data], "Orders");
+    const chartOptions = new ChartConfig(0, true);
+    const chartData = new DashboardLineChart([...orderFrequency.labels],[...orderFrequency.data], "Orders");
 
     return (
-        <DefaultBarChart title="Last Weeks Orders" masterData={orderFrequency.data} chartData={chartData} chartOptions={chartOptions} />
+            <DefaultChart title="Last Weeks Orders" masterData={orderFrequency.data} chartData={chartData} chartOptions={chartOptions} chartFlag="line"/>
     )
 }
 

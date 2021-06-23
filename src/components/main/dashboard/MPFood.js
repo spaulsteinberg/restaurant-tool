@@ -1,6 +1,6 @@
 import React from 'react'
-import { ChartBarConfig, DashboardBarChart } from '../../../models/charts/dashboardCharts';
-import DefaultBarChart from '../../utility/DefaultBarChart';
+import { ChartConfig, DashboardBarChart } from '../../../models/charts/dashboardCharts';
+import DefaultChart from '../../utility/DefaultChart';
 import MostPurchased from './MostPurchased';
 
 const MPFood = ({labels, data}) => {
@@ -8,12 +8,12 @@ const MPFood = ({labels, data}) => {
     const tickCallBack = value => `$${value}`
     const tooltipCallBack = item => `Earnings: $${item.formattedValue}`
 
-    const chartOptions = new ChartBarConfig(null, tickCallBack, tooltipCallBack);
+    const chartOptions = new ChartConfig(null, false, tickCallBack, tooltipCallBack);
 
     const chartData = new DashboardBarChart([...labels],[...data], "Earnings")
 
     return (
-        <DefaultBarChart title="Highest Earning Items" masterData={data} chartData={chartData} chartOptions={chartOptions} />
+        <DefaultChart title="Highest Earning Items" masterData={data} chartData={chartData} chartOptions={chartOptions} chartFlag="bar"/>
 
     )
 }

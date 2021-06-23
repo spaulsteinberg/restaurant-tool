@@ -1,16 +1,17 @@
+import moment from "moment";
+
 export const buildChartWithData = (data, dataKey="orders") => {
     let revenueData = {};
-    for (let order of data.data) {
-        // if date exists
-        if (revenueData.hasOwnProperty(order.date)){
-            revenueData[order.date].revenue += order.totalCost
-            revenueData[order.date].orders += 1
-        } else {
-            revenueData[order.date] = {
-                revenue: order.totalCost,
-                orders: 1
-            }
+    let lastSevenInclusive = getLastSevenDays();
+    for (const date of lastSevenInclusive){
+        revenueData[date] = {
+            revenue: 0,
+            orders: 0
         }
+    }
+    for (let order of data.data) {
+        revenueData[order.date].revenue += order.totalCost
+        revenueData[order.date].orders += 1
     }
     let structureDataForChart = [];
     for (const [key, value] of Object.entries(revenueData)) {
@@ -20,3 +21,8 @@ export const buildChartWithData = (data, dataKey="orders") => {
 }
 
 export const sortByDate = array => array.sort((a, b) => new Date(b[0]) - new Date(a[0]));
+
+const getLastSevenDays = () => {
+    const today = moment();
+    return [today.format('MM/DD/YYYY')].concat(Array(7).fill().map(() => today.subtract(1, 'day').format('MM/DD/YYYY')))
+}

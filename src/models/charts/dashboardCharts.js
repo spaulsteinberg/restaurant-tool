@@ -18,22 +18,34 @@ export class DashboardBarChart extends ChartBase {
     }
 }
 
+export class DashboardLineChart extends ChartBase {
+    constructor(labels, dataSet, dataSetLabel){
+        super(labels);
+        this.hydrateDataSet(dataSet, dataSetLabel);
+    }
+
+    hydrateDataSet(data, setLabel) {
+        this.datasets.push({data: data, label: setLabel, borderColor: DASHBOARD_CHART_COLORS[1], fill: false, tension: 0})
+    }
+}
+
 /*********Chart Options Configs *************/
 
 export class ChartConfigBase {
-    constructor(precision){
+    constructor(precision, overrideXGridDisplay){
         this.responsive = true;
         this.scales = {
-            y: { ticks: {beginAtZero: 0, precision: precision} },
-            x: { grid: { display: false}}
+            y: { ticks: {beginAtZero: true, precision: precision} },
+            x: { grid: { display: overrideXGridDisplay}}
         }
         this.plugins = {legend: {display: false}, tooltip: {}}
     }
 }
 
-export class ChartBarConfig extends ChartConfigBase {
-    constructor(precision, tickCallBack = null, toolTipCallBack = null){
-        super(precision);
+
+export class ChartConfig extends ChartConfigBase {
+    constructor(precision, overrideXGridDisplay, tickCallBack = null, toolTipCallBack = null){
+        super(precision, overrideXGridDisplay);
         if (tickCallBack){
             this.scales.y.ticks.callback = tickCallBack
         }

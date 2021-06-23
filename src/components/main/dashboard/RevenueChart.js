@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {useSelector} from 'react-redux'
 import { buildChartWithData } from '../../../utils';
-import { ChartBarConfig, DashboardBarChart } from '../../../models/charts/dashboardCharts';
-import DefaultBarChart from '../../utility/DefaultBarChart';
+import { ChartConfig, DashboardLineChart } from '../../../models/charts/dashboardCharts';
+import DefaultChart from '../../utility/DefaultChart';
 
 const RevenueChart = (props) => {
     const [revenue, setRevenue] = useState({labels: [], data: []});
@@ -23,11 +23,11 @@ const RevenueChart = (props) => {
     const tickCallBack = value => `$${value}`
     const tooltipCallBack = item => `Revenue: $${item.formattedValue}`
 
-    const chartOptions = new ChartBarConfig(null, tickCallBack, tooltipCallBack);
-    const chartData = new DashboardBarChart([...revenue.labels], [...revenue.data], "Revenue")
+    const chartOptions = new ChartConfig(null, true, tickCallBack, tooltipCallBack);
+    const chartData = new DashboardLineChart([...revenue.labels], [...revenue.data], "Revenue")
 
     return (
-        <DefaultBarChart title="My Revenue" masterData={revenue.data} chartData={chartData} chartOptions={chartOptions} />
+        <DefaultChart title="My Revenue" masterData={revenue.data} chartData={chartData} chartOptions={chartOptions} chartFlag="line"/>
     )
 }
 export default RevenueChart;
