@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux'
 import { buildChartWithData } from '../../../utils';
 import { ChartConfig, DashboardLineChart } from '../../../models/charts/dashboardCharts';
 import DefaultChart from '../../utility/DefaultChart';
+import { DATA_KEYS } from '../../../constants/constants';
 
 const PopularityChart = (props) => {
 
@@ -25,7 +26,7 @@ const PopularityChart = (props) => {
     const chartData = new DashboardLineChart([...orderFrequency.labels],[...orderFrequency.data], "Orders");
 
     return (
-            <DefaultChart title="Last Weeks Orders" masterData={orderFrequency.data} chartData={chartData} chartOptions={chartOptions} chartFlag="line"/>
+            <DefaultChart title="Last Weeks Orders" masterData={orderFrequency.data} chartData={chartData} chartOptions={chartOptions} chartFlag={DATA_KEYS.LINE}/>
     )
 }
 

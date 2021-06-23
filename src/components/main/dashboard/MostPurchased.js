@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import { DATA_KEYS } from '../../../constants/constants';
 
 const MostPurchased = (WrappedComponent, keyIn) => {
     class MostPurchased extends React.Component {
@@ -11,7 +12,7 @@ const MostPurchased = (WrappedComponent, keyIn) => {
             const orderItems = this.props.content.slice().map(order => order.order[keyIn]);
             for (const items of orderItems){
                 for (const item of items){
-                    if (keyIn === "food"){
+                    if (keyIn === DATA_KEYS.FOOD){
                         key = item.main.charAt(0).toUpperCase() + item.main.slice(1).toLowerCase();
                     }
                     else {

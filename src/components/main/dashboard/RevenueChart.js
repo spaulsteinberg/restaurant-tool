@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux'
 import { buildChartWithData } from '../../../utils';
 import { ChartConfig, DashboardLineChart } from '../../../models/charts/dashboardCharts';
 import DefaultChart from '../../utility/DefaultChart';
+import { DATA_KEYS } from '../../../constants/constants';
 
 const RevenueChart = (props) => {
     const [revenue, setRevenue] = useState({labels: [], data: []});
@@ -27,7 +28,7 @@ const RevenueChart = (props) => {
     const chartData = new DashboardLineChart([...revenue.labels], [...revenue.data], "Revenue")
 
     return (
-        <DefaultChart title="My Revenue" masterData={revenue.data} chartData={chartData} chartOptions={chartOptions} chartFlag="line"/>
+        <DefaultChart title="My Revenue" masterData={revenue.data} chartData={chartData} chartOptions={chartOptions} chartFlag={DATA_KEYS.LINE} />
     )
 }
 export default RevenueChart;

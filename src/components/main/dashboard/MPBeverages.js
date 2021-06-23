@@ -2,6 +2,7 @@ import React from 'react';
 import MostPurchased from './MostPurchased';
 import DefaultChart from '../../utility/DefaultChart';
 import { ChartConfig, DashboardBarChart } from '../../../models/charts/dashboardCharts';
+import { DATA_KEYS } from '../../../constants/constants';
 
 const MPBeverages = ({labels, data}) => {
     const tickCallBack = value => `$${value}`
@@ -11,7 +12,7 @@ const MPBeverages = ({labels, data}) => {
 
     const chartData = new DashboardBarChart([...labels],[...data], "Earnings")
     return (
-        <DefaultChart title="Highest Earning Beverages" masterData={data} chartData={chartData} chartOptions={chartOptions} chartFlag="bar"/>
+        <DefaultChart title="Highest Earning Beverages" masterData={data} chartData={chartData} chartOptions={chartOptions} chartFlag={DATA_KEYS.BAR}/>
     )
 }
 

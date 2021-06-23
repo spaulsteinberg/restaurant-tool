@@ -2,6 +2,7 @@ import React from 'react';
 import '../main/main-styles.scss';
 import Card from 'react-bootstrap/Card';
 import {Bar, Line} from 'react-chartjs-2';
+import { DATA_KEYS } from '../../constants/constants';
 
 const DefaultChart = ({title, masterData, chartData, chartOptions, chartFlag}) => {
     return (
@@ -13,7 +14,7 @@ const DefaultChart = ({title, masterData, chartData, chartOptions, chartFlag}) =
                 {
                     masterData && masterData.length > 0 && 
                     <div className="dashboard-chart-wrapper">
-                        { chartFlag === "bar" ?
+                        { chartFlag === DATA_KEYS.BAR ?
                             <Bar data={chartData} options={chartOptions} />
                             : <Line data={chartData} options={chartOptions} />}
                     </div>

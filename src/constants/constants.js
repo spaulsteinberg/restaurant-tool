@@ -8,3 +8,11 @@ export const DASHBOARD_CHART_COLORS = [
     'rgba(153, 102, 255, 1)',
     'rgba(255, 159, 64, 1)'
 ]
+
+// key into order and chart info here 
+export const DATA_KEYS = Object.freeze({
+    "FOOD": "food",
+    "DRINK": "drink",
+    "BAR": "bar",
+    "LINE": "line"
+});
