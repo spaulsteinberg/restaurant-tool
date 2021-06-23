@@ -19,4 +19,4 @@ const MPFood = ({labels, data}) => {
     )
 }
 
-export default MostPurchased(MPFood, "food");
+export default MostPurchased(MPFood, DATA_KEYS.FOOD);

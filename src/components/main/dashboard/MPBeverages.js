@@ -16,4 +16,4 @@ const MPBeverages = ({labels, data}) => {
     )
 }
 
-export default MostPurchased(MPBeverages, "drink");
+export default MostPurchased(MPBeverages, DATA_KEYS.DRINK);

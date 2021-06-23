@@ -29,6 +29,13 @@ export class DashboardLineChart extends ChartBase {
     }
 }
 
+export class DashboardDoughnutChart extends ChartBase {
+    constructor(labels, dataSet){
+        super(labels)
+        this.datasets.push({data: dataSet, backgroundColor: DASHBOARD_CHART_COLORS, hoverOffset: 4})
+    }
+}
+
 /*********Chart Options Configs *************/
 
 export class ChartConfigBase {

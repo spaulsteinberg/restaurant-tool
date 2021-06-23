@@ -7,6 +7,8 @@ import TopBar from './TopBar';
 import PopularityChart from './PopularityChart';
 import MPFood from './MPFood';
 import MPBeverages from './MPBeverages';
+import MPFoodCategories from './MPFoodCategories';
+import MPBevCategories from './MPBevCategories';
 
 const Dashboard = ({orderData, retrieveUsers}) => {
 
@@ -17,7 +19,7 @@ const Dashboard = ({orderData, retrieveUsers}) => {
     const sumOrderCostForRevenue = () => orderData.data.length > 0 ? orderData.data.map(order => order.totalCost).reduce((acc, cur) => acc += cur) : 0
 
     const averageOrderPrice = () => orderData.data.length > 0 ? sumOrderCostForRevenue() / orderData.data.length : 0
-
+    const componentsToRender = [<RevenueChart />, <PopularityChart />, <MPFood />, <MPBeverages />, <MPFoodCategories />, <MPBevCategories />]
     return (
         <React.Fragment>
             {
@@ -28,18 +30,10 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                     <React.Fragment>
                         <TopBar numOrders={orderData.data.length} sumRevenue={sumOrderCostForRevenue} avgOrderPrice={averageOrderPrice}/>
                         <div className="dashboard-body">
-                            <div className="dashboard-body-item">
-                                <RevenueChart />
-                            </div>
-                            <div className="dashboard-body-item">
-                                <PopularityChart />
-                            </div>
-                            <div className="dashboard-body-item">
-                                <MPFood />
-                            </div>
-                            <div className="dashboard-body-item">
-                                <MPBeverages />
-                            </div>
+                            {
+                                componentsToRender
+                                .map((component, i) => <div className="dashboard-body-item" key={i}>{component}</div>)
+                            }
                         </div>
                     </React.Fragment> }
                     {orderData.error && <p className="text-danger">{orderData.error}</p>}

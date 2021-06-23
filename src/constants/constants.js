@@ -14,5 +14,6 @@ export const DATA_KEYS = Object.freeze({
     "FOOD": "food",
     "DRINK": "drink",
     "BAR": "bar",
-    "LINE": "line"
+    "LINE": "line",
+    "DOUGHNUT": "doughnut"
 });
