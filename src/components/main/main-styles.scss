@@ -161,6 +161,16 @@
         width: 100%;
     }
 }
+#dashboard-order-table {
+    border: none;
+    tr, td, th {
+        border-bottom: none;
+    }
+}
+.dashboard-table-card-header {
+    background-color: white;
+    border-bottom: none;
+}
 
 /****************** Queries *********************/
 
