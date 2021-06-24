@@ -28,7 +28,7 @@ const MostPurchased = (WrappedComponent, keyIn, isCategoryComponent = false) => 
         }
 
         accumulateCategoryData = () => {
-            let key, price, map = new Map();
+            let key, price, totalPrice = 0, map = new Map();
             const categoryItems = this.props.content.slice().map(order => order.order[keyIn]);
             for (const items of categoryItems){
                 for (const item of items){
@@ -36,9 +36,14 @@ const MostPurchased = (WrappedComponent, keyIn, isCategoryComponent = false) => 
                     key = item.category.charAt(0).toUpperCase() + item.category.slice(1).toLowerCase();
                     price = price !== undefined && price !== null ? parseFloat(item.price) : 0;
                     this.addOrSetMapKey(map, key, price);
+                    totalPrice += price;
                 }
             }
             let accumulationArr = this.buildArrayFromMapKeyValues(map);
+            accumulationArr.forEach(element => {
+                element[1] = parseFloat((element[1] * 100 / totalPrice).toFixed(2))
+                element[0] = `${element[0]} (${element[1]}%)`
+            })
             return accumulationArr.sort((a, b) => b[1] - a[1]).slice(0, accumulationArr.length >= 7 ? 7 : accumulationArr.length)
         }
 

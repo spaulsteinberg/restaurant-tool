@@ -62,3 +62,20 @@ export class ChartConfig extends ChartConfigBase {
         }
     }
 }
+
+export class ChartDoughnutConfig {
+    constructor(toolTipCallBack){
+        this.responsive = true;
+        this.cutout = "70%";
+        this.plugins = {
+            legend: { 
+                display: true,
+            },
+            tooltip: {
+                callbacks: {
+                    label: toolTipCallBack
+                }
+            }
+        }
+    }
+}

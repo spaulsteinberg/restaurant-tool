@@ -31,8 +31,7 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                         <TopBar numOrders={orderData.data.length} sumRevenue={sumOrderCostForRevenue} avgOrderPrice={averageOrderPrice}/>
                         <div className="dashboard-body">
                             {
-                                componentsToRender
-                                .map((component, i) => <div className="dashboard-body-item" key={i}>{component}</div>)
+                                componentsToRender.map((component, i) => <div className="dashboard-body-item" key={i}>{component}</div>)
                             }
                         </div>
                     </React.Fragment> }
