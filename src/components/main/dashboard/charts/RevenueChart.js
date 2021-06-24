@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {useSelector} from 'react-redux'
-import { buildChartWithData } from '../../../utils';
-import { ChartConfig, DashboardLineChart } from '../../../models/charts/dashboardCharts';
-import DefaultChart from '../../utility/DefaultChart';
-import { DATA_KEYS } from '../../../constants/constants';
+import { buildChartWithData } from '../../../../utils';
+import { ChartConfig, DashboardLineChart } from '../../../../models/charts/dashboardCharts';
+import DefaultChart from '../../../utility/DefaultChart';
+import { DATA_KEYS } from '../../../../constants/constants';
 
 const RevenueChart = (props) => {
     const [revenue, setRevenue] = useState({labels: [], data: []});

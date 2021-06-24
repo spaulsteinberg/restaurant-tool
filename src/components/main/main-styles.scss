@@ -153,10 +153,8 @@
 .dashboard-body {
     @include flex-full-column;
     justify-content: center;
-    .dashboard-body-item {
-        flex: 0 0 100%;
-        -ms-flex: 0 0 100%;
-        width: 100%;
+    .dashboard-body-item, .dashboard-body-table {
+        @include set-flex-container("large")
     }
     .dashboard-card {
         @include card-dimensions;
@@ -211,6 +209,23 @@
             -ms-flex: 0 0 45%;
             width: 45%;
             margin: 1rem;
+        }
+        .dashboard-body-table {
+            @include set-flex-container("medium");
+            margin: $dashboard-margin;
+        }
+    }
+}
+
+@media screen and (min-width: resolution("mobile")) and (max-width: 700px) {
+    .dashboard-body {
+        .dashboard-body-item {
+            @include set-flex-container("medium-large");
+            margin: $dashboard-margin;
+        }
+        .dashboard-body-table {
+            @include set-flex-container("medium");
+            margin: $dashboard-margin;
         }
     }
 }

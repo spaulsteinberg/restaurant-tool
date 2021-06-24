@@ -2,6 +2,7 @@ $global-font-weight: 350;
 $primary-success-color: #198754;
 $navigation-link-size: 20px;
 $icon-text-min-width: 130px;
+$dashboard-margin: 1rem;
 $alignment-values: (
     "reset": 0,
     "centered": 0 auto
@@ -13,12 +14,14 @@ $flex-width: (
     "small": 0 0 20%,
     "quarter": 0 0 25%,
     "medium": 0 0 60%,
+    "medium-large": 0 0 70%,
     "large": 0 0 100%
 );
 $flex-width-single: (
     "small": 20%,
     "quarter": 25%,
     "medium": 60%,
+    "medium-large": 70%,
     "large": 100%
 );
 $resolution-names: (

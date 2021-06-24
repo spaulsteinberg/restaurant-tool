@@ -30,6 +30,7 @@ export const getAllOrders = () => {
                 .get()
                 .then(response => response.docs.map(d => {
                     let snapShot = d.data();
+                    snapShot.receiptNumber = d.id;
                     snapShot.date = moment(snapShot.date.toDate()).format('MM/DD/YYYY');
                     snapShot.totalCost = parseFloat(snapShot.totalCost)
                     return snapShot;

@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { getAllOrders } from '../../../redux/dashboard/orderActions';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../../utility/LoadingSpinner';
-import RevenueChart from './RevenueChart';
+import RevenueChart from './charts/RevenueChart';
 import TopBar from './TopBar';
-import PopularityChart from './PopularityChart';
-import MPFood from './MPFood';
-import MPBeverages from './MPBeverages';
-import MPFoodCategories from './MPFoodCategories';
-import MPBevCategories from './MPBevCategories';
+import PopularityChart from './charts/PopularityChart';
+import MPFood from './charts/MPFood';
+import MPBeverages from './charts/MPBeverages';
+import MPFoodCategories from './charts/MPFoodCategories';
+import MPBevCategories from './charts/MPBevCategories';
+import RecentOrderTable from './RecentOrderTable'
 
 const Dashboard = ({orderData, retrieveUsers}) => {
 
@@ -33,6 +34,9 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                             {
                                 componentsToRender.map((component, i) => <div className="dashboard-body-item" key={i}>{component}</div>)
                             }
+                            <div className="dashboard-body-table">
+                                <RecentOrderTable />
+                            </div>
                         </div>
                     </React.Fragment> }
                     {orderData.error && <p className="text-danger">{orderData.error}</p>}

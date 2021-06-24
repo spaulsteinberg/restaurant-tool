@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { DATA_KEYS } from '../../../constants/constants';
+import { DATA_KEYS } from '../../../../constants/constants';
 
 const MostPurchased = (WrappedComponent, keyIn, isCategoryComponent = false) => {
     class MostPurchased extends React.Component {

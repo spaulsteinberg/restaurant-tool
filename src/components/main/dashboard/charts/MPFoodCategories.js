@@ -1,7 +1,7 @@
 import React from 'react'
-import DefaultChart from '../../utility/DefaultChart';
-import { DATA_KEYS } from '../../../constants/constants';
-import { ChartDoughnutConfig, DashboardDoughnutChart } from '../../../models/charts/dashboardCharts';
+import DefaultChart from '../../../utility/DefaultChart';
+import { DATA_KEYS } from '../../../../constants/constants';
+import { ChartDoughnutConfig, DashboardDoughnutChart } from '../../../../models/charts/dashboardCharts';
 import MostPurchased from './MostPurchased';
 
 const MPFoodCategories = ({labels, data}) => {

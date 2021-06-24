@@ -1,7 +1,7 @@
 import React from 'react'
-import { DATA_KEYS } from '../../../constants/constants';
-import { ChartConfig, DashboardBarChart } from '../../../models/charts/dashboardCharts';
-import DefaultChart from '../../utility/DefaultChart';
+import { DATA_KEYS } from '../../../../constants/constants';
+import { ChartConfig, DashboardBarChart } from '../../../../models/charts/dashboardCharts';
+import DefaultChart from '../../../utility/DefaultChart';
 import MostPurchased from './MostPurchased';
 
 const MPFood = ({labels, data}) => {
@@ -14,7 +14,7 @@ const MPFood = ({labels, data}) => {
     const chartData = new DashboardBarChart([...labels],[...data], "Earnings")
 
     return (
-        <DefaultChart title="Highest Earning Items" masterData={data} chartData={chartData} chartOptions={chartOptions} chartFlag={DATA_KEYS.BAR}/>
+        <DefaultChart title="Top Items" masterData={data} chartData={chartData} chartOptions={chartOptions} chartFlag={DATA_KEYS.BAR}/>
 
     )
 }
