@@ -49,7 +49,7 @@ const MostPurchased = (WrappedComponent, keyIn, isCategoryComponent = false) => 
 
         buildArrayFromMapKeyValues = (map, accumulationArr = []) => {
             for (const [key, value] of map.entries()){
-                accumulationArr.push([key, value])
+                value !== 0 && accumulationArr.push([key, value])
             }
             return accumulationArr;
         }
