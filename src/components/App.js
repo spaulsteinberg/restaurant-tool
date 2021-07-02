@@ -18,6 +18,9 @@ import store from '../redux/store';
 import Orders from './main/orders/Orders';
 
 const App = () => {
+  const privateRoutes = [{path: '/', component: Dashboard}, {path:"/dashboard", component:Dashboard}, {path:"/orders", component:Orders},
+    {path:"/profile/view", component:ViewProfile}, {path:"/profile/update", component:UpdateCredentials}, {path:"/profile/signup", component:SignUp},];
+  const publicRoutes = [{path:"/login", component:Login}, {path:"/forgot-password", component:ResetPassword}, {path:"*", component:PageNotFound}]
   return (
       <ErrorBoundary>
           <AuthProvider>
@@ -26,15 +29,8 @@ const App = () => {
                 <Router>
                   <Root>
                     <Switch>
-                      <PrivateRoute exact path="/" component={Dashboard} />
-                      <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                      <PrivateRoute exact path="/orders" component={Orders} />
-                      <PrivateRoute exact path="/profile/view" component={ViewProfile} />
-                      <PrivateRoute path="/profile/update" component={UpdateCredentials} />
-                      <Route exact path="/signup" component={SignUp} />
-                      <Route exact path="/login" component={Login} />
-                      <Route exact path="/forgot-password" component={ResetPassword} />
-                      <Route exact path="*" component={PageNotFound} />
+                      {privateRoutes.map(route => <PrivateRoute key={route.path} exact path={route.path} component={route.component} />)}
+                      {publicRoutes.map(route => <Route key={route.path} exact path={route.path} component={route.component} />)}
                     </Switch>
                   </Root>
                 </Router>

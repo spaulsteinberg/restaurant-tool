@@ -109,7 +109,7 @@ const UpdateCredentials = () => {
                 </Form>
             </Card>
                 <div className="w-100 text-center mt-2">
-                    Click <Link exact={`${true}`} to="/">here</Link> to return to the profile screen.
+                    Click <Link exact={`${true}`} to="/profile/signup">here</Link> to sign up a new user.
                 </div>
         </React.Fragment>
     )

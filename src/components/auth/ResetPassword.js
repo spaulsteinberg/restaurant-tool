@@ -65,9 +65,6 @@ const ResetPassword = () => {
                     {success && <Alert variant="success" className="text-center">{success}</Alert>}
                 </Form>
             </Card>
-                <div className="w-100 text-center">
-                    Dont have an account yet? <Link exact={`${true}`} to="/signup">Sign Up</Link>
-                </div>
         </div>
     )
 }

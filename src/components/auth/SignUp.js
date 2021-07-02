@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Form, Button, Alert } from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import LoadingSpinner from '../utility/LoadingSpinner';
 import {EMAIL_REGEX} from '../../constants/constants';
@@ -11,9 +11,8 @@ const SignUp = () => {
     const initialState = { email: '', password: '', confirm: ''}
     const [form, setFormValues] = useState(initialState);
     const [error, setErrorState] = useState('');
-    const [isLoading, setLoadState] = useState(false)
-    const { signup } = useAuth();
-    const history = useHistory();
+    const [isLoading, setLoadState] = useState(false);
+    const { signup, logout } = useAuth();
 
     const handleInputChange = event => {
         let { name, value } = event.target;
@@ -23,6 +22,7 @@ const SignUp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoadState(true)
+        setErrorState('')
         if (form.password !== form.confirm) {
             setLoadState(false);
             return setErrorState("Passwords do not match.")
@@ -38,8 +38,7 @@ const SignUp = () => {
         try {
             setErrorState('');
             await signup(form.email, form.password);
-            setLoadState(false)
-            history.push('/')
+            await logout();
         } catch (err) {
             setLoadState(false)
             setErrorState(`Account creation failed.`)
@@ -91,7 +90,8 @@ const SignUp = () => {
                 </Form>
             </Card>
                 <div className="w-100 text-center mt-2">
-                    Already have an account? <Link exact={`${true}`} to="/login">Login</Link>
+                    Not where you want to be? Click here to go back to the <Link exact={`${true}`} to="/dashboard">dashboard</Link>.
+                    <p className="text-danger">*On a successful sign up, your current session will be ended.</p>
                 </div>
         </React.Fragment>
     )

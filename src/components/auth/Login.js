@@ -79,9 +79,6 @@ const Login = () => {
                     {error && <Alert variant="danger" className="text-center">{error}</Alert>}
                 </Form>
             </Card>
-                <div className="w-100 text-center mt-2">
-                    Dont have an account yet? <Link exact={`${true}`} to="/signup">Sign Up</Link>
-                </div>
         </React.Fragment>
     )
 }
