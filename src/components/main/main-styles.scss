@@ -209,16 +209,16 @@
         flex-direction: row;
         justify-content: space-between;
         .dashboard-body-item {
-            @include set-flex-unbound(48.5%);
+            @include set-flex-unbound(31.5%, 0);
         }
         .dashboard-card {
             max-width: 1000000px;
         }
         .dashboard-body-table {
-            @include set-flex-unbound(65%);
+            @include set-flex-unbound(65%, 0);
         }
         .dashboard-table-side-item {
-            @include set-flex-unbound(32%);
+            @include set-flex-unbound(32%, 0);
         }
     }
 }
@@ -226,16 +226,9 @@
 /* to prevent mobile landscape chart distortions */
 @media screen and (min-width: resolution("mobile")) and (max-width: 700px) {
     .dashboard-body {
-        .dashboard-body-item {
+        justify-content: center;
+        .dashboard-body-item, .dashboard-body-table, .dashboard-table-side-item {
             @include set-flex-container("medium-large");
-            margin: $dashboard-margin;
-        }
-        .dashboard-body-table {
-            @include set-flex-container("medium");
-            margin: $dashboard-margin;
-        }
-        .dashboard-table-side-item {
-            @include set-flex-container("small");
             margin: $dashboard-margin;
         }
     }

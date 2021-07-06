@@ -19,8 +19,11 @@ const Dashboard = ({orderData, retrieveUsers}) => {
 
     const sumOrderCostForRevenue = () => orderData.data.length > 0 ? orderData.data.map(order => order.totalCost).reduce((acc, cur) => acc += cur) : 0
 
-    const averageOrderPrice = () => orderData.data.length > 0 ? sumOrderCostForRevenue() / orderData.data.length : 0
-    const componentsToRender = [<RevenueChart />, <PopularityChart />, <MPFood />, <MPBeverages />, <MPFoodCategories />, <MPBevCategories />]
+    const averageOrderPrice = () => orderData.data.length > 0 ? sumOrderCostForRevenue() / orderData.data.length : 0;
+
+    const topRowComponents = [ <RevenueChart />, <PopularityChart />, <MPFood /> ]
+    const middleTableComponents = [ <MPBeverages />, <RecentOrderTable />]
+    const componentsToRender = [<MPFoodCategories />, <MPBevCategories />]
     return (
         <React.Fragment>
             {
@@ -32,14 +35,16 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                         <TopBar numOrders={orderData.data.length} sumRevenue={sumOrderCostForRevenue} avgOrderPrice={averageOrderPrice}/>
                         <div className="dashboard-body">
                             {
-                                componentsToRender.map((component, i) => <div className="dashboard-body-item" key={i}>{component}</div>)
+                                topRowComponents.map((component, i) => <div className="dashboard-body-item" key={i}>{component}</div>)
                             }
-                                <div className="dashboard-table-side-item">
-                                    <RevenueChart />
-                                </div>
-                                <div className="dashboard-body-table">
-                                    <RecentOrderTable />
-                                </div>
+                            {
+                                middleTableComponents.map((component, i) => 
+                                    <div className={i === 1 ? "dashboard-body-table" : "dashboard-table-side-item"} key={i+4}>{component} </div>
+                                )
+                            }
+                            {
+                                componentsToRender.map((component, i) => <div className="dashboard-body-item" key={i+10}>{component}</div>)
+                            }
                         </div>
                     </React.Fragment> }
                     {orderData.error && <p className="text-danger">{orderData.error}</p>}

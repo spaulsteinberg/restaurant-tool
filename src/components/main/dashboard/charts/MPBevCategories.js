@@ -9,7 +9,7 @@ const MPBevCategories = ({labels, data}) => {
   const chartData = new DashboardDoughnutChart([...labels], [...data]);
   const options = new ChartDoughnutConfig(tooltipCallBack)
     return (
-        <DefaultChart title="Beverage Distribution" masterData={data} chartData={chartData} chartOptions={options} chartFlag={DATA_KEYS.DOUGHNUT}/>
+        <DefaultChart title="Bev Dist" masterData={data} chartData={chartData} chartOptions={options} chartFlag={DATA_KEYS.DOUGHNUT}/>
       )
 }
 

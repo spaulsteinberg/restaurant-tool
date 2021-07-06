@@ -9,7 +9,7 @@ const MPFoodCategories = ({labels, data}) => {
   const chartData = new DashboardDoughnutChart([...labels], [...data]);
   const options = new ChartDoughnutConfig(tooltipCallBack);
     return (
-      <DefaultChart title="Food Distribution" masterData={data} chartData={chartData} chartOptions={options} chartFlag={DATA_KEYS.DOUGHNUT}/>
+      <DefaultChart title="Food Dist" masterData={data} chartData={chartData} chartOptions={options} chartFlag={DATA_KEYS.DOUGHNUT}/>
       )
 }
 
