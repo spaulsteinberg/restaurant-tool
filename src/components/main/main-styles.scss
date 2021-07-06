@@ -99,9 +99,7 @@
     @include flex-full-column;
     justify-content: center;
     .top-nav-item {
-        flex: 0 0 100%;
-        -ms-flex: 0 0 100%;
-        width: 100%;
+        @include set-flex-container("large");
         min-width: $icon-text-min-width;
         .block-svg-wrapper {
             @include flex-full-column;
@@ -110,14 +108,10 @@
             min-width: $icon-text-min-width;
             padding: 3%;
             .block-svg-item-icon {
-                flex: 0 0 30%;
-                -ms-flex: 0 0 30%;
-                width: 30%;
+                @include set-flex-unbound(30%, 0);
             }
             .block-svg-item-desc {
-                flex: 0 0 70%;
-                -ms-flex: 0 0 70%;
-                width: 70%;
+                @include set-flex-container("medium-large");
                 text-align: center;
             }
         }
@@ -153,7 +147,7 @@
 .dashboard-body {
     @include flex-full-column;
     justify-content: center;
-    .dashboard-body-item, .dashboard-body-table {
+    .dashboard-body-item, .dashboard-body-table, .dashboard-table-side-item {
         @include set-flex-container("large")
     }
     .dashboard-card {
@@ -213,20 +207,23 @@
     }
     .dashboard-body {
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         .dashboard-body-item {
-            flex: 0 0 45%;
-            -ms-flex: 0 0 45%;
-            width: 45%;
-            margin: 1rem;
+            @include set-flex-unbound(48.5%);
+        }
+        .dashboard-card {
+            max-width: 1000000px;
         }
         .dashboard-body-table {
-            @include set-flex-container("medium");
-            margin: $dashboard-margin;
+            @include set-flex-unbound(65%);
+        }
+        .dashboard-table-side-item {
+            @include set-flex-unbound(32%);
         }
     }
 }
 
+/* to prevent mobile landscape chart distortions */
 @media screen and (min-width: resolution("mobile")) and (max-width: 700px) {
     .dashboard-body {
         .dashboard-body-item {
@@ -235,6 +232,10 @@
         }
         .dashboard-body-table {
             @include set-flex-container("medium");
+            margin: $dashboard-margin;
+        }
+        .dashboard-table-side-item {
+            @include set-flex-container("small");
             margin: $dashboard-margin;
         }
     }

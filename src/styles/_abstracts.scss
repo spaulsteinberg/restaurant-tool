@@ -47,6 +47,13 @@
     width: map-get($flex-width-single, $width);
 }
 
+@mixin set-flex-unbound($width, $margin: $dashboard-margin) {
+    flex: 0 0 $width;
+    -ms-flex: 0 0 $width;
+    width: $width;
+    @if ($margin != 0) {margin: $margin; }
+}
+
 @mixin flex-display($width, $justify){
     @if ($width == "small"){
         @include set-flex-container("small");

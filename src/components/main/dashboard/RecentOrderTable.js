@@ -16,7 +16,7 @@ const RecentOrderTable = (props) => {
     const colNames = ["Order #", "Date", "Name","Amount"]
   
     return (
-      <Card>
+      <Card className="my-4">
         <Card.Header className="dashboard-table-card-header"><h2>Recent Orders</h2></Card.Header>
         <Card.Body>
           <div className="table-responsive">

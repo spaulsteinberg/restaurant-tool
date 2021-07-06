@@ -34,9 +34,12 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                             {
                                 componentsToRender.map((component, i) => <div className="dashboard-body-item" key={i}>{component}</div>)
                             }
-                            <div className="dashboard-body-table">
-                                <RecentOrderTable />
-                            </div>
+                                <div className="dashboard-table-side-item">
+                                    <RevenueChart />
+                                </div>
+                                <div className="dashboard-body-table">
+                                    <RecentOrderTable />
+                                </div>
                         </div>
                     </React.Fragment> }
                     {orderData.error && <p className="text-danger">{orderData.error}</p>}

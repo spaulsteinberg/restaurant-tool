@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Card, Form, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import LoadingSpinner from '../utility/LoadingSpinner';
 import {EMAIL_REGEX} from '../../constants/constants';
 import './auth-styles.scss';
+import { useUserContext } from '../../contexts/UserContext';
 
 const SignUp = () => {
 
@@ -13,6 +14,8 @@ const SignUp = () => {
     const [error, setErrorState] = useState('');
     const [isLoading, setLoadState] = useState(false);
     const { signup, logout } = useAuth();
+    const { clearUserDataFromLocalStorage } = useUserContext();
+    const history = useHistory();
 
     const handleInputChange = event => {
         let { name, value } = event.target;
@@ -39,6 +42,8 @@ const SignUp = () => {
             setErrorState('');
             await signup(form.email, form.password);
             await logout();
+            clearUserDataFromLocalStorage();
+            history.push('/login');
         } catch (err) {
             setLoadState(false)
             setErrorState(`Account creation failed.`)
