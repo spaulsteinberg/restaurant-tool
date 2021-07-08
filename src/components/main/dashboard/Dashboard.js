@@ -9,7 +9,8 @@ import MPFood from './charts/MPFood';
 import MPBeverages from './charts/MPBeverages';
 import MPFoodCategories from './charts/MPFoodCategories';
 import MPBevCategories from './charts/MPBevCategories';
-import RecentOrderTable from './RecentOrderTable'
+import RecentOrderTable from './RecentOrderTable';
+import GoalProgressVisual from './GoalProgressVisual';
 
 const Dashboard = ({orderData, retrieveUsers}) => {
 
@@ -45,6 +46,7 @@ const Dashboard = ({orderData, retrieveUsers}) => {
                             {
                                 componentsToRender.map((component, i) => <div className="dashboard-body-item" key={i+10}>{component}</div>)
                             }
+                            <div className="dashboard-body-item"> <GoalProgressVisual /> </div>
                         </div>
                     </React.Fragment> }
                     {orderData.error && <p className="text-danger">{orderData.error}</p>}

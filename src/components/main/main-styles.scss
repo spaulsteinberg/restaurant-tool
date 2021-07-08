@@ -127,6 +127,10 @@
 #refresh-dashboard-button {
     padding-top: 4px !important;
 }
+#goal-progress-title-span {
+    margin-left: 10px;
+    margin-top: 5px;
+}
 
 .dashboard-top-container {
     @include flex-full-column;
@@ -153,6 +157,26 @@
     .dashboard-card {
         @include card-dimensions;
         width: 100%;
+    }
+    .dashboard-visual-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-right: 5%;
+        .visual-element {
+            flex: 0 0 45%;
+            -ms-flex: 0 0 45%;
+            width: 45%;
+            align-items: center;
+            display: flex;
+            justify-content: flex-end;
+            h2 {
+                margin-bottom: 0.25rem;
+            }
+        }
+        #dashboard-visual-title {
+            margin-left: 2%;
+        }
     }
 }
 #dashboard-order-table {

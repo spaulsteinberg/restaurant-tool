@@ -36,11 +36,12 @@ const ViewProfile = () => {
         if (edit) {
             const requestObj = {
                 firstName: form.firstName,
-                lastName: form.lastName,
                 restaurant: form.restaurant,
+                email: currentUser.email,
                 role: form.role,
-                email: currentUser.email
+                lastName: form.lastName,
             }
+            if (JSON.stringify(requestObj) === JSON.stringify(initialState)) return setEdit(prevState => !prevState)
             try {
                 setLoading(true);
                 await setOrCreateUserProfile(requestObj, currentUser.uid)
