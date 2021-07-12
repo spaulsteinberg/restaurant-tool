@@ -84,6 +84,22 @@
     }
 }
 
+.toggle-goals-container {
+    @include flex-full-column;
+    @include set-flex-unbound(50%);
+    justify-content: center;
+    margin: alignment("centered");
+    border-radius: .25rem;
+    border: 1px solid lightgray;
+    margin-bottom: 2px;
+    padding: .25rem .75rem;
+    &:hover {
+        background-color: whitesmoke;
+        border: 1px solid black;
+        cursor: pointer;
+    }
+}
+
 .profile-form-state-div {
     @include center-content-flex;
 }
@@ -164,9 +180,7 @@
         justify-content: center;
         margin-right: 5%;
         .visual-element {
-            flex: 0 0 45%;
-            -ms-flex: 0 0 45%;
-            width: 45%;
+            @include set-flex-unbound(45%, 0);
             align-items: center;
             display: flex;
             justify-content: flex-end;
@@ -214,6 +228,7 @@
             }
         }
     }
+    .toggle-goals-container { @include set-flex-unbound(20%, 0) }
     .dashboard-top-container {
         flex-direction: row;
         justify-content: space-between;

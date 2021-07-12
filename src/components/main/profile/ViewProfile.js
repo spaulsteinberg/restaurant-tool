@@ -6,7 +6,8 @@ import Alert from 'react-bootstrap/Button';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useUserContext } from '../../../contexts/UserContext';
 import LoadingSpinner from '../../utility/LoadingSpinner';
-import { pencilEditIconPath, checkMarkSavePath, circleSlashForCancelPaths } from '../../../constants/svg/svgs';
+import { pencilEditIconPath, checkMarkSavePath, circleSlashForCancelPaths, doubleDownArrow, doubleUpArrow } from '../../../constants/svg/svgs';
+import Goals from './Goals';
 import '../main-styles.scss';
 
 const ViewProfile = () => {
@@ -18,7 +19,8 @@ const ViewProfile = () => {
     const [form, setFormState] = useState(initialState)
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('')
+    const [success, setSuccess] = useState('');
+    const [showGoals, setShowGoals] = useState(false);
 
     const handleInputChange = event => {
         const {name, value} = event.target;
@@ -56,6 +58,11 @@ const ViewProfile = () => {
         }
         setEdit(prevState => !prevState);
     }
+
+    const handleGoalsClick = () => {
+        setShowGoals(prevState => !prevState);
+    }
+
     const renderForm = () => {
         const formLabels = ["First Name: ", "Last Name: ", "Restaurant: ", "Role: "];
         const formKeys = ["firstName", "lastName", "restaurant", "role"]
@@ -75,7 +82,8 @@ const ViewProfile = () => {
         return formValuesToBind.map((k,i) => <div className="profile-form-row row mt-3" key={i}>{k}</div>);
     }
     return (
-        <Card className="profile-card my-4 text-left">
+        <React.Fragment>
+            <Card className="profile-card my-4 text-left">
             <Card.Header className="profile-header mb-2">
                 <h2>My Profile</h2>
             </Card.Header>
@@ -127,6 +135,16 @@ const ViewProfile = () => {
                 </Form>
             </Card.Body>
         </Card>
+            <div className="toggle-goals-container" onClick={handleGoalsClick}>
+                <p className="text-primary" style={{marginBottom: '.25rem'}}>{!showGoals ? "Show Goals" : "Hide Goals"}</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#0d6efd" viewBox="0 0 16 16" style={{margin: '0 auto'}}>
+                    { !showGoals 
+                        ? doubleDownArrow.map(path => <path fillRule="evenodd" key={path} d={path} />)
+                        : doubleUpArrow.map(path => <path fillRule="evenodd" key={path} d={path} />)}
+                </svg>
+            </div>
+            {showGoals && <Goals />}
+        </React.Fragment>
     )
 }
 
