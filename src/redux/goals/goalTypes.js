@@ -1,0 +1,11 @@
+export const LOAD_GOALS = 'LOAD_GOALS';
+export const LOAD_GOALS_SUCCESS = 'LOAD_GOALS_SUCCESS';
+export const LOAD_GOALS_ERROR = 'LOAD_GOALS_ERROR';
+
+export const ADD_GOAL = 'ADD_GOAL';
+export const ADD_GOAL_SUCCESS = 'ADD_GOAL_SUCCESS';
+export const ADD_GOAL_ERROR = 'ADD_GOAL_ERROR';
+
+export const REMOVE_GOAL = 'REMOVE_GOAL';
+export const REMOVE_GOAL_SUCCESS = 'REMOVE_GOAL_SUCCESS';
+export const REMOVE_GOAL_ERROR = 'REMOVE_GOAL_ERROR';
