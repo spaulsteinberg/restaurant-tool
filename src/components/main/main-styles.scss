@@ -63,9 +63,7 @@
 }
 
 .profile-form-row {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    @include flex-full-column;
     justify-content: flex-start;
     text-align: center;
     .profile-label-text {
@@ -100,8 +98,18 @@
     }
 }
 
-.profile-form-state-div {
-    @include center-content-flex;
+.profile-form-state-div { @include center-content-flex; }
+
+.view-goals-row {
+    @include flex-full-column;
+    .view-goals-column {
+        @include set-flex-container("medium");
+        margin: alignment("centered");
+    }
+    .view-goals-button-column {
+        @include set-flex-unbound("quarter");
+        margin: 1rem auto;
+    }
 }
 
 /****************** Dashboard *******************/
@@ -260,6 +268,18 @@
             @include set-flex-unbound(32%, 0);
         }
     }
+    .view-goals-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+        .view-goals-column {
+            @include set-flex-container("quarter");
+        }
+        .view-goals-button-column {
+            @include set-flex-unbound(10%);
+        }
+    }
+    
 }
 
 /* to prevent mobile landscape chart distortions */

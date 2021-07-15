@@ -17,3 +17,8 @@ export const DATA_KEYS = Object.freeze({
     "LINE": "line",
     "DOUGHNUT": "doughnut"
 });
+
+export const GOAL_TYPES = Object.freeze({
+    SUBJECTS: ["Revenue", "Orders"],
+    TIMEABLES: ["Weekly", "Monthly", "Yearly"]
+})
