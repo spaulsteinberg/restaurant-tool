@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
 import { useSelector } from 'react-redux';
-import { GOAL_TYPES } from '../../../constants/constants';
+import { GOAL_TYPES, REVENUE_KEY } from '../../../constants/constants';
 import { addIcon } from '../../../constants/svg/svgs';
 import { addNewGoal } from '../../../redux/goals/goalActions';
 import LoadingSpinner from '../../utility/LoadingSpinner';
@@ -62,7 +62,7 @@ const NewGoalForm = ({dispatch, user, hasCol, goals}) => {
                     {GOAL_TYPES.TIMEABLES.map(time => <option value={time} key={time}>{time}</option>)}
                 </Form.Control>
                 <InputGroup className="mb-4">
-                    <InputGroup.Text>$</InputGroup.Text>
+                    {newGoal.goal === REVENUE_KEY && <InputGroup.Text>$</InputGroup.Text>}
                     <Form.Control placeholder="Deliverable number here..." as="input" type="number" max={100000} min={1} value={newGoal.deliverable} onChange={(e) => handleGoalSelectChange(e, dKey)}/>
                 </InputGroup>
                 <Button type="submit" variant="success">

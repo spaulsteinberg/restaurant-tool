@@ -26,7 +26,7 @@ const PopularityChart = (props) => {
     const chartData = new DashboardLineChart([...orderFrequency.labels],[...orderFrequency.data], "Orders");
 
     return (
-            <DefaultChart title="Last Weeks Orders" masterData={orderFrequency.data} chartData={chartData} chartOptions={chartOptions} chartFlag={DATA_KEYS.LINE}/>
+            <DefaultChart title="My Orders" masterData={orderFrequency.data} chartData={chartData} chartOptions={chartOptions} chartFlag={DATA_KEYS.LINE}/>
     )
 }
 

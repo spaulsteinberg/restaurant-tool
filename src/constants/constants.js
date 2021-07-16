@@ -18,7 +18,13 @@ export const DATA_KEYS = Object.freeze({
     "DOUGHNUT": "doughnut"
 });
 
+export const REVENUE_KEY = "Revenue";
+export const ORDER_KEY = "Orders";
+export const WEEKLY_KEY = "Weekly"
+export const MONTHLY_KEY = "Monthly";
+export const YEARLY_KEY = "Yearly";
+
 export const GOAL_TYPES = Object.freeze({
-    SUBJECTS: ["Revenue", "Orders"],
-    TIMEABLES: ["Weekly", "Monthly", "Yearly"]
+    SUBJECTS: [REVENUE_KEY, ORDER_KEY],
+    TIMEABLES: [WEEKLY_KEY, MONTHLY_KEY, YEARLY_KEY]
 })
