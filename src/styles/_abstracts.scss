@@ -41,9 +41,9 @@
     flex-wrap: wrap;
 }
 
-@mixin set-flex-container($width) {
-    flex: set-flex-width($width);
-    -ms-flex: set-flex-width($width);
+@mixin set-flex-container($width, $important: false) {
+    flex: set-flex-width($width) if($important==true,!important,());
+    -ms-flex: set-flex-width($width) if($important==true,!important,());
     width: map-get($flex-width-single, $width);
 }
 

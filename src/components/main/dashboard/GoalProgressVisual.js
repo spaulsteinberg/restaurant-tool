@@ -70,7 +70,6 @@ const GoalProgressVisual = ({goals, sumRevenue, numOrders}) => {
                     </Box>
                     </Box>
                 </div>)}
-                <p style={{marginBottom: '0'}}><small className="text-info">*Only Weekly goals are displayed in the dashboard.</small></p>
                 {goalsProgress.length > 0 && <small className="text-info">*Some values may appear off target due to rounding. </small>}
             </Card.Body>
         </Card>

@@ -200,6 +200,9 @@
             margin-left: 2%;
         }
     }
+    .goals-dashboard-element {
+        @include set-flex-container("large", true);
+    }
 }
 #dashboard-order-table {
     border: none;
@@ -262,6 +265,10 @@
         .dashboard-body-item {
             @include set-flex-unbound(31.5%, 0);
         }
+        .bottom-row-item {
+            @include set-flex-unbound(45%);
+            margin: 0 auto !important;
+        }
         .dashboard-card {
             max-width: 1000000px;
         }
@@ -292,6 +299,10 @@
         justify-content: center;
         .dashboard-body-item, .dashboard-body-table, .dashboard-table-side-item {
             @include set-flex-container("medium-large");
+            margin: $dashboard-margin;
+        }
+        .goals-dashboard-element {
+            @include set-flex-container("medium-large", true);
             margin: $dashboard-margin;
         }
     }
