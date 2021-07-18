@@ -13,8 +13,9 @@ import { Alert } from 'react-bootstrap';
 
 const Goals = () => {
 
-    const handleTabChange = (event, newValue) => setValue(newValue)
     const [value, setValue] = useState(0);
+    const [showNewGoalStatefulMessage, setShowNewGoalStatefulMessage] = useState(false);
+    const [showViewGoalStatefulMessage, setViewGoalShowStatefulMessage] = useState(false);
 
     const {currentUser} = useAuth();
     const dispatch = useDispatch();
@@ -24,6 +25,17 @@ const Goals = () => {
     const goalsCallFailed = useSelector(state => state.goals.get.error);
     const userHasIdInCollection = useSelector(state => state.goals.userHasGoals);
     const currentGoalList = useSelector(state => state.goals.goalsList);
+
+    const handleTabChange = (event, newValue) => {
+        setShowNewGoalStatefulMessage(false);
+        setViewGoalShowStatefulMessage(false);
+        setValue(newValue)
+    }
+
+    const setStateMessage = () => {
+        if (value === 0) setViewGoalShowStatefulMessage(true);
+        else if (value === 1) setShowNewGoalStatefulMessage(true);
+    }
 
     const getGoalsCallback = useCallback(() => {
         dispatch(retrieveGoals(currentUser.email))
@@ -61,14 +73,22 @@ const Goals = () => {
                         <Tab label="New" />
                     </Tabs>
                     <TabPanel value={value} index={0}>
-                        <ViewGoalForm dispatch={dispatch} goals={currentGoalList} user={currentUser}/>
+                        <ViewGoalForm 
+                            dispatch={dispatch}
+                            goals={currentGoalList}
+                            user={currentUser}
+                            setShowMsg={setStateMessage}
+                            showMsg={showViewGoalStatefulMessage}
+                            />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         <NewGoalForm 
                             dispatch={dispatch}
                             user={currentUser}
                             hasCol={userHasIdInCollection}
-                            goals={currentGoalList}/>
+                            goals={currentGoalList}
+                            setShowMsg={setStateMessage}
+                            showMsg={showNewGoalStatefulMessage}/>
                     </TabPanel>
                 </React.Fragment>
             }

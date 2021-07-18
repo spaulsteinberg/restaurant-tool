@@ -9,7 +9,7 @@ import { addIcon } from '../../../constants/svg/svgs';
 import { addNewGoal } from '../../../redux/goals/goalActions';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 
-const NewGoalForm = ({dispatch, user, hasCol, goals}) => {
+const NewGoalForm = ({dispatch, user, hasCol, goals, setShowMsg, showMsg}) => {
 
     const {loading, success, error} = useSelector(state => state.goals.add);
     
@@ -32,6 +32,7 @@ const NewGoalForm = ({dispatch, user, hasCol, goals}) => {
         setFormError('');
         newGoal.deliverable = parseInt(newGoal.deliverable)
         await dispatch(addNewGoal(user.email, newGoal, hasCol))
+        setShowMsg();
     }
 
     const validate = () => {
@@ -73,9 +74,9 @@ const NewGoalForm = ({dispatch, user, hasCol, goals}) => {
                 </div>
             </Form>
             <div style={{display: !formError ? "block" : "none", marginTop: '1rem'}}>
-                {loading && <LoadingSpinner alignment="center">Adding...</LoadingSpinner>}
-                {success && <Alert variant="success" className="text-center">Goal added successfully!</Alert>}
-                {error && <Alert variant="danger" className="text-center">An error occurred. Please try again.</Alert>}
+                {loading && showMsg &&<LoadingSpinner alignment="center">Adding...</LoadingSpinner>}
+                {success && showMsg && <Alert variant="success" className="text-center">Goal added successfully!</Alert>}
+                {error && showMsg && <Alert variant="danger" className="text-center">An error occurred. Please try again.</Alert>}
             </div>
     </>
     )

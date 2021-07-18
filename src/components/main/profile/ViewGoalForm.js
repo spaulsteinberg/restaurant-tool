@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import { Alert } from 'react-bootstrap';
 
-const ViewGoalForm = ({dispatch, goals, user}) => {
+const ViewGoalForm = ({dispatch, goals, user, setShowMsg, showMsg}) => {
 
     const {loading, success, error} = useSelector(state => state.goals.remove);
 
@@ -19,6 +19,7 @@ const ViewGoalForm = ({dispatch, goals, user}) => {
     const handleDeleteClick = (e, goal) => {
         e.preventDefault();
         dispatch(deleteGoal(user.email, goal))
+        setShowMsg();
     }
     return (
         <>
@@ -47,8 +48,8 @@ const ViewGoalForm = ({dispatch, goals, user}) => {
         </div>
         )}
         {loading && <LoadingSpinner alignment="centered" variant="danger">Removing...</LoadingSpinner>}
-        {!loading && goals.length > 0 && success && <Alert variant="primary" className="text-center mt-2">Goal deleted successfully.</Alert>}
-        {!loading && goals.length > 0 && error && <Alert variant="danger" className="text-center mt-2">Failed to remove goal.</Alert>}
+        {!loading && goals.length > 0 && success && showMsg && <Alert variant="primary" className="text-center mt-2">Goal deleted successfully.</Alert>}
+        {!loading && goals.length > 0 && error && showMsg && <Alert variant="danger" className="text-center mt-2">Failed to remove goal.</Alert>}
         </>
     )
 }
