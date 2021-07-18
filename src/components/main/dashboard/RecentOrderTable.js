@@ -28,6 +28,7 @@ const RecentOrderTable = (props) => {
               </thead>
               <tbody>
                 {
+                  recentOrders.length > 0 ? 
                   recentOrders.map(order =>
                     <tr key={order.id}>
                       <th scope="row">{order.id}</th>
@@ -36,6 +37,7 @@ const RecentOrderTable = (props) => {
                       <td>{order.revenue}</td>
                     </tr>
                   )
+                  : <tr><td colSpan="4">No data to display</td></tr>
                 }
               </tbody>
             </table>
