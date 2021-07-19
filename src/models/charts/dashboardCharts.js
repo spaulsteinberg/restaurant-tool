@@ -66,6 +66,8 @@ export class ChartConfig extends ChartConfigBase {
 export class ChartDoughnutConfig {
     constructor(toolTipCallBack){
         this.responsive = true;
+        this.maintainAspectRatio = true;
+        this.aspectRatio = 1.5;
         this.cutout = "70%";
         this.plugins = {
             legend: { 
