@@ -183,9 +183,7 @@
         width: 100%;
     }
     .dashboard-visual-wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
+        @include row-flex(center);
         margin-right: 5%;
         .visual-element {
             @include set-flex-unbound(45%, 0);
@@ -222,12 +220,14 @@
 /****************** Orders **********************/
 
 .order-search-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    @include row-flex(center);
     margin-top: 1rem;
     #search-bar-container {
         @include set-flex-container("medium");
+        .select-dropdown-mobile-tablet {
+            @include set-flex-unbound(50%, 0);
+            margin: alignment("centered");
+        }
     }
 }
 

@@ -30,9 +30,9 @@ export const GOAL_TYPES = Object.freeze({
 });
 
 export const ORDER_TIMEFRAMES = Object.freeze({
-    ONE_WEEK: "1WEEK",
-    ONE_MONTH: "1MONTH",
-    THREE_MONTH: "3MONTH",
-    ONE_YEAR: "1YEAR",
-    ALL_TIME: "ALL_TIME",
+    ONE_WEEK: "One Week",
+    ONE_MONTH: "One Month",
+    THREE_MONTH: "Three Months",
+    ONE_YEAR: "One Year",
+    ALL_TIME: "All Time",
 });
