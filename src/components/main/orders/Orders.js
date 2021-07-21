@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
+import SearchContainer from './SearchContainer';
 
 const Orders = () => {
+    const [searchValue, setSearchValue] = useState('');
+
+    const handleSearchChange = event => {
+        console.log(event);
+        setSearchValue(event.target.value)
+    }
     return (
-        <div>
-            Orders page
-        </div>
+        <SearchContainer searchValue={searchValue} change={handleSearchChange}/>
     )
 }
 

@@ -219,6 +219,18 @@
     margin-bottom: 1rem;
 }
 
+/****************** Orders **********************/
+
+.order-search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
+    #search-bar-container {
+        @include set-flex-container("medium");
+    }
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: resolution("mobile")) {

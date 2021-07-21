@@ -10,11 +10,11 @@ import MPBeverages from './charts/MPBeverages';
 import MPFoodCategories from './charts/MPFoodCategories';
 import MPBevCategories from './charts/MPBevCategories';
 import RecentOrderTable from './RecentOrderTable';
-import GoalProgressVisual from './GoalProgressVisual';
 import { retrieveGoals } from '../../../redux/goals/goalActions';
 import { useAuth } from '../../../contexts/AuthContext';
-import { Alert } from 'react-bootstrap';
+
 import { ORDER_TIMEFRAMES } from '../../../constants/constants';
+import GoalDisplay from './GoalDisplay';
 
 const Dashboard = ({orderData, goals, retrieveUsers, loadGoals}) => {
 
@@ -48,11 +48,7 @@ const Dashboard = ({orderData, goals, retrieveUsers, loadGoals}) => {
                         <div className="dashboard-body">
                             {topRowComponents.map((component, i) => <div className="dashboard-body-item" key={i}>{component}</div>)}
                             {middleTableComponents.map((component, i) => <div className={i === 1 ? "dashboard-body-table" : "dashboard-table-side-item"} key={i+4}>{component} </div>)}
-                            {goals.get.loading ? 
-                                <LoadingSpinner alignment="center">Retrieving Goals...</LoadingSpinner> :
-                                goals.get.error ? <Alert variant="danger" className="text-center mt-2">Could not load goals.</Alert>
-                                : <div className="dashboard-body-item goals-dashboard-element"><GoalProgressVisual goals={goals.goalsList} numOrders={numOrders} sumRevenue={sumOrderCostForRevenue}/></div>
-                            }
+                            {<GoalDisplay goals={goals} numOrders={numOrders} sumRevenue={sumOrderCostForRevenue} />}
                             {bottomRowcomponentsToRender.map((component, i) => <div className="dashboard-body-item bottom-row-item" key={i+10}>{component}</div>)}
                         </div>
                     </React.Fragment> }
