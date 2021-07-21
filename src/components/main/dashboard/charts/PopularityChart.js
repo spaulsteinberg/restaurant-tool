@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 import { buildChartWithData } from '../../../../utils';
 import { ChartConfig, DashboardLineChart } from '../../../../models/charts/dashboardCharts';
 import DefaultChart from '../../../utility/DefaultChart';
-import { DATA_KEYS } from '../../../../constants/constants';
+import { DATA_KEYS, ORDER_KEY } from '../../../../constants/constants';
 
 const PopularityChart = (props) => {
 
@@ -11,8 +11,8 @@ const PopularityChart = (props) => {
     const orders = useSelector(state => state.orders);
 
     const buildFrequencyChart = useCallback(() => {
-        return buildChartWithData({...orders}, "orders")
-    }, [orders])
+        return buildChartWithData({...orders}, props.tf, ORDER_KEY.toLowerCase())
+    }, [orders, props.tf])
 
     useEffect(() => {
         let chartTools = buildFrequencyChart();

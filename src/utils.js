@@ -1,9 +1,10 @@
 import moment from "moment";
+import { ORDER_TIMEFRAMES } from "./constants/constants";
 
-export const buildChartWithData = (data, dataKey="orders") => {
+export const buildChartWithData = (data, timeframe, dataKey="orders") => {
     let revenueData = {};
-    let lastSevenInclusive = getLastSevenDays();
-    for (const date of lastSevenInclusive){
+    let lastXDates = getLastXDates(timeframe);
+    for (const date of lastXDates){
         revenueData[date] = {
             revenue: 0,
             orders: 0
@@ -22,7 +23,15 @@ export const buildChartWithData = (data, dataKey="orders") => {
 
 export const sortByDate = array => array.sort((a, b) => new Date(b[0]) - new Date(a[0]));
 
-const getLastSevenDays = () => {
+const getLastXDates = timeframe => {
     const today = moment();
-    return [today.format('MM/DD/YYYY')].concat(Array(7).fill().map(() => today.subtract(1, 'day').format('MM/DD/YYYY')))
+    let numberOfDays;
+    switch (timeframe) {
+        case ORDER_TIMEFRAMES.ONE_WEEK: numberOfDays = 7; break;
+        case ORDER_TIMEFRAMES.ONE_MONTH: numberOfDays = 30; break;
+        case ORDER_TIMEFRAMES.THREE_MONTH: numberOfDays = 90; break;
+        case ORDER_TIMEFRAMES.ONE_YEAR: numberOfDays = 365; break;
+        default: numberOfDays = 7; break;
+    }
+    return [today.format('MM/DD/YYYY')].concat(Array(numberOfDays).fill().map(() => today.subtract(1, 'day').format('MM/DD/YYYY')))
 }

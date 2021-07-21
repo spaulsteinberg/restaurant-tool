@@ -7,7 +7,7 @@ export const DASHBOARD_CHART_COLORS = [
     'rgba(75, 192, 192, 1)',
     'rgba(153, 102, 255, 1)',
     'rgba(255, 159, 64, 1)'
-]
+];
 
 // key into order and chart info here 
 export const DATA_KEYS = Object.freeze({
@@ -27,4 +27,12 @@ export const YEARLY_KEY = "Yearly";
 export const GOAL_TYPES = Object.freeze({
     SUBJECTS: [REVENUE_KEY, ORDER_KEY],
     TIMEABLES: [WEEKLY_KEY, MONTHLY_KEY, YEARLY_KEY]
-})
+});
+
+export const ORDER_TIMEFRAMES = Object.freeze({
+    ONE_WEEK: "1WEEK",
+    ONE_MONTH: "1MONTH",
+    THREE_MONTH: "3MONTH",
+    ONE_YEAR: "1YEAR",
+    ALL_TIME: "ALL_TIME",
+});

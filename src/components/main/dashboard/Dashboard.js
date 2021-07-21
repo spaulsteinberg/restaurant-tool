@@ -14,6 +14,7 @@ import GoalProgressVisual from './GoalProgressVisual';
 import { retrieveGoals } from '../../../redux/goals/goalActions';
 import { useAuth } from '../../../contexts/AuthContext';
 import { Alert } from 'react-bootstrap';
+import { ORDER_TIMEFRAMES } from '../../../constants/constants';
 
 const Dashboard = ({orderData, goals, retrieveUsers, loadGoals}) => {
 
@@ -32,7 +33,7 @@ const Dashboard = ({orderData, goals, retrieveUsers, loadGoals}) => {
 
     const averageOrderPrice = () => orderData.data.length > 0 ? sumOrderCostForRevenue() / orderData.data.length : 0;
 
-    const topRowComponents = [ <RevenueChart />, <PopularityChart />, <MPFood /> ]
+    const topRowComponents = [ <RevenueChart tf={ORDER_TIMEFRAMES.ONE_WEEK}/>, <PopularityChart tf={ORDER_TIMEFRAMES.ONE_WEEK}/>, <MPFood /> ]
     const middleTableComponents = [ <MPBeverages />, <RecentOrderTable />]
     const bottomRowcomponentsToRender = [<MPFoodCategories />, <MPBevCategories />]
     return (
@@ -71,7 +72,7 @@ const mapStateToProps = state => {
 // map the dispatch function in props
 const mapDispatchToProps = dispatch => {
     return {
-        retrieveUsers: () => dispatch(getAllOrders()),
+        retrieveUsers: () => dispatch(getAllOrders(ORDER_TIMEFRAMES.ONE_WEEK)),
         loadGoals: (email) => dispatch(retrieveGoals(email))
     }
 }

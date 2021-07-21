@@ -243,7 +243,7 @@
             }
         }
     }
-    .toggle-goals-container { @include set-flex-unbound(20%, 0) }
+    .toggle-goals-container { @include set-flex-unbound(15%, 0) }
     .dashboard-top-container {
         flex-direction: row;
         justify-content: space-between;
@@ -305,6 +305,7 @@
             margin: $dashboard-margin;
         }
     }
+    .toggle-goals-container { @include set-flex-unbound(21%, 0) }
 }
 
 @media screen and (min-width: resolution("tablet")) {
