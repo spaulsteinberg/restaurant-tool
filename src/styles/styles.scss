@@ -11,4 +11,11 @@
     .row {
         justify-content: center;
     }
+
+    .table-header {
+        font-weight: $table-header-font-weight;
+        &:hover {
+            background-color: lightyellow;
+        }
+    }
 }

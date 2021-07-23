@@ -34,5 +34,4 @@ export const ORDER_TIMEFRAMES = Object.freeze({
     ONE_MONTH: "One Month",
     THREE_MONTH: "Three Months",
     ONE_YEAR: "One Year",
-    ALL_TIME: "All Time",
 });

@@ -35,3 +35,26 @@ const getLastXDates = timeframe => {
     }
     return [today.format('MM/DD/YYYY')].concat(Array(numberOfDays).fill().map(() => today.subtract(1, 'day').format('MM/DD/YYYY')))
 }
+
+/******Order comparators *******/
+export const firstNameComparator = (a, b) => {
+    if (a.firstName === b.firstName) {
+        return a.lastName > b.lastName ? 1 : a.lastName < b.lastName ? -1 : 0
+    }
+    return a.firstName > b.firstName ? 1 : -1
+}
+
+export const lastNameComparator = (a, b) => {
+    if (a.lastName === b.lastName) {
+        return a.firstName > b.firstName ? 1 : a.firstName < b.firstName ? -1 : 0
+    }
+    return a.lastName > b.lastName ? 1 : -1
+}
+
+export const dateComparator = (a, b) => {
+    return new Date(b.date) - new Date(a.date)
+}
+
+export const costComparator = (a, b) => {
+    return b.totalCost - a.totalCost;
+}
