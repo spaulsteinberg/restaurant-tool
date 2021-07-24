@@ -11,7 +11,11 @@ const Orders = ({orders, getOrders}) => {
     const [searchValue, setSearchValue] = useState('');
     const [searchDuration, setSearchDuration] = useState(ORDER_TIMEFRAMES.ONE_WEEK);
 
-    const handleSearchChange = event => setSearchValue(event.target.value)
+    const handleSearchChange = event => {
+        const {value} = event.target;
+        setSearchValue(value);
+    }
+
     const handleDurationChange = event => {
         setSearchDuration(event.target.value);
     }
@@ -26,7 +30,7 @@ const Orders = ({orders, getOrders}) => {
                 <SearchBar value={searchValue} searchChange={handleSearchChange} durationChange={handleDurationChange}/>
             </div>
             { orders.loading && <LoadingSpinner alignment="centered">Loading</LoadingSpinner>}
-            { !orders.loading && orders.data && <OrderTable orders={orders.data}/>}
+            { !orders.loading && orders.data && <OrderTable orders={orders.data} searchValue={searchValue}/>}
             { !orders.loading && orders.error && <Alert variant="danger">An error occurred. Please reload and try again.</Alert>}
         </React.Fragment>
     )

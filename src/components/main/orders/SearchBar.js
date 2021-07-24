@@ -36,13 +36,13 @@ const SearchBar = ({value, searchChange, durationChange}) => {
                     <FormControl placeholder="Filter by Receipt..." as="input" type="text" value={value} onChange={searchChange}/>
                     { wideView && 
                         <InputGroup.Text className="bg-primary">
-                            <FormSelectBox options={options} defaultText={"Set a Duration..."} changeFunction={durationChange} defaultDisabled={true} />
+                            <FormSelectBox options={options} defaultText={"Interval..."} changeFunction={durationChange} defaultDisabled={true} />
                         </InputGroup.Text>
                     }
             </InputGroup>
             { !wideView && 
-                <div className="select-dropdown-mobile-tablet">
-                    <FormSelectBox options={options} defaultText={"Set A Duration..."} changeFunction={durationChange} defaultDisabled={true} />
+                <div className="select-dropdown-mobile-tablet mb-4">
+                    <FormSelectBox options={options} defaultText={"Interval..."} changeFunction={durationChange} defaultDisabled={true} />
                 </div>
             }
         </div>

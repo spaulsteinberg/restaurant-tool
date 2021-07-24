@@ -72,7 +72,6 @@ export const retrieveGoals = email => {
                 else dispatch(loadGoalsSuccess({goals: [], hasGoals: false}))
             })
             .catch(err => {
-                console.log(err)
                 dispatch(loadGoalsError(err))
             })
     }

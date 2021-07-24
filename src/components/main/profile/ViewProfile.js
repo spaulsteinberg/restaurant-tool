@@ -49,7 +49,6 @@ const ViewProfile = () => {
                 await setOrCreateUserProfile(requestObj, currentUser.uid)
                 setSuccess('Profile edits saved successfully!')
             } catch (err) {
-                console.log(err)
                 setFormState(initialState);
                 setError('Failed to save edits. Please try again.')
             } finally {
