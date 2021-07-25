@@ -8,7 +8,7 @@ import { ORDER_TIMEFRAMES } from '../../../constants/constants';
 const SearchBar = ({value, searchChange, durationChange}) => {
 
     const [wideView, setWideView] = useState(false);
-    let options = [...Object.values(ORDER_TIMEFRAMES)]
+    let options = [...Object.values(ORDER_TIMEFRAMES)].slice(1)
 
     useEffect(() => {
 
@@ -36,13 +36,25 @@ const SearchBar = ({value, searchChange, durationChange}) => {
                     <FormControl placeholder="Filter by Receipt..." as="input" type="text" value={value} onChange={searchChange}/>
                     { wideView && 
                         <InputGroup.Text className="bg-primary">
-                            <FormSelectBox options={options} defaultText={"Interval..."} changeFunction={durationChange} defaultDisabled={true} />
+                            <FormSelectBox 
+                                options={options} 
+                                defaultText={ORDER_TIMEFRAMES.ONE_WEEK} 
+                                defaultValue={ORDER_TIMEFRAMES.ONE_WEEK} 
+                                changeFunction={durationChange} 
+                                defaultDisabled={false} 
+                            />
                         </InputGroup.Text>
                     }
             </InputGroup>
             { !wideView && 
                 <div className="select-dropdown-mobile-tablet mb-4">
-                    <FormSelectBox options={options} defaultText={"Interval..."} changeFunction={durationChange} defaultDisabled={true} />
+                    <FormSelectBox 
+                        options={options}
+                        defaultText={ORDER_TIMEFRAMES.ONE_WEEK} 
+                        defaultValue={ORDER_TIMEFRAMES.ONE_WEEK} 
+                        changeFunction={durationChange}
+                        defaultDisabled={false} 
+                    />
                 </div>
             }
         </div>
