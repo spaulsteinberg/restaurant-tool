@@ -1,17 +1,28 @@
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import PropTypes from 'prop-types';
+import SortableIcon from './SortableIcon';
 
 const TableHeader = ({columnNames, click, active}) => {
     return (
         <>
-            {columnNames.map((name, i) => <TableCell key={name} className={active === i ? "table-header table-active-column" : "table-header"} onClick={click}>{name}</TableCell>)}
+            {columnNames.map((column, i) => 
+            <TableCell key={column.name} className={active === i ? "table-header table-active-column" : "table-header"} onClick={click}>{column.name}
+                    {column.sortable && 
+                        <sup>
+                            <SortableIcon direction={active === i ? 0 : 1} fill={active === i ? "#0d6efd" : "black"}/>
+                        </sup>
+                    }
+            </TableCell>)}
         </>
     )
 }
 
 TableHeader.propTypes = {
-    columnNames: PropTypes.arrayOf(PropTypes.string),
+    columnNames: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        sortable: PropTypes.bool
+    })),
     click: PropTypes.func,
     active: PropTypes.number
 }
