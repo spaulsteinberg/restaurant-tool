@@ -1,5 +1,6 @@
 import React from 'react';
 import FormControl from 'react-bootstrap/FormControl';
+import PropTypes from 'prop-types';
 
 const FormSelectBox = ({options, defaultText, changeFunction, defaultDisabled = true}) => {
     return (
@@ -8,6 +9,12 @@ const FormSelectBox = ({options, defaultText, changeFunction, defaultDisabled = 
             {options.map(option => <option key={option} value={option}>{option}</option>)}
         </FormControl>
     )
+}
+
+FormSelectBox.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.string),
+    defaultText: PropTypes.string,
+    changeFunction: PropTypes.func
 }
 
 export default FormSelectBox;
