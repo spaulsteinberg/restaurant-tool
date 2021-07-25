@@ -1,24 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Disclaimer = ({text, classes, iconComponent = null}) => {
+const Disclaimer = ({children, classes, iconComponent = null}) => {
     return (
         <div className={classes}>
             <small>
                 {iconComponent}
-                {text}
+                {children}
             </small>
         </div>
     )
 }
 
 Disclaimer.defaultProps = {
-    text: "",
     classes : "order-table-disclaimer"
 }
 
 Disclaimer.propTypes = {
-    text: PropTypes.string,
+    children: PropTypes.string,
     classes: PropTypes.string,
     iconComponent: PropTypes.element
 }

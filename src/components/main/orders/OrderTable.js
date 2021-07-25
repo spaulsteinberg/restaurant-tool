@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
+import TablePagination from '@material-ui/core/TablePagination';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -24,14 +25,27 @@ const OrderTable = ({orders, searchValue}) => {
         new TableColumnSortable("View", false)
     ];
 
+    const rowPaginationOptions = [5, 10, 25]
+
     const [innerOrderState, setInnerOrderState] = useState(orders.slice());
     const [sortedColumn, setSortedColumn] = useState('')
     const [activeColumn, setActiveColumn] = useState(null);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [count, setCount] = useState(0);
 
     const filterInput = useCallback(() => {
+        setPage(0);
         setActiveColumn(null);
-        if (!searchValue) setInnerOrderState(orders)
-        else setInnerOrderState(tableFilter(orders, searchValue))
+        if (!searchValue) {
+            setInnerOrderState(orders);
+            setCount(orders.length)
+        }
+        else {
+            let filteredArray = tableFilter(orders, searchValue)
+            setInnerOrderState(filteredArray);
+            setCount(filteredArray.length)
+        }
     }, [orders, searchValue])
 
     useEffect(() => {
@@ -43,13 +57,18 @@ const OrderTable = ({orders, searchValue}) => {
         setActiveColumn(index);
     }
 
+    const handlePageChange = (event, newPage) => setPage(newPage);
+
+    const handleChangeRowsPerPage = (event) => { setRowsPerPage(parseInt(event.target.value, 10)); setPage(0); }
     
     const handleColumnClick = e => {
         e.preventDefault();
         const {outerText, cellIndex} = e.target;
         // undo the filter if clicked again
         if (sortedColumn === outerText) {
-            setInnerOrderState(tableFilter(orders, searchValue))
+            let filteredArray = tableFilter(orders, searchValue)
+            setInnerOrderState(filteredArray)
+            setCount(filteredArray.length)
             setActiveColumn(null)
             setSortedColumn('')
             return;
@@ -61,17 +80,28 @@ const OrderTable = ({orders, searchValue}) => {
         : null
     }
     return (
-        <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableHeader columnNames={columnNames} click={handleColumnClick} active={activeColumn}/>
-                    </TableRow>
-                </TableHead>
-                <OrderTableBody orders={innerOrderState} />
-            </Table>
-            <Disclaimer text={" - Denotes a sortable column"} classes={"order-table-disclaimer"} iconComponent={<SortableIcon/>} />
-        </TableContainer>
+        <Paper>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableHeader columnNames={columnNames} click={handleColumnClick} active={activeColumn} />
+                        </TableRow>
+                    </TableHead>
+                    <OrderTableBody orders={innerOrderState.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)} />
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={rowPaginationOptions}
+                component="div"
+                count={count}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                onChangePage={handlePageChange}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+            <Disclaimer classes={"order-table-disclaimer"} iconComponent={<SortableIcon />}> - Denotes a sortable column</Disclaimer>
+        </Paper>
     )
 }
 

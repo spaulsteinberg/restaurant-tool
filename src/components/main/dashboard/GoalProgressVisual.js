@@ -5,6 +5,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import {bullsEyeTargetIcon, checkMark} from '../../../constants/svg/svgs';
 import { ORDER_KEY, REVENUE_KEY, WEEKLY_KEY } from '../../../constants/constants';
 import Alert from 'react-bootstrap/Alert';
+import Disclaimer from '../../utility/Disclaimer';
 
 const GoalProgressVisual = ({goals, sumRevenue, numOrders}) => {
 
@@ -70,7 +71,7 @@ const GoalProgressVisual = ({goals, sumRevenue, numOrders}) => {
                     </Box>
                     </Box>
                 </div>)}
-                {goalsProgress.length > 0 && <small className="text-info">*Some values may appear off target due to rounding. </small>}
+                {goalsProgress.length > 0 && <Disclaimer classes="text-info">*Some values may appear off target due to rounding</Disclaimer>}
             </Card.Body>
         </Card>
     )
