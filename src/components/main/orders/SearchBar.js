@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
 import { searchIcon } from '../../../constants/svg/svgs';
 import FormSelectBox from '../../utility/FormSelectBox';
 import { ORDER_TIMEFRAMES } from '../../../constants/constants';
+import InputBox from '../../utility/InputBox';
 
 const SearchBar = ({value, searchChange, durationChange}) => {
 
     const [wideView, setWideView] = useState(false);
-    let options = [...Object.values(ORDER_TIMEFRAMES)].slice(1)
+    let options = [...Object.values(ORDER_TIMEFRAMES)].slice(1);
+    const searchRef = React.useRef();
 
     useEffect(() => {
 
@@ -18,6 +19,7 @@ const SearchBar = ({value, searchChange, durationChange}) => {
 
         let widthCheck = window.matchMedia("(min-width: 768px)")
         widthCheck.addEventListener("change", shouldChangeInputAlignment, true);
+        searchRef.current.focus();
         return () => {
             widthCheck.removeEventListener("change", shouldChangeInputAlignment, true)
           }
@@ -33,7 +35,7 @@ const SearchBar = ({value, searchChange, durationChange}) => {
                             <path d={searchIcon}/>
                         </svg>
                     </InputGroup.Text>
-                    <FormControl placeholder="Filter by Receipt..." as="input" type="text" value={value} onChange={searchChange}/>
+                    <InputBox ref={searchRef} placeholder="Filter by Receipt..." as="input" type="text" value={value} onChange={searchChange} />
                     { wideView && 
                         <InputGroup.Text className="bg-primary">
                             <FormSelectBox 
