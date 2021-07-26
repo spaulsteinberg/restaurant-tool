@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
-import TablePagination from '@material-ui/core/TablePagination';
+import {TablePagination} from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -79,6 +79,7 @@ const OrderTable = ({orders, searchValue}) => {
         : outerText === "Date" ? setActiveColumnsAndState(cellIndex, dateComparator) : outerText === "Amount" ? setActiveColumnsAndState(cellIndex, costComparator)
         : null
     }
+
     return (
         <Paper>
             <TableContainer>
@@ -97,8 +98,9 @@ const OrderTable = ({orders, searchValue}) => {
                 count={count}
                 page={page}
                 rowsPerPage={rowsPerPage}
-                onChangePage={handlePageChange}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
+                onPageChange={handlePageChange}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                className="pagination-table"
             />
             <Disclaimer classes={"order-table-disclaimer"} iconComponent={<SortableIcon />}> - Denotes a sortable column</Disclaimer>
         </Paper>

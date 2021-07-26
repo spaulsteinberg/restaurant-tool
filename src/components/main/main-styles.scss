@@ -238,7 +238,37 @@
     }
 }
 
+// override v5 material css causing distortions 
+.pagination-table {
+    p {
+        margin-bottom: 0 !important;
+    }
+    .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+        right: 0px !important;
+    }
+    .css-11bfvty-MuiToolbar-root-MuiTablePagination-toolbar {
+        flex-direction: column !important;
+    }
+    .css-11bfvty-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions {
+        margin: 0 1rem 0 0px !important;
+    }
+    
+    .css-levciy-MuiTablePagination-displayedRows {
+        margin-right: 1rem !important;
+    }
+}
+
 /****************** Queries *********************/
+
+@media screen and (min-width: resolution("small-mobile")) {
+
+    // show pagination in row until greater than 400px
+    .pagination-table {
+        .css-11bfvty-MuiToolbar-root-MuiTablePagination-toolbar {
+            flex-direction: row !important;
+        }
+    }
+}
 
 @media screen and (min-width: resolution("mobile")) {
     .navbar {
