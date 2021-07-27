@@ -2,6 +2,7 @@ import React from 'react'
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
+import { Link } from 'react-router-dom';
 
 const OrderTableBody = ({orders}) => {
     return (
@@ -14,7 +15,9 @@ const OrderTableBody = ({orders}) => {
                     <TableCell>{order.email}</TableCell>
                     <TableCell>{order.date}</TableCell>
                     <TableCell>${order.totalCost}</TableCell>
-                    <TableCell>View Order</TableCell>
+                    <TableCell>
+                        <Link exact={`${true}`} to={`/orders/order/${order.receiptNumber}`}>View Order</Link>
+                    </TableCell>
                 </TableRow>
             )}
         </TableBody>

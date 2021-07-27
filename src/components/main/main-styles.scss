@@ -258,6 +258,11 @@
     }
 }
 
+.order-receipt-error-container {
+    width: 70%;
+    margin: alignment("centered");
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: resolution("small-mobile")) {
@@ -338,7 +343,9 @@
             @include set-flex-unbound(10%);
         }
     }
-    
+    .order-receipt-error-container {
+        width: 31%;
+    }
 }
 
 /* to prevent mobile landscape chart distortions */

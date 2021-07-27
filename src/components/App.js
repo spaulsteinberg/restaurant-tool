@@ -16,10 +16,12 @@ import { UserProvider } from '../contexts/UserContext';
 import {Provider} from 'react-redux';
 import store from '../redux/store';
 import Orders from './main/orders/Orders';
+import OrderReceipt from './main/orders/OrderReceipt';
 
 const App = () => {
   const privateRoutes = [{path: '/', component: Dashboard}, {path:"/dashboard", component:Dashboard}, {path:"/orders", component:Orders},
-    {path:"/profile/view", component:ViewProfile}, {path:"/profile/update", component:UpdateCredentials}, {path:"/profile/signup", component:SignUp},];
+    {path:"/profile/view", component:ViewProfile}, {path:"/profile/update", component:UpdateCredentials}, {path:"/profile/signup", component:SignUp},
+    {path: '/orders/order/:id', component:OrderReceipt}];
   const publicRoutes = [{path:"/login", component:Login}, {path:"/forgot-password", component:ResetPassword}, {path:"*", component:PageNotFound}]
   return (
       <ErrorBoundary>
