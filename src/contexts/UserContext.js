@@ -19,7 +19,8 @@ export const UserProvider = (props) => {
         userDispatch({type: CLEAR_USER})
     }
 
-    
+    const userExistsInLocalStorage = () => localStorage.getItem(process.env.REACT_APP_LOCAL_USER_INFO) ? true : false
+
     const updateUserContextEmail = (email, key) => {
         db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
             .doc(key)
@@ -43,15 +44,20 @@ export const UserProvider = (props) => {
 
     const getUserFromProfile = (uid, email) => {
         setProfileError(false)
-        db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
+        return new Promise((resolve, reject) => {
+            db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
             .doc(uid)
             .get()
             .then(doc => {
                 if (doc.exists){
                     getUserCallToDispatch(doc.data(), email)
+                    resolve(doc.data())
+                } else {
+                    resolve(null)
                 }
             })
-            .catch((err) => setProfileError(true))
+            .catch((err) => reject(setProfileError(true)))
+        })
     }
 
     useEffect(() => {
@@ -64,6 +70,7 @@ export const UserProvider = (props) => {
         userDispatch,
         setOrCreateUserProfile,
         updateUserContextEmail,
+        userExistsInLocalStorage,
         profileError,
         getUserFromProfile,
         user,

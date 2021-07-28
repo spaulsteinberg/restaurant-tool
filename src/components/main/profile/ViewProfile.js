@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useUserContext } from '../../../contexts/UserContext';
 import LoadingSpinner from '../../utility/LoadingSpinner';
@@ -12,15 +12,35 @@ import '../main-styles.scss';
 
 const ViewProfile = () => {
     const {currentUser} = useAuth();
-    const {user, setOrCreateUserProfile, profileError} = useUserContext();
+    const {user, setOrCreateUserProfile, getUserFromProfile, userExistsInLocalStorage, profileError} = useUserContext();
     const [edit, setEdit] = useState(false);
     // if the user is not null/undefined, has keys and there is no error grabbing the profile have the current state be that user. else empty form
-    const initialState = user && Object.keys(user).length !== 0 && !profileError ? user : {firstName: '', lastName: '', restaurant: '', role: ''}
-    const [form, setFormState] = useState(initialState)
+    const emptyFormState = {firstName: '', lastName: '', restaurant: '', role: ''}
+    const initialState = user && Object.keys(user).length !== 0 && !profileError ? user : emptyFormState
+    const [form, setFormState] = useState(initialState);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [showGoals, setShowGoals] = useState(false);
+    const [fetchingProfileDirectly, setFetchingProfileDirectly] = useState(false);
+    const [fetchProfileError, setFetchProfileError] = useState(false);
+
+    const shouldFetchProfile = useCallback(() => {
+        if (!userExistsInLocalStorage()) {
+            setFetchingProfileDirectly(true)
+            setFetchProfileError(false)
+            getUserFromProfile(currentUser.uid, currentUser.email)
+            .then(data => {
+                data ? setFormState(data) : setFormState({firstName: '', lastName: '', restaurant: '', role: ''})
+            })
+            .catch(err => setFetchProfileError(true))
+            .finally(() => setFetchingProfileDirectly(false))
+        }
+    }, [currentUser.email, currentUser.uid, getUserFromProfile, userExistsInLocalStorage])
+
+    useEffect(() => {
+        shouldFetchProfile()
+    }, [shouldFetchProfile])
 
     const handleInputChange = event => {
         const {name, value} = event.target;
@@ -96,7 +116,9 @@ const ViewProfile = () => {
                             <Form.Control type="text" aria-labelledby="view-email" value={currentUser.email} readOnly/>
                         </div>
                     </div>
-                        { user && !profileError ? <React.Fragment>
+                    {fetchingProfileDirectly ? <LoadingSpinner alignment="centered" marginTop="1rem">Fetching Profile...</LoadingSpinner>
+                        : fetchProfileError ? <Alert variant="danger" className="mt-4">Could not fetch profile. Please reload and try again.</Alert>
+                        : user && !profileError ? <React.Fragment>
                             {renderForm()}
                             <Button variant={!edit ? "warning" : "success"} className="btn mt-3 mb-2 mx-1" onClick={handleEditClick}>
                                 { !edit ? <svg xmlns="http://www.w3.org/2000/svg" 
@@ -130,7 +152,8 @@ const ViewProfile = () => {
                                 </div>
                             }
                         </React.Fragment>
-                        : <p>Could not load profile. Please login and try again.</p>}
+                        : <Alert variant="danger" className="mt-4">Could not load profile. Please reload and try again.</Alert>
+                    }
                 </Form>
             </Card.Body>
         </Card>
