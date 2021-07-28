@@ -263,6 +263,17 @@
     margin: alignment("centered");
 }
 
+.order-receipt-body-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: alignment("centered");
+    width: 60%;
+    min-height: 400px;
+    max-height: 900px;
+    overflow-y: scroll;
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: resolution("small-mobile")) {

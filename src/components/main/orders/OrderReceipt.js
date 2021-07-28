@@ -23,7 +23,7 @@ const OrderReceipt = (props) => {
         .then(response => {
             if (response) {
                 response.receiptNumber = id;
-                response.date = moment(response.date.toDate()).format('MM/DD/YYYY');
+                response.date = moment(response.date.toDate()).format('MM/DD/YYYY HH:mm');
                 response.totalCost = parseFloat(response.totalCost);
                 return setOrderView(response)
             }
