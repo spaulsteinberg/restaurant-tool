@@ -7,13 +7,14 @@ const TableHeader = ({columnNames, click, active}) => {
     return (
         <>
             {columnNames.map((column, i) => 
-            <TableCell key={column.name} className={active === i ? "table-header table-active-column" : "table-header"} onClick={click}>{column.name}
-                    {column.sortable && 
-                        <sup>
-                            <SortableIcon direction={active === i ? 0 : 1} fill={active === i ? "#0d6efd" : "black"}/>
-                        </sup>
-                    }
-            </TableCell>)}
+                <TableCell key={column.name} className={`${active === i ? "table-header table-active-column" : "table-header"} ${column.sortable && "sortable-table-header"}`} onClick={click}>{column.name}
+                        {column.sortable && 
+                            <sup>
+                                <SortableIcon direction={active === i ? 0 : 1} fill={active === i ? "#0d6efd" : "black"}/>
+                            </sup>
+                        }
+                </TableCell>
+            )}
         </>
     )
 }
