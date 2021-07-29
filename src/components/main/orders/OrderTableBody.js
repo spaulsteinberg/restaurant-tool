@@ -16,7 +16,9 @@ const OrderTableBody = ({orders}) => {
                     <TableCell>{order.date}</TableCell>
                     <TableCell>${order.totalCost}</TableCell>
                     <TableCell>
-                        <Link exact={`${true}`} to={`/orders/order/${order.receiptNumber}`}>View Order</Link>
+                        <Link exact={`${true}`} to={{pathname: `/orders/order/${order.receiptNumber}`, state: {order: order}}}>
+                            View Order
+                        </Link>
                     </TableCell>
                 </TableRow>
             )}
