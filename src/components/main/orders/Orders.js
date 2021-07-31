@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ORDER_TIMEFRAMES } from '../../../constants/constants';
 import { getAllOrders } from '../../../redux/dashboard/orderActions';
 import LoadingSpinner from '../../utility/LoadingSpinner';
+import OrderRefreshButton from './OrderRefreshButton';
 import OrderTable from './OrderTable';
 import SearchBar from './SearchBar';
 
@@ -20,6 +21,8 @@ const Orders = ({orders, getOrders}) => {
         setSearchDuration(event.target.value);
     }
 
+    const handleRefreshClick = () => getOrders(searchDuration)
+
     useEffect(() => {
         getOrders(searchDuration);
     }, [getOrders, searchDuration])
@@ -30,7 +33,12 @@ const Orders = ({orders, getOrders}) => {
                 <SearchBar value={searchValue} searchChange={handleSearchChange} durationChange={handleDurationChange}/>
             </div>
             { orders.loading && <LoadingSpinner alignment="centered">Loading</LoadingSpinner>}
-            { !orders.loading && orders.data && <OrderTable orders={orders.data} searchValue={searchValue}/>}
+            { !orders.loading && orders.data && (
+                <React.Fragment>
+                    <OrderTable orders={orders.data} searchValue={searchValue}/>
+                    <OrderRefreshButton click={handleRefreshClick} />
+                </React.Fragment>
+            )}
             { !orders.loading && orders.error && <Alert variant="danger">An error occurred. Please reload and try again.</Alert>}
         </React.Fragment>
     )
