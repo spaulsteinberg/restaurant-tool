@@ -7,7 +7,7 @@ const OrderBodyList = ({list, itemKey, priceKey}) => {
             {list.map((item, i) => 
                 <div className="receipt-body-row" key={i}>
                     <div className="receipt-body-item">{item[itemKey]} ....</div>
-                    <div className="receipt-body-price">{item[priceKey]}</div>
+                    <div className="receipt-body-price">{Number(item[priceKey]).toFixed(2)}</div>
                 </div>
             )}
         </React.Fragment>
