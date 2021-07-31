@@ -73,8 +73,11 @@
     justify-content: center;
 }
 
-@mixin row-flex($justify) {
+@mixin row-flex($justify, $wrap: false) {
     display: flex;
     flex-direction: row;
     justify-content: $justify;
+    @if ($wrap == true) {
+        flex-wrap: wrap;
+    }
 }

@@ -265,15 +265,44 @@
 
 // change this to be mobile first
 .order-receipt-body-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    @include row-flex(center, true);
     margin: alignment("centered");
-    width: 50%;
-    min-height: 400px;
-    max-height: 900px;
-    overflow-y: auto;
+    width: 100%;
     padding: 2rem;
+
+    .receipt-header-container {
+        @include flex-full-column;
+        word-wrap: break-word;
+        #main-lookup {
+            font-weight: 700;
+            word-wrap: anywhere;
+        }
+        .drop-headers {
+            font-weight: 500;
+        }
+    }
+
+    .receipt-body-container {
+        @include full-width-flex;
+        @include row-flex(center, true);
+        min-height: 400px;
+        align-content: flex-start;
+    }
+
+    .receipt-body-row {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 100%;
+        .receipt-body-item {
+            flex: 0 0 70%;
+            text-align: left;
+        }
+        .receipt-body-price {
+            flex: 0 0 30%;
+            text-align: right;
+        }
+    }
 }
 
 /****************** Queries *********************/
@@ -359,6 +388,11 @@
     .order-receipt-error-container {
         width: 31%;
     }
+    .order-receipt-body-container {
+        width: 75%;
+        .receipt-body-item { flex: 0 0 80%; }
+        .receipt-body-price { flex: 0 0 20%; }
+    }
 }
 
 /* to prevent mobile landscape chart distortions */
@@ -375,6 +409,7 @@
         }
     }
     .toggle-goals-container { @include set-flex-unbound(21%, 0) }
+    
 }
 
 @media screen and (min-width: resolution("tablet")) {
@@ -392,5 +427,16 @@
     .form-label {
         margin-bottom: 0;
         padding-top: .5rem;
+    }
+    
+    .order-receipt-body-container {
+        width: 45%;
+    }
+}
+
+@media screen and (min-width: resolution("desktop")){
+    .order-receipt-body-container {
+        width: 30%;
+        max-width: 40%;
     }
 }

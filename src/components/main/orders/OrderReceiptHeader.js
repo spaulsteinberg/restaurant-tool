@@ -3,8 +3,10 @@ import React from 'react'
 const OrderReceiptHeader = ({patron, date, number}) => {
 
     return (
-        <div>
-            <h4>Patron : {patron} - {date} - {number}</h4>
+        <div className="receipt-header-container">
+            <p id="main-lookup">{number}</p>
+            <p className="drop-headers">{patron}</p>
+            <p className="drop-headers">{date}</p>
         </div>
     )
 }
