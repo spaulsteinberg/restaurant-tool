@@ -10,11 +10,11 @@ const NavigationBar = (props) => {
   const [showProfileIcon, setShowProfileIcon] = useState(true);
 
   useEffect(() => {
-    let widthCheck = null;
-    widthCheck = window.matchMedia("(min-width: 992px)").addEventListener("change", shouldMoveItems, true);
+    
+    let widthCheck = window.matchMedia("(min-width: 992px)").addEventListener("change", shouldMoveItems, true);
 
     return () => {
-      if (widthCheck) this.widthCheck.removeEventListener("change", shouldMoveItems, true)
+      if (widthCheck) widthCheck.removeEventListener("change", shouldMoveItems, true)
     }
   }, [])
 
@@ -54,6 +54,7 @@ const NavigationBar = (props) => {
                 <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
                 <NavLink className="navLink" to="/profile">Inventory</NavLink>
                 <NavLink className="navLink" to="/orders">Orders</NavLink>
+                <NavLink className="navLink" to="/menus">Menus</NavLink>
                 {/* Also add inventory and past order links*/}
               </Nav>
             </Navbar.Collapse>
@@ -65,6 +66,7 @@ const NavigationBar = (props) => {
                 <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
                 <NavLink className="navLink" to="/inventory">Inventory</NavLink>
                 <NavLink className="navLink" to="/orders">Orders</NavLink>
+                <NavLink className="navLink" to="/menus">Menus</NavLink>
               </Nav>
             </Navbar.Collapse>
             <Navbar.Toggle aria-controls="collapsed-nav-items" />

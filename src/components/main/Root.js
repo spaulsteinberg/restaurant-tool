@@ -13,9 +13,9 @@ const Root = (props) => {
         <React.StrictMode>
           <Container fluid className="appWrapper">
             <Row>
-                <Col md={12}>
+              <Col md={12}>
                 {props.children}
-                </Col>
+              </Col>
             </Row>
           </Container>
         </React.StrictMode>
