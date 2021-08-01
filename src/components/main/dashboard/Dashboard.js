@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { getAllOrders } from '../../../redux/dashboard/orderActions';
+import { getAllOrders } from '../../../redux/orders/orderActions';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import RevenueChart from './charts/RevenueChart';

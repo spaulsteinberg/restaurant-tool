@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import TopBarIconShortcut from './TopBarIconShortcut';
 import { cashCoinIconPaths, cartIconPath, tagIconPath, refreshIconPath } from '../../../constants/svg/svgs';
 import {Link} from 'react-router-dom';
-import { getAllOrders } from '../../../redux/dashboard/orderActions';
+import { getAllOrders } from '../../../redux/orders/orderActions';
 import { useDispatch } from 'react-redux';
 
 const TopBar = (props) => {

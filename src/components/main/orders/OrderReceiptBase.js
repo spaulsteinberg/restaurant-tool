@@ -5,7 +5,7 @@ import OrderReceiptHeader from './OrderReceiptHeader';
 
 const OrderReceiptBase = ({order}) => {
     return (
-        <Paper className="order-receipt-body-container">
+        <Paper className="order-receipt-body-container mb-2">
             <OrderReceiptHeader patron={`${order.firstName} ${order.lastName}`} date={order.date} number={order.receiptNumber}/>
             <OrderReceiptBody order={order.order} total={order.totalCost} method={order.credit}/>
         </Paper>

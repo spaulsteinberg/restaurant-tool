@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { ORDER_TIMEFRAMES } from '../../../constants/constants';
-import { getAllOrders } from '../../../redux/dashboard/orderActions';
+import { getAllOrders } from '../../../redux/orders/orderActions';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import OrderRefreshButton from './OrderRefreshButton';
 import OrderTable from './OrderTable';

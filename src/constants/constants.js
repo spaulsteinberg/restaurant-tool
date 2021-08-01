@@ -35,3 +35,7 @@ export const ORDER_TIMEFRAMES = Object.freeze({
     THREE_MONTH: "Three Months",
     ONE_YEAR: "One Year",
 });
+
+export const FOOD_KEY = "main";
+export const BEVERAGE_KEY = "item"
+export const PRICE_KEY = "price"
