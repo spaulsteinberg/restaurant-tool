@@ -12,9 +12,9 @@ export const buildChartWithData = (data, timeframe, dataKey="orders") => {
     }
     for (let order of data.data) {
         //protects against unwanted data that could seep in from orders state or bad data that could crash the app
-        if (!revenueData[order.date]) continue;
-        revenueData[order.date].revenue += order.totalCost
-        revenueData[order.date].orders += 1
+        if (!revenueData[order.shortDate]) continue;
+        revenueData[order.shortDate].revenue += order.totalCost
+        revenueData[order.shortDate].orders += 1
     }
     let structureDataForChart = [];
     for (const [key, value] of Object.entries(revenueData)) {

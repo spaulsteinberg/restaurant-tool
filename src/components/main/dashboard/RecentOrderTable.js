@@ -1,17 +1,18 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { dateComparator } from '../../../utils';
 
 const RecentOrderTable = (props) => {
     const recentOrders = useSelector(state => state.orders.data.map(order => {
                                   return {
                                     id: order.receiptNumber.substring(0, 5) + 'x'.repeat(5),
-                                    date: order.date,
+                                    date: order.shortDate,
                                     name: `${order.firstName[0]}. ${order.lastName}`,
                                     revenue: `$${order.totalCost}`
                                   }
                                 })
-                                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                                .sort(dateComparator)
                                 .slice(0, 10));
     const colNames = ["Order #", "Date", "Name","Amount"]
   

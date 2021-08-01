@@ -13,7 +13,7 @@ const OrderTableBody = ({orders}) => {
                     <TableCell>{order.firstName}</TableCell>
                     <TableCell>{order.lastName}</TableCell>
                     <TableCell>{order.email}</TableCell>
-                    <TableCell>{order.date}</TableCell>
+                    <TableCell>{order.shortDate}</TableCell>
                     <TableCell>${order.totalCost}</TableCell>
                     <TableCell>
                         <Link exact={`${true}`} to={{pathname: `/orders/order/${order.receiptNumber}`, state: {order: order}}}>

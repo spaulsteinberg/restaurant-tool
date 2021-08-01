@@ -1,5 +1,5 @@
 import * as orderActions from './orderTypes';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import { db } from '../../firebase';
 import { ORDER_TIMEFRAMES } from '../../constants/constants';
 
@@ -35,7 +35,8 @@ export const getAllOrders = timeframe => {
                 .then(response => response.docs.map(d => {
                     let snapShot = d.data();
                     snapShot.receiptNumber = d.id;
-                    snapShot.date = moment(snapShot.date.toDate()).format('MM/DD/YYYY');
+                    snapShot.shortDate = moment(snapShot.date.toDate()).format('MM/DD/YYYY');
+                    snapShot.date = moment(snapShot.date.toDate()).format('MM/DD/YYYY HH:MM');
                     snapShot.totalCost = parseFloat(snapShot.totalCost)
                     return snapShot;
                 }))
