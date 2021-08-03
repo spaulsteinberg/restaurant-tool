@@ -5,13 +5,18 @@
     @include card-dimensions;
     padding: 0 !important;
 }
+.separator {
+    border-bottom: 1px solid lightblue;
+    width: 90%;
+    margin-bottom: 1rem;
+}
 
 .alignTextLeft {
     text-align: left;
 }
 
 .navbar-toggler {
-    font-size: 1rem !important;
+    font-size: $default-padding !important;
     button {
         padding-left: 80px
     }
@@ -67,7 +72,7 @@
     justify-content: flex-start;
     text-align: center;
     .profile-label-text {
-        font-size: 1rem;
+        font-size: $default-padding;
         font-weight: 500;
     }
     .profile-label-col {
@@ -108,7 +113,7 @@
     }
     .view-goals-button-column {
         @include set-flex-unbound("quarter");
-        margin: 1rem auto;
+        margin: $default-padding auto;
     }
 }
 
@@ -214,14 +219,14 @@
 }
 
 .dashboard-goal-progress-bar {
-    margin-bottom: 1rem;
+    margin-bottom: $default-padding;
 }
 
 /****************** Orders **********************/
 
 .order-search-container {
     @include row-flex(center);
-    margin-top: 1rem;
+    margin-top: $default-padding;
     #search-bar-container {
         @include set-flex-container("medium");
         .select-dropdown-mobile-tablet {
@@ -309,6 +314,52 @@
     }
 }
 
+/****************** Menus ***********************/
+
+.menu-dropdown-container {
+    @include flex-full-column;
+    flex-wrap: wrap;
+    padding: .5rem;
+    justify-content: center;
+    .menu-select {
+        @include set-flex-container("medium");
+        margin: 1rem auto;
+    }
+    .menu-focused {
+        @include set-flex-container("large");
+        min-height: 500px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+        padding: $default-padding;
+        justify-content: center;
+        align-content: flex-start;
+        .menu-main-header {
+            color: lightskyblue;
+            margin: alignment("centered");
+            @include set-flex-container("large");
+            height: max-content;
+            margin-bottom: .5rem;
+        }
+        .menu-section {
+            @include set-flex-container("large");
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            .menu-item-column {
+                @include set-flex-unbound(100%, 0);
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                .item-col {font-weight: 600;}
+            }
+        }
+    }
+    .blank-menu {
+        @include set-flex-container("large");
+    }
+}
 /****************** Queries *********************/
 
 @media screen and (min-width: resolution("small-mobile")) {
@@ -397,6 +448,7 @@
         .receipt-body-item { flex: 0 0 80%; }
         .receipt-body-price { flex: 0 0 20%; }
     }
+    .separator {width: 80%;}
 }
 
 /* to prevent mobile landscape chart distortions */
@@ -435,6 +487,39 @@
     
     .order-receipt-body-container {
         width: 45%;
+    }
+    .menu-dropdown-container {
+        flex-direction: row;
+        padding: $default-padding;
+        justify-content: space-around;
+        .menu-select {
+            @include set-flex-container("small");
+            margin: 0;
+            margin-top: $default-padding;
+        }
+        .menu-focused {
+            @include set-flex-unbound(70%, 0);
+            margin-top: $default-padding;
+            .menu-section {
+                @include set-flex-container("large");
+                justify-content: space-evenly;
+                .menu-item-column {
+                    @include set-flex-unbound(45%, 0);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: resolution("laptop")){
+    .menu-dropdown-container {
+        .menu-focused {
+            .menu-section {
+                .menu-item-column {
+                    @include set-flex-unbound(30%, 0);
+                }
+            }
+        }
     }
 }
 

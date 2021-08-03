@@ -27,7 +27,7 @@ const initialState = {
 export const menuReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_MENUS:
-            return { ...state, get: { ...state.get, loading: true } }
+            return { ...state, get: { ...state.get, loading: true, success: null, error: null } }
         case GET_MENUS_SUCCESS:
             return {
                 ...state,
