@@ -11,6 +11,8 @@
     margin-bottom: 1rem;
 }
 
+.text-reset { font-size: 1rem}
+
 .alignTextLeft {
     text-align: left;
 }
@@ -327,12 +329,10 @@
     }
     .menu-focused {
         @include set-flex-container("large");
+        @include row-flex(center, true);
         min-height: 500px;
-        display: flex;
-        flex-wrap: wrap;
         margin-top: 1.5rem;
         padding: $default-padding;
-        justify-content: center;
         align-content: flex-start;
         .menu-main-header {
             color: lightskyblue;
@@ -343,21 +343,27 @@
         }
         .menu-section {
             @include set-flex-container("large");
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
+            @include row-flex(center, true);
             margin-bottom: 1.5rem;
             .menu-item-column {
                 @include set-flex-unbound(100%, 0);
                 font-size: 1.2rem;
                 margin-bottom: 1rem;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
                 .item-col {font-weight: 600;}
             }
         }
     }
     .blank-menu {
         @include set-flex-container("large");
+    }
+
+    .menu-loading-container {
+        width: 60%;
+        justify-content: center;
+        margin: 1rem auto;
     }
 }
 /****************** Queries *********************/
@@ -380,9 +386,7 @@
         margin: 0;
     }
     .top-nav-body-wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        @include row-flex(space-between);
         .top-nav-item {
             @include set-flex-container("quarter");
             flex-direction: row;

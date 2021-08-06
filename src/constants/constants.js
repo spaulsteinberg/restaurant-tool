@@ -39,3 +39,9 @@ export const ORDER_TIMEFRAMES = Object.freeze({
 export const FOOD_KEY = "main";
 export const BEVERAGE_KEY = "item"
 export const PRICE_KEY = "price"
+
+export const ITEM_TYPES = new Map([
+    ["Entree/Dessert", FOOD_KEY],
+    ["Beverage", BEVERAGE_KEY],
+    ["Addition", BEVERAGE_KEY]
+])

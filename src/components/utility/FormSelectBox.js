@@ -2,9 +2,9 @@ import React from 'react';
 import FormControl from 'react-bootstrap/FormControl';
 import PropTypes from 'prop-types';
 
-const FormSelectBox = ({options, defaultText, defaultValue, changeFunction, method = 1, defaultDisabled = true}) => {
+const FormSelectBox = ({options, defaultText, defaultValue, changeFunction, method = 1, defaultDisabled = true, ...rest}) => {
     return (
-        <FormControl as="select" defaultValue={defaultValue} onChange={changeFunction}>
+        <FormControl as="select" defaultValue={defaultValue} onChange={changeFunction} {...rest}>
             <option value={defaultValue} disabled={defaultDisabled}>{defaultText}</option>
             {
                 method === 1 ? options.map(option => <option key={option} value={option}>{option}</option>)

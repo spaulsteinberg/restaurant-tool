@@ -1,17 +1,13 @@
 import React from 'react'
 import MenuHeader from './MenuHeader'
+import MenuItem from './MenuItem';
 
-const MenuSection = ({subMenu}) => {
+const MenuSection = ({subMenu, mainMenuName, sectionIndex, updateId}) => {
     return (
         <div className="menu-section">
             <MenuHeader title={subMenu.menuName} subheader={subMenu.optionalMessage} fontSize="3rem" fontWeight="400" />
-            {subMenu.items.map(item => 
-                <div key={item.item} className="menu-item-column">
-                    <div className="item-col">{item.item}</div>
-                    <div>{item.description}</div>
-                    <div>${item.price}</div>
-                </div>
-            )}
+            {subMenu.items.map((item, i) => 
+                <MenuItem key={`${item.item + i}`} item={item} itemIndex={i}sectionIndex={sectionIndex} mainMenuName={mainMenuName} currentMenu={subMenu} updateId={updateId}/>)}
         </div>
     )
 }

@@ -1,7 +1,8 @@
 import {
     GET_MENUS,
     GET_MENUS_SUCCESS,
-    GET_MENUS_ERROR
+    GET_MENUS_ERROR,
+    EDIT_MENU_ITEM_SUCCESS,
 } from './menuTypes'
 
 const initialState = {
@@ -42,6 +43,10 @@ export const menuReducer = (state = initialState, action) => {
             }
         case GET_MENUS_ERROR:
             return { ...state, get: { ...state.get, loading: false, success: false, error: action.payload } }
+        case EDIT_MENU_ITEM_SUCCESS:
+            let menuListCopy = [...state.menuList];
+            menuListCopy[action.payload.index] = action.payload.menu
+            return { ...state, menuList: menuListCopy}
         default:
             return state;
     }

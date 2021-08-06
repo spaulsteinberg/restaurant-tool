@@ -60,3 +60,11 @@ export const dateComparator = (a, b) => {
 export const costComparator = (a, b) => {
     return b.totalCost - a.totalCost;
 }
+
+export const getMapKeyByValue = (map, searchValue) => {
+    for (let [key, value] of map.entries()) {
+      if (value === searchValue)
+        return key;
+    }
+    return null;
+  }

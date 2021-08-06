@@ -2,7 +2,8 @@ import { db } from '../../firebase'
 import {
     GET_MENUS,
     GET_MENUS_SUCCESS,
-    GET_MENUS_ERROR
+    GET_MENUS_ERROR,
+    EDIT_MENU_ITEM_SUCCESS,
 } from './menuTypes'
 
 export const loadMenus = () => {
@@ -24,6 +25,12 @@ export const loadMenusError = error => {
         payload: error,
     }
 }
+export const editItemSuccess = payload => {
+    return {
+        type: EDIT_MENU_ITEM_SUCCESS,
+        payload: payload
+    }
+}
 
 export const loadAllMenus = () => {
     return (dispatch) => {
@@ -33,7 +40,11 @@ export const loadAllMenus = () => {
         .then(response => response.docs)
         .then(docs => {
             if (docs) {
-                let menus = docs.map(doc => doc.data());
+                let menus = docs.map(doc => {
+                   let snapShot = doc.data();
+                   snapShot.id = doc.id;
+                   return snapShot;
+                });
                 let current = menus.find(menu => menu.current === true);
                 dispatch(loadMenusSuccess({menus: menus, current: current}));
             }

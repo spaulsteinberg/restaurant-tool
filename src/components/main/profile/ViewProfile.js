@@ -131,10 +131,7 @@ const ViewProfile = () => {
                             </Button>
                             {edit && 
                             <Button variant="danger" className="mt-3 mb-2 mx-1" onClick={handleCancelClick}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d={circleSlashForCancelPaths[0]}/>
-                                    <path d={circleSlashForCancelPaths[1]}/>
-                                </svg>
+                                {circleSlashForCancelPaths}
                             </Button>}
                             {loading && 
                                 <div className="profile-form-state-div">
