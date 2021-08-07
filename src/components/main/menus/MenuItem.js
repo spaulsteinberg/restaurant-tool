@@ -13,7 +13,7 @@ import { editItemSuccess } from '../../../redux/menus/menuActions';
 import ItemDisplay from './ItemDisplay';
 import ProgressBar from '../../utility/ProgressBar';
 
-const MenuItem = ({item, currentMenu, mainMenuName, sectionIndex, itemIndex, updateId}) => {
+const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, sectionEdits, mainMenuName, sectionIndex, itemIndex, updateId}) => {
 
     const dispatch = useDispatch();
 
@@ -26,8 +26,10 @@ const MenuItem = ({item, currentMenu, mainMenuName, sectionIndex, itemIndex, upd
 
     const menus = useSelector(state => state.menus.menuList);
 
-    const handleEditClick = () => {
+    const handleEditClick = e => {
+        e.preventDefault();
         setEditing(prevState => !prevState);
+        setSectionEdit()
         setFormError('');
     }
 
@@ -81,6 +83,7 @@ const MenuItem = ({item, currentMenu, mainMenuName, sectionIndex, itemIndex, upd
                 dispatch(editItemSuccess({menu: menuCopy, index: menuIndex}))
                 setFormValues({...form, type: "" })
                 setEditing(false)
+                setSectionExit()
             })
             .catch(err => {
                 setFormError('Could not edit item. Something went wrong.')
@@ -96,6 +99,7 @@ const MenuItem = ({item, currentMenu, mainMenuName, sectionIndex, itemIndex, upd
         e.preventDefault();
         setFormValues(initialState);
         setEditing(false);
+        setSectionExit()
     }
 
     return (
@@ -127,7 +131,7 @@ const MenuItem = ({item, currentMenu, mainMenuName, sectionIndex, itemIndex, upd
                     </FormGroup>
                 </Form>
             }
-            <div className="align-flex-bottom">
+            <div className={sectionEdits === 0 ? "align-flex-bottom" : ""}>
                 {
                     !editing ? 
                     <Button variant="warning" className="mt-2" onClick={handleEditClick}>{pencilIconFull}<span className="mx-2">Edit</span></Button>
