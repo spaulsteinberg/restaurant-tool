@@ -4,6 +4,8 @@ import {
     GET_MENUS_SUCCESS,
     GET_MENUS_ERROR,
     EDIT_MENU_ITEM_SUCCESS,
+    EDIT_MAIN_HEADER_SUCCESS,
+    UPDATE_CONTEXT
 } from './menuTypes'
 
 export const loadMenus = () => {
@@ -25,9 +27,24 @@ export const loadMenusError = error => {
         payload: error,
     }
 }
+
 export const editItemSuccess = payload => {
     return {
         type: EDIT_MENU_ITEM_SUCCESS,
+        payload: payload
+    }
+}
+
+export const editMainMenuSuccess = payload => {
+    return {
+        type: EDIT_MAIN_HEADER_SUCCESS,
+        payload: payload
+    }
+}
+
+export const updateContext = payload => {
+    return {
+        type: UPDATE_CONTEXT,
         payload: payload
     }
 }

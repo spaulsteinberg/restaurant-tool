@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAllMenus } from '../../../redux/menus/menuActions';
+import { loadAllMenus, updateContext } from '../../../redux/menus/menuActions';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import ViewMenu from './ViewMenu';
 
@@ -30,7 +30,9 @@ const Menu = () => {
     const handleMenuDropdownChange = (e) => {
         const {value} = e.target;
         if (value !== selectedMenu?.name && value !== defaultText) {
-            setSelectedMenu(menus.find(menu => menu.name === value))
+            let selected = menus.find(menu => menu.name === value);
+            setSelectedMenu(selected)
+            dispatch(updateContext({title: value, message: selected.optionalMessage}))
         }
     }
 

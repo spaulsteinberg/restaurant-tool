@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { SUB_MENU } from '../../../constants/constants';
 import MenuHeader from './MenuHeader'
 import MenuItem from './MenuItem';
 
-const MenuSection = ({subMenu, mainMenuName, sectionIndex, updateId}) => {
+const MenuSection = ({subMenu, sectionIndex, updateId}) => {
 
     const [sectionEdited, setSectionEdited] = useState(0);
     const handleSectionEdit = () => setSectionEdited(prev => prev + 1)
@@ -10,7 +11,7 @@ const MenuSection = ({subMenu, mainMenuName, sectionIndex, updateId}) => {
 
     return (
         <div className="menu-section">
-            <MenuHeader title={subMenu.menuName} subheader={subMenu.optionalMessage} fontSize="3rem" fontWeight="400" />
+            <MenuHeader title={subMenu.menuName} subheader={subMenu.optionalMessage} updateKey={updateId} menuType={SUB_MENU} fontSize="3rem" fontWeight="400" />
             {subMenu.items.map((item, i) => 
                 <MenuItem 
                     key={`${item.item + i}`} 
@@ -20,7 +21,6 @@ const MenuSection = ({subMenu, mainMenuName, sectionIndex, updateId}) => {
                     setSectionExit={handleSectionExitEdit}
                     sectionEdits={sectionEdited}
                     sectionIndex={sectionIndex}
-                    mainMenuName={mainMenuName}
                     currentMenu={subMenu}
                     updateId={updateId}/>)}
         </div>

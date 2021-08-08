@@ -45,3 +45,6 @@ export const ITEM_TYPES = new Map([
     ["Beverage", BEVERAGE_KEY],
     ["Addition", BEVERAGE_KEY]
 ])
+
+export const MAIN_MENU = "main-menu";
+export const SUB_MENU = "sub-menu";

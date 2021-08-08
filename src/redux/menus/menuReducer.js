@@ -3,6 +3,8 @@ import {
     GET_MENUS_SUCCESS,
     GET_MENUS_ERROR,
     EDIT_MENU_ITEM_SUCCESS,
+    EDIT_MAIN_HEADER_SUCCESS,
+    UPDATE_CONTEXT
 } from './menuTypes'
 
 const initialState = {
@@ -23,6 +25,7 @@ const initialState = {
     },
     menuList: [],
     current: null,
+    context: null,
 }
 
 export const menuReducer = (state = initialState, action) => {
@@ -47,6 +50,11 @@ export const menuReducer = (state = initialState, action) => {
             let menuListCopy = [...state.menuList];
             menuListCopy[action.payload.index] = action.payload.menu
             return { ...state, menuList: menuListCopy}
+        case EDIT_MAIN_HEADER_SUCCESS:
+            const {isCurrent, newMenu, currentMenu} = action.payload;
+            return isCurrent ? {...state, menuList: newMenu, current: currentMenu} : {...state, menuList: newMenu }
+        case UPDATE_CONTEXT:
+            return {...state, context: {...state.context, title: action.payload.title, message: action.payload.message}}
         default:
             return state;
     }
