@@ -11,7 +11,7 @@ const Menu = () => {
     const current = useSelector(state => state.menus.current);
     const menuCall = useSelector(state => state.menus.get);
 
-    const [selectedMenu, setSelectedMenu] = useState(null)
+    const [selectedMenu, setSelectedMenu] = useState(null);
 
     const menuNames = menus.map(menu => {
         return {
@@ -29,8 +29,10 @@ const Menu = () => {
 
     const handleMenuDropdownChange = (e) => {
         const {value} = e.target;
+        console.log("dropdown change or re render", value)
         if (value !== selectedMenu?.name && value !== defaultText) {
             let selected = menus.find(menu => menu.name === value);
+            console.log("changed to ", selected)
             setSelectedMenu(selected)
             dispatch(updateContext({title: value, message: selected.optionalMessage}))
         }

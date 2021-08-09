@@ -10,9 +10,8 @@ const MenuDisplay = ({menu}) => {
     const dispatch = useDispatch();
     const context = useSelector(state => state.menus.context);
     
-    const handleUpdateTitle = (updatedTitle, updatedMessage) => {
-        dispatch(updateContext({title: updatedTitle, message: updatedMessage}))
-    }
+    const handleUpdateTitle = (updatedTitle, updatedMessage) => dispatch(updateContext({title: updatedTitle, message: updatedMessage}))
+    
     return (
         <React.Fragment>
             <MenuHeader title={context.title} update={handleUpdateTitle} subheader={context.message} menuType={MAIN_MENU} updateKey={menu.id} fontSize="3.25rem" fontWeight="500" />

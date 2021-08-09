@@ -3,6 +3,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import PropTypes from 'prop-types';
 
 const FormSelectBox = ({options, defaultText, defaultValue, changeFunction, method = 1, defaultDisabled = true, ...rest}) => {
+    console.log(options)
     return (
         <FormControl as="select" defaultValue={defaultValue} onChange={changeFunction} {...rest}>
             <option value={defaultValue} disabled={defaultDisabled}>{defaultText}</option>

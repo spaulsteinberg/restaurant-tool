@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { circleSlashForCancelPaths, pencilIconFull, saveIcon } from '../../../constants/svg/svgs'
 import HeaderForm from './HeaderForm'
@@ -10,17 +10,40 @@ import { useDispatch, useSelector } from 'react-redux'
 import { editMainMenuSuccess } from '../../../redux/menus/menuActions'
 
 const MenuHeader = ({title, subheader, update, menuType, updateKey, fontSize, fontWeight}) => {
-    const [editing, setEditing] = useState(false);
-
-    const [headerForm, setHeaderForm] = useState({name: '', optionalMessage: ''})
 
     const currentMenuNames = useSelector(state => state.menus.menuList.map(menu => menu.name))
     const currentMainMenuIndex = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === title))
     const menus = useSelector(state => state.menus.menuList);
-    const current = useSelector(state => state.menus.current)
     const dispatch = useDispatch();
 
+    const blankState = {name: '', optionalMessage: ''}
+
     const [headerRequestState, setHeaderRequestState] = useState({loading: false, error: ''})
+    const [editing, setEditing] = useState(false);
+    const [headerForm, setHeaderForm] = useState(blankState)
+
+    const ref = useRef();
+
+    useEffect(() => {
+        document.addEventListener("click", handleDocumentClick);
+
+        return () => {
+            document.removeEventListener("click", handleDocumentClick)
+        }
+        // have to disable this lint warning. Even in strict mode its useless.
+        // eslint-disable-next-line
+    }, [])
+
+    const handleDocumentClick = e => {
+        if (!ref || !ref.current) { return; }
+        if (ref.current.contains(e.target) && !editing) {
+            return;
+        }
+        if (!ref.current.contains(e.target) && e.target.innerText?.trim() !== "Edit") {
+            setEditing(false)
+            setHeaderForm(blankState)
+        }
+    } 
 
     const validateMain = () => {
         if (!headerForm.name || headerForm.name.trim() === '') {
@@ -38,7 +61,6 @@ const MenuHeader = ({title, subheader, update, menuType, updateKey, fontSize, fo
         event.preventDefault();
         setHeaderRequestState(prevState => { return {...prevState, loading: true, error: ''}})
         if (menuType === MAIN_MENU){
-            console.log("validated")
             if (validateMain()) {
                 updateMainMenuTitleAndDescription(headerForm.name, headerForm.optionalMessage, updateKey)
                     .then(() => {
@@ -47,7 +69,6 @@ const MenuHeader = ({title, subheader, update, menuType, updateKey, fontSize, fo
                         const menuCopy = [...menus];
                         menuCopy[index].name = headerForm.name;
                         menuCopy[index].optionalMessage = headerForm.optionalMessage;
-                        console.log(current.name, menuCopy[index].current)
                         if (menuCopy[index].current === true){
                             dispatch(editMainMenuSuccess({isCurrent: true, newMenu: menuCopy, currentMenu: menuCopy[index]}))
                         }
@@ -55,6 +76,7 @@ const MenuHeader = ({title, subheader, update, menuType, updateKey, fontSize, fo
                             dispatch(editMainMenuSuccess({isCurrent: false, newMenu: menuCopy}))
                         }
                         update(menuCopy[index].name, menuCopy[index].optionalMessage)
+                        setHeaderForm(blankState)
                     })
                     .catch(err => {
                         console.log("error", err)
@@ -75,15 +97,15 @@ const MenuHeader = ({title, subheader, update, menuType, updateKey, fontSize, fo
     const handleOnDiscardClick = event => {
         event.preventDefault();
         setEditing(false)
-        setHeaderRequestState({...headerRequestState, error: ''})
-        console.log("discarded")
+        setHeaderRequestState({...headerRequestState, error: ''});
+        setHeaderForm(blankState)
     }
     const handleInputChange = event => {
         let { name, value } = event.target;
         setHeaderForm({...headerForm, [name]: value})
     }
 
-    const handlSetEditClick = () => setEditing(prev => !prev);
+    const handlSetEditClick = () => setEditing(true);
 
     return (
         <div className="menu-main-header">
@@ -97,6 +119,7 @@ const MenuHeader = ({title, subheader, update, menuType, updateKey, fontSize, fo
                     fontSize={fontSize} 
                     fontWeight={fontWeight} />
                 : <HeaderForm 
+                    ref={ref}
                     form={headerForm}
                     handleInputChange={handleInputChange}
                     saveClick={handleOnSaveClick} 
