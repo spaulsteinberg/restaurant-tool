@@ -7,9 +7,9 @@ import { MAIN_MENU } from '../../../constants/constants'
 import { updateMainMenuTitleAndDescription } from '../../../api'
 import ProgressBar from '../../utility/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux'
-import { editMainMenuSuccess } from '../../../redux/menus/menuActions'
+import { editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'
 
-const MenuHeader = ({title, subheader, update, menuType, updateKey, fontSize, fontWeight}) => {
+const MenuHeader = ({title, subheader, menuType, updateKey, fontSize, fontWeight}) => {
 
     const currentMenuNames = useSelector(state => state.menus.menuList.map(menu => menu.name))
     const currentMainMenuIndex = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === title))
@@ -75,7 +75,7 @@ const MenuHeader = ({title, subheader, update, menuType, updateKey, fontSize, fo
                         else {
                             dispatch(editMainMenuSuccess({isCurrent: false, newMenu: menuCopy}))
                         }
-                        update(menuCopy[index].name, menuCopy[index].optionalMessage)
+                        dispatch(updateContext({title: menuCopy[index].name, message: menuCopy[index].optionalMessage}))
                         setHeaderForm(blankState)
                     })
                     .catch(err => {

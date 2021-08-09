@@ -1,13 +1,13 @@
 import React from 'react'
-import FormSelectBox from '../../utility/FormSelectBox';
+import ControlledFormSelect from '../../utility/ControlledFormSelect';
 import CurrentPaperMenu from './CurrentPaperMenu';
 
 
-const ViewMenu = ({names, menuChange, menu, defaultText}) => {
+const ViewMenu = ({names, handleMenuChange, menu}) => {
     return (
         <div className="menu-dropdown-container">
             <div className="menu-select">
-                <FormSelectBox options={names} defaultText={defaultText} defaultValue={defaultText} changeFunction={menuChange}  method={2} defaultDisabled />
+                <ControlledFormSelect options={names} method={2} value={menu ? menu.name : names[0].text} onChange={handleMenuChange} defaultDisabled />
             </div>
             <CurrentPaperMenu menu={menu} />
         </div>

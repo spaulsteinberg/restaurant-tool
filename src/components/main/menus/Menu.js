@@ -13,14 +13,15 @@ const Menu = () => {
 
     const [selectedMenu, setSelectedMenu] = useState(null);
 
-    const menuNames = menus.map(menu => {
+    let menuNames = menus.map(menu => {
         return {
             text: menu.name,
             highlight: menu.name === current.name ? true : false
         }
     })
 
-    const defaultText = "Choose a menu";
+    const defaultText = [{text: "Choose a menu", highlight: false}];
+    menuNames = defaultText.concat(menuNames)
 
 
     useEffect(() => {
@@ -29,10 +30,8 @@ const Menu = () => {
 
     const handleMenuDropdownChange = (e) => {
         const {value} = e.target;
-        console.log("dropdown change or re render", value)
-        if (value !== selectedMenu?.name && value !== defaultText) {
+        if (value !== selectedMenu?.name && value !== menuNames[0].text) {
             let selected = menus.find(menu => menu.name === value);
-            console.log("changed to ", selected)
             setSelectedMenu(selected)
             dispatch(updateContext({title: value, message: selected.optionalMessage}))
         }
@@ -41,7 +40,7 @@ const Menu = () => {
     return (
         <div>
             { menuCall.loading ? <LoadingSpinner alignment="centered" marginTop="2rem">Loading Menus</LoadingSpinner>
-              : menuCall.success ? <ViewMenu names={menuNames} menuChange={handleMenuDropdownChange} menu={selectedMenu} defaultText={defaultText} /> 
+              : menuCall.success ? <ViewMenu names={menuNames} selected={selectedMenu?.name} handleMenuChange={handleMenuDropdownChange} menu={selectedMenu} /> 
               : menuCall.error ? <Alert variant="danger" className="mt-4">{menuCall.error}</Alert>
               : null
             }
