@@ -11,7 +11,7 @@ const MenuSection = ({subMenu, sectionIndex, updateId}) => {
 
     return (
         <div className="menu-section">
-            <MenuHeader title={subMenu.menuName} subheader={subMenu.optionalMessage} updateKey={updateId} menuType={SUB_MENU} fontSize="3rem" fontWeight="400" />
+            <MenuHeader title={subMenu.menuName} sectionIndex={sectionIndex} subheader={subMenu.optionalMessage} updateKey={updateId} menuType={SUB_MENU} fontSize="3rem" fontWeight="400" />
             {subMenu.items.map((item, i) => 
                 <MenuItem 
                     key={`${item.item + i}`} 

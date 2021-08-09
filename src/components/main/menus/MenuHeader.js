@@ -4,15 +4,15 @@ import { circleSlashForCancelPaths, pencilIconFull, saveIcon } from '../../../co
 import HeaderForm from './HeaderForm'
 import HeaderDisplay from './HeaderDisplay'
 import { MAIN_MENU } from '../../../constants/constants'
-import { updateMainMenuTitleAndDescription } from '../../../api'
+import { updateMainMenuTitleAndDescription, updateMenuItem } from '../../../api'
 import ProgressBar from '../../utility/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux'
-import { editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'
+import { editItemSuccess, editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'
 
-const MenuHeader = ({title, subheader, menuType, updateKey, fontSize, fontWeight}) => {
-
+const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSize, fontWeight}) => {
+    const context = useSelector(state => state.menus.context);
     const currentMenuNames = useSelector(state => state.menus.menuList.map(menu => menu.name))
-    const currentMainMenuIndex = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === title))
+    const index = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === context.title))
     const menus = useSelector(state => state.menus.menuList);
     const dispatch = useDispatch();
 
@@ -50,10 +50,16 @@ const MenuHeader = ({title, subheader, menuType, updateKey, fontSize, fontWeight
             setHeaderRequestState(prevState => { return { ...prevState, error: 'Menu name cannot be blank', loading: false } });
             return false;
         }
-        if (currentMenuNames.includes(headerForm.name.trim()) && currentMainMenuIndex !== currentMenuNames.findIndex(name => name === headerForm.name.trim())) {
+        if (currentMenuNames.includes(headerForm.name.trim()) && index !== currentMenuNames.findIndex(name => name === headerForm.name.trim())) {
             setHeaderRequestState(prevState => { return { ...prevState, error: 'Cannot have duplicate menu names', loading: false } });
             return false;
         }
+        return true;
+    }
+
+    const validateSections = () => {
+        // to do validate
+        // do the same as main but change the second condition
         return true;
     }
 
@@ -65,7 +71,6 @@ const MenuHeader = ({title, subheader, menuType, updateKey, fontSize, fontWeight
                 updateMainMenuTitleAndDescription(headerForm.name, headerForm.optionalMessage, updateKey)
                     .then(() => {
                         setEditing(false);
-                        const index = menus.findIndex(menu => menu.name === title)
                         const menuCopy = [...menus];
                         menuCopy[index].name = headerForm.name;
                         menuCopy[index].optionalMessage = headerForm.optionalMessage;
@@ -79,7 +84,6 @@ const MenuHeader = ({title, subheader, menuType, updateKey, fontSize, fontWeight
                         setHeaderForm(blankState)
                     })
                     .catch(err => {
-                        console.log("error", err)
                         setHeaderRequestState(prevState => { return { ...prevState, error: 'Request failed. Please reload and try again.' } })
                         setEditing(false)
                     })
@@ -87,7 +91,27 @@ const MenuHeader = ({title, subheader, menuType, updateKey, fontSize, fontWeight
                         setHeaderRequestState(prevState => { return { ...prevState, loading: false } })
                     })
             }
-            else return;
+        }
+        else {
+            if (validateSections()){
+                let menuCopy = [...menus].find(menu => menu.name === context.title);
+                menuCopy.menus[sectionIndex].menuName = headerForm.name;
+                menuCopy.menus[sectionIndex].optionalMessage = headerForm.optionalMessage
+                console.log(menuCopy)
+                updateMenuItem(menuCopy, updateKey)
+                .then(() => {
+                    setEditing(false);
+                    dispatch(editItemSuccess({menu: menuCopy, index: index}))
+                    setHeaderForm(blankState);
+                })
+                .catch(err => {
+                    console.log("error", err)
+                    setHeaderRequestState(prevState => { return { ...prevState, error: 'Request failed. Please reload and try again.' } })
+                })
+                .finally(() => {
+                    setHeaderRequestState(prevState => { return { ...prevState, loading: false } })
+                })
+            }
         } 
         
         // check for main or sub menu
