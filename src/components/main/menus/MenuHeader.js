@@ -13,6 +13,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
     const context = useSelector(state => state.menus.context);
     const currentMenuNames = useSelector(state => state.menus.menuList.map(menu => menu.name))
     const index = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === context.title))
+    const subMenuNames = useSelector(state => state.menus.menuList[index]?.menus.map(m => m.menuName))
     const menus = useSelector(state => state.menus.menuList);
     const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
             setEditing(false)
             setHeaderForm(blankState)
         }
-    } 
+    }
 
     const validateMain = () => {
         if (!headerForm.name || headerForm.name.trim() === '') {
@@ -58,8 +59,14 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
     }
 
     const validateSections = () => {
-        // to do validate
-        // do the same as main but change the second condition
+        if (!headerForm.name || !headerForm.name.trim()){
+            setHeaderRequestState(prevState => { return { ...prevState, error: 'Section name cannot be blank', loading: false } })
+            return false;
+        }
+        if (subMenuNames.includes(headerForm.name.trim()) && sectionIndex !== subMenuNames.findIndex(name => name.trim().toLowerCase() === headerForm.name.trim().toLowerCase())) {
+            setHeaderRequestState(prevState => { return { ...prevState, error: 'Cannot have duplicate section names', loading: false } });
+            return false;
+        }
         return true;
     }
 
@@ -90,14 +97,13 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
                     .finally(() => {
                         setHeaderRequestState(prevState => { return { ...prevState, loading: false } })
                     })
-            }
+            } else return;
         }
         else {
             if (validateSections()){
                 let menuCopy = [...menus].find(menu => menu.name === context.title);
                 menuCopy.menus[sectionIndex].menuName = headerForm.name;
                 menuCopy.menus[sectionIndex].optionalMessage = headerForm.optionalMessage
-                console.log(menuCopy)
                 updateMenuItem(menuCopy, updateKey)
                 .then(() => {
                     setEditing(false);
@@ -112,6 +118,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
                     setHeaderRequestState(prevState => { return { ...prevState, loading: false } })
                 })
             }
+            else return;
         } 
         
         // check for main or sub menu
