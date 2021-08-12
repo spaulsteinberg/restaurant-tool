@@ -365,6 +365,14 @@
         justify-content: center;
         margin: 1rem auto;
     }
+
+    .add-section-button-container {
+        @include set-flex-container("large");
+    }
+
+    .add-section-form-container {
+        @include set-flex-container("large");
+    }
 }
 /****************** Queries *********************/
 
@@ -453,6 +461,11 @@
         .receipt-body-price { flex: 0 0 20%; }
     }
     .separator {width: 80%;}
+    .menu-dropdown-container { 
+        .add-section-form-container {
+            @include set-flex-container("medium-large");
+        }
+    }
 }
 
 /* to prevent mobile landscape chart distortions */

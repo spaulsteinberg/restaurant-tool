@@ -2,7 +2,7 @@ export const GET_MENUS = 'GET_MENUS';
 export const GET_MENUS_SUCCESS = 'GET_MENUS_SUCCESS';
 export const GET_MENUS_ERROR = 'GET_MENUS_ERROR';
 
-// only have a success for edit. local state keeps the local errors. Only have this to update menu lists
+// Standalone updates. Local state keeps track of the rest
 export const EDIT_MENU_ITEM_SUCCESS = 'EDIT_MENU_ITEM_SUCCESS';
 export const EDIT_MAIN_HEADER_SUCCESS = 'EDIT_MAIN_HEADER_SUCCESS';
 export const UPDATE_CONTEXT = 'UPDATE_CONTEXT'

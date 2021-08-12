@@ -106,16 +106,15 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
                 menuCopy.menus[sectionIndex].optionalMessage = headerForm.optionalMessage
                 updateMenuItem(menuCopy, updateKey)
                 .then(() => {
-                    setEditing(false);
                     dispatch(editItemSuccess({menu: menuCopy, index: index}))
                     setHeaderForm(blankState);
+                    setHeaderRequestState(prevState => { return { ...prevState, loading: false } })
+                    setEditing(false);
                 })
                 .catch(err => {
                     console.log("error", err)
-                    setHeaderRequestState(prevState => { return { ...prevState, error: 'Request failed. Please reload and try again.' } })
-                })
-                .finally(() => {
-                    setHeaderRequestState(prevState => { return { ...prevState, loading: false } })
+                    setHeaderRequestState(prevState => { return { ...prevState, error: 'Request failed. Please reload and try again.', loading: false } })
+                    setEditing(false);
                 })
             }
             else return;

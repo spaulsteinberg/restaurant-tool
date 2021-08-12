@@ -4,7 +4,10 @@ import {
     GET_MENUS_ERROR,
     EDIT_MENU_ITEM_SUCCESS,
     EDIT_MAIN_HEADER_SUCCESS,
-    UPDATE_CONTEXT
+    UPDATE_CONTEXT,
+    ADD_MENU,
+    ADD_MENU_SUCCESS,
+    ADD_MENU_ERROR
 } from './menuTypes'
 
 const initialState = {
@@ -46,6 +49,19 @@ export const menuReducer = (state = initialState, action) => {
             }
         case GET_MENUS_ERROR:
             return { ...state, get: { ...state.get, loading: false, success: false, error: action.payload } }
+        case ADD_MENU:
+            return { ...state, add: { ...state.add, loading: true, success: null, error: null } }
+        case ADD_MENU_SUCCESS:
+            let mainIndex = [...state.menuList].findIndex(menu => menu.name === state.context.title)
+            let updatedMenu = [...state.menuList];
+            updatedMenu[mainIndex].menus.push(action.payload.section);
+            if (action.payload.isCurrent){
+                return { ...state, menuList: updatedMenu, current: updatedMenu[mainIndex], add: { ...state.add, loading: false, success: true, error: null } }
+            } else {
+                return { ...state, menuList: updatedMenu, add: { ...state.add, loading: false, success: true, error: null } }
+            }
+        case ADD_MENU_ERROR:
+            return { ...state, add: { ...state.add, loading: false, success: false, error: action.payload } }
         case EDIT_MENU_ITEM_SUCCESS:
             let menuListCopy = [...state.menuList];
             menuListCopy[action.payload.index] = action.payload.menu

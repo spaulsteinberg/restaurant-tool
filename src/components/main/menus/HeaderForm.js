@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { FormGroup } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputBox from '../../utility/InputBox';
 import SaveDiscardButtons from '../../utility/SaveDiscardButtons';
 
-const HeaderForm = React.forwardRef(({form, handleInputChange, saveClick, discardClick, saveIcon, discardIcon}, ref) => (
+const HeaderForm = React.forwardRef(({ form, handleInputChange, saveClick, discardClick, saveIcon, discardIcon, fiRef = null }, ref) => {
+    useEffect(() => {
+        if (fiRef) {
+            fiRef.current.focus();
+        }
+    }, [fiRef])
+    return (
         <Form className="text-dark" ref={ref}>
             <FormGroup className="m-2">
                 <label name="title-label">Menu or Section Name</label>
-                <InputBox name="name" type="text" value={form.name} onChange={handleInputChange} />
+                <InputBox ref={fiRef} name="name" type="text" value={form.name} onChange={handleInputChange} />
             </FormGroup>
             <FormGroup className="m-2">
                 <label name="description-label">Optional Description</label>
@@ -16,6 +22,7 @@ const HeaderForm = React.forwardRef(({form, handleInputChange, saveClick, discar
             </FormGroup>
             <SaveDiscardButtons saveChange={saveClick} discardChange={discardClick} saveIcon={saveIcon} discardIcon={discardIcon} classes="mt-2" />
         </Form>
-    ))
+    )
+})
 
 export default HeaderForm;

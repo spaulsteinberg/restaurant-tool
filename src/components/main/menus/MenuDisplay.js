@@ -2,11 +2,14 @@ import React from 'react'
 import Alert from 'react-bootstrap/Alert';
 import { useSelector } from 'react-redux';
 import { MAIN_MENU } from '../../../constants/constants';
+import AddMenuSection from './AddMenuSection';
 import MenuHeader from './MenuHeader'
 import MenuSection from './MenuSection';
 
 const MenuDisplay = ({menu}) => {
     const context = useSelector(state => state.menus.context);
+    const menuNames = menu?.menus?.map(menu => menu.menuName)
+    const isCurrent = useSelector(state => state.menus?.current?.name === context?.title)
     
     return (
         <React.Fragment>
@@ -15,8 +18,9 @@ const MenuDisplay = ({menu}) => {
             { 
                 !menu.menus || menu.menus.length === 0 ? 
                 <Alert variant="warning" style={{width: "30%"}}>Create menus to see them here.</Alert>
-                : menu.menus.map((m, i) => <MenuSection key={i} subMenu={m} sectionIndex={i} updateId={menu.id}/>)
+                : menu.menus.map((m, i) => <MenuSection key={m.menuName + i} subMenu={m} sectionIndex={i} updateId={menu.id}/>)
             }
+            <AddMenuSection updateKey={menu.id} menuNames={menuNames} isCurrent={isCurrent}/>
         </React.Fragment>
     )
 }
