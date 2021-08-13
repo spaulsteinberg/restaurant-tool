@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { SUB_MENU } from '../../../constants/constants';
+import { addItemIcon } from '../../../constants/svg/svgs';
+import AddItemButton from '../../utility/AddItemButton';
 import MenuHeader from './MenuHeader'
 import MenuItem from './MenuItem';
 
@@ -23,6 +25,9 @@ const MenuSection = ({subMenu, sectionIndex, updateId}) => {
                     sectionIndex={sectionIndex}
                     currentMenu={subMenu}
                     updateId={updateId}/>)}
+            <div className="add-item-button-container mt-2">
+                <AddItemButton icon={addItemIcon} variant="success">Add Item</AddItemButton>
+            </div>
         </div>
     )
 }

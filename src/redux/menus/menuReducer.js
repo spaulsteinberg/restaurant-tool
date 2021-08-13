@@ -7,7 +7,10 @@ import {
     UPDATE_CONTEXT,
     ADD_MENU,
     ADD_MENU_SUCCESS,
-    ADD_MENU_ERROR
+    ADD_MENU_ERROR,
+    DELETE_MENU,
+    DELETE_MENU_SUCCESS,
+    DELETE_MENU_ERROR
 } from './menuTypes'
 
 const initialState = {
@@ -24,7 +27,8 @@ const initialState = {
     remove: {
         loading: null,
         success: null,
-        error: ''
+        error: null,
+        target: null, // to narrow where error and loading bars are shown
     },
     menuList: [],
     current: null,
@@ -55,22 +59,30 @@ export const menuReducer = (state = initialState, action) => {
             let mainIndex = [...state.menuList].findIndex(menu => menu.name === state.context.title)
             let updatedMenu = [...state.menuList];
             updatedMenu[mainIndex].menus.push(action.payload.section);
-            if (action.payload.isCurrent){
+            if (action.payload.isCurrent) {
                 return { ...state, menuList: updatedMenu, current: updatedMenu[mainIndex], add: { ...state.add, loading: false, success: true, error: null } }
-            } else {
-                return { ...state, menuList: updatedMenu, add: { ...state.add, loading: false, success: true, error: null } }
             }
+            return { ...state, menuList: updatedMenu, add: { ...state.add, loading: false, success: true, error: null } }
         case ADD_MENU_ERROR:
             return { ...state, add: { ...state.add, loading: false, success: false, error: action.payload } }
+        case DELETE_MENU:
+            return { ...state, remove: { ...state.remove, loading: true, success: null, error: null, target: action.payload } }
+        case DELETE_MENU_SUCCESS:
+            if (action.payload.isCurrent) {
+                return { ...state, menuList: action.payload.menus, current: action.payload.current, remove: { ...state.remove, loading: false, success: true, error: null, } }
+            }
+            return { ...state, menuList: action.payload.menus, remove: { ...state.remove, loading: false, success: true, error: null } }
+        case DELETE_MENU_ERROR:
+            return { ...state, remove: { ...state.remove, loading: false, success: null, error: action.payload } }
         case EDIT_MENU_ITEM_SUCCESS:
             let menuListCopy = [...state.menuList];
             menuListCopy[action.payload.index] = action.payload.menu
-            return { ...state, menuList: menuListCopy}
+            return { ...state, menuList: menuListCopy }
         case EDIT_MAIN_HEADER_SUCCESS:
-            const {isCurrent, newMenu, currentMenu} = action.payload;
-            return isCurrent ? {...state, menuList: newMenu, current: currentMenu} : {...state, menuList: newMenu }
+            const { isCurrent, newMenu, currentMenu } = action.payload;
+            return isCurrent ? { ...state, menuList: newMenu, current: currentMenu } : { ...state, menuList: newMenu }
         case UPDATE_CONTEXT:
-            return {...state, context: {...state.context, title: action.payload.title, message: action.payload.message}}
+            return { ...state, context: { ...state.context, title: action.payload.title, message: action.payload.message } }
         default:
             return state;
     }

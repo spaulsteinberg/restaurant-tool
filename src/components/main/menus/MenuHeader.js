@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { circleSlashForCancelPaths, pencilIconFull, saveIcon } from '../../../constants/svg/svgs'
+import { circleSlashForCancelPaths, pencilOutlineFull, saveIcon } from '../../../constants/svg/svgs'
 import HeaderForm from './HeaderForm'
 import HeaderDisplay from './HeaderDisplay'
 import { MAIN_MENU } from '../../../constants/constants'
 import { updateMainMenuTitleAndDescription, updateMenuItem } from '../../../api'
 import ProgressBar from '../../utility/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux'
-import { editItemSuccess, editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'
+import { deleteMenuSection, editItemSuccess, editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'
+import { Alert } from 'react-bootstrap'
 
 const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSize, fontWeight}) => {
     const context = useSelector(state => state.menus.context);
@@ -15,6 +16,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
     const index = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === context.title))
     const subMenuNames = useSelector(state => state.menus.menuList[index]?.menus.map(m => m.menuName))
     const menus = useSelector(state => state.menus.menuList);
+    const deleteSectionRequestState = useSelector(state => state.menus.remove);
     const dispatch = useDispatch();
 
     const blankState = {name: '', optionalMessage: ''}
@@ -25,7 +27,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
 
     const ref = useRef();
 
-    useEffect(() => {
+   /*  useEffect(() => {
         document.addEventListener("click", handleDocumentClick);
 
         return () => {
@@ -33,18 +35,19 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
         }
         // have to disable this lint warning. Even in strict mode its useless.
         // eslint-disable-next-line
-    }, [])
-
+    }, []) */
+/* 
     const handleDocumentClick = e => {
         if (!ref || !ref.current) { return; }
         if (ref.current.contains(e.target) && !editing) {
             return;
         }
-        if (!ref.current.contains(e.target) && e.target.innerText?.trim() !== "Edit") {
+        console.log(e.target.name, e)
+        if (!ref.current.contains(e.target) && e.target.name?.trim() !== "action-button") {
             setEditing(false)
             setHeaderForm(blankState)
         }
-    }
+    } */
 
     const validateMain = () => {
         if (!headerForm.name || headerForm.name.trim() === '') {
@@ -130,9 +133,17 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
         setHeaderRequestState({...headerRequestState, error: ''});
         setHeaderForm(blankState)
     }
+
     const handleInputChange = event => {
         let { name, value } = event.target;
         setHeaderForm({...headerForm, [name]: value})
+    }
+
+    const handleDeleteSectionClick = event => {
+        event.preventDefault();
+        const menuCopy = menus.slice();
+        menuCopy[index].menus.splice(sectionIndex, 1);
+        dispatch(deleteMenuSection(menuCopy[index].current, menuCopy, index, sectionIndex, updateKey))
     }
 
     const handlSetEditClick = () => setEditing(true);
@@ -143,9 +154,11 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
                 !editing 
                 ? <HeaderDisplay 
                     title={title} 
-                    subheader={subheader} 
-                    click={handlSetEditClick} 
-                    icon={pencilIconFull} 
+                    subheader={subheader}
+                    menuType={menuType} 
+                    onEditClick={handlSetEditClick} 
+                    onDeleteClick={handleDeleteSectionClick}
+                    icon={pencilOutlineFull} 
                     fontSize={fontSize} 
                     fontWeight={fontWeight} />
                 : <HeaderForm 
@@ -157,6 +170,8 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
                     saveIcon={saveIcon} 
                     discardIcon={circleSlashForCancelPaths} />
             }
+            { deleteSectionRequestState.loading && deleteSectionRequestState.target === sectionIndex && <ProgressBar className="menu-loading-container" color="primary" />}
+            { deleteSectionRequestState.error && deleteSectionRequestState.target === sectionIndex && <Alert className="menu-loading-container" variant="danger">{deleteSectionRequestState.error}</Alert>}
             { headerRequestState.loading && editing && <ProgressBar className="menu-loading-container" color="primary" /> }
             { headerRequestState.error && editing && <small className="mt-2 text-danger">{headerRequestState.error}</small>}
         </div>

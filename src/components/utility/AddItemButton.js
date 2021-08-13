@@ -6,7 +6,7 @@ import { sectionClipboardIcon } from '../../constants/svg/svgs';
 const AddItemButton = ({variant, children, icon, ...rest}) => {
     return (
         <Button variant={variant} {...rest}>
-            {icon} <span className="mx-2">{children}</span>
+            {icon} {children ? <span className="mx-2">{children}</span> : null}
         </Button>
     )
 }

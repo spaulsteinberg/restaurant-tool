@@ -9,7 +9,10 @@ import {
     UPDATE_CONTEXT,
     ADD_MENU,
     ADD_MENU_SUCCESS,
-    ADD_MENU_ERROR
+    ADD_MENU_ERROR,
+    DELETE_MENU,
+    DELETE_MENU_SUCCESS,
+    DELETE_MENU_ERROR
 } from './menuTypes'
 
 export const loadMenus = () => {
@@ -48,6 +51,27 @@ export const addMenuSuccess = payload => {
 export const addMenuError = error => {
     return {
         type: ADD_MENU_ERROR,
+        payload: error
+    }
+}
+
+export const deleteMenu = payload => {
+    return {
+        type: DELETE_MENU,
+        payload: payload
+    }
+}
+
+export const deleteMenuSuccess = payload => {
+    return {
+        type: DELETE_MENU_SUCCESS,
+        payload: payload
+    }
+}
+
+export const deleteMenuError = error => {
+    return {
+        type: DELETE_MENU_ERROR,
         payload: error
     }
 }
@@ -110,5 +134,18 @@ export const addNewMenuSection = (name, message, isCurrent, updateId) => {
             })
             .then(() => dispatch(addMenuSuccess({section: menuObject, isCurrent: isCurrent})))
             .catch(() => dispatch(addMenuError("Something went wrong adding menu. Please try again.")))
+    }
+}
+
+export const deleteMenuSection = (isCurrent, menuCopy, index, sectionIndex, updateId) => {
+    return (dispatch) => {
+        dispatch(deleteMenu(sectionIndex));
+        db.collection(process.env.REACT_APP_MENU_DB_COLLECTION)
+            .doc(updateId)
+            .update({
+                menus: menuCopy[index].menus
+            })
+            .then(() => dispatch(deleteMenuSuccess({isCurrent: isCurrent, current: menuCopy[index], menus: menuCopy})))
+            .catch(() => dispatch(deleteMenuError("Something went wrong. Please try again.")))
     }
 }

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const EditIconButton = ({variant, icon, text, textColor, ...rest}) => {
     return (
         <Button variant={variant} {...rest} >
-            {icon} <span className="mx-2" style={{color: textColor}}>{text}</span>
+            {icon} {text ? <span className="mx-2" style={{color: textColor}}>{text}</span> : null}
         </Button>
     )
 }

@@ -367,10 +367,15 @@
     }
 
     .add-section-button-container {
-        @include set-flex-container("large");
+        @include set-flex-unbound(90%, false);
+        border-top: 1px solid lightblue;
     }
 
     .add-section-form-container {
+        @include set-flex-container("large");
+    }
+
+    .add-item-button-container {
         @include set-flex-container("large");
     }
 }
@@ -464,6 +469,9 @@
     .menu-dropdown-container { 
         .add-section-form-container {
             @include set-flex-container("medium-large");
+        }
+        .add-section-button-container {
+            @include set-flex-unbound(80%, false);
         }
     }
 }
