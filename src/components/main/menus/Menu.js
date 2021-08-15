@@ -40,7 +40,7 @@ const Menu = () => {
     return (
         <div>
             { menuCall.loading ? <LoadingSpinner alignment="centered" marginTop="2rem">Loading Menus</LoadingSpinner>
-              : menuCall.success ? <ViewMenu names={menuNames} selected={selectedMenu?.name} handleMenuChange={handleMenuDropdownChange} menu={selectedMenu} /> 
+              : menuCall.success ? <ViewMenu names={menuNames} selected={selectedMenu?.name} handleMenuChange={handleMenuDropdownChange} menu={selectedMenu} menus={menus}/> 
               : menuCall.error ? <Alert variant="danger" className="mt-4">{menuCall.error}</Alert>
               : null
             }

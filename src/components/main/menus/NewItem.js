@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { updateMenuItemsInSection } from '../../../api'
 import { FOOD_KEY, ITEM_TYPES } from '../../../constants/constants'
 import { addItemSuccess } from '../../../redux/menus/menuActions'
@@ -8,9 +8,7 @@ import ProgressBar from '../../utility/ProgressBar'
 import SaveDiscardButtons from '../../utility/SaveDiscardButtons'
 import ItemForm from './ItemForm'
 
-const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, updateId}) => {
-    const context = useSelector(state => state.menus.context.title);
-    const menuList = useSelector(state => [...state.menus.menuList])
+const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, menuList, index, updateId}) => {
     const dispatch = useDispatch();
 
     const blankState = {item: '', description: '', price: '', category: '', type: ''}
@@ -42,7 +40,6 @@ const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, updateId}) =>
         event.preventDefault();
         setFormActions({error: '', loading: true})
         if (validate()) {
-            const index = menuList.findIndex(menu => menu.name === context);
             form.type = ITEM_TYPES.get(form.type) ? ITEM_TYPES.get(form.type) : FOOD_KEY;
             menuList[index].menus[sectionIndex].items.push(form)
             updateMenuItemsInSection(menuList[index].menus, updateId)

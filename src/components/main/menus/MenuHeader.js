@@ -10,12 +10,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteMenuSection, editItemSuccess, editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'
 import { Alert } from 'react-bootstrap'
 
-const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSize, fontWeight}) => {
+const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSize, fontWeight, menuList, index}) => {
     const context = useSelector(state => state.menus.context);
     const currentMenuNames = useSelector(state => state.menus.menuList.map(menu => menu.name))
-    const index = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === context.title))
     const subMenuNames = useSelector(state => state.menus.menuList[index]?.menus.map(m => m.menuName))
-    const menus = useSelector(state => state.menus.menuList);
     const deleteSectionRequestState = useSelector(state => state.menus.remove);
     const dispatch = useDispatch();
 
@@ -81,7 +79,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
                 updateMainMenuTitleAndDescription(headerForm.name, headerForm.optionalMessage, updateKey)
                     .then(() => {
                         setEditing(false);
-                        const menuCopy = [...menus];
+                        const menuCopy = [...menuList];
                         menuCopy[index].name = headerForm.name;
                         menuCopy[index].optionalMessage = headerForm.optionalMessage;
                         if (menuCopy[index].current === true){
@@ -104,7 +102,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
         }
         else {
             if (validateSections()){
-                let menuCopy = [...menus].find(menu => menu.name === context.title);
+                let menuCopy = [...menuList].find(menu => menu.name === context.title);
                 menuCopy.menus[sectionIndex].menuName = headerForm.name;
                 menuCopy.menus[sectionIndex].optionalMessage = headerForm.optionalMessage
                 updateMenuItem(menuCopy, updateKey)
@@ -140,7 +138,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
 
     const handleDeleteSectionClick = event => {
         event.preventDefault();
-        const menuCopy = menus.slice();
+        const menuCopy = menuList.slice();
         menuCopy[index].menus.splice(sectionIndex, 1);
         dispatch(deleteMenuSection(menuCopy[index].current, menuCopy, index, sectionIndex, updateKey))
     }

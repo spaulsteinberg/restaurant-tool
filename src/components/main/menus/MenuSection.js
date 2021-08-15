@@ -6,7 +6,7 @@ import MenuHeader from './MenuHeader'
 import MenuItem from './MenuItem';
 import NewItem from './NewItem';
 
-const MenuSection = ({subMenu, sectionIndex, isCurrent, updateId}) => {
+const MenuSection = ({subMenu, sectionIndex, isCurrent, menuList, index, updateId}) => {
 
     const [sectionEdited, setSectionEdited] = useState(0);
     const [addItem, setAddItem] = useState(false);
@@ -23,7 +23,7 @@ const MenuSection = ({subMenu, sectionIndex, isCurrent, updateId}) => {
 
     return (
         <div className="menu-section">
-            <MenuHeader title={subMenu.menuName} sectionIndex={sectionIndex} subheader={subMenu.optionalMessage} updateKey={updateId} menuType={SUB_MENU} fontSize="3rem" fontWeight="400" />
+            <MenuHeader title={subMenu.menuName} sectionIndex={sectionIndex} subheader={subMenu.optionalMessage} updateKey={updateId} menuType={SUB_MENU} fontSize="3rem" fontWeight="400" menuList={menuList} index={index}/>
             {subMenu.items.map((item, i) => 
                 <MenuItem 
                     key={`${item.item + i}`} 
@@ -34,7 +34,9 @@ const MenuSection = ({subMenu, sectionIndex, isCurrent, updateId}) => {
                     sectionEdits={sectionEdited}
                     sectionIndex={sectionIndex}
                     currentMenu={subMenu}
+                    menus={menuList}
                     isCurrent={isCurrent}
+                    menuIndex={index}
                     updateId={updateId}/>)}
             <div className="add-item-button-container mt-2">
                 <AddItemButton icon={addItemIcon} variant="success" className="menu-new-button" onClick={handleAddItemClick}>Add Item</AddItemButton>
@@ -44,7 +46,9 @@ const MenuSection = ({subMenu, sectionIndex, isCurrent, updateId}) => {
                         onDiscard={handleDiscardAddClick}
                         sectionIndex={sectionIndex}
                         currentMenu={subMenu}
+                        menuList={menuList}
                         updateId={updateId}
+                        index={index}
                         isCurrent={isCurrent} />
                     : null
                 }

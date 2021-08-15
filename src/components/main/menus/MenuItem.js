@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { circleSlashForCancelPaths, pencilOutlineSmallFull, saveIcon, trashSmallIcon } from '../../../constants/svg/svgs';
 import SaveDiscardButtons from '../../utility/SaveDiscardButtons';
 import { ITEM_TYPES } from '../../../constants/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteItemSuccess, editItemSuccess } from '../../../redux/menus/menuActions';
 import ItemDisplay from './ItemDisplay';
 import ProgressBar from '../../utility/ProgressBar';
@@ -12,7 +12,7 @@ import { updateMenuItem, updateMenuItemsInSection } from '../../../api';
 import { validateDescription, validateFormItemsExist, validatePrice } from '../../../utils';
 import RemoveItemButton from '../../utility/RemoveItemButton';
 
-const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent, sectionEdits, sectionIndex, itemIndex, updateId}) => {
+const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent, sectionEdits, sectionIndex, itemIndex, menus, menuIndex, updateId}) => {
 
     const dispatch = useDispatch();
 
@@ -22,10 +22,6 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
     const [formError, setFormError] = useState('');
     const [formLoading, setFormLoading] = useState(false);
     const [editing, setEditing] = useState(false);
-
-    const menus = useSelector(state => [...state.menus.menuList]);
-    const menuContext = useSelector(state => state.menus.context)
-    const menuIndex = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === menuContext.title))
 
     const handleEditClick = e => {
         e.preventDefault();
@@ -61,19 +57,11 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
         setFormError('');
         setFormLoading(true);
         if (validate()) {
-            let menuIndex;
-            let menuCopy = {...menus.find((menu, i) => {
-                if (menu.name === menuContext.title){
-                    menuIndex = i;
-                    return menu;
-                }
-                return -1;
-            })}
-            menuCopy.menus[sectionIndex].items[itemIndex] = {...form};
-            menuCopy.menus[sectionIndex].items[itemIndex].type = ITEM_TYPES.get(form.type);
-            updateMenuItem(menuCopy, updateId)
+            menus[menuIndex].menus[sectionIndex].items[itemIndex] = {...form};
+            menus[menuIndex].menus[sectionIndex].items[itemIndex].type = ITEM_TYPES.get(form.type);
+            updateMenuItem(menus[menuIndex], updateId)
             .then(() => {
-                dispatch(editItemSuccess({menu: menuCopy, index: menuIndex}))
+                dispatch(editItemSuccess({menu: menus[menuIndex], index: menuIndex}))
                 setFormValues({...form, type: "" })
                 setEditing(false)
                 setSectionExit()
@@ -100,6 +88,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
         })
         .catch(err => {
             console.log(err)
+            setFormLoading(false)
             // possibly do something like a toast message here. For now its self-explanatory.
         })
     }
