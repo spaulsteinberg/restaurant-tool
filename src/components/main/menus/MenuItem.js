@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { circleSlashForCancelPaths, pencilIconFull, saveIcon } from '../../../constants/svg/svgs';
+import { circleSlashForCancelPaths, pencilOutlineSmallFull, saveIcon, trashSmallIcon } from '../../../constants/svg/svgs';
 import SaveDiscardButtons from '../../utility/SaveDiscardButtons';
 import { ITEM_TYPES } from '../../../constants/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { editItemSuccess } from '../../../redux/menus/menuActions';
+import { deleteItemSuccess, editItemSuccess } from '../../../redux/menus/menuActions';
 import ItemDisplay from './ItemDisplay';
 import ProgressBar from '../../utility/ProgressBar';
 import ItemForm from './ItemForm';
 import EditIconButton from '../../utility/EditIconButton';
-import { updateMenuItem } from '../../../api';
+import { updateMenuItem, updateMenuItemsInSection } from '../../../api';
 import { validateDescription, validateFormItemsExist, validatePrice } from '../../../utils';
+import RemoveItemButton from '../../utility/RemoveItemButton';
 
-const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, sectionEdits, sectionIndex, itemIndex, updateId}) => {
+const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent, sectionEdits, sectionIndex, itemIndex, updateId}) => {
 
     const dispatch = useDispatch();
 
@@ -22,8 +23,9 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, sectionEdi
     const [formLoading, setFormLoading] = useState(false);
     const [editing, setEditing] = useState(false);
 
-    const menus = useSelector(state => state.menus.menuList);
+    const menus = useSelector(state => [...state.menus.menuList]);
     const menuContext = useSelector(state => state.menus.context)
+    const menuIndex = useSelector(state => state.menus.menuList.findIndex(menu => menu.name === menuContext.title))
 
     const handleEditClick = e => {
         e.preventDefault();
@@ -86,6 +88,21 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, sectionEdi
             return;
         }
     }
+
+    const handleOnDelete = e => {
+        e.preventDefault();
+        setFormLoading(true)
+        menus[menuIndex].menus[sectionIndex].items.splice(itemIndex, 1);
+        updateMenuItemsInSection(menus[menuIndex].menus, updateId)
+        .then(() => {
+            setFormLoading(false)
+            dispatch(deleteItemSuccess({updatedMenuList: menus, currentItem: menus[menuIndex], isCurrent: isCurrent}))
+        })
+        .catch(err => {
+            console.log(err)
+            // possibly do something like a toast message here. For now its self-explanatory.
+        })
+    }
     const handleOnDiscard = e => {
         e.preventDefault();
         setFormValues(initialState);
@@ -102,7 +119,10 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, sectionEdi
             <div className={sectionEdits === 0 ? "align-flex-bottom" : ""}>
                 {
                     !editing ? 
-                    <EditIconButton variant="warning" icon={pencilIconFull}  text="Edit" className="mt-2" onClick={handleEditClick} />
+                    <React.Fragment>
+                        <EditIconButton variant="info" icon={pencilOutlineSmallFull} text={null} className="mt-2" onClick={handleEditClick} />
+                        <RemoveItemButton className="mt-2 mx-2" icon={trashSmallIcon} onClick={handleOnDelete} />
+                    </React.Fragment>
                     : <SaveDiscardButtons saveChange={handleOnSave} discardChange={handleOnDiscard} saveIcon={saveIcon} discardIcon={circleSlashForCancelPaths} classes="mt-2"/>
                 }
                 { formError && editing && <small className="mt-2 text-danger">{formError}</small> }

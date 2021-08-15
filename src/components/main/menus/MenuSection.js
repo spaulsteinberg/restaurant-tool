@@ -34,6 +34,7 @@ const MenuSection = ({subMenu, sectionIndex, isCurrent, updateId}) => {
                     sectionEdits={sectionEdited}
                     sectionIndex={sectionIndex}
                     currentMenu={subMenu}
+                    isCurrent={isCurrent}
                     updateId={updateId}/>)}
             <div className="add-item-button-container mt-2">
                 <AddItemButton icon={addItemIcon} variant="success" className="menu-new-button" onClick={handleAddItemClick}>Add Item</AddItemButton>

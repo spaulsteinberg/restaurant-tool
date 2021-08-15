@@ -11,7 +11,8 @@ import {
     DELETE_MENU,
     DELETE_MENU_SUCCESS,
     DELETE_MENU_ERROR,
-    ADD_ITEM_SUCCESS
+    ADD_ITEM_SUCCESS,
+    DELETE_ITEM_SUCCESS
 } from './menuTypes'
 
 const initialState = {
@@ -82,6 +83,9 @@ export const menuReducer = (state = initialState, action) => {
         case ADD_ITEM_SUCCESS:
             const {index, list} = action.payload
             return action.payload.isCurrent ? {...state, menuList: list, current: list[index]} : {...state, menuList: list}
+        case DELETE_ITEM_SUCCESS:
+            const {updatedMenuList, currentItem} = action.payload;
+            return action.payload.isCurrent ? {...state, menuList: updatedMenuList, current: currentItem} : {...state, menuList: updatedMenuList}
         case EDIT_MAIN_HEADER_SUCCESS:
             const { isCurrent, newMenu, currentMenu } = action.payload;
             return isCurrent ? { ...state, menuList: newMenu, current: currentMenu } : { ...state, menuList: newMenu }

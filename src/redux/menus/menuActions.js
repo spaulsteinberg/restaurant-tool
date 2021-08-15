@@ -13,7 +13,8 @@ import {
     DELETE_MENU,
     DELETE_MENU_SUCCESS,
     DELETE_MENU_ERROR,
-    ADD_ITEM_SUCCESS
+    ADD_ITEM_SUCCESS,
+    DELETE_ITEM_SUCCESS
 } from './menuTypes'
 
 export const loadMenus = () => {
@@ -87,6 +88,13 @@ export const editItemSuccess = payload => {
 export const addItemSuccess = payload => {
     return {
         type: ADD_ITEM_SUCCESS,
+        payload: payload
+    }
+}
+
+export const deleteItemSuccess = payload => {
+    return {
+        type: DELETE_ITEM_SUCCESS,
         payload: payload
     }
 }

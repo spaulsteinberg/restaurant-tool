@@ -18,7 +18,7 @@ export const updateMainMenuTitleAndDescription = (name, message, updateId) => {
         })
 }
 
-export const addMenuItemToSection = (menus, updateId) => {
+export const updateMenuItemsInSection = (menus, updateId) => {
     return db.collection(process.env.REACT_APP_MENU_DB_COLLECTION)
         .doc(updateId)
         .update({

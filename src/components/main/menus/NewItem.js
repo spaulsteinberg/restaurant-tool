@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addMenuItemToSection } from '../../../api'
+import { updateMenuItemsInSection } from '../../../api'
 import { FOOD_KEY, ITEM_TYPES } from '../../../constants/constants'
 import { addItemSuccess } from '../../../redux/menus/menuActions'
 import { validateDescription, validateFormItemsExist, validatePrice } from '../../../utils'
@@ -40,13 +40,12 @@ const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, updateId}) =>
 
     const handleSaveClick = event => {
         event.preventDefault();
-        console.log("save click")
         setFormActions({error: '', loading: true})
         if (validate()) {
             const index = menuList.findIndex(menu => menu.name === context);
             form.type = ITEM_TYPES.get(form.type) ? ITEM_TYPES.get(form.type) : FOOD_KEY;
             menuList[index].menus[sectionIndex].items.push(form)
-            addMenuItemToSection(menuList[index].menus, updateId)
+            updateMenuItemsInSection(menuList[index].menus, updateId)
                 .then(() => {
                     dispatch(addItemSuccess({ index: index, list: menuList, isCurrent: isCurrent }))
                     setFormActions({ error: '', loading: false })
