@@ -345,6 +345,7 @@
             @include set-flex-container("large");
             @include row-flex(center, true);
             margin-bottom: 1.5rem;
+            word-break: break-word;
             .menu-item-column {
                 @include set-flex-unbound(100%, 0);
                 font-size: 1.2rem;
@@ -367,7 +368,7 @@
     }
 
     .add-section-button-container {
-        @include set-flex-unbound(90%, false);
+        @include set-flex-unbound(90%, 0);
         border-top: 1px solid lightblue;
     }
 
@@ -375,8 +376,19 @@
         @include set-flex-container("large");
     }
 
+    .menu-new-button {
+        width: 90% !important;
+        max-width: 200px;
+        text-align: center;
+    }
+
     .add-item-button-container {
+        @include set-flex-unbound(90%, 0);
+    }
+
+    .new-item-form-container {
         @include set-flex-container("large");
+        margin: alignment("centered");
     }
 }
 /****************** Queries *********************/
@@ -387,6 +399,11 @@
     .pagination-table {
         .css-11bfvty-MuiToolbar-root-MuiTablePagination-toolbar {
             flex-direction: row !important;
+        }
+    }
+    .menu-dropdown-container {
+        .menu-new-button {
+            width: 60% !important;
         }
     }
 }
@@ -470,8 +487,8 @@
         .add-section-form-container {
             @include set-flex-container("medium-large");
         }
-        .add-section-button-container {
-            @include set-flex-unbound(80%, false);
+        .add-section-button-container, .new-item-form-container, .add-item-button-container {
+            @include set-flex-unbound(80%, 0);
         }
     }
 }
@@ -544,6 +561,9 @@
                     @include set-flex-unbound(30%, 0);
                 }
             }
+        }
+        .new-item-form-container {
+            @include set-flex-container("medium")
         }
     }
 }

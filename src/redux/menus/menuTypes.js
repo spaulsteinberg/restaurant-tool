@@ -4,8 +4,9 @@ export const GET_MENUS_ERROR = 'GET_MENUS_ERROR';
 
 // Standalone updates. Local state keeps track of the rest
 export const EDIT_MENU_ITEM_SUCCESS = 'EDIT_MENU_ITEM_SUCCESS';
+export const ADD_ITEM_SUCCESS = 'ADD_ITEM_SUCCESS';
 export const EDIT_MAIN_HEADER_SUCCESS = 'EDIT_MAIN_HEADER_SUCCESS';
-export const UPDATE_CONTEXT = 'UPDATE_CONTEXT'
+export const UPDATE_CONTEXT = 'UPDATE_CONTEXT';
 
 export const ADD_MENU = 'ADD_MENU';
 export const ADD_MENU_SUCCESS = 'ADD_MENU_SUCCESS';

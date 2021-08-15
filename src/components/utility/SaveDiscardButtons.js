@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
+import { circleSlashForCancelPaths, saveIcon } from '../../constants/svg/svgs';
 
 const SaveDiscardButtons = ({saveChange, discardChange, saveIcon, discardIcon, classes}) => {
     return (
@@ -21,6 +22,11 @@ SaveDiscardButtons.propTypes = {
     saveIcon: PropTypes.element,
     discardIcon: PropTypes.element,
     classes: PropTypes.string,
+}
+
+SaveDiscardButtons.defaultProps = {
+    saveIcon: saveIcon,
+    discardIcon: circleSlashForCancelPaths
 }
 
 export default SaveDiscardButtons

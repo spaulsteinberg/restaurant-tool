@@ -4,12 +4,22 @@ import { addItemIcon } from '../../../constants/svg/svgs';
 import AddItemButton from '../../utility/AddItemButton';
 import MenuHeader from './MenuHeader'
 import MenuItem from './MenuItem';
+import NewItem from './NewItem';
 
-const MenuSection = ({subMenu, sectionIndex, updateId}) => {
+const MenuSection = ({subMenu, sectionIndex, isCurrent, updateId}) => {
 
     const [sectionEdited, setSectionEdited] = useState(0);
+    const [addItem, setAddItem] = useState(false);
     const handleSectionEdit = () => setSectionEdited(prev => prev + 1)
     const handleSectionExitEdit = () => setSectionEdited(prev => prev - 1)
+    const handleAddItemClick = event => {
+        event.preventDefault();
+        setAddItem(true);
+    }
+    const handleDiscardAddClick = event => {
+        event.preventDefault();
+        setAddItem(false)
+    }
 
     return (
         <div className="menu-section">
@@ -26,7 +36,17 @@ const MenuSection = ({subMenu, sectionIndex, updateId}) => {
                     currentMenu={subMenu}
                     updateId={updateId}/>)}
             <div className="add-item-button-container mt-2">
-                <AddItemButton icon={addItemIcon} variant="success">Add Item</AddItemButton>
+                <AddItemButton icon={addItemIcon} variant="success" className="menu-new-button" onClick={handleAddItemClick}>Add Item</AddItemButton>
+                {
+                    addItem ? 
+                    <NewItem 
+                        onDiscard={handleDiscardAddClick}
+                        sectionIndex={sectionIndex}
+                        currentMenu={subMenu}
+                        updateId={updateId}
+                        isCurrent={isCurrent} />
+                    : null
+                }
             </div>
         </div>
     )

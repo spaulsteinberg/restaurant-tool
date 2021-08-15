@@ -68,3 +68,12 @@ export const getMapKeyByValue = (map, searchValue) => {
     }
     return null;
   }
+
+export const validateFormItemsExist = form => {
+    if (!form.item?.trim() || !form.category?.trim() || !form.price || !form.type) {
+        return false;
+    }
+    return true;
+}
+export const validateDescription = description => description.trim().length > 100
+export const validatePrice = price => price < 0 || isNaN(price)

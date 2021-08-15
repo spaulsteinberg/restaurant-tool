@@ -18,9 +18,9 @@ const MenuDisplay = ({menu}) => {
             { 
                 !menu.menus || menu.menus.length === 0 ? 
                 <Alert variant="warning" style={{width: "30%"}}>Create menus to see them here.</Alert>
-                : menu.menus.map((m, i) => <MenuSection key={m.menuName + i} subMenu={m} sectionIndex={i} updateId={menu.id}/>)
+                : menu.menus.map((m, i) => <MenuSection key={m.menuName + i} subMenu={m} sectionIndex={i} updateId={menu.id} isCurrent={isCurrent}/>)
             }
-            <AddMenuSection updateKey={menu.id} menuNames={menuNames} isCurrent={isCurrent}/>
+            <AddMenuSection updateKey={menu.id} menuNames={menuNames} isCurrent={isCurrent} />
         </React.Fragment>
     )
 }

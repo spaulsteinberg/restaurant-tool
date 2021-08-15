@@ -115,7 +115,6 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
                     setEditing(false);
                 })
                 .catch(err => {
-                    console.log("error", err)
                     setHeaderRequestState(prevState => { return { ...prevState, error: 'Request failed. Please reload and try again.', loading: false } })
                     setEditing(false);
                 })

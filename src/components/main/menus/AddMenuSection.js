@@ -55,7 +55,7 @@ const AddMenuSection = ({updateKey, menuNames, isCurrent}) => {
     return (
         <React.Fragment>
             <div className="add-section-button-container section-separator">
-                <AddItemButton className="mt-4" variant="primary" onClick={handleEditingClick}>Add Section</AddItemButton>
+                <AddItemButton className="mt-4 menu-new-button" variant="primary" onClick={handleEditingClick}>Add Section</AddItemButton>
             </div>
             <div className="add-section-form-container">
                 {editing && <HeaderForm 

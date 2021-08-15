@@ -17,3 +17,11 @@ export const updateMainMenuTitleAndDescription = (name, message, updateId) => {
             optionalMessage: message
         })
 }
+
+export const addMenuItemToSection = (menus, updateId) => {
+    return db.collection(process.env.REACT_APP_MENU_DB_COLLECTION)
+        .doc(updateId)
+        .update({
+            menus: menus
+        })
+}

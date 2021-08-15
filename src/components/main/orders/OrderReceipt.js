@@ -40,10 +40,7 @@ const OrderReceipt = (props) => {
                         return setOrderViewError('This order could not be found.')
                     }
                 })
-                .catch(err => {
-                    console.log(err)
-                    return setOrderViewError('An error occurred. Please try reloading the page.')
-                })
+                .catch(err => setOrderViewError('An error occurred. Please try reloading the page.'))
                 .finally(() => setOrderViewLoading(false))
         }
     }, [props, location.state, params])

@@ -6,12 +6,12 @@ import Form from 'react-bootstrap/Form';
 import { ITEM_TYPES } from '../../../constants/constants';
 
 
-const ItemForm = ({form, handleInputChange}) => {
+const ItemForm = ({form, handleInputChange, newForm = null}) => {
     return (
         <Form className="text-reset">
             <FormGroup className="m-1">
                 <label>Item Name</label>
-                <InputBox name="item" type="text" value={form.item} onChange={handleInputChange} disabled />
+                <InputBox name="item" type="text" value={form.item} onChange={handleInputChange} disabled={newForm ? false : true} />
             </FormGroup>
             <FormGroup className="m-1">
                 <label>Description</label>

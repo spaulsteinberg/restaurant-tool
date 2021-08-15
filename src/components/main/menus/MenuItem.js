@@ -9,6 +9,7 @@ import ProgressBar from '../../utility/ProgressBar';
 import ItemForm from './ItemForm';
 import EditIconButton from '../../utility/EditIconButton';
 import { updateMenuItem } from '../../../api';
+import { validateDescription, validateFormItemsExist, validatePrice } from '../../../utils';
 
 const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, sectionEdits, sectionIndex, itemIndex, updateId}) => {
 
@@ -37,18 +38,14 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, sectionEdi
     }
 
     const validate = () => {
-        if (!form.item?.trim() || !form.category?.trim() || !form.price || !form.type){
+        if (!validateFormItemsExist(form)){
             return setFormError("All form items must have valid values.");
         }
-        if (form.description.trim().length > 100){
+        if (validateDescription(form.description)){
             return setFormError("Description cannot be greater than 100 characters long")
         }
-        let price = parseFloat(form.price);
-        if (price < 0) {
-            return setFormError("Price cannot be less than 0.")
-        }
-        if (isNaN(price)) {
-            return setFormError("Price must be a valid number")
+        if (validatePrice(parseFloat(form.price))) {
+            return setFormError("Price must be a valid number cannot be less than 0.")
         }
 
         // if the item isnt the same item and the item is already in the menu it exists.

@@ -15,6 +15,7 @@ $static-element-space: (
     "nav": 10px
 );
 $flex-width: (
+    "extra-small": 0 0 10%,
     "small": 0 0 20%,
     "quarter": 0 0 25%,
     "medium": 0 0 60%,
@@ -22,6 +23,7 @@ $flex-width: (
     "large": 0 0 100%
 );
 $flex-width-single: (
+    "extra-small": 10%,
     "small": 20%,
     "quarter": 25%,
     "medium": 60%,
