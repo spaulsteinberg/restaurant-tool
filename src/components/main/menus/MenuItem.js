@@ -84,7 +84,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
         updateMenuItemsInSection(menus[menuIndex].menus, updateId)
         .then(() => {
             setFormLoading(false)
-            dispatch(deleteItemSuccess({updatedMenuList: menus, currentItem: menus[menuIndex], isCurrent: isCurrent}))
+            dispatch(deleteItemSuccess({updatedMenuList: [...menus], currentItem: menus[menuIndex], isCurrent: isCurrent}))
         })
         .catch(err => {
             console.log(err)

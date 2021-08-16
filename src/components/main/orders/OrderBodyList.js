@@ -24,7 +24,7 @@ const OrderBodyList = ({list, itemKey, priceKey}) => {
                         itemKey === FOOD_KEY && item.subtractions && item.subtractions.length > 0 ? 
                         item.subtractions.map(subtraction => 
                             <ReceiptRow 
-                                key={`${subtraction.item + itemKey + i}`} 
+                                key={`${subtraction + itemKey + i}`} 
                                 name={subtraction}
                                 isSubtraction
                         />)

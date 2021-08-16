@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import InputBox from '../../utility/InputBox';
 import FormSelectBox from '../../utility/FormSelectBox';
 import FormGroup from 'react-bootstrap/FormGroup';
@@ -6,12 +6,19 @@ import Form from 'react-bootstrap/Form';
 import { ITEM_TYPES } from '../../../constants/constants';
 
 
-const ItemForm = ({form, handleInputChange, newForm = null}) => {
+const ItemForm = ({form, handleInputChange, mainRef, newForm = null}) => {
+
+    useEffect(() => {
+        if (mainRef) {
+            mainRef.current.focus();
+        }
+    }, [mainRef])
+
     return (
         <Form className="text-reset">
             <FormGroup className="m-1">
                 <label>Item Name</label>
-                <InputBox name="item" type="text" value={form.item} onChange={handleInputChange} disabled={newForm ? false : true} />
+                <InputBox name="item" type="text" ref={mainRef} value={form.item} onChange={handleInputChange} disabled={newForm ? false : true} />
             </FormGroup>
             <FormGroup className="m-1">
                 <label>Description</label>

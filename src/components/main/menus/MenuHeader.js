@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { circleSlashForCancelPaths, pencilOutlineFull, saveIcon } from '../../../constants/svg/svgs'
 import HeaderForm from './HeaderForm'
@@ -8,7 +8,7 @@ import { updateMainMenuTitleAndDescription, updateMenuItem } from '../../../api'
 import ProgressBar from '../../utility/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteMenuSection, editItemSuccess, editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'
-import { Alert } from 'react-bootstrap'
+import Alert from 'react-bootstrap/Alert'
 
 const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSize, fontWeight, menuList, index}) => {
     const context = useSelector(state => state.menus.context);
@@ -25,27 +25,9 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
 
     const ref = useRef();
 
-   /*  useEffect(() => {
-        document.addEventListener("click", handleDocumentClick);
-
-        return () => {
-            document.removeEventListener("click", handleDocumentClick)
-        }
-        // have to disable this lint warning. Even in strict mode its useless.
-        // eslint-disable-next-line
-    }, []) */
-/* 
-    const handleDocumentClick = e => {
-        if (!ref || !ref.current) { return; }
-        if (ref.current.contains(e.target) && !editing) {
-            return;
-        }
-        console.log(e.target.name, e)
-        if (!ref.current.contains(e.target) && e.target.name?.trim() !== "action-button") {
-            setEditing(false)
-            setHeaderForm(blankState)
-        }
-    } */
+    useEffect(() => {
+        setEditing(false)
+    }, [title])
 
     const validateMain = () => {
         if (!headerForm.name || headerForm.name.trim() === '') {

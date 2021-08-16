@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateMenuItemsInSection } from '../../../api'
 import { FOOD_KEY, ITEM_TYPES } from '../../../constants/constants'
@@ -10,6 +10,7 @@ import ItemForm from './ItemForm'
 
 const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, menuList, index, updateId}) => {
     const dispatch = useDispatch();
+    const ref = useRef();
 
     const blankState = {item: '', description: '', price: '', category: '', type: ''}
     const [form, setForm] = useState(blankState)
@@ -55,7 +56,7 @@ const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, menuList, ind
     }
     return (
         <div className="new-item-form-container">
-            <ItemForm form={form} handleInputChange={handleInputChange} newForm/>
+            <ItemForm form={form} handleInputChange={handleInputChange} mainRef={ref} newForm/>
             <SaveDiscardButtons classes="mt-2" discardChange={onDiscard} saveChange={handleSaveClick} />
             {formActions.error ? <small className="mt-2 text-danger">{formActions.error}</small> : null}
             {formActions.loading ? <ProgressBar className="menu-loading-container" color="secondary" /> : null}
