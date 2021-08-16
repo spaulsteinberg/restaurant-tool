@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import { Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAllMenus, updateContext } from '../../../redux/menus/menuActions';
@@ -23,10 +23,15 @@ const Menu = () => {
     const defaultText = [{text: "Choose a menu", highlight: false}];
     menuNames = defaultText.concat(menuNames)
 
+    const onLoadCall = useCallback(() => {
+        if(!menuCall.success){
+            dispatch(loadAllMenus())
+        }
+    }, [dispatch, menuCall.success])
 
     useEffect(() => {
-        dispatch(loadAllMenus())
-    }, [dispatch])
+        onLoadCall()
+    }, [onLoadCall])
 
     const handleMenuDropdownChange = (e) => {
         const {value} = e.target;

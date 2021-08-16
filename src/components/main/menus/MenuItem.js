@@ -66,9 +66,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
                 setEditing(false)
                 setSectionExit()
             })
-            .catch(err => {
-                setFormError('Could not edit item. Something went wrong.')
-            })
+            .catch(() => setFormError('Could not edit item. Something went wrong.'))
             .finally(() => setFormLoading(false))
         }
         else {
@@ -86,11 +84,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
             setFormLoading(false)
             dispatch(deleteItemSuccess({updatedMenuList: [...menus], currentItem: menus[menuIndex], isCurrent: isCurrent}))
         })
-        .catch(err => {
-            console.log(err)
-            setFormLoading(false)
-            // possibly do something like a toast message here. For now its self-explanatory.
-        })
+        .catch(err => setFormLoading(false))
     }
     const handleOnDiscard = e => {
         e.preventDefault();
