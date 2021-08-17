@@ -14,7 +14,8 @@ import {
     DELETE_MENU_SUCCESS,
     DELETE_MENU_ERROR,
     ADD_ITEM_SUCCESS,
-    DELETE_ITEM_SUCCESS
+    DELETE_ITEM_SUCCESS,
+    UPDATE_CURRENT_MENU
 } from './menuTypes'
 
 export const loadMenus = () => {
@@ -109,6 +110,13 @@ export const editMainMenuSuccess = payload => {
 export const updateContext = payload => {
     return {
         type: UPDATE_CONTEXT,
+        payload: payload
+    }
+}
+
+export const updateCurrentMenuTag = payload => {
+    return {
+        type: UPDATE_CURRENT_MENU,
         payload: payload
     }
 }

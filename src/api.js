@@ -25,3 +25,17 @@ export const updateMenuItemsInSection = (menus, updateId) => {
             menus: menus
         })
 }
+
+export const updateCurrentMenu = (updateIdOld, updateIdNew) => {
+    let batch = db.batch();
+
+    if (updateIdOld){
+        let updateOldRef = db.collection(process.env.REACT_APP_MENU_DB_COLLECTION).doc(updateIdOld);
+        batch.update(updateOldRef, {"current": false});
+    }
+    
+    let updateNewRef = db.collection(process.env.REACT_APP_MENU_DB_COLLECTION).doc(updateIdNew);
+    batch.update(updateNewRef, {"current": true});
+
+    return batch.commit();
+}

@@ -400,10 +400,12 @@
         @include row-flex(center, true);
         @include set-flex-container("large");
         margin: $dashboard-margin;
+        padding: 2rem;
         min-height: 325px;
         align-items: center;
         &:hover {
             cursor: pointer;
+            opacity: .7;
         }
     }
 }
