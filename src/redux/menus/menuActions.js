@@ -15,7 +15,10 @@ import {
     DELETE_MENU_ERROR,
     ADD_ITEM_SUCCESS,
     DELETE_ITEM_SUCCESS,
-    UPDATE_CURRENT_MENU
+    UPDATE_CURRENT_MENU,
+    DELETE_MAIN_MENU,
+    DELETE_MAIN_MENU_SUCCESS,
+    DELETE_MAIN_MENU_ERROR
 } from './menuTypes'
 
 export const loadMenus = () => {
@@ -121,6 +124,26 @@ export const updateCurrentMenuTag = payload => {
     }
 }
 
+export const deleteMainMenu = () => {
+    return {
+        type: DELETE_MAIN_MENU
+    }
+}
+
+export const deleteMainMenuSuccess = payload => {
+    return {
+        type: DELETE_MAIN_MENU_SUCCESS,
+        payload: payload
+    }
+}
+
+export const deleteMainMenuError = error => {
+    return {
+        type: DELETE_MAIN_MENU_ERROR,
+        payload: error
+    }
+}
+
 export const loadAllMenus = () => {
     return (dispatch) => {
         dispatch(loadMenus())
@@ -171,5 +194,18 @@ export const deleteMenuSection = (isCurrent, menuCopy, index, sectionIndex, upda
             })
             .then(() => dispatch(deleteMenuSuccess({isCurrent: isCurrent, current: menuCopy[index], menus: menuCopy})))
             .catch(() => dispatch(deleteMenuError("Something went wrong. Please try again.")))
+    }
+}
+
+export const postDeleteMainMenu = (menuCopy, updateIds) => {
+    return (dispatch) => {
+        dispatch(deleteMainMenu());
+        let batch = db.batch();
+        for(const id of updateIds){
+            batch.delete(db.collection(process.env.REACT_APP_MENU_DB_COLLECTION).doc(id))
+        }
+        batch.commit()
+        .then(() => dispatch(deleteMainMenuSuccess(menuCopy)))
+        .catch(err => dispatch(deleteMainMenuError('Something went wrong in the network call.')))
     }
 }

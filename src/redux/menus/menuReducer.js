@@ -13,7 +13,10 @@ import {
     DELETE_MENU_ERROR,
     ADD_ITEM_SUCCESS,
     DELETE_ITEM_SUCCESS,
-    UPDATE_CURRENT_MENU
+    UPDATE_CURRENT_MENU,
+    DELETE_MAIN_MENU,
+    DELETE_MAIN_MENU_SUCCESS,
+    DELETE_MAIN_MENU_ERROR
 } from './menuTypes'
 
 const initialState = {
@@ -32,6 +35,11 @@ const initialState = {
         success: null,
         error: null,
         target: null, // to narrow where error and loading bars are shown
+    },
+    deleteMain: {
+        loading: null,
+        success: null,
+        error: null
     },
     menuList: [],
     current: null,
@@ -98,6 +106,12 @@ export const menuReducer = (state = initialState, action) => {
             newMenuList[nIndex].current = true;
             newMenuList[oIndex].current = false;
             return {...state, menuList: newMenuList, current: newMenuList[nIndex]}
+        case DELETE_MAIN_MENU:
+            return {...state, deleteMain: {...state.deleteMain, loading: true, success: null, error: null}}
+        case DELETE_MAIN_MENU_SUCCESS:
+            return {...state, menuList: action.payload, deleteMain: {...state.deleteMain, loading: false, success: true, error: null}}
+        case DELETE_MAIN_MENU_ERROR:
+            return {...state, deleteMain: {...state.deleteMain, loading: false, success: false, error: action.payload}}
         default:
             return state;
     }
