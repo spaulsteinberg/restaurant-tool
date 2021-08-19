@@ -39,3 +39,15 @@ export const updateCurrentMenu = (updateIdOld, updateIdNew) => {
 
     return batch.commit();
 }
+
+export const addMainMenuToMenuList = (name, description, current = false, menus = []) => {
+    // add an empty array of menus as well
+    // get a returned id
+    return db.collection(process.env.REACT_APP_MENU_DB_COLLECTION)
+        .add({
+            name: name,
+            optionalMessage: description,
+            current: current,
+            menus: menus
+        })
+}

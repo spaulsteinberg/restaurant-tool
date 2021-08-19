@@ -16,7 +16,8 @@ import {
     UPDATE_CURRENT_MENU,
     DELETE_MAIN_MENU,
     DELETE_MAIN_MENU_SUCCESS,
-    DELETE_MAIN_MENU_ERROR
+    DELETE_MAIN_MENU_ERROR,
+    ADD_MAIN_MENU_SUCCESS
 } from './menuTypes'
 
 const initialState = {
@@ -112,6 +113,10 @@ export const menuReducer = (state = initialState, action) => {
             return {...state, menuList: action.payload, deleteMain: {...state.deleteMain, loading: false, success: true, error: null}}
         case DELETE_MAIN_MENU_ERROR:
             return {...state, deleteMain: {...state.deleteMain, loading: false, success: false, error: action.payload}}
+        case ADD_MAIN_MENU_SUCCESS:
+            let cp = [...state.menuList]
+            cp.push(action.payload)
+            return {...state, menuList: cp}
         default:
             return state;
     }

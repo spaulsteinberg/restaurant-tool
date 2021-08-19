@@ -3,7 +3,11 @@ import Button from 'react-bootstrap/Button';
 import { Paper } from '@material-ui/core';
 import RemoveMenuForm from './RemoveMenuForm';
 import { useDispatch } from 'react-redux';
-import { postDeleteMainMenu } from '../../../redux/menus/menuActions';
+import { addMainMenuSuccess, postDeleteMainMenu } from '../../../redux/menus/menuActions';
+import AddMainMenuForm from './AddMainMenuForm';
+import { validateDescription } from '../../../utils';
+import { addMainMenuToMenuList } from '../../../api';
+import { useHistory } from 'react-router-dom';
 
 const resetKeyValues = (obj) => {
     for (const key of Object.keys(obj)){
@@ -14,16 +18,26 @@ const resetKeyValues = (obj) => {
 
 const AddOrRemoveMenuSelection = ({menus, current}) => {
 
-    
     const initalRemoveFormState = {errors: null}
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
+    /* Remove menu states */
     const [removeCheckValues, setRemoveCheckValues] = useState({});
     const [removeConfirm, setRemoveConfirm] = useState("")
     const [removeState, setRemoveState] = useState(false);
     const [removeFormState, setRemoveFormState] = useState(initalRemoveFormState)
+
+    /* Add menu states */
+    const initialAddState = {name: "", description: "", redirect: true}
+    const initialAddFormState = {loading: false, success: null, errors: ""}
     const [addState, setAddState] = useState(false);
+    const [addFormRequestState, setAddFormRequestState] = useState(initialAddFormState)
+    const [addFormState, setAddFormState] = useState(initialAddState)
+    const [currentMenuNames, setCurrentMenuNames] = useState([])
+
+    /* main page states */
     const [aorEdit, setAorEdit] = useState(false);
 
     const setInitialNames = useCallback(() => {
@@ -31,6 +45,7 @@ const AddOrRemoveMenuSelection = ({menus, current}) => {
         const names = menus.map(menu => menu.name)
         names.map(name => initialRemoveState[name] = false)
         setRemoveCheckValues(initialRemoveState)
+        setCurrentMenuNames(names)
     }, [menus])
 
     useEffect(() => {
@@ -88,12 +103,69 @@ const AddOrRemoveMenuSelection = ({menus, current}) => {
     const handleDiscardClick = event => {
         event.stopPropagation();
         event.preventDefault();
-        setRemoveCheckValues(resetKeyValues({...removeCheckValues}))
+        if (removeState){
+            setRemoveCheckValues(resetKeyValues({...removeCheckValues}))
+            setRemoveConfirm("");
+            setRemoveFormState(initalRemoveFormState)
+        } else {
+            setAddFormState(initialAddState);
+            setAddFormRequestState(initialAddFormState)
+        }
         setAddState(false);
         setRemoveState(false);
-        setRemoveConfirm("");
-        setRemoveFormState(initalRemoveFormState)
         setAorEdit(prevState => !prevState)
+    }
+
+    const handleAddInputChange = event => setAddFormState({...addFormState, [event.target.name]: event.target.value})
+
+    const handleRedirectCheckClick = event => {
+        event.stopPropagation();
+        const {name, checked} = event.target;
+        setAddFormState({...addFormState, [name]: checked})
+    }
+
+    const validateAddForm = () => {
+        if (!addFormState.name?.trim()) {
+            setAddFormRequestState({errors: "Must have a valid menu name", loading: false})
+            return false;
+        }
+        if (currentMenuNames.includes(addFormState.name.trim())){
+            setAddFormRequestState({errors: `Menu name ${addFormState.name} already exists!`, loading: false})
+            return false;
+        }
+        if (addFormState.description && (addFormState.description.trim().length === 0 || validateDescription(addFormState.description))){
+            setAddFormRequestState({errors: "Description must be between 1-100 characters", loading: false})
+            return false;
+        }
+        return true;
+    }
+    
+    const handleAddSaveMenuClick = event => {
+        event.preventDefault();
+        setAddFormRequestState({loading: true, success: null, errors: null})
+        if (validateAddForm()){
+            const name = addFormState.name.trim()
+            const description = addFormState.description ? addFormState.description?.trim() : ""
+            addMainMenuToMenuList(name, description)
+            .then(doc => {
+                // if there is a check for redirect, redirect and put into context
+                setAddFormRequestState({loading: false, success: true, errors: null})
+                const newMenu = { 
+                    name: name, 
+                    optionalMessage: description,
+                    current: false,
+                    menus: [],
+                    id: doc.id
+                }
+                dispatch(addMainMenuSuccess(newMenu));
+                if (addFormState.redirect) {
+                    history.push('/menus/view', {name: name, description: description, showMenu: newMenu})
+                }
+            })
+            .catch(err => {
+                setAddFormRequestState({loading: false, success: false, errors: 'Something went wrong adding the menu. Please try again.'})
+            })
+        }
     }
     
     return (
@@ -122,7 +194,15 @@ const AddOrRemoveMenuSelection = ({menus, current}) => {
                                 removeValue={removeConfirm}
                                 handleConfirmChange={handleConfirmChange}
                                 formState={removeFormState}/> 
-                        : addState ? <p>add state nah</p>
+                        : addState ? 
+                            <AddMainMenuForm
+                                save={handleAddSaveMenuClick}
+                                discard={handleDiscardClick}
+                                handleInputChange={handleAddInputChange}
+                                handleCheckClick={handleRedirectCheckClick}
+                                values={addFormState}
+                                formState={addFormRequestState}
+                             />
                         : null
                     }
                 </React.Fragment>

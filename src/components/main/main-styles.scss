@@ -17,6 +17,11 @@
     text-align: left;
 }
 
+.relaign-react-boot-form-check {
+    margin-left: 1rem;
+    float: none;
+}
+
 .navbar-toggler {
     font-size: $default-padding !important;
     button {
@@ -521,6 +526,7 @@
     }
     .menu-home-main-container {
         @include row-flex(space-around, true);
+        align-items: flex-start;
         .menu-home-main-paper {
             @include row-flex(center, true);
             @include set-flex-unbound(60%, $dashboard-margin);

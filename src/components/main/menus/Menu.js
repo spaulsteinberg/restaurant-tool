@@ -4,12 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadAllMenus, updateContext } from '../../../redux/menus/menuActions';
 import LoadingSpinner from '../../utility/LoadingSpinner';
 import ViewMenu from './ViewMenu';
+import { useLocation, useHistory } from "react-router-dom";
+
 
 const Menu = () => {
     const dispatch = useDispatch();
     const menus = useSelector(state => state.menus.menuList);
     const current = useSelector(state => state.menus.current);
     const menuCall = useSelector(state => state.menus.get);
+    const location = useLocation();
+    const history = useHistory()
 
     const [selectedMenu, setSelectedMenu] = useState(null);
 
@@ -26,8 +30,12 @@ const Menu = () => {
     const onLoadCall = useCallback(() => {
         if(!menuCall.success){
             dispatch(loadAllMenus())
+        } else if (location.state?.name && location.state?.showMenu) {
+            setSelectedMenu(location.state.showMenu)
+            dispatch(updateContext({title: location.state.name, message: location.state?.description}))
+            history.replace()
         }
-    }, [dispatch, menuCall.success])
+    }, [dispatch, menuCall.success, location.state, history])
 
     useEffect(() => {
         onLoadCall()
