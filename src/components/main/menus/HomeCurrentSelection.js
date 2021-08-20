@@ -20,6 +20,7 @@ const HomeCurrentSelection = ({menus}) => {
 
     const handleDiscardClick = event => {
         event.stopPropagation();
+        setFormState(emptyState);
         setCurrentEdit(false);
     }
 
@@ -52,6 +53,7 @@ const HomeCurrentSelection = ({menus}) => {
     const handleCurrentClick = event => {
         event.stopPropagation();
         if (event.target.name === "name-g" || event.target.tagName === "SPAN") return;
+        setFormState(emptyState);
         setCurrentEdit(prev => !prev)
     }
 
@@ -69,9 +71,11 @@ const HomeCurrentSelection = ({menus}) => {
                 ? 
                 <React.Fragment>
                     <SetCurrentMenuForm names={menuNames} current={current?.name} discard={handleDiscardClick} save={handleSaveClick} />
-                    {formState.loading && <LoadingSpinner alignment="left">Loading...</LoadingSpinner>}
-                    {formState.success && <Alert variant="primary" className="m-2 text-center">{formState.success}</Alert>}
-                    {formState.error && <Alert variant="danger" className="m-2 text-center">{formState.error}</Alert>}
+                    <div style={{margin: "0 auto"}}>
+                        {formState.loading && <LoadingSpinner alignment="left">Loading...</LoadingSpinner>}
+                        {formState.success && <Alert variant="primary" className="m-2 text-center">{formState.success}</Alert>}
+                        {formState.error && <Alert variant="danger" className="m-2 text-center">{formState.error}</Alert>}
+                    </div>
                 </React.Fragment>
                 : <Button variant="outline-light" size="lg" className="w-50" onClick={handleCurrentClick}>Change Current Menu</Button>
             }
