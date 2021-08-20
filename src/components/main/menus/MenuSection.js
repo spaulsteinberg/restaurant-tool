@@ -6,7 +6,7 @@ import MenuHeader from './MenuHeader'
 import MenuItem from './MenuItem';
 import NewItem from './NewItem';
 
-const MenuSection = ({subMenu, sectionIndex, isCurrent, menuList, index, updateId}) => {
+const MenuSection = ({subMenu, sectionIndex, isCurrent, menuList, index, editable, updateId}) => {
 
     const [sectionEdited, setSectionEdited] = useState(0);
     const [addItem, setAddItem] = useState(false);
@@ -23,7 +23,7 @@ const MenuSection = ({subMenu, sectionIndex, isCurrent, menuList, index, updateI
 
     return (
         <div className="menu-section">
-            <MenuHeader title={subMenu.menuName} sectionIndex={sectionIndex} subheader={subMenu.optionalMessage} updateKey={updateId} menuType={SUB_MENU} fontSize="3rem" fontWeight="400" menuList={menuList} index={index}/>
+            <MenuHeader title={subMenu.menuName} sectionIndex={sectionIndex} subheader={subMenu.optionalMessage} updateKey={updateId} menuType={SUB_MENU} fontSize="3rem" fontWeight="400" menuList={menuList} index={index} editable={editable}/>
             {subMenu.items.map((item, i) => 
                 <MenuItem 
                     key={`${item.item + i}`} 
@@ -37,8 +37,9 @@ const MenuSection = ({subMenu, sectionIndex, isCurrent, menuList, index, updateI
                     menus={menuList}
                     isCurrent={isCurrent}
                     menuIndex={index}
+                    editable={editable}
                     updateId={updateId}/>)}
-            <div className="add-item-button-container mt-2">
+            { editable ? <div className="add-item-button-container mt-2">
                 <AddItemButton icon={addItemIcon} variant="success" className="menu-new-button" onClick={handleAddItemClick}>Add Item</AddItemButton>
                 {
                     addItem ? 
@@ -52,7 +53,8 @@ const MenuSection = ({subMenu, sectionIndex, isCurrent, menuList, index, updateI
                         isCurrent={isCurrent} />
                     : null
                 }
-            </div>
+            </div> : null
+            }
         </div>
     )
 }

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteMenuSection, editItemSuccess, editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'
 import Alert from 'react-bootstrap/Alert'
 
-const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSize, fontWeight, menuList, index}) => {
+const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSize, fontWeight, menuList, editable, index}) => {
     const context = useSelector(state => state.menus.context);
     const currentMenuNames = useSelector(state => state.menus.menuList.map(menu => menu.name))
     const subMenuNames = useSelector(state => state.menus.menuList[index]?.menus.map(m => m.menuName))
@@ -130,7 +130,7 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
     return (
         <div className="menu-main-header">
             {
-                !editing 
+                !editing || !editable
                 ? <HeaderDisplay 
                     title={title} 
                     subheader={subheader}
@@ -139,7 +139,8 @@ const MenuHeader = ({title, subheader, sectionIndex, menuType, updateKey, fontSi
                     onDeleteClick={handleDeleteSectionClick}
                     icon={pencilOutlineFull} 
                     fontSize={fontSize} 
-                    fontWeight={fontWeight} />
+                    fontWeight={fontWeight}
+                    editable={editable} />
                 : <HeaderForm 
                     ref={ref}
                     form={headerForm}

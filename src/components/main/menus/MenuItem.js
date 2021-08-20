@@ -12,7 +12,7 @@ import { updateMenuItem, updateMenuItemsInSection } from '../../../api';
 import { validateDescription, validateFormItemsExist, validatePrice } from '../../../utils';
 import RemoveItemButton from '../../utility/RemoveItemButton';
 
-const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent, sectionEdits, sectionIndex, itemIndex, menus, menuIndex, updateId}) => {
+const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent, sectionEdits, sectionIndex, itemIndex, menus, menuIndex, editable, updateId}) => {
 
     const dispatch = useDispatch();
 
@@ -96,10 +96,12 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
     return (
         <div key={item.item} className="menu-item-column">
             {
-                !editing ? <ItemDisplay item={item.item} price={`$${item.price}`} description={item.description} />
+                !editing || !editable ? <ItemDisplay item={item.item} price={`$${item.price}`} description={item.description} />
                 : <ItemForm form={form} handleInputChange={handleInputChange} />
             }
-            <div className={sectionEdits === 0 ? "align-flex-bottom" : ""}>
+            {
+                editable ? 
+                <div className={sectionEdits === 0 ? "align-flex-bottom" : ""}>
                 {
                     !editing ? 
                     <React.Fragment>
@@ -110,7 +112,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
                 }
                 { formError && editing && <small className="mt-2 text-danger">{formError}</small> }
                 { formLoading && <ProgressBar className="menu-loading-container" color="secondary" /> }
-            </div>
+            </div> : null }
         </div>
     )
 }
