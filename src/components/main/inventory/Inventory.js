@@ -11,14 +11,14 @@ const Inventory = () => {
     const inventory = useSelector(state => state.inventory);
 
     useEffect(() => {
-   //     dispatch(fetchAllInventoryItems())
+        dispatch(fetchAllInventoryItems())
     }, [dispatch])
 
     return (
         <React.Fragment>
             {
                 inventory.loading ? <LoadingSpinner alignment="centered" variant="primary" marginTop="2rem">Loading Inventory</LoadingSpinner>
-                : inventory.inventoryList ? <InventoryTable />
+                : inventory.inventoryList ? <InventoryTable items={inventory.inventoryList}/>
                 : inventory.error ? <Alert variant="danger" className="mt-3 text-center">{inventory.error}</Alert>
                 : null
             }

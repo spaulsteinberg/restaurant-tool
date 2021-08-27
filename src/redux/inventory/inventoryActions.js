@@ -28,7 +28,11 @@ export const fetchAllInventoryItems = () => {
         .get()
         .then(querySnapShot => {
             if (querySnapShot){
-                let snapShot = querySnapShot.docs.map(doc => doc.data())
+                let snapShot = querySnapShot.docs.map(doc => {
+                    let data = doc.data();
+                    data.id = doc.id;
+                    return data;
+                })
                 dispatch(getInventoryItemsSuccess(snapShot))
             }
         })

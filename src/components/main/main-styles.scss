@@ -424,6 +424,13 @@
     }
 }
 
+/****************** Inventory *******************/
+
+.inventory-paper-container {
+    width: 100%;
+    margin: 3rem auto;
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: resolution("small-mobile")) {
@@ -620,6 +627,7 @@
             width: 45%;
         }
     }
+    .inventory-paper-container { width: 90%; }
 }
 
 @media screen and (min-width: resolution("desktop")){
@@ -633,4 +641,5 @@
             @include set-flex-unbound(34%, $dashboard-margin);
         }
     }
+    .inventory-paper-container { width: 75%; }
 }
