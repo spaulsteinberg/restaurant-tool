@@ -52,7 +52,7 @@ const NavigationBar = (props) => {
             <Navbar.Collapse id="collapsed-nav-items">
               <Nav className="alignTextLeft">
                 <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
-                <NavLink className="navLink" to="/profile">Inventory</NavLink>
+                <NavLink className="navLink" to="/inventory">Inventory</NavLink>
                 <NavLink className="navLink" to="/orders">Orders</NavLink>
                 <NavLink className="navLink" to="/menus">Menus</NavLink>
                 {/* Also add inventory and past order links*/}

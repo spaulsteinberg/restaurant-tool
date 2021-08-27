@@ -112,7 +112,9 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
                 }
                 { formError && editing && <small className="mt-2 text-danger">{formError}</small> }
                 { formLoading && <ProgressBar className="menu-loading-container" color="secondary" /> }
-            </div> : null }
+                </div>
+                 : null 
+            }
         </div>
     )
 }
