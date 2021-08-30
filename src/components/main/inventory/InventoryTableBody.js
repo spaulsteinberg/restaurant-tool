@@ -1,13 +1,15 @@
 import React from 'react'
 import { TableRow, TableCell, TableBody } from '@material-ui/core'
 import InventoryTableRowCells from './InventoryTableRowCells'
+import { useSelector } from 'react-redux'
 
 
-const InventoryTableBody = ({items}) => {
+const InventoryTableBody = ({itemKeys}) => {
+    const inventoryItems = useSelector(state => state.inventory.inventory.items);
     return (
         <TableBody>
-            {items.map(item => <TableRow key={item.id}><InventoryTableRowCells item={item} /></TableRow> )}
-            {items.length === 0 && <TableRow><TableCell colSpan={4} className="text-center">No inventory items to display.</TableCell></TableRow>}
+            {itemKeys.map(item => <TableRow key={item}><InventoryTableRowCells item={inventoryItems[item]} /></TableRow> )}
+            {itemKeys.length === 0 && <TableRow><TableCell colSpan={4} className="text-center">No inventory items to display.</TableCell></TableRow>}
         </TableBody>
     )
 }

@@ -9,7 +9,7 @@ const Inventory = () => {
 
     const dispatch = useDispatch();
     const inventory = useSelector(state => state.inventory);
-
+    console.log(inventory)
     useEffect(() => {
         dispatch(fetchAllInventoryItems())
     }, [dispatch])
@@ -18,7 +18,7 @@ const Inventory = () => {
         <React.Fragment>
             {
                 inventory.loading ? <LoadingSpinner alignment="centered" variant="primary" marginTop="2rem">Loading Inventory</LoadingSpinner>
-                : inventory.inventoryList ? <InventoryTable items={inventory.inventoryList}/>
+                : inventory.inventory ? <InventoryTable inventory={inventory.inventory}/>
                 : inventory.error ? <Alert variant="danger" className="mt-3 text-center">{inventory.error}</Alert>
                 : null
             }

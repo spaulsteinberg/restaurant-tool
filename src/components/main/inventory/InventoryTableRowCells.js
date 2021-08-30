@@ -3,6 +3,8 @@ import TableCell from '@material-ui/core/TableCell'
 import InventoryCellDisplay from './InventoryCellDisplay';
 import InventoryCellAction from './InventoryCellAction';
 import { editInventoryItemReq } from '../../../api';
+import { useDispatch } from 'react-redux';
+import { editInventoryItem } from '../../../redux/inventory/inventoryActions';
 
 
 const InventoryTableRowCells = ({item}) => {
@@ -12,6 +14,7 @@ const InventoryTableRowCells = ({item}) => {
     const [editItemForm, setEditItemForm] = useState({count: '', cost: ''})
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch()
 
     const handleEditClick = event => {
         event.preventDefault();
@@ -35,6 +38,8 @@ const InventoryTableRowCells = ({item}) => {
                 editInventoryItemReq(item.id, count, cost)
                     .then(res => {
                         console.log("success", res)
+                        let resultObj = {...item, count: count, cost: cost}
+                        dispatch(editInventoryItem({id: item.consumable, data: resultObj}))
                         setLoading(false)
                         setEdit(false)
                     })
