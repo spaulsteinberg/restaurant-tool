@@ -31,9 +31,7 @@ const SearchBar = ({value, searchChange, durationChange}) => {
         <div id="search-bar-container">
             <InputGroup className="mb-4">
                     <InputGroup.Text>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                            <path d={searchIcon}/>
-                        </svg>
+                        {searchIcon}
                     </InputGroup.Text>
                     <InputBox ref={searchRef} placeholder="Filter by Receipt..." as="input" type="text" value={value} onChange={searchChange} />
                     { wideView && 
