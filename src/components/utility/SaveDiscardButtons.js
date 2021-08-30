@@ -3,13 +3,13 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { circleSlashForCancelPaths, saveIcon } from '../../constants/svg/svgs';
 
-const SaveDiscardButtons = ({saveChange, discardChange, saveIcon, discardIcon, classes}) => {
+const SaveDiscardButtons = ({saveChange, discardChange, saveIcon, discardIcon, classes, marginSave = "mx-1", marginCancel = "mx-1"}) => {
     return (
         <div className={classes}>
-            <Button variant="primary" type="submit" className="mx-1 icon-button" onClick={saveChange}>
+            <Button variant="primary" type="submit" className={`${marginSave} icon-button`} onClick={saveChange}>
                 {saveIcon}
             </Button>
-            <Button variant="danger" className="mx-1 icon-button" onClick={discardChange}>
+            <Button variant="danger" className={`${marginCancel} icon-button`} onClick={discardChange}>
                 {discardIcon}
             </Button>
         </div>

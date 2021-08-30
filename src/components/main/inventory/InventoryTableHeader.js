@@ -8,6 +8,7 @@ const InventoryTableHeader = () => {
         new TableColumnSortable("Item", false),
         new TableColumnSortable("Items in Stock", false),
         new TableColumnSortable("Cost/Item", false),
+        new TableColumnSortable("Actions", false),
     ]
     return (
         <TableHead>

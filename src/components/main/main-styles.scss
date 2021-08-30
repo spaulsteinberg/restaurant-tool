@@ -443,6 +443,18 @@
     }
 }
 
+.inventory-editable-row-in {
+    margin: alignment("centered");
+    width: 100%;
+}
+.inventory-table-buttons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: resolution("small-mobile")) {
@@ -627,6 +639,9 @@
         .menu-home-main-paper {
             @include set-flex-unbound(44%, $dashboard-margin);
         }
+    }
+    .inventory-table-buttons {
+        flex-direction: row;
     }
 }
 

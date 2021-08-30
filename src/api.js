@@ -51,3 +51,12 @@ export const addMainMenuToMenuList = (name, description, current = false, menus 
             menus: menus
         })
 }
+
+export const editInventoryItemReq = (id, count, cost) => {
+    return db.collection(process.env.REACT_APP_INVENTORY_DB_COLLECTION)
+        .doc(id)
+        .update({
+            count: count,
+            cost: cost
+        })
+}

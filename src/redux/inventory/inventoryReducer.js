@@ -1,4 +1,4 @@
-import { GET_INVENTORY_ITEMS, GET_INVENTORY_ITEMS_ERROR, GET_INVENTORY_ITEMS_SUCCESS } from "./inventoryTypes";
+import { EDIT_INVENTORY_ITEM, GET_INVENTORY_ITEMS, GET_INVENTORY_ITEMS_ERROR, GET_INVENTORY_ITEMS_SUCCESS } from "./inventoryTypes";
 
 
 const initialState = {
@@ -15,6 +15,8 @@ const inventoryReducer = (state = initialState, action) => {
             return {...state, loading: false, inventoryList: action.payload, error: null}
         case GET_INVENTORY_ITEMS_ERROR:
             return {...state, loading: false, inventoryList: null, error: action.payload}
+        /* case EDIT_INVENTORY_ITEM:
+            return {...state, inventoryList: } */
         default:
             return {...state};
     }

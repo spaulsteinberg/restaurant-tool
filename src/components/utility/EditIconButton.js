@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
+import { pencilOutlineFull } from '../../constants/svg/svgs';
 
 const EditIconButton = ({variant, icon, text, textColor, ...rest}) => {
     return (
@@ -20,7 +21,8 @@ EditIconButton.propTypes = {
 EditIconButton.defaultProps = {
     variant: "warning",
     text: "Edit",
-    textColor: "black"
+    textColor: "black",
+    icon: pencilOutlineFull
 }
 
 export default EditIconButton
