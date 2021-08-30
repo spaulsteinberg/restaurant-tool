@@ -7,7 +7,13 @@ import SearchInventory from './SearchInventory';
 const InventoryTable = ({items}) => {
 
     const [searchValue, setSearchValue] = useState('');
-    const handleSearchChange = event => setSearchValue(event.target.value);
+    const [tableItems, setTableItems] = useState([...items]);
+    const handleSearchChange = event => {
+        const { value } = event.target
+        setSearchValue(value);
+        const lv = value.toLowerCase();
+        setTableItems(items.filter(item => item.category.toLowerCase().includes(lv) || item.subCategory.toLowerCase().includes(lv) || item.consumable.toLowerCase().includes(lv)))
+    }
     return (
         <div className="inventory-paper-container">
             <SearchInventory value={searchValue} handleSearchChange={handleSearchChange}/>
@@ -15,7 +21,7 @@ const InventoryTable = ({items}) => {
                 <TableContainer>
                     <Table>
                         <InventoryTableHeader />
-                        <InventoryTableBody items={items} />
+                        <InventoryTableBody items={tableItems} />
                     </Table>
                 </TableContainer>
             </Paper>

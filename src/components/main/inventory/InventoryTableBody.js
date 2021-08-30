@@ -11,6 +11,7 @@ const InventoryTableBody = ({items}) => {
                     <TableCell align="right">${item.cost.toFixed(2)}</TableCell>
                 </TableRow>
             )}
+            {items.length === 0 && <TableRow><TableCell colSpan={3} className="text-center">No inventory items to display.</TableCell></TableRow>}
         </TableBody>
     )
 }
