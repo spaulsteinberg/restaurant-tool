@@ -60,3 +60,9 @@ export const editInventoryItemReq = (id, count, cost) => {
             cost: cost
         })
 }
+
+export const removeInventoryItemReq = id => {
+    return db.collection(process.env.REACT_APP_INVENTORY_DB_COLLECTION)
+    .doc(id)
+    .delete()
+}

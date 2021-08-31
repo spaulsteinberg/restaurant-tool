@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import TableCell from '@material-ui/core/TableCell'
 import InventoryCellDisplay from './InventoryCellDisplay';
 import InventoryCellAction from './InventoryCellAction';
-import { editInventoryItemReq } from '../../../api';
+import { editInventoryItemReq, removeInventoryItemReq } from '../../../api';
 import { useDispatch } from 'react-redux';
-import { editInventoryItem } from '../../../redux/inventory/inventoryActions';
+import { editInventoryItem, removeInventoryItem } from '../../../redux/inventory/inventoryActions';
 
 
 const InventoryTableRowCells = ({item}) => {
@@ -37,14 +37,13 @@ const InventoryTableRowCells = ({item}) => {
             } else {
                 editInventoryItemReq(item.id, count, cost)
                     .then(res => {
-                        console.log("success", res)
                         let resultObj = {...item, count: count, cost: cost}
                         dispatch(editInventoryItem({id: item.consumable, data: resultObj}))
                         setLoading(false)
+                        setEditItemForm({count: '', cost: ''})
                         setEdit(false)
                     })
                     .catch(err => {
-                        console.log(err)
                         setError("Request failed. Please try again.")
                         setLoading(false)
                     })
@@ -61,7 +60,16 @@ const InventoryTableRowCells = ({item}) => {
 
     const handleRemoveClick = event => {
         event.preventDefault();
-        console.log("remove click")
+        setLoading(true);
+        removeInventoryItemReq(item.id)
+        .then(() => {
+            dispatch(removeInventoryItem(item.consumable))
+            setLoading(false)
+        })
+        .catch(() => { 
+            setLoading(false);
+            setError("Failed to delete item.")
+        })
     }
 
     const handleInputChange = event => {
@@ -86,19 +94,25 @@ const InventoryTableRowCells = ({item}) => {
 
     return (
         <React.Fragment>
-            <TableCell component="th" scope="row" align="left" style={{ paddingLeft: "2rem" }} width="25%">{item.consumable}</TableCell>
             {
-                !edit 
-                ? <InventoryCellDisplay item={item} editClick={handleEditClick} removeClick={handleRemoveClick} wideView={wideView} />
-                : <InventoryCellAction 
-                        handleSave={handleSaveClick} 
-                        handleDiscard={handleCancelEditClick} 
-                        wideView={wideView} 
-                        handleInputChange={handleInputChange} 
-                        values={editItemForm} 
-                        error={error}
-                        loading={loading}
-                        />
+                item ?
+                    <>
+                        <TableCell component="th" scope="row" align="left" style={{ paddingLeft: "2rem" }} width="25%">{item.consumable}</TableCell>
+                        {
+                            !edit 
+                            ? <InventoryCellDisplay item={item} editClick={handleEditClick} removeClick={handleRemoveClick} wideView={wideView} loading={loading}/>
+                            : <InventoryCellAction 
+                                    handleSave={handleSaveClick} 
+                                    handleDiscard={handleCancelEditClick} 
+                                    wideView={wideView} 
+                                    handleInputChange={handleInputChange} 
+                                    values={editItemForm} 
+                                    error={error}
+                                    loading={loading}
+                                    />
+                        }
+                    </>
+                : null
             }
         </React.Fragment>
     )

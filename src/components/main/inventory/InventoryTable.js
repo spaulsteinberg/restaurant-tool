@@ -12,7 +12,7 @@ const InventoryTable = ({inventory}) => {
         const { value } = event.target
         setSearchValue(value);
         const lv = value.toLowerCase();
-        setTableItems(inventory.names.filter(item => item.consumable.toLowerCase().includes(lv)))
+        setTableItems(inventory.names.filter(item => item.toLowerCase().includes(lv)))
     }
     return (
         <div className="inventory-paper-container">

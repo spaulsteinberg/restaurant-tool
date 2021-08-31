@@ -1,4 +1,4 @@
-import { GET_INVENTORY_ITEMS, GET_INVENTORY_ITEMS_SUCCESS, GET_INVENTORY_ITEMS_ERROR, EDIT_INVENTORY_ITEM } from "./inventoryTypes"
+import { GET_INVENTORY_ITEMS, GET_INVENTORY_ITEMS_SUCCESS, GET_INVENTORY_ITEMS_ERROR, EDIT_INVENTORY_ITEM, REMOVE_INVENTORY_ITEM } from "./inventoryTypes"
 import { db } from "../../firebase"
 
 export const getInventoryItems = () => {
@@ -28,6 +28,13 @@ export const editInventoryItem = payload => {
     }
 }
 
+export const removeInventoryItem = id => {
+    return {
+        type: REMOVE_INVENTORY_ITEM,
+        payload: id
+    }
+}
+
 export const fetchAllInventoryItems = () => {
     return (dispatch) => {
         dispatch(getInventoryItems());
@@ -46,7 +53,6 @@ export const fetchAllInventoryItems = () => {
             }
         })
         .catch(err => {
-            console.log(err)
             dispatch(getInventoryItemsError("An error occurred making the request. Please try again."))
         })
     }
