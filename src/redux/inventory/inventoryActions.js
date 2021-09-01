@@ -1,4 +1,4 @@
-import { GET_INVENTORY_ITEMS, GET_INVENTORY_ITEMS_SUCCESS, GET_INVENTORY_ITEMS_ERROR, EDIT_INVENTORY_ITEM, REMOVE_INVENTORY_ITEM } from "./inventoryTypes"
+import { GET_INVENTORY_ITEMS, GET_INVENTORY_ITEMS_SUCCESS, GET_INVENTORY_ITEMS_ERROR, EDIT_INVENTORY_ITEM, REMOVE_INVENTORY_ITEM, ADD_INVENTORY_ITEM } from "./inventoryTypes"
 import { db } from "../../firebase"
 
 export const getInventoryItems = () => {
@@ -18,6 +18,13 @@ export const getInventoryItemsError = error => {
     return {
         type: GET_INVENTORY_ITEMS_ERROR,
         payload: error
+    }
+}
+
+export const addInventoryItem = payload => {
+    return {
+        type: ADD_INVENTORY_ITEM,
+        payload: payload
     }
 }
 

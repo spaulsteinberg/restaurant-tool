@@ -66,3 +66,8 @@ export const removeInventoryItemReq = id => {
     .doc(id)
     .delete()
 }
+
+export const addInventoryItemReq = item => {
+    return db.collection(process.env.REACT_APP_INVENTORY_DB_COLLECTION)
+        .add(item)
+}

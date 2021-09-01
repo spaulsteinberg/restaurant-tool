@@ -432,14 +432,30 @@
 }
 
 .search-inventory-input-container {
-    margin: 3rem auto;
+    margin: alignment("centered");
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
+    .search-combined-filter-container {
+        @include set-flex-container("large");
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
     .search-inventory-input {
-        @include set-flex-unbound(80%);
-        text-align: left;
+        @include set-flex-unbound(60%);
+        text-align: center;
+    }
+    .add-inventory-item-container {
+        @include set-flex-unbound(100%);
+        text-align: center;
+    }
+    .filter-inventory-container {
+        @include set-flex-unbound(35%);
+        display: flex;
+        justify-content: center;
     }
 }
 
@@ -453,6 +469,23 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+.inventory-modal-styles {
+    padding: 1rem;
+    max-width: 500px;
+    min-width: 210px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.dialog-action-button-overrides {
+    padding-top: 3px;
+}
+
+.dialog-action-loading-container {
+    width: 75%;
+    margin: 1rem auto;
 }
 
 /****************** Queries *********************/
@@ -567,13 +600,30 @@
         margin: 3rem auto;
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: left;
+        justify-content: space-between;
         .search-inventory-input {
-            @include set-flex-unbound(45%);
+            @include set-flex-unbound(80%);
             text-align: left;
         }
-    }
+        .add-inventory-item-container {
+            @include set-flex-unbound(20%);
+            text-align: center;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .filter-inventory-container {
+            @include set-flex-unbound(20%);
+            display: flex;
+            justify-content: flex-start;
+            .form-control {
+                width: 75%;
+            }
+        }
+            .search-inventory-input {
+                @include set-flex-unbound(45%);
+                text-align: left;
+            }
+        }
 }
 
 /* to prevent mobile landscape chart distortions */

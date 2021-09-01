@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Paper, TableContainer, Table } from '@material-ui/core'
 import InventoryTableBody from './InventoryTableBody';
 import InventoryTableHeader from './InventoryTableHeader';
-import SearchInventory from './SearchInventory';
+import InventoryTableActionBar from './InventoryTableActionBar';
 
 const InventoryTable = ({inventory}) => {
 
@@ -14,9 +14,14 @@ const InventoryTable = ({inventory}) => {
         const lv = value.toLowerCase();
         setTableItems(inventory.names.filter(item => item.toLowerCase().includes(lv)))
     }
+
+    useEffect(() => {
+        setTableItems([...inventory.names])
+    }, [inventory.names])
+    
     return (
         <div className="inventory-paper-container">
-            <SearchInventory value={searchValue} handleSearchChange={handleSearchChange}/>
+            <InventoryTableActionBar value={searchValue} handleSearchChange={handleSearchChange}/>
             <Paper>
                 <TableContainer>
                     <Table>
