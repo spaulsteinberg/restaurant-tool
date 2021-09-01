@@ -1,31 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { searchIcon } from '../../../constants/svg/svgs';
 import FormSelectBox from '../../utility/FormSelectBox';
 import { ORDER_TIMEFRAMES } from '../../../constants/constants';
 import InputBox from '../../utility/InputBox';
+import useWideView from '../../../hooks/useWideView';
 
 const SearchBar = ({value, searchChange, durationChange}) => {
 
-    const [wideView, setWideView] = useState(false);
+    const {wideView} = useWideView(768);
     let options = [...Object.values(ORDER_TIMEFRAMES)].slice(1);
     const searchRef = React.useRef();
-
-    useEffect(() => {
-
-        if (window.matchMedia("(min-width: 768px)").matches) {
-            setWideView(true)
-        }
-
-        let widthCheck = window.matchMedia("(min-width: 768px)")
-        widthCheck.addEventListener("change", shouldChangeInputAlignment, true);
-        searchRef.current.focus();
-        return () => {
-            widthCheck.removeEventListener("change", shouldChangeInputAlignment, true)
-          }
-    }, [])
-
-    const shouldChangeInputAlignment = e => e.matches ? setWideView(true) : setWideView(false)
 
     return (
         <div id="search-bar-container">

@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TableCell from '@material-ui/core/TableCell'
 import InventoryCellDisplay from './InventoryCellDisplay';
 import InventoryCellAction from './InventoryCellAction';
 import { editInventoryItemReq, removeInventoryItemReq } from '../../../api';
 import { useDispatch } from 'react-redux';
 import { editInventoryItem, removeInventoryItem } from '../../../redux/inventory/inventoryActions';
+import useWideView from '../../../hooks/useWideView';
 
 
 const InventoryTableRowCells = ({item}) => {
 
     const [edit, setEdit] = useState(false)
-    const [wideView, setWideView] = useState(false)
     const [editItemForm, setEditItemForm] = useState({count: '', cost: ''})
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const {wideView} = useWideView(768);
 
     const handleEditClick = event => {
         event.preventDefault();
@@ -76,21 +77,6 @@ const InventoryTableRowCells = ({item}) => {
         let { name, value } = event.target;
         setEditItemForm({...editItemForm, [name]: value})
     }
-
-    useEffect(() => {
-
-        if (window.matchMedia("(min-width: 768px)").matches) {
-            setWideView(true)
-        }
-
-        let widthCheck = window.matchMedia("(min-width: 768px)")
-        widthCheck.addEventListener("change", shouldChangeInputAlignment, true);
-        return () => {
-            widthCheck.removeEventListener("change", shouldChangeInputAlignment, true)
-          }
-    }, [])
-
-    const shouldChangeInputAlignment = e => e.matches ? setWideView(true) : setWideView(false)
 
     return (
         <React.Fragment>
