@@ -3,12 +3,49 @@ import { Paper, TableContainer, Table, TablePagination } from '@material-ui/core
 import InventoryTableBody from './InventoryTableBody';
 import InventoryTableHeader from './InventoryTableHeader';
 import InventoryTableActionBar from './InventoryTableActionBar';
+import Disclaimer from '../../utility/Disclaimer';
+import SortableIcon from '../../utility/SortableIcon';
+import { TableColumnSortable } from '../../../models/main/tableColums';
+import { INVENTORY_COLS } from '../../../constants/constants';
 
 const InventoryTable = ({inventory}) => {
 
     
     const [searchValue, setSearchValue] = useState('');
     const [tableItems, setTableItems] = useState([...inventory.names]);
+
+    const columnNames = [
+        new TableColumnSortable(INVENTORY_COLS.ITEM, true),
+        new TableColumnSortable(INVENTORY_COLS.STOCK, true),
+        new TableColumnSortable(INVENTORY_COLS.COST, true),
+        new TableColumnSortable(INVENTORY_COLS.ACTIONS, false),
+    ]
+
+    // sorting values and states
+    const [activeColumn, setActiveColumn] = useState({index: null, text: ''});
+    const activateColumn = event => {
+        const {outerText, cellIndex} = event.target;
+        if (outerText === activeColumn.text){
+            setTableItems([...inventory.names])
+            setActiveColumn({index: null, text: ''});
+            setCount(inventory.names.length)
+        }
+        else if (outerText === INVENTORY_COLS.ITEM){
+            setTableItems([...tableItems].sort())
+            setActiveColumn({index: cellIndex, text: outerText});
+        } else if (outerText === INVENTORY_COLS.COST){
+            let filtered = [...tableItems].sort((a, b) => inventory.items[a].cost - inventory.items[b].cost)
+            setTableItems(filtered)
+            setActiveColumn({index: cellIndex, text: outerText});
+            setCount(filtered.length)
+        } else if (outerText === INVENTORY_COLS.STOCK){
+            let filtered = [...tableItems].sort((a, b) => inventory.items[a].count - inventory.items[b].count)
+            setTableItems(filtered)
+            setActiveColumn({index: cellIndex, text: outerText});
+            setCount(filtered.length)
+        }
+        
+    }
 
     // paginator values and states
     const rowPaginationOptions = [5, 10, 25];
@@ -24,6 +61,7 @@ const InventoryTable = ({inventory}) => {
         let filteredInventory = inventory.names.filter(item => item.toLowerCase().includes(value.toLowerCase()))
         setTableItems(filteredInventory)
         setCount(filteredInventory.length)
+        setActiveColumn({index: null, text: ''});
     }
 
     useEffect(() => {
@@ -37,7 +75,7 @@ const InventoryTable = ({inventory}) => {
             <Paper>
                 <TableContainer>
                     <Table>
-                        <InventoryTableHeader />
+                        <InventoryTableHeader active={activeColumn.index} click={activateColumn} columnNames={columnNames}/>
                         <InventoryTableBody itemKeys={tableItems.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)} />
                     </Table>
                 </TableContainer>
@@ -51,6 +89,7 @@ const InventoryTable = ({inventory}) => {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                     className="pagination-table"
                 />
+                <Disclaimer classes={"order-table-disclaimer"} iconComponent={<SortableIcon />}> - Denotes a sortable column</Disclaimer>
             </Paper>
         </div>
     )

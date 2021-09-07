@@ -48,3 +48,10 @@ export const ITEM_TYPES = new Map([
 
 export const MAIN_MENU = "main-menu";
 export const SUB_MENU = "sub-menu";
+
+export const INVENTORY_COLS = Object.freeze({
+    ITEM: "Item",
+    STOCK: "Items in Stock",
+    COST: "Cost/Item",
+    ACTIONS: "Actions"
+})
