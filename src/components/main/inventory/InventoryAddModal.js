@@ -12,6 +12,7 @@ import { circleSlashForCancelPaths } from '../../../constants/svg/svgs';
 import { addInventoryItemReq } from '../../../api';
 import { useDispatch } from 'react-redux';
 import { addInventoryItem } from '../../../redux/inventory/inventoryActions';
+import { standardizeString } from '../../../utils';
 
 
 const InventoryAddModal = ({show, handleClose, itemsPresent}) => {
@@ -84,6 +85,12 @@ const InventoryAddModal = ({show, handleClose, itemsPresent}) => {
             } else if (parseFloat(form.cost) > Number.MAX_SAFE_INTEGER || parseInt(form.count) > Number.MAX_SAFE_INTEGER){
                 setRequestState({loading: false, error: 'Cost or count is too large.'})
                 return false;            
+            } else if (form.category && (form.category.length < 3 || form.category.length > 15)){
+                setRequestState({loading: false, error: 'If adding a category, it must be between 3 and 15 characters long.'})
+                return false; 
+            } else if (form.subCategory && (form.subCategory.length < 3 || form.subCategory.length > 15)){
+                setRequestState({loading: false, error: 'If adding a sub category, it must be between 3 and 15 characters long.'})
+                return false; 
             }
             return true;
         } catch (err) {
@@ -95,8 +102,13 @@ const InventoryAddModal = ({show, handleClose, itemsPresent}) => {
     const handleOnSubmit = () => {
         if (validate()){
             setRequestState({loading: true, error: ''})
+            let consumable = standardizeString(form.consumable);
+            let category = form.category ? standardizeString(form.category) : form.category;
+            let subCategory = form.subCategory ? standardizeString(form.subCategory) : form.subCategory;
             const requestObj = {
-                ...form,
+                consumable: consumable,
+                category: category,
+                subCategory: subCategory,
                 count: parseInt(form.count),
                 cost: parseFloat(form.cost)
             }

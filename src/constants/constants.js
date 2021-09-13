@@ -55,3 +55,5 @@ export const INVENTORY_COLS = Object.freeze({
     COST: "Cost/Item",
     ACTIONS: "Actions"
 })
+
+export const defaultDropDownText = "No Filter"

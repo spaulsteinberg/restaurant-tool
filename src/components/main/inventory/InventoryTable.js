@@ -6,12 +6,14 @@ import InventoryTableActionBar from './InventoryTableActionBar';
 import Disclaimer from '../../utility/Disclaimer';
 import SortableIcon from '../../utility/SortableIcon';
 import { TableColumnSortable } from '../../../models/main/tableColums';
-import { INVENTORY_COLS } from '../../../constants/constants';
+import { INVENTORY_COLS, defaultDropDownText } from '../../../constants/constants';
 
 const InventoryTable = ({inventory}) => {
 
     
     const [searchValue, setSearchValue] = useState('');
+    const [categoryValue, setCategoryFilterValue] = useState(defaultDropDownText);
+    const [availableCategories, setAvailableCategories] = useState(Object.keys(inventory.categories))
     const [tableItems, setTableItems] = useState([...inventory.names]);
 
     const columnNames = [
@@ -62,16 +64,47 @@ const InventoryTable = ({inventory}) => {
         setTableItems(filteredInventory)
         setCount(filteredInventory.length)
         setActiveColumn({index: null, text: ''});
+        setCategoryFilterValue(defaultDropDownText)
+    }
+
+    const handleFilterChange = event => {
+        const { value } = event.target
+        setCategoryFilterValue(value);
+        if (value !== defaultDropDownText){
+            setSearchValue('')
+            let temp = []
+            for (const name of inventory.names){
+                if (inventory.items[name].category === value){
+                    temp.push(name)
+                }
+            }
+            setTableItems(temp)
+            setCount(temp.length)
+            setPage(0)
+        } else {
+            setTableItems([...inventory.names])
+            setCount(inventory.names.length)
+            setPage(0)
+        }
+        // on filter change filter on category filter after setting new category filter
     }
 
     useEffect(() => {
         setTableItems([...inventory.names])
+        setAvailableCategories(Object.keys(inventory.categories))
+        setCategoryFilterValue(defaultDropDownText)
         setCount(inventory.names.length)
-    }, [inventory.names])
+    }, [inventory.names, inventory.categories])
     
     return (
         <div className="inventory-paper-container">
-            <InventoryTableActionBar value={searchValue} handleSearchChange={handleSearchChange}/>
+            <InventoryTableActionBar 
+                value={searchValue} 
+                handleSearchChange={handleSearchChange} 
+                handleFilterChange={handleFilterChange}
+                categoryList={availableCategories}
+                categoryValue={categoryValue}
+                />
             <Paper>
                 <TableContainer>
                     <Table>

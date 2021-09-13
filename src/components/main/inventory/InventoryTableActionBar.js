@@ -7,7 +7,7 @@ import InventoryFilterCategory from './InventoryFilterCategory'
 import SearchInventory from './SearchInventory'
 
 
-const InventoryTableActionBar = ({value, handleSearchChange}) => {
+const InventoryTableActionBar = ({value, handleSearchChange, handleFilterChange, categoryList, categoryValue}) => {
 
     const {wideView} = useWideView(500);
     const [show, setShow] = useState(false);
@@ -25,7 +25,7 @@ const InventoryTableActionBar = ({value, handleSearchChange}) => {
                     <SearchInventory value={value} handleSearchChange={handleSearchChange} />
                 </div>
                 <div className="filter-inventory-container">
-                    <InventoryFilterCategory />
+                    <InventoryFilterCategory handleFilterChange={handleFilterChange} categoryList={categoryList} value={categoryValue} />
                 </div>
             </>
         )

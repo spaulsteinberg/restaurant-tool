@@ -51,12 +51,16 @@ export const fetchAllInventoryItems = () => {
             if (querySnapShot){
                 const stateObj = {}
                 const names = []
+                const categories = {}
                 querySnapShot.docs.forEach(doc => {
                     let data = doc.data();
                     stateObj[data.consumable] = {...data, id: doc.id}
                     names.push(data.consumable)
+                    if (data.category){
+                        categories[data.category] = true
+                    }
                 })
-                dispatch(getInventoryItemsSuccess({items: stateObj, names: names}))
+                dispatch(getInventoryItemsSuccess({items: stateObj, names: names, categories: categories}))
             }
         })
         .catch(err => {

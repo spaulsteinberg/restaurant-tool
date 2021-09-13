@@ -5,7 +5,8 @@ const initialState = {
     loading: null,
     inventory: {
         items: {},
-        names: []
+        names: [],
+        categories: {}
     },
     error: null
 }
@@ -15,7 +16,7 @@ const inventoryReducer = (state = initialState, action) => {
         case GET_INVENTORY_ITEMS:
             return {...state, loading: true, inventory: null, error: null}
         case GET_INVENTORY_ITEMS_SUCCESS:
-            return {...state, loading: false, inventory: {...state.inventory, items: action.payload.items, names: action.payload.names}, error: null}
+            return {...state, loading: false, inventory: {...state.inventory, items: action.payload.items, names: action.payload.names, categories: action.payload.categories}, error: null}
         case GET_INVENTORY_ITEMS_ERROR:
             return {...state, loading: false, inventory: null, error: action.payload}
         case ADD_INVENTORY_ITEM:
@@ -30,7 +31,11 @@ const inventoryReducer = (state = initialState, action) => {
                     names: [
                         ...state.inventory.names,
                         action.payload.id
-                    ]
+                    ],
+                    categories: {
+                        ...state.inventory.categories,
+                        [action.payload.data.category] : true
+                    }
                 }
             }
         case EDIT_INVENTORY_ITEM:

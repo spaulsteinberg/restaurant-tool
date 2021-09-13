@@ -1,10 +1,11 @@
 import React from 'react'
+import { defaultDropDownText } from '../../../constants/constants'
 import ControlledFormSelect from '../../utility/ControlledFormSelect'
 
-const InventoryFilterCategory = () => {
-    const options = ["placeholder 1", "placeholder 2", "placeholder 3"]
+const InventoryFilterCategory = ({handleFilterChange, categoryList, value}) => {
+    const options = [defaultDropDownText, ...categoryList]
     return (
-        <ControlledFormSelect options={options} method={0} />
+        <ControlledFormSelect options={options} method={0} onChange={handleFilterChange} value={value} />
     )
 }
 

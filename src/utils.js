@@ -77,3 +77,7 @@ export const validateFormItemsExist = form => {
 }
 export const validateDescription = description => description.trim().length > 100
 export const validatePrice = price => price < 0 || isNaN(price)
+
+export const standardizeString = str => {
+    return (str[0].toUpperCase() + str.slice(1)).trim()
+}
