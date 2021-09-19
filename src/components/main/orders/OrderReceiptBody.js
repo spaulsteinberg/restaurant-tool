@@ -9,7 +9,7 @@ const OrderReceiptBody = ({order, total, method}) => {
         <div className="receipt-body-container">
             <OrderBodyList list={order.drink} itemKey={BEVERAGE_KEY} priceKey={PRICE_KEY} />
             <OrderBodyList list={order.food} itemKey={FOOD_KEY} priceKey={PRICE_KEY} />
-            <OrderReceiptFooter total={total} styles="receipt-body-row justify-content-end strong-border"/>
+            <OrderReceiptFooter total={total.toFixed(2)} styles="receipt-body-row justify-content-end strong-border"/>
             <OrderReceiptPayment method={method} />
         </div>
     )
