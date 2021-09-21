@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import {Navbar, Nav} from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import Navbar from 'react-bootstrap/Navbar';
 import { useAuth } from '../../../contexts/AuthContext';
+import useWideView from '../../../hooks/useWideView';
 import '../../main/main-styles.scss';
 import ProfileDropdown from '../profile/ProfileDropdown';
+import NavigationBarLinks from './NavigationBarLinks';
 
 const NavigationBar = (props) => {
   const {currentUser} = useAuth();
-  const [showProfileIcon, setShowProfileIcon] = useState(true);
-
-  useEffect(() => {
-    
-    let widthCheck = window.matchMedia("(min-width: 992px)").addEventListener("change", shouldMoveItems, true);
-
-    return () => {
-      if (widthCheck) widthCheck.removeEventListener("change", shouldMoveItems, true)
-    }
-  }, [])
-
-  const shouldMoveItems = e => {
-      if (e.matches) {
-          setShowProfileIcon(true)
-      } else {
-         setShowProfileIcon(false)
-      }
-  }
+  const {wideView} = useWideView(992);
 
 
 
@@ -38,40 +22,19 @@ const NavigationBar = (props) => {
       </Navbar>
     );
     const loggedInNav = (
-      <Navbar bg="primary" expand="md" ref={(nodeExists) => {
-        if (nodeExists){
-          nodeExists.style.setProperty("justify-content", "inherit")
-        }
-      }}>
+      <Navbar bg="primary" expand="md">
         { 
-        !showProfileIcon ? 
+        !wideView ? 
           <React.Fragment>
-            <Navbar.Toggle aria-controls="collapsed-nav-items" />
-            <Navbar.Brand>Admin Tool</Navbar.Brand>
+            <Navbar.Toggle aria-controls="collapsed-nav-items" className="mx-1"/>
+            <NavigationBarLinks />
             <ProfileDropdown />
-            <Navbar.Collapse id="collapsed-nav-items">
-              <Nav className="alignTextLeft">
-                <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
-                <NavLink className="navLink" to="/inventory">Inventory</NavLink>
-                <NavLink className="navLink" to="/orders">Orders</NavLink>
-                <NavLink className="navLink" to="/menus">Menus</NavLink>
-                {/* Also add inventory and past order links*/}
-              </Nav>
-            </Navbar.Collapse>
           </React.Fragment>
           : 
           <React.Fragment>
-            <Navbar.Collapse id="collapsed-nav-items">
-              <Nav className="alignTextLeft">
-                <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
-                <NavLink className="navLink" to="/inventory">Inventory</NavLink>
-                <NavLink className="navLink" to="/orders">Orders</NavLink>
-                <NavLink className="navLink" to="/menus">Menus</NavLink>
-              </Nav>
-            </Navbar.Collapse>
+            <NavigationBarLinks />
             <Navbar.Toggle aria-controls="collapsed-nav-items" />
-        <Navbar.Brand>Admin Tool</Navbar.Brand>
-        <ProfileDropdown />
+            <ProfileDropdown />
           </React.Fragment>
         }
       </Navbar>
