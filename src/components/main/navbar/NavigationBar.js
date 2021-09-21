@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import { useAuth } from '../../../contexts/AuthContext';
 import useWideView from '../../../hooks/useWideView';
@@ -10,7 +10,9 @@ const NavigationBar = (props) => {
   const {currentUser} = useAuth();
   const {wideView} = useWideView(992);
 
+  const [collapsed, setCollapsed] = useState(false);
 
+  const handleSetCollapsed = () => setCollapsed(prev => !prev)
 
     const notLoggedInNav = (
       <Navbar bg="primary" expand="lg" ref={(nodeExists) => {
@@ -26,9 +28,9 @@ const NavigationBar = (props) => {
         { 
         !wideView ? 
           <React.Fragment>
-            <Navbar.Toggle aria-controls="collapsed-nav-items" className="mx-1"/>
+            <Navbar.Toggle aria-controls="collapsed-nav-items" className="mx-1" onClick={handleSetCollapsed}/>
             <NavigationBarLinks />
-            <ProfileDropdown />
+            <ProfileDropdown isCollapsed={collapsed} />
           </React.Fragment>
           : 
           <React.Fragment>

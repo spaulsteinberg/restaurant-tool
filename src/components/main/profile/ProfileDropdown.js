@@ -5,7 +5,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { useUserContext } from '../../../contexts/UserContext';
 import '../../main/main-styles.scss';
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({isCollapsed}) => {
 
     const { logout } = useAuth();
     const { clearUserDataFromLocalStorage } = useUserContext();
@@ -27,7 +27,7 @@ const ProfileDropdown = () => {
     // add a props "show" to show either the icon or text
     // on click dropdown with options
     return (
-        <Dropdown>
+        <Dropdown style={{margin: isCollapsed ? "0 auto" : 0}}>
             <Dropdown.Toggle>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" className="gradient-profile" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
