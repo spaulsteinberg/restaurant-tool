@@ -9,7 +9,7 @@ const RecentOrderTable = (props) => {
                                     id: order.receiptNumber.substring(0, 5) + 'x'.repeat(5),
                                     date: order.shortDate,
                                     name: `${order.firstName[0]}. ${order.lastName}`,
-                                    revenue: `$${order.totalCost}`
+                                    revenue: `$${order.totalCost.toFixed(2)}`
                                   }
                                 })
                                 .sort(dateComparator)

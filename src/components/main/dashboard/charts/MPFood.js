@@ -7,7 +7,7 @@ import MostPurchased from './MostPurchased';
 const MPFood = ({labels, data}) => {
 
     const tickCallBack = value => `$${value}`
-    const tooltipCallBack = item => `Earnings: $${item.formattedValue}`
+    const tooltipCallBack = item => `Earnings: $${item.raw.toFixed(2)}`
 
     const chartOptions = new ChartConfig(null, false, tickCallBack, tooltipCallBack);
 

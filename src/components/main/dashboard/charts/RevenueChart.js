@@ -22,7 +22,7 @@ const RevenueChart = (props) => {
     }, [buildFrequencyChart])
 
     const tickCallBack = value => `$${value}`
-    const tooltipCallBack = item => `Revenue: $${item.formattedValue}`
+    const tooltipCallBack = item => `Revenue: $${item.raw.toFixed(2)}`
 
     const chartOptions = new ChartConfig(null, true, tickCallBack, tooltipCallBack);
     const chartData = new DashboardLineChart([...revenue.labels], [...revenue.data], REVENUE_KEY.toLowerCase())
