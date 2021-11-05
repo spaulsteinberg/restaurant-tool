@@ -11,7 +11,7 @@ const MostPurchased = (WrappedComponent, keyIn, isCategoryComponent = false) => 
             const orderItems = this.props.content.slice().map(order => order.order[keyIn]);
             for (const items of orderItems){
                 for (const item of items){
-                    price = price !== undefined && price !== null ? parseFloat(item.price) : 0;
+                    price = item.price !== undefined && item.price !== null ? parseFloat(item.price) : 0;
                     if (keyIn === DATA_KEYS.FOOD){
                         if (!item.main) continue;
                         key = item.main.charAt(0).toUpperCase() + item.main.slice(1).toLowerCase();
@@ -20,7 +20,7 @@ const MostPurchased = (WrappedComponent, keyIn, isCategoryComponent = false) => 
                         if (!item.item) continue;
                         key = item.item.charAt(0).toUpperCase() + item.item.slice(1).toLowerCase();
                     }
-                    this.addOrSetMapKey(map, key, price)
+                    this.addOrSetMapKey(map, key, parseFloat(price) * (item.quantity ? item.quantity : 1))
                 }
             }
             let accumulationArr = this.buildArrayFromMapKeyValues(map)
@@ -34,9 +34,9 @@ const MostPurchased = (WrappedComponent, keyIn, isCategoryComponent = false) => 
                 for (const item of items){
                     if (!item.category) continue;
                     key = item.category.charAt(0).toUpperCase() + item.category.slice(1).toLowerCase();
-                    price = price !== undefined && price !== null ? parseFloat(item.price) : 0;
-                    this.addOrSetMapKey(map, key, price);
-                    totalPrice += price;
+                    price = item.price !== undefined && item.price !== null ? parseFloat(item.price) : 0;
+                    this.addOrSetMapKey(map, key, price * (item.quantity ? item.quantity : 1));
+                    totalPrice += (parseFloat(price) * (item.quantity ? item.quantity : 1));
                 }
             }
             let accumulationArr = this.buildArrayFromMapKeyValues(map);

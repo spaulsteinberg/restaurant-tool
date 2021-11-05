@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ReceiptRow = ({name, price, isAddition = false, isSubtraction = false}) => {
+const ReceiptRow = ({name, price, quantity, isAddition = false, isSubtraction = false}) => {
     return (
         <div className="receipt-body-row">
             <div className="receipt-body-item">
@@ -10,7 +10,7 @@ const ReceiptRow = ({name, price, isAddition = false, isSubtraction = false}) =>
                     : isSubtraction ? <span>&nbsp;- </span> 
                     : null
                 }
-                {name} {price && "...."}
+                {name}{quantity && quantity > 1 ? ` (${quantity})` : null} {price && "...."}
                 </div>
             <div className="receipt-body-price">{price}</div>
         </div>

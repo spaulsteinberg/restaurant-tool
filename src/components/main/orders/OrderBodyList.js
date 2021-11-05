@@ -8,7 +8,7 @@ const OrderBodyList = ({list, itemKey, priceKey}) => {
         <React.Fragment>
             {list.map((item, i) => 
                 <React.Fragment key={i}>
-                    <ReceiptRow name={item[itemKey]} price={Number(item[priceKey]).toFixed(2)} />
+                    <ReceiptRow name={item[itemKey]} price={Number(item[priceKey]).toFixed(2)} quantity={item.quantity} />
                     {
                         itemKey === FOOD_KEY && item.additions && item.additions.length > 0 ? 
                         item.additions.map(addition => 
