@@ -11,13 +11,14 @@ import EditIconButton from '../../utility/EditIconButton';
 import { updateMenuItem, updateMenuItemsInSection } from '../../../api';
 import { validateDescription, validateFormItemsExist, validatePrice } from '../../../utils';
 import RemoveItemButton from '../../utility/RemoveItemButton';
+import { storage } from '../../../firebase';
 
 const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent, sectionEdits, sectionIndex, itemIndex, menus, menuIndex, editable, updateId}) => {
 
     const dispatch = useDispatch();
 
-    const initialState = {item: item.item, description: item.description, price: item.price, category: item.category, type: ""}
-
+    const initialState = {item: item.item, description: item.description, price: item.price, category: item.category, type: "", imageAddress: ""}
+    const [imageFile, setImageFile] = useState(null);
     const [form, setFormValues] = useState(initialState);
     const [formError, setFormError] = useState('');
     const [formLoading, setFormLoading] = useState(false);
@@ -33,6 +34,12 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
     const handleInputChange = event => {
         let { name, value } = event.target;
         setFormValues({...form, [name]: value})
+    }
+
+    const handleFileUpload = event => {
+        if (event.target.files[0]){
+            setImageFile(event.target.files[0])
+        }
     }
 
     const validate = () => {
@@ -52,13 +59,27 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
         return true;
     }
 
-    const handleOnSave = e => {
+    const handleOnSave = async (e) => {
         e.preventDefault();
         setFormError('');
         setFormLoading(true);
         if (validate()) {
             menus[menuIndex].menus[sectionIndex].items[itemIndex] = {...form};
             menus[menuIndex].menus[sectionIndex].items[itemIndex].type = ITEM_TYPES.get(form.type);
+
+            if (imageFile) {
+                let address = await storage.ref(`menu-images/${imageFile.name}`).put(imageFile)
+                    .then(response => {
+                        return storage
+                            .ref("menu-images")
+                            .child(imageFile.name)
+                            .getDownloadURL()
+                            .then(url => Promise.resolve(url))
+                    })
+                    .catch(err => console.log(err))
+                    menus[menuIndex].menus[sectionIndex].items[itemIndex].imageAddress = address;
+            }
+
             updateMenuItem(menus[menuIndex], updateId)
             .then(() => {
                 dispatch(editItemSuccess({menu: menus[menuIndex], index: menuIndex}))
@@ -89,6 +110,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
     const handleOnDiscard = e => {
         e.preventDefault();
         setFormValues(initialState);
+        setImageFile(null)
         setEditing(false);
         setSectionExit()
     }
@@ -97,7 +119,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
         <div key={item.item} className="menu-item-column">
             {
                 !editing || !editable ? <ItemDisplay item={item.item} price={`$${item.price}`} description={item.description} />
-                : <ItemForm form={form} handleInputChange={handleInputChange} />
+                : <ItemForm form={form} handleInputChange={handleInputChange} handleFileUpload={handleFileUpload} />
             }
             {
                 editable ? 

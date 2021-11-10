@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { ITEM_TYPES } from '../../../constants/constants';
 
 
-const ItemForm = ({form, handleInputChange, mainRef, newForm = null}) => {
+const ItemForm = ({form, handleInputChange, handleFileUpload, mainRef, newForm = null}) => {
 
     useEffect(() => {
         if (mainRef) {
@@ -36,6 +36,10 @@ const ItemForm = ({form, handleInputChange, mainRef, newForm = null}) => {
                 <label>This Item is a: </label>
                 <FormSelectBox options={[...ITEM_TYPES.keys()]} name="type" defaultText={""} defaultValue={""} changeFunction={handleInputChange} defaultDisabled={true} />
             </FormGroup>
+            <Form.Group className="m-1">
+                <label>Add an image: </label>
+                <Form.Control type="file" onChange={handleFileUpload}/>
+            </Form.Group>
         </Form>
     )
 }
