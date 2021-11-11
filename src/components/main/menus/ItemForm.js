@@ -4,7 +4,7 @@ import FormSelectBox from '../../utility/FormSelectBox';
 import FormGroup from 'react-bootstrap/FormGroup';
 import Form from 'react-bootstrap/Form';
 import { ITEM_TYPES } from '../../../constants/constants';
-
+import Disclaimer from '../../utility/Disclaimer';
 
 const ItemForm = ({form, handleInputChange, handleFileUpload, mainRef, newForm = null}) => {
 
@@ -39,6 +39,7 @@ const ItemForm = ({form, handleInputChange, handleFileUpload, mainRef, newForm =
             <Form.Group className="m-1">
                 <label>Add an image: </label>
                 <Form.Control type="file" onChange={handleFileUpload}/>
+                <Disclaimer classes="text-info">*Please choose a small image with an aspect ratio of 4:3 for the best render</Disclaimer>
             </Form.Group>
         </Form>
     )
