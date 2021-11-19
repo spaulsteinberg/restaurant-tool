@@ -17,7 +17,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
 
     const dispatch = useDispatch();
 
-    const initialState = {item: item.item, description: item.description, price: item.price, category: item.category, type: "", imageAddress: ""}
+    const initialState = {item: item.item, description: item.description, price: item.price, category: item.category, type: "", imageAddress: item.imageAddress}
     const [imageFile, setImageFile] = useState(null);
     const [form, setFormValues] = useState(initialState);
     const [formError, setFormError] = useState('');
@@ -79,7 +79,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
                     .catch(err => console.log(err))
                     menus[menuIndex].menus[sectionIndex].items[itemIndex].imageAddress = address;
             }
-
+            
             updateMenuItem(menus[menuIndex], updateId)
             .then(() => {
                 dispatch(editItemSuccess({menu: menus[menuIndex], index: menuIndex}))
