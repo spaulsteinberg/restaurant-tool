@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllInventoryItems } from '../../../redux/inventory/inventoryActions'
-import LoadingSpinner from '../../utility/LoadingSpinner'
-import InventoryTable from './InventoryTable'
+import { fetchAllInventoryItems } from '../../redux/inventory/inventoryActions'
+import LoadingSpinner from '../../components/utility/LoadingSpinner'
+import InventoryTable from '../../components/main/inventory/InventoryTable'
 
-const Inventory = () => {
+const InventoryPage = () => {
 
     const dispatch = useDispatch();
     const inventory = useSelector(state => state.inventory);
@@ -25,4 +25,4 @@ const Inventory = () => {
     )
 }
 
-export default Inventory
+export default InventoryPage

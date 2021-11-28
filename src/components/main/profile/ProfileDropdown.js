@@ -3,7 +3,6 @@ import { Dropdown } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useUserContext } from '../../../contexts/UserContext';
-import '../../main/main-styles.scss';
 
 const ProfileDropdown = ({isCollapsed}) => {
 

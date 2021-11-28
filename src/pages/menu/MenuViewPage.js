@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import { Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAllMenus, updateContext } from '../../../redux/menus/menuActions';
-import LoadingSpinner from '../../utility/LoadingSpinner';
-import ViewMenu from './ViewMenu';
+import { loadAllMenus, updateContext } from '../../redux/menus/menuActions';
+import LoadingSpinner from '../../components/utility/LoadingSpinner';
+import ViewMenu from '../../components/main/menus/ViewMenu';
 import { useLocation, useHistory } from "react-router-dom";
 
 
-const Menu = () => {
+const MenuViewPage = () => {
     const dispatch = useDispatch();
     const menus = useSelector(state => state.menus.menuList);
     const current = useSelector(state => state.menus.current);
@@ -61,4 +61,4 @@ const Menu = () => {
     )
 }
 
-export default Menu;
+export default MenuViewPage;

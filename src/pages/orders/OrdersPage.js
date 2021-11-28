@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { ORDER_TIMEFRAMES } from '../../../constants/constants';
-import { getAllOrders } from '../../../redux/orders/orderActions';
-import LoadingSpinner from '../../utility/LoadingSpinner';
-import OrderRefreshButton from './OrderRefreshButton';
-import OrderTable from './OrderTable';
-import SearchBar from './SearchBar';
+import { ORDER_TIMEFRAMES } from '../../constants/constants';
+import { getAllOrders } from '../../redux/orders/orderActions';
+import LoadingSpinner from '../../components/utility/LoadingSpinner';
+import OrderRefreshButton from '../../components/main/orders/OrderRefreshButton';
+import OrderTable from '../../components/main/orders/OrderTable';
+import SearchBar from '../../components/main/orders/SearchBar';
 
-const Orders = ({orders, getOrders}) => {
+const OrdersPage = ({orders, getOrders}) => {
     const [searchValue, setSearchValue] = useState('');
     const [searchDuration, setSearchDuration] = useState(ORDER_TIMEFRAMES.ONE_WEEK);
 
@@ -56,4 +56,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(OrdersPage);

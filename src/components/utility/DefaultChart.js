@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import '../main/main-styles.scss';
 import Card from 'react-bootstrap/Card';
 import {Bar, Line, Doughnut} from 'react-chartjs-2';
 import { DATA_KEYS } from '../../constants/constants';

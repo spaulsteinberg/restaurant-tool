@@ -3,11 +3,11 @@ import Button from 'react-bootstrap/Button'
 import { useHistory } from 'react-router-dom'
 import { Paper } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadAllMenus } from '../../../redux/menus/menuActions'
-import LoadingSpinner from '../../utility/LoadingSpinner'
+import { loadAllMenus } from '../../redux/menus/menuActions'
+import LoadingSpinner from '../../components/utility/LoadingSpinner'
 import { Alert } from 'react-bootstrap'
-import HomeCurrentSelection from './HomeCurrentSelection'
-import AddOrRemoveMenuSelection from './AddOrRemoveMenuSelection'
+import HomeCurrentSelection from '../../components/main/menus/HomeCurrentSelection'
+import AddOrRemoveMenuSelection from '../../components/main/menus/AddOrRemoveMenuSelection'
 
 const MenuHomePage = () => {
     const history = useHistory();

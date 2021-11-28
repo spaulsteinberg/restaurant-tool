@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { userReducer, ADD_USER, CLEAR_USER, UPDATE_USER_EMAIL } from '../components/reducers/userReducer';
+import { userReducer, ADD_USER, CLEAR_USER, UPDATE_USER_EMAIL } from '../reducers/userReducer';
 import {db} from '../firebase';
 
 const UserContext = React.createContext();

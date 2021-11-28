@@ -1,22 +1,22 @@
 import React, { useCallback, useEffect } from 'react';
-import { getAllOrders } from '../../../redux/orders/orderActions';
+import { getAllOrders } from '../../redux/orders/orderActions';
 import { connect } from 'react-redux';
-import LoadingSpinner from '../../utility/LoadingSpinner';
-import RevenueChart from './charts/RevenueChart';
-import TopBar from './TopBar';
-import PopularityChart from './charts/PopularityChart';
-import MPFood from './charts/MPFood';
-import MPBeverages from './charts/MPBeverages';
-import MPFoodCategories from './charts/MPFoodCategories';
-import MPBevCategories from './charts/MPBevCategories';
-import RecentOrderTable from './RecentOrderTable';
-import { retrieveGoals } from '../../../redux/goals/goalActions';
-import { useAuth } from '../../../contexts/AuthContext';
+import LoadingSpinner from '../../components/utility/LoadingSpinner';
+import RevenueChart from '../../components/main/dashboard/charts/RevenueChart';
+import TopBar from '../../components/main/dashboard/TopBar';
+import PopularityChart from '../../components/main/dashboard/charts/PopularityChart';
+import MPFood from '../../components/main/dashboard/charts/MPFood';
+import MPBeverages from '../../components/main/dashboard/charts/MPBeverages';
+import MPFoodCategories from '../../components/main/dashboard/charts/MPFoodCategories';
+import MPBevCategories from '../../components/main/dashboard/charts/MPBevCategories';
+import RecentOrderTable from '../../components/main/dashboard/RecentOrderTable';
+import { retrieveGoals } from '../../redux/goals/goalActions';
+import { useAuth } from '../../contexts/AuthContext';
 
-import { ORDER_TIMEFRAMES } from '../../../constants/constants';
-import GoalDisplay from './GoalDisplay';
+import { ORDER_TIMEFRAMES } from '../../constants/constants';
+import GoalDisplay from '../../components/main/dashboard/GoalDisplay';
 
-const Dashboard = ({orderData, goals, retrieveUsers, loadGoals}) => {
+const DashboardPage = ({orderData, goals, retrieveUsers, loadGoals}) => {
 
     const {currentUser} = useAuth();
 
@@ -73,4 +73,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);

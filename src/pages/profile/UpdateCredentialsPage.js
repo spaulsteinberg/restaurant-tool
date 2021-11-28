@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Card, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from '../../../contexts/AuthContext';
-import LoadingSpinner from '../../utility/LoadingSpinner';
-import { EMAIL_REGEX } from '../../../constants/constants'
-import '../main-styles.scss';
-import { useUserContext } from '../../../contexts/UserContext';
+import { useAuth } from '../../contexts/AuthContext';
+import LoadingSpinner from '../../components/utility/LoadingSpinner';
+import { EMAIL_REGEX } from '../../constants/constants'
+import { useUserContext } from '../../contexts/UserContext';
 
-const UpdateCredentials = () => {
+const UpdateCredentialsPage = () => {
 
     const { currentUser, updateEmail, updatePassword } = useAuth();
     const { updateUserContextEmail } = useUserContext();
@@ -115,4 +114,4 @@ const UpdateCredentials = () => {
     )
 }
 
-export default UpdateCredentials;
+export default UpdateCredentialsPage;

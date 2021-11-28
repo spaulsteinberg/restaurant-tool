@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import { useAuth } from '../../../contexts/AuthContext';
 import useWideView from '../../../hooks/useWideView';
-import '../../main/main-styles.scss';
 import ProfileDropdown from '../profile/ProfileDropdown';
 import NavigationBarLinks from './NavigationBarLinks';
 

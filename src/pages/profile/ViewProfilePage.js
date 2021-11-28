@@ -3,14 +3,13 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import { useAuth } from '../../../contexts/AuthContext';
-import { useUserContext } from '../../../contexts/UserContext';
-import LoadingSpinner from '../../utility/LoadingSpinner';
-import { pencilEditIconPath, checkMarkSavePath, circleSlashForCancelPaths, doubleDownArrow, doubleUpArrow } from '../../../constants/svg/svgs';
-import Goals from './Goals';
-import '../main-styles.scss';
+import { useAuth } from '../../contexts/AuthContext';
+import { useUserContext } from '../../contexts/UserContext';
+import LoadingSpinner from '../../components/utility/LoadingSpinner';
+import { pencilEditIconPath, checkMarkSavePath, circleSlashForCancelPaths, doubleDownArrow, doubleUpArrow } from '../../constants/svg/svgs';
+import Goals from '../../components/main/profile/Goals';
 
-const ViewProfile = () => {
+const ViewProfilePage = () => {
     const {currentUser} = useAuth();
     const {user, setOrCreateUserProfile, getUserFromProfile, userExistsInLocalStorage, profileError} = useUserContext();
     const [edit, setEdit] = useState(false);
@@ -167,4 +166,4 @@ const ViewProfile = () => {
     )
 }
 
-export default ViewProfile;
+export default ViewProfilePage;

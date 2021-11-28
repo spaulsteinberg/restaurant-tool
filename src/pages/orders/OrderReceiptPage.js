@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../../../firebase';
-import LoadingSpinner from '../../utility/LoadingSpinner';
+import { db } from '../../firebase';
+import LoadingSpinner from '../../components/utility/LoadingSpinner';
 import Alert from 'react-bootstrap/Alert'
-import OrderReceiptBase from './OrderReceiptBase';
+import OrderReceiptBase from '../../components/main/orders/OrderReceiptBase';
 import * as moment from 'moment';
 import { useLocation, useParams } from 'react-router-dom';
 
-const OrderReceipt = (props) => {
+const OrderReceiptPage = (props) => {
 
     const location = useLocation();
     const params = useParams();
@@ -59,4 +59,4 @@ const OrderReceipt = (props) => {
     )
 }
 
-export default OrderReceipt;
+export default OrderReceiptPage;
