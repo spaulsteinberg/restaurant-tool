@@ -494,6 +494,11 @@
     margin: 1rem auto;
 }
 
+.not-found-link-container {
+    text-align: left;
+    @include full-width-flex;
+}
+
 /****************** Queries *********************/
 
 @media screen and (min-width: resolution("small-mobile")) {
