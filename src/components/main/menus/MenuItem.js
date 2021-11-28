@@ -9,9 +9,8 @@ import ProgressBar from '../../utility/ProgressBar';
 import ItemForm from './ItemForm';
 import EditIconButton from '../../utility/EditIconButton';
 import { updateMenuItem, updateMenuItemsInSection } from '../../../api';
-import { validateDescription, validateFormItemsExist, validatePrice } from '../../../utils';
+import { uploadImageFile, validateDescription, validateFormItemsExist, validatePrice } from '../../../utils';
 import RemoveItemButton from '../../utility/RemoveItemButton';
-import { storage } from '../../../firebase';
 
 const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent, sectionEdits, sectionIndex, itemIndex, menus, menuIndex, editable, updateId}) => {
 
@@ -68,16 +67,8 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
             menus[menuIndex].menus[sectionIndex].items[itemIndex].type = ITEM_TYPES.get(form.type);
 
             if (imageFile) {
-                let address = await storage.ref(`menu-images/${imageFile.name}`).put(imageFile)
-                    .then(response => {
-                        return storage
-                            .ref("menu-images")
-                            .child(imageFile.name)
-                            .getDownloadURL()
-                            .then(url => Promise.resolve(url))
-                    })
-                    .catch(err => console.log(err))
-                    menus[menuIndex].menus[sectionIndex].items[itemIndex].imageAddress = address;
+                let address = await uploadImageFile(imageFile.name, imageFile)
+                menus[menuIndex].menus[sectionIndex].items[itemIndex].imageAddress = address;
             }
             
             updateMenuItem(menus[menuIndex], updateId)

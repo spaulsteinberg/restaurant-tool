@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { updateMenuItemsInSection } from '../../../api'
 import { FOOD_KEY, ITEM_TYPES } from '../../../constants/constants'
 import { addItemSuccess } from '../../../redux/menus/menuActions'
-import { validateDescription, validateFormItemsExist, validatePrice } from '../../../utils'
+import { uploadImageFile, validateDescription, validateFormItemsExist, validatePrice } from '../../../utils'
 import ProgressBar from '../../utility/ProgressBar'
 import SaveDiscardButtons from '../../utility/SaveDiscardButtons'
 import ItemForm from './ItemForm'
@@ -12,9 +12,16 @@ const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, menuList, ind
     const dispatch = useDispatch();
     const ref = useRef();
 
-    const blankState = {item: '', description: '', price: '', category: '', type: ''}
+    const blankState = {item: '', description: '', price: '', category: '', type: '', imageAddress: ''}
     const [form, setForm] = useState(blankState)
     const [formActions, setFormActions] = useState({error: '', loading: false})
+    const [imageFile, setImageFile] = useState(null);
+
+    const handleFileUpload = event => {
+        if (event.target.files[0]){
+            setImageFile(event.target.files[0])
+        }
+    }
 
     const validate = () => {
         if (!validateFormItemsExist(form)){
@@ -37,11 +44,16 @@ const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, menuList, ind
         setForm({...form, [name]: value})
     }
 
-    const handleSaveClick = event => {
+    const handleSaveClick = async (event) => {
         event.preventDefault();
         setFormActions({error: '', loading: true})
         if (validate()) {
             form.type = ITEM_TYPES.get(form.type) ? ITEM_TYPES.get(form.type) : FOOD_KEY;
+            if (imageFile){
+                let address = await uploadImageFile(imageFile.name, imageFile)
+                form.imageAddress = address;
+            }
+
             menuList[index].menus[sectionIndex].items.push(form)
             updateMenuItemsInSection(menuList[index].menus, updateId)
                 .then(() => {
@@ -56,7 +68,7 @@ const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, menuList, ind
     }
     return (
         <div className="new-item-form-container">
-            <ItemForm form={form} handleInputChange={handleInputChange} mainRef={ref} newForm/>
+            <ItemForm form={form} handleInputChange={handleInputChange} mainRef={ref} handleFileUpload={handleFileUpload} newForm/>
             <SaveDiscardButtons classes="mt-2" discardChange={onDiscard} saveChange={handleSaveClick} />
             {formActions.error ? <small className="mt-2 text-danger">{formActions.error}</small> : null}
             {formActions.loading ? <ProgressBar className="menu-loading-container" color="secondary" /> : null}

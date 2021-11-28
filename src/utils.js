@@ -1,5 +1,6 @@
 import moment from "moment";
 import { ORDER_TIMEFRAMES } from "./constants/constants";
+import { storage } from "./firebase";
 
 export const buildChartWithData = (data, timeframe, dataKey="orders") => {
     let revenueData = {};
@@ -81,3 +82,13 @@ export const validatePrice = price => price < 0 || isNaN(price)
 export const standardizeString = str => {
     return (str[0].toUpperCase() + str.slice(1)).trim()
 }
+
+export const uploadImageFile = async (name, file) => storage.ref(`menu-images/${name}`).put(file)
+    .then(response => {
+        return storage
+            .ref("menu-images")
+            .child(name)
+            .getDownloadURL()
+            .then(url => Promise.resolve(url))
+    })
+    .catch(err => console.log(err)) 
