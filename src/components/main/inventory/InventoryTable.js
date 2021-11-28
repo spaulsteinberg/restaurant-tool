@@ -65,6 +65,7 @@ const InventoryTable = ({inventory}) => {
         setCount(filteredInventory.length)
         setActiveColumn({index: null, text: ''});
         setCategoryFilterValue(defaultDropDownText)
+        setPage(0)
     }
 
     const handleFilterChange = event => {
