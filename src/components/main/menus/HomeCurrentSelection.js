@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import { Paper } from '@material-ui/core';
 import SetCurrentMenuForm from './SetCurrentMenuForm';
-import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCurrentMenu } from '../../../api';
 import { updateCurrentMenuTag } from '../../../redux/menus/menuActions';
 import { Alert } from 'react-bootstrap';
 import LoadingSpinner from '../../utility/LoadingSpinner';
+import MenuSelectionItem from './MenuSelectionItem';
+import MenuSelectionButton from './MenuSelectionButton';
 
 const HomeCurrentSelection = ({menus}) => {
     const dispatch = useDispatch();
@@ -59,27 +59,26 @@ const HomeCurrentSelection = ({menus}) => {
 
 
     return (
-        <Paper
-            className="menu-home-main-paper"
+        <MenuSelectionItem className="menu-home-main-paper"
             onClick={handleCurrentClick}
             style={{
                 backgroundColor: currentEdit ? "#fff" : "#0dcaf0",
                 justifyContent: currentEdit ? "flex-start" : "center",
                 opacity: currentEdit && !formState.loading && 1
             }}>
-            {currentEdit 
-                ? 
+            {currentEdit
+                ?
                 <React.Fragment>
                     <SetCurrentMenuForm names={menuNames} current={current?.name} discard={handleDiscardClick} save={handleSaveClick} />
-                    <div style={{margin: "0 auto"}}>
+                    <div className="centered-item">
                         {formState.loading && <LoadingSpinner alignment="left">Loading...</LoadingSpinner>}
                         {formState.success && <Alert variant="primary" className="m-2 text-center">{formState.success}</Alert>}
                         {formState.error && <Alert variant="danger" className="m-2 text-center">{formState.error}</Alert>}
                     </div>
                 </React.Fragment>
-                : <Button variant="outline-light" size="lg" className="w-50" onClick={handleCurrentClick}>Change Current Menu</Button>
+                : <MenuSelectionButton handleClick={handleCurrentClick} buttonText="Change Current Menu" />
             }
-        </Paper>
+        </MenuSelectionItem>
     )
 }
 

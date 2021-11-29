@@ -19,10 +19,7 @@ export const UserProvider = (props) => {
         userDispatch({type: CLEAR_USER})
     }
 
-    const userExistsInLocalStorage = () => {
-        let userObject = localStorage.getItem(process.env.REACT_APP_LOCAL_USER_INFO);
-        return userObject && JSON.stringify(userObject) !== '{}'
-    }
+    const userExistsInLocalStorage = () => !user || JSON.stringify(user) === '{}' ? false : true
 
     const updateUserContextEmail = (email, key) => {
         db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
@@ -63,11 +60,32 @@ export const UserProvider = (props) => {
         })
     }
 
+    const getUserRoles = (email) => new Promise((resolve, reject) => {
+            db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
+            .where("email", "==", email)
+            .get()
+            .then(snapshot => {
+                // result will be an array but with only one item
+                let roles = null;
+                snapshot.forEach(doc => {
+                    let info = doc.data();
+                    getUserCallToDispatch(info, email)
+                    roles = info.roles;
+                });
+                resolve(roles)
+            })
+            .catch(err => {
+                console.log(err)
+                reject(err)
+            })
+        })
+
     useEffect(() => {
         localStorage.setItem(process.env.REACT_APP_LOCAL_USER_INFO, JSON.stringify(user))
     }, [user])
 
     const value = {
+        getUserRoles,
         clearUserDataFromLocalStorage,
         getUserCallToDispatch,
         userDispatch,

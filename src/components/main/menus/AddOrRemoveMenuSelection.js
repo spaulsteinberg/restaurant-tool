@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Button from 'react-bootstrap/Button';
-import { Paper } from '@material-ui/core';
 import RemoveMenuForm from './RemoveMenuForm';
 import { useDispatch } from 'react-redux';
 import { addMainMenuSuccess, postDeleteMainMenu } from '../../../redux/menus/menuActions';
@@ -8,6 +7,8 @@ import AddMainMenuForm from './AddMainMenuForm';
 import { validateDescription } from '../../../utils';
 import { addMainMenuToMenuList } from '../../../api';
 import { useHistory } from 'react-router-dom';
+import MenuSelectionItem from './MenuSelectionItem';
+import MenuSelectionButton from './MenuSelectionButton';
 
 const resetKeyValues = (obj) => {
     for (const key of Object.keys(obj)){
@@ -169,7 +170,7 @@ const AddOrRemoveMenuSelection = ({menus, current}) => {
     }
     
     return (
-        <Paper className="menu-home-main-paper" onClick={handleAorClick} 
+        <MenuSelectionItem className="menu-home-main-paper" onClick={handleAorClick} 
             style={
                 { backgroundColor: aorEdit ? "#fff" : "#f06292",
                  opacity: aorEdit && 1 }
@@ -206,9 +207,9 @@ const AddOrRemoveMenuSelection = ({menus, current}) => {
                         : null
                     }
                 </React.Fragment>
-                    : <Button variant="outline-light" size="lg" className="w-50">Add or Remove Menus</Button>
+                    : <MenuSelectionButton handleClick={() => {}} buttonText="Add or Remove Menus" />
             }
-        </Paper>
+        </MenuSelectionItem>
     )
 }
 

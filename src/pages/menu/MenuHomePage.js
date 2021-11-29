@@ -1,17 +1,19 @@
 import React, { useEffect, useCallback } from 'react'
-import Button from 'react-bootstrap/Button'
 import { useHistory } from 'react-router-dom'
-import { Paper } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadAllMenus } from '../../redux/menus/menuActions'
 import LoadingSpinner from '../../components/utility/LoadingSpinner'
 import { Alert } from 'react-bootstrap'
 import HomeCurrentSelection from '../../components/main/menus/HomeCurrentSelection'
 import AddOrRemoveMenuSelection from '../../components/main/menus/AddOrRemoveMenuSelection'
+import ViewEditMenuSelection from '../../components/main/menus/ViewEditMenuSelection'
+import HomeMenuSelection from '../../components/main/menus/HomeMenuSelection'
+import useRoles from '../../hooks/useRoles'
 
 const MenuHomePage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const roles = useRoles()
     const menuFetch = useSelector(state => state.menus.get);
     const menuList = useSelector(state => [...state.menus?.menuList]);
     const current = useSelector(state => state.menus.current)
@@ -41,9 +43,8 @@ const MenuHomePage = () => {
                 <React.Fragment>
                     <HomeCurrentSelection menus={menuList} />
                     <AddOrRemoveMenuSelection menus={menuList} current={current}/>
-                    <Paper className="menu-home-main-paper" onClick={handleViewClick} style={{backgroundColor: "#ff7043"}}>
-                        <Button variant="outline-light" size="lg" className="w-50">View or Edit Menus</Button>
-                    </Paper>
+                    <ViewEditMenuSelection handleViewClick={handleViewClick} />
+                    { roles?.admin ? <HomeMenuSelection /> : null }
                 </React.Fragment>
             }
             {
