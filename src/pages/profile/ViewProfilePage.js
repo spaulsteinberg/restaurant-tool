@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
 import { useAuth } from '../../contexts/AuthContext';
 import { useUserContext } from '../../contexts/UserContext';
-import LoadingSpinner from '../../components/utility/LoadingSpinner';
-import { pencilEditIconPath, checkMarkSavePath, circleSlashForCancelPaths, doubleDownArrow, doubleUpArrow } from '../../constants/svg/svgs';
-import Goals from '../../components/main/profile/Goals';
+import ProfileGoalTransition from '../../components/main/profile/ProfileGoalTransition';
+import ViewProfileReadOnlyDisplayEmail from '../../components/main/profile/ViewProfileReadOnlyDisplayEmail';
+import ViewProfileFormBody from '../../components/main/profile/ViewProfileFormBody';
+import ViewProfileHeader from '../../components/main/profile/ViewProfileHeader';
 
 const ViewProfilePage = () => {
     const {currentUser} = useAuth();
@@ -57,6 +56,7 @@ const ViewProfilePage = () => {
         setError('');
         if (edit) {
             const requestObj = {
+                ...user,
                 firstName: form.firstName,
                 restaurant: form.restaurant,
                 email: currentUser.email,
@@ -103,66 +103,27 @@ const ViewProfilePage = () => {
     return (
         <React.Fragment>
             <Card className="profile-card my-4 text-left">
-            <Card.Header className="profile-header mb-2">
-                <h2>My Profile</h2>
-            </Card.Header>
-            <Card.Body>
-                <Form>
-                    <div className="profile-form-row row">
-                        <div className="profile-label-col">
-                            <Form.Label id="view-email" className="profile-label-text">Email: </Form.Label>
-                        </div>
-                        <div className="profile-control-col">
-                            <Form.Control type="text" aria-labelledby="view-email" value={currentUser.email} readOnly/>
-                        </div>
-                    </div>
-                    {fetchingProfileDirectly ? <LoadingSpinner alignment="centered" marginTop="1rem">Fetching Profile...</LoadingSpinner>
-                        : fetchProfileError ? <Alert variant="danger" className="mt-4">Could not fetch profile. Please reload and try again.</Alert>
-                        : user && !profileError ? <React.Fragment>
-                            {renderForm()}
-                            <Button variant={!edit ? "warning" : "success"} className="btn mt-3 mb-2 mx-1" onClick={handleEditClick}>
-                                { !edit ? <svg xmlns="http://www.w3.org/2000/svg" 
-                                    width="16" height="16" fill="black" viewBox="0 0 16 16">
-                                    <path d={pencilEditIconPath}/>
-                                </svg> : <svg xmlns="http://www.w3.org/2000/svg" 
-                                    width="16" height="16" fill="white" viewBox="0 0 16 16">
-                                    <path d={checkMarkSavePath}/>
-                                </svg>}
-                            </Button>
-                            {edit && 
-                            <Button variant="danger" className="mt-3 mb-2 mx-1" onClick={handleCancelClick}>
-                                {circleSlashForCancelPaths}
-                            </Button>}
-                            {loading && 
-                                <div className="profile-form-state-div">
-                                    <LoadingSpinner alignment="center">Updating...</LoadingSpinner>
-                                </div>
-                            }
-                            {error && 
-                                <div className="profile-form-state-div">
-                                    <Alert variant="danger">{error}</Alert>
-                                </div>
-                            }
-                            {success && 
-                                <div className="profile-form-state-div">
-                                    <Alert variant="success">{success}</Alert>
-                                </div>
-                            }
-                        </React.Fragment>
-                        : <Alert variant="danger" className="mt-4">Could not load profile. Please reload and try again.</Alert>
-                    }
-                </Form>
-            </Card.Body>
-        </Card>
-            <div className="toggle-goals-container" onClick={handleGoalsClick}>
-                <p className="text-primary" style={{marginBottom: '.25rem'}}>{!showGoals ? "Show Goals" : "Hide Goals"}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#0d6efd" viewBox="0 0 16 16" style={{margin: '0 auto'}}>
-                    { !showGoals 
-                        ? doubleDownArrow.map(path => <path fillRule="evenodd" key={path} d={path} />)
-                        : doubleUpArrow.map(path => <path fillRule="evenodd" key={path} d={path} />)}
-                </svg>
-            </div>
-            {showGoals && <Goals />}
+                <ViewProfileHeader />
+                <Card.Body>
+                    <Form>
+                        <ViewProfileReadOnlyDisplayEmail email={currentUser.email} />
+                        <ViewProfileFormBody
+                            user={user}
+                            profileError={profileError}
+                            renderForm={renderForm}
+                            fetchingProfileDirectly={fetchingProfileDirectly}
+                            fetchProfileError={fetchProfileError}
+                            edit={edit}
+                            loading={loading}
+                            error={error}
+                            success={success}
+                            handleCancelClick={handleCancelClick}
+                            handleEditClick={handleEditClick}
+                        />
+                    </Form>
+                </Card.Body>
+            </Card>
+            <ProfileGoalTransition show={showGoals} handleGoalsClick={handleGoalsClick} />
         </React.Fragment>
     )
 }
