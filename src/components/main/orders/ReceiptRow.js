@@ -12,7 +12,7 @@ const ReceiptRow = ({name, price, quantity, isAddition = false, isSubtraction = 
                 }
                 {name}{quantity && quantity > 1 ? ` (${quantity})` : null} {price && "...."}
                 </div>
-            <div className="receipt-body-price">{(price * quantity).toFixed(2)}</div>
+            { !isSubtraction && <div className="receipt-body-price">{(price * (quantity ? quantity : 1)).toFixed(2)}</div>}
         </div>
     )
 }
