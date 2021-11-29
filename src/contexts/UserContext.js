@@ -19,7 +19,10 @@ export const UserProvider = (props) => {
         userDispatch({type: CLEAR_USER})
     }
 
-    const userExistsInLocalStorage = () => localStorage.getItem(process.env.REACT_APP_LOCAL_USER_INFO) ? true : false
+    const userExistsInLocalStorage = () => {
+        let userObject = localStorage.getItem(process.env.REACT_APP_LOCAL_USER_INFO);
+        return userObject && JSON.stringify(userObject) !== '{}'
+    }
 
     const updateUserContextEmail = (email, key) => {
         db.collection(process.env.REACT_APP_USER_DB_COLLECTION)

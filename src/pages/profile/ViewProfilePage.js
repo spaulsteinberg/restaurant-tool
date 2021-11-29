@@ -14,7 +14,7 @@ const ViewProfilePage = () => {
     const {user, setOrCreateUserProfile, getUserFromProfile, userExistsInLocalStorage, profileError} = useUserContext();
     const [edit, setEdit] = useState(false);
     // if the user is not null/undefined, has keys and there is no error grabbing the profile have the current state be that user. else empty form
-    const emptyFormState = {firstName: '', lastName: '', restaurant: '', role: ''}
+    const emptyFormState = {firstName: '', lastName: '', restaurant: '', title: ''}
     const initialState = user && Object.keys(user).length !== 0 && !profileError ? user : emptyFormState
     const [form, setFormState] = useState(initialState);
     const [loading, setLoading] = useState(false);
@@ -30,12 +30,13 @@ const ViewProfilePage = () => {
             setFetchProfileError(false)
             getUserFromProfile(currentUser.uid, currentUser.email)
             .then(data => {
-                data ? setFormState(data) : setFormState({firstName: '', lastName: '', restaurant: '', role: ''})
+                data ? setFormState(data) : setFormState({firstName: '', lastName: '', restaurant: '', title: ''})
             })
             .catch(err => setFetchProfileError(true))
             .finally(() => setFetchingProfileDirectly(false))
         }
-    }, [currentUser.email, currentUser.uid, getUserFromProfile, userExistsInLocalStorage])
+        // eslint-disable-next-line
+    }, [currentUser.email, currentUser.uid])
 
     useEffect(() => {
         shouldFetchProfile()
@@ -59,7 +60,7 @@ const ViewProfilePage = () => {
                 firstName: form.firstName,
                 restaurant: form.restaurant,
                 email: currentUser.email,
-                role: form.role,
+                title: form.title,
                 lastName: form.lastName,
             }
             if (JSON.stringify(requestObj) === JSON.stringify(initialState)) return setEdit(prevState => !prevState)
@@ -82,8 +83,8 @@ const ViewProfilePage = () => {
     }
 
     const renderForm = () => {
-        const formLabels = ["First Name: ", "Last Name: ", "Restaurant: ", "Role: "];
-        const formKeys = ["firstName", "lastName", "restaurant", "role"]
+        const formLabels = ["First Name: ", "Last Name: ", "Restaurant: ", "Title: "];
+        const formKeys = ["firstName", "lastName", "restaurant", "title"]
         let formValuesToBind = [];
         for (let i = 0; i < formLabels.length; i++){
             formValuesToBind.push(
