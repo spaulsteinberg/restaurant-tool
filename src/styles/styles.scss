@@ -36,3 +36,12 @@
         margin: $margin-centered;
     }
 }
+
+.padded-false {
+    padding: 0;
+}
+
+.padded-true {
+    padding-left: 12px;
+    padding-right: 12px;
+}

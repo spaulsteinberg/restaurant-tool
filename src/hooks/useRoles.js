@@ -10,19 +10,21 @@ const useRoles = () => {
     useEffect(
         () => {
             const fetchRoles = async () => {
-                if (JSON.stringify(user) === '{}') {
-                    let roles = await getUserRoles(currentUser.email);
-                    // set roles or if none exist logout user
-                    roles ? setRoles(roles) : logout()
-                } else if (!user?.roles) {
-                    // user has no assigned roles and needs to contact admin
-                    logout();
-                } else {
-                    setRoles(user.roles)
+                if (currentUser?.email) {
+                    if (JSON.stringify(user) === '{}') {
+                        let roles = await getUserRoles(currentUser.email);
+                        // set roles or if none exist logout user
+                        roles ? setRoles(roles) : logout()
+                    } else if (!user?.roles) {
+                        // user has no assigned roles and needs to contact admin
+                        logout();
+                    } else {
+                        setRoles(user.roles)
+                    }
                 }
             }
             fetchRoles();
-        }, [currentUser.email, user, logout, getUserRoles])
+        }, [currentUser, user, logout, getUserRoles])
     return roles
 }
 

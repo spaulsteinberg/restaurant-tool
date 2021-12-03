@@ -7,7 +7,7 @@ import { Alert } from 'react-bootstrap'
 import HomeCurrentSelection from '../../components/main/menus/HomeCurrentSelection'
 import AddOrRemoveMenuSelection from '../../components/main/menus/AddOrRemoveMenuSelection'
 import ViewEditMenuSelection from '../../components/main/menus/ViewEditMenuSelection'
-import HomeMenuSelection from '../../components/main/menus/HomeMenuSelection'
+import ConfigureHomeSelection from '../../components/main/menus/ConfigureHomeSelection'
 import useRoles from '../../hooks/useRoles'
 
 const MenuHomePage = () => {
@@ -44,7 +44,7 @@ const MenuHomePage = () => {
                     <HomeCurrentSelection menus={menuList} />
                     <AddOrRemoveMenuSelection menus={menuList} current={current}/>
                     <ViewEditMenuSelection handleViewClick={handleViewClick} />
-                    { roles?.admin ? <HomeMenuSelection /> : null }
+                    { roles?.admin ? <ConfigureHomeSelection /> : null }
                 </React.Fragment>
             }
             {

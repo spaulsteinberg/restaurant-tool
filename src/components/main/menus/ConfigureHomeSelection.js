@@ -1,11 +1,13 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import MenuSelectionButton from './MenuSelectionButton'
 import MenuSelectionItem from './MenuSelectionItem'
 
-const HomeMenuSelection = () => {
+const ConfigureHomeSelection = () => {
+    const history = useHistory()
 
     const handleClick = () => {
-        console.log("hey")
+        history.push("/menus/configure/home")
     }
     return (
         <MenuSelectionItem className="menu-home-main-paper create-home-screen-styles">
@@ -14,4 +16,4 @@ const HomeMenuSelection = () => {
     )
 }
 
-export default HomeMenuSelection
+export default ConfigureHomeSelection

@@ -1,0 +1,48 @@
+@import '../../../styles/abstracts';
+
+.home-input-container {
+    @include flex-full-column;
+    text-align: start;
+    #restaurant-name-input, #home-links-input  {
+       input {
+        max-width: 488px;
+       }
+    }
+    #restaurant-name-input {
+        @include set-flex-container("large")
+    }
+    #home-description-input {
+        textarea {
+            max-width: 700px;
+        }
+    }
+}
+
+.background-photo-input {
+   // background-image: url('https://linkedassets.s3.amazonaws.com/camping.jpg');
+   background-color: lawngreen;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    // keep here for wider screens
+    padding-bottom: 33.33%;
+}
+
+@media screen and (min-width: resolution("tablet")) {
+    .home-input-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        #home-links-input {
+            @include set-flex-unbound(30%);
+        }
+        #home-description-input {
+            @include set-flex-unbound(65%);
+            margin-right: 3%;
+            textarea {
+                 max-width: 750px;
+            }
+        }
+    }
+}

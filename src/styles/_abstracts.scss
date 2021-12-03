@@ -81,3 +81,8 @@
         flex-wrap: wrap;
     }
 }
+
+@mixin create-aspect-ratio($height, $numerator, $denomonator){
+    height: $height;
+    width: calc(#{height} * 16 / 9);
+}
