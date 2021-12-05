@@ -1,14 +1,51 @@
-import React from 'react'
-import FormLabel from 'react-bootstrap/FormLabel'
-import FormControl from 'react-bootstrap/FormControl'
-import FormGroup from 'react-bootstrap/FormGroup'
+import React, { useState } from 'react'
+import { editRestaurantName } from '../../../api'
+import RestaurantNameInput from './RestaurantNameInput'
+import RestaurantNameDisplay from './RestaurantNameDisplay'
 
-const InputRestaurantName = () => {
+const InputRestaurantName = ({restName}) => {
+    const [restaurantName, setRestaurantName] = useState(restName)
+    const [editable, setEditable] = useState(false);
+    const [submitState, setSubmitState] = useState({loading: false, success: null, error: null})
+    const [lastSavedName, setLastSavedName] = useState('')
+
+    const handleInputChange = event => setRestaurantName(event.target.value)
+
+    const handleSave = event => {
+        event.preventDefault();
+        setSubmitState({loading: true, success: null, error: null})
+        editRestaurantName(restaurantName)
+        .then(res => {
+            setSubmitState({loading: false, success: true, error: null})
+            setLastSavedName(restaurantName)
+            setEditable(false)
+        })
+        .catch(err => {
+            console.log(err)
+            setSubmitState({loading: false, success: null, error: '*Save failed. Please try again.'})
+        })
+    }
+
+    const handleDiscard = event => {
+        setRestaurantName(lastSavedName ? lastSavedName : restName)
+        handleSetEditable()
+    }
+
+    const handleSetEditable = () => setEditable(prev => !prev)
+    
     return (
-        <FormGroup id="restaurant-name-input">
-            <FormLabel>Enter your restaurants display name: </FormLabel>
-            <FormControl />
-        </FormGroup>
+        <div id="restaurant-name-input">
+            {
+                editable ? 
+                    <RestaurantNameInput 
+                        restaurantName={restaurantName} 
+                        handleInputChange={handleInputChange} 
+                        handleSave={handleSave}
+                        handleDiscard={handleDiscard} 
+                        submitState={submitState}/>
+                    : <RestaurantNameDisplay restaurantName={restaurantName} handleSetEditable={handleSetEditable} />
+            }
+        </div>
     )
 }
 

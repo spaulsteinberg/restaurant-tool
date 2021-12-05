@@ -3,24 +3,41 @@
 .home-input-container {
     @include flex-full-column;
     text-align: start;
+    padding: 12px;
     #restaurant-name-input, #home-links-input  {
        input {
         max-width: 488px;
        }
     }
     #restaurant-name-input {
-        @include set-flex-container("large")
+        @include flex-full-column;
+        @include set-flex-container("large");
+        .button-styles {
+            align-self: center;
+            margin-top: .5rem;
+        }
     }
     #home-description-input {
         textarea {
             max-width: 700px;
         }
     }
+    .input-container {
+        h1 {
+            margin-bottom: 0;
+            margin-right: 1rem;
+        }
+    }
+
+    .spinner-align-center {
+        align-self: flex-end;
+        margin-left: 2rem;
+    }
 }
 
 .background-photo-input {
    // background-image: url('https://linkedassets.s3.amazonaws.com/camping.jpg');
-   background-color: lawngreen;
+    background-color: darkcyan;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -30,6 +47,17 @@
     padding-bottom: 33.33%;
 }
 
+@media screen and (min-width: resolution("mobile")){
+    .home-input-container {
+        #restaurant-name-input {
+            @include row-flex(left);
+            .button-styles {
+                align-self: $align-end;
+                margin: 0;
+            }
+        }
+    }
+}
 @media screen and (min-width: resolution("tablet")) {
     .home-input-container {
         flex-direction: row;

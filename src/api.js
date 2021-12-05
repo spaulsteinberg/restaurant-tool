@@ -71,3 +71,11 @@ export const addInventoryItemReq = item => {
     return db.collection(process.env.REACT_APP_INVENTORY_DB_COLLECTION)
         .add(item)
 }
+
+export const editRestaurantName = newName => {
+    return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
+    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+    .update({
+        name: newName
+    })
+}

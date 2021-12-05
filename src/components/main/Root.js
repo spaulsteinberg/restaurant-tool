@@ -7,7 +7,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 
 
 const Root = (props) => {
-    const padded = useTheme();
+    const { state } = useTheme();
     
     return (
         <React.Fragment>
@@ -15,7 +15,7 @@ const Root = (props) => {
         <React.StrictMode>
           <Container fluid className="appWrapper">
             <Row>
-              <Col md={12} className={`padded-${padded.state.padded}`}>
+              <Col md={12} className={`padded-${state.padded}`}>
                 {props.children}
               </Col>
             </Row>
