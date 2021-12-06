@@ -1,19 +1,54 @@
 import React, { useState } from 'react'
-import FormGroup from 'react-bootstrap/FormGroup'
-import FormControl from 'react-bootstrap/FormControl'
-import FormLabel from 'react-bootstrap/FormLabel'
+import { useDispatch } from 'react-redux'
+import { editRestaurantDescription } from '../../../api'
+import { addRestaurantDescription } from '../../../redux/home/homeActions'
+import DescriptionDisplay from './DescriptionDisplay'
+import DescriptionInput from './DescriptionInput'
 
 const InputMainDescription = ({restDescription}) => {
     const [editable, setEditable] = useState(false)
     const [description, setDescription] = useState(restDescription)
+    const [submitState, setSubmitState] = useState({loading: false, success: null, error: null})
+    const dispatch = useDispatch()
 
     const handleInputChange = event => setDescription(event.target.value)
 
+    const handleSetEditable = () => setEditable(prev => !prev)
+
+    const handleOnSave = () => {
+        setSubmitState({loading: true, success: null, error: null})
+        editRestaurantDescription(description)
+        .then(res => {
+            dispatch(addRestaurantDescription(description))
+            setSubmitState({loading: false, success: true, error: null})
+            handleSetEditable();
+        })
+        .catch(err => {
+            console.log(err)
+            setSubmitState({loading: false, success: null, error: 'Save Failed. Please try again.'})
+        })
+    }
+
+    const handleOnDiscard = () => {
+        handleSetEditable();
+    }
+
     return (
-        <FormGroup id="home-description-input">
-            <FormLabel>Enter a Home Description</FormLabel>
-            <FormControl as="textarea" rows="6" value={description} onChange={handleInputChange} />
-        </FormGroup>
+        <React.Fragment>
+            {
+                editable ? 
+                    <DescriptionInput 
+                        description={description} 
+                        handleInputChange={handleInputChange}
+                        handleOnSave={handleOnSave}
+                        handleOnDiscard={handleOnDiscard}
+                        submitState={submitState} /> 
+                    : 
+                        <DescriptionDisplay 
+                            description={restDescription} 
+                            handleSetEditable={handleSetEditable} />
+            }
+        </React.Fragment>
     )
 }
 

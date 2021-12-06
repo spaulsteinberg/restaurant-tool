@@ -1,5 +1,5 @@
 import { db } from "../../firebase"
-import { ADD_RESTAURANT_NAME, GET_HOME_CONFIG, GET_HOME_CONFIG_ERROR, GET_HOME_CONFIG_SUCCESS } from "./homeTypes"
+import { EDIT_RESTAURANT_DESCRIPTION, EDIT_RESTAURANT_NAME, GET_HOME_CONFIG, GET_HOME_CONFIG_ERROR, GET_HOME_CONFIG_SUCCESS } from "./homeTypes"
 
 export const getHomeConfig = () => {
     return {
@@ -23,7 +23,14 @@ export const getHomeConfigError = payload => {
 
 export const addRestaurantName = payload => {
     return {
-        type: ADD_RESTAURANT_NAME,
+        type: EDIT_RESTAURANT_NAME,
+        payload: payload
+    }
+}
+
+export const addRestaurantDescription = payload => {
+    return {
+        type: EDIT_RESTAURANT_DESCRIPTION,
         payload: payload
     }
 }

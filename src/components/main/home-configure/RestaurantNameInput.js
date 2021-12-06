@@ -13,7 +13,7 @@ const RestaurantNameInput = ({restaurantName, handleInputChange, handleSave, han
                 <FormLabel>Enter your restaurants display name: </FormLabel>
                 {submitState.error && <Disclaimer classes="text-danger">{submitState.error}</Disclaimer>}
 
-                <FormControl value={restaurantName} onChange={handleInputChange} name="restaurantName" aria-label="restaurant-name" />
+                <FormControl value={restaurantName} onChange={handleInputChange} name="restaurantName" aria-label="restaurant-name" disabled={submitState.loading} />
             </FormGroup>
             {submitState.loading ?
                 <div className="spinner-align-center">

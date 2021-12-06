@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { editRestaurantName } from '../../../api'
 import RestaurantNameInput from './RestaurantNameInput'
 import RestaurantNameDisplay from './RestaurantNameDisplay'
+import { useDispatch } from 'react-redux'
+import { addRestaurantName } from '../../../redux/home/homeActions'
 
 const InputRestaurantName = ({restName}) => {
     const [restaurantName, setRestaurantName] = useState(restName)
     const [editable, setEditable] = useState(false);
     const [submitState, setSubmitState] = useState({loading: false, success: null, error: null})
-    const [lastSavedName, setLastSavedName] = useState('')
+    const dispatch = useDispatch()
 
     const handleInputChange = event => setRestaurantName(event.target.value)
 
@@ -17,7 +19,7 @@ const InputRestaurantName = ({restName}) => {
         editRestaurantName(restaurantName)
         .then(res => {
             setSubmitState({loading: false, success: true, error: null})
-            setLastSavedName(restaurantName)
+            dispatch(addRestaurantName(restaurantName))
             setEditable(false)
         })
         .catch(err => {
@@ -27,7 +29,7 @@ const InputRestaurantName = ({restName}) => {
     }
 
     const handleDiscard = event => {
-        setRestaurantName(lastSavedName ? lastSavedName : restName)
+        setRestaurantName(restName)
         handleSetEditable()
     }
 

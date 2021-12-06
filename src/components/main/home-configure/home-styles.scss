@@ -17,7 +17,7 @@
             margin-top: .5rem;
         }
     }
-    #home-description-input {
+    .home-description-input {
         textarea {
             max-width: 700px;
         }
@@ -29,10 +29,46 @@
         }
     }
 
+    .home-description-display {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        flex-flow: inherit;
+        flex: 0 0 60%;
+        margin-top: 1rem;
+        .display-edit-button {
+            max-width: 50px;
+            margin: 0 auto;
+        }
+        .home-text-desc-display {
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+    }
+
+    .home-description-head-container {
+        @include flex-full-column;
+        @include set-flex-container("large");
+        align-items: flex-start;
+    }
+
+    .description-input-button-container {
+        display: flex;
+    }
+
+    .description-label-text {
+        font-size: 1.25rem;
+        margin-right: 1rem;
+    }
     .spinner-align-center {
         align-self: flex-end;
         margin-left: 2rem;
     }
+    .spinner-align-desc {
+        align-self: center;
+        margin-top: .5rem;
+    }
+    .save-disc-desc { margin-top: .5rem;}
 }
 
 .background-photo-input {
@@ -56,6 +92,16 @@
                 margin: 0;
             }
         }
+        .home-description-display {
+            margin-right: 3%;
+            .display-edit-button {
+                margin: 0;
+            }
+        }
+        .home-description-head-container {
+            @include row-flex(left);
+            width: 60%;
+        }
     }
 }
 @media screen and (min-width: resolution("tablet")) {
@@ -65,7 +111,7 @@
         #home-links-input {
             @include set-flex-unbound(30%);
         }
-        #home-description-input {
+        .home-description-input {
             @include set-flex-unbound(65%);
             margin-right: 3%;
             textarea {

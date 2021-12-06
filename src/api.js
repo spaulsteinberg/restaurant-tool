@@ -79,3 +79,11 @@ export const editRestaurantName = newName => {
         name: newName
     })
 }
+
+export const editRestaurantDescription = newDescription => {
+    return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
+    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+    .update({
+        description: newDescription
+    })
+}
