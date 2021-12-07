@@ -1,5 +1,6 @@
 // file for standalone api calls
 import { db } from "./firebase"
+import firebase from "firebase/app";
 
 export const updateMenuItem = (menuCopy, updateId) => {
     return db.collection(process.env.REACT_APP_MENU_DB_COLLECTION)
@@ -85,5 +86,13 @@ export const editRestaurantDescription = newDescription => {
     .doc(process.env.REACT_APP_HOME_MAIN_DOC)
     .update({
         description: newDescription
+    })
+}
+
+export const addRestaurantLink = newLink => {
+    return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
+    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+    .update({
+        links: firebase.firestore.FieldValue.arrayUnion(newLink)
     })
 }

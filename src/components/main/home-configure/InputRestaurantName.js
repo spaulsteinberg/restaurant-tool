@@ -3,7 +3,7 @@ import { editRestaurantName } from '../../../api'
 import RestaurantNameInput from './RestaurantNameInput'
 import RestaurantNameDisplay from './RestaurantNameDisplay'
 import { useDispatch } from 'react-redux'
-import { addRestaurantName } from '../../../redux/home/homeActions'
+import { editRestaurantNameAct } from '../../../redux/home/homeActions'
 
 const InputRestaurantName = ({restName}) => {
     const [restaurantName, setRestaurantName] = useState(restName)
@@ -19,7 +19,7 @@ const InputRestaurantName = ({restName}) => {
         editRestaurantName(restaurantName)
         .then(res => {
             setSubmitState({loading: false, success: true, error: null})
-            dispatch(addRestaurantName(restaurantName))
+            dispatch(editRestaurantNameAct(restaurantName))
             setEditable(false)
         })
         .catch(err => {

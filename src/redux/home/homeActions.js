@@ -1,5 +1,5 @@
 import { db } from "../../firebase"
-import { EDIT_RESTAURANT_DESCRIPTION, EDIT_RESTAURANT_NAME, GET_HOME_CONFIG, GET_HOME_CONFIG_ERROR, GET_HOME_CONFIG_SUCCESS } from "./homeTypes"
+import { ADD_RESTAURANT_LINK, EDIT_RESTAURANT_DESCRIPTION, EDIT_RESTAURANT_NAME, GET_HOME_CONFIG, GET_HOME_CONFIG_ERROR, GET_HOME_CONFIG_SUCCESS } from "./homeTypes"
 
 export const getHomeConfig = () => {
     return {
@@ -21,16 +21,23 @@ export const getHomeConfigError = payload => {
     }
 }
 
-export const addRestaurantName = payload => {
+export const editRestaurantNameAct = payload => {
     return {
         type: EDIT_RESTAURANT_NAME,
         payload: payload
     }
 }
 
-export const addRestaurantDescription = payload => {
+export const editRestaurantDescriptionAct = payload => {
     return {
         type: EDIT_RESTAURANT_DESCRIPTION,
+        payload: payload
+    }
+}
+
+export const addRestaurantLinkAct = payload => {
+    return {
+        type: ADD_RESTAURANT_LINK,
         payload: payload
     }
 }

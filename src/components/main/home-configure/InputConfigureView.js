@@ -11,7 +11,7 @@ const InputConfigureView = ({data}) => {
             <div className="home-input-container my-3">
                 <InputRestaurantName restName={data.name} />
                 <InputMainDescription restDescription={data.description}/>
-                <InputLinks />
+                <InputLinks links={data.links} />
             </div>
         </React.Fragment>
     )

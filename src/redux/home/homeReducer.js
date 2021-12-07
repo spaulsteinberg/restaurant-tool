@@ -1,4 +1,4 @@
-import { EDIT_RESTAURANT_DESCRIPTION, EDIT_RESTAURANT_NAME, GET_HOME_CONFIG, GET_HOME_CONFIG_ERROR, GET_HOME_CONFIG_SUCCESS } from "./homeTypes"
+import { ADD_RESTAURANT_LINK, EDIT_RESTAURANT_DESCRIPTION, EDIT_RESTAURANT_NAME, GET_HOME_CONFIG, GET_HOME_CONFIG_ERROR, GET_HOME_CONFIG_SUCCESS } from "./homeTypes"
 
 const initialState = {
     loading: false,
@@ -15,9 +15,11 @@ const homeReducer = (state = initialState, action) => {
         case GET_HOME_CONFIG_ERROR:
             return { ...state, loading: false, data: null, error: action.payload }
         case EDIT_RESTAURANT_NAME:
-            return {...state, data: { ...state.data, name: action.payload }};
+            return { ...state, data: { ...state.data, name: action.payload } };
         case EDIT_RESTAURANT_DESCRIPTION:
-            return {...state, data: {...state.data, description: action.payload}}
+            return { ...state, data: { ...state.data, description: action.payload } }
+        case ADD_RESTAURANT_LINK:
+            return { ...state, data: { ...state.data, links: [...state.data.links, action.payload] } }
         default:
             return state;
     }

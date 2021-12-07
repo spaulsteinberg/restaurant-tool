@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { editRestaurantDescription } from '../../../api'
-import { addRestaurantDescription } from '../../../redux/home/homeActions'
+import { editRestaurantDescriptionAct } from '../../../redux/home/homeActions'
 import DescriptionDisplay from './DescriptionDisplay'
 import DescriptionInput from './DescriptionInput'
 
@@ -19,7 +19,7 @@ const InputMainDescription = ({restDescription}) => {
         setSubmitState({loading: true, success: null, error: null})
         editRestaurantDescription(description)
         .then(res => {
-            dispatch(addRestaurantDescription(description))
+            dispatch(editRestaurantDescriptionAct(description))
             setSubmitState({loading: false, success: true, error: null})
             handleSetEditable();
         })
