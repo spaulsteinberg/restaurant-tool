@@ -39,6 +39,7 @@
         flex-flow: inherit;
         flex: 0 0 60%;
         margin-top: 1rem;
+        align-content: flex-start;
         .display-edit-button {
             max-width: 50px;
             margin: 0 auto;
@@ -53,6 +54,7 @@
         @include flex-full-column;
         @include set-flex-container("large");
         align-items: flex-start;
+        align-self: flex-start;
     }
 
     .description-input-button-container, .link-edit-container {
