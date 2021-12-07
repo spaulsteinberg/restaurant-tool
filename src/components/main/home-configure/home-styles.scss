@@ -4,6 +4,7 @@
     @include flex-full-column;
     text-align: start;
     padding: 12px;
+    justify-content: space-between;
     #restaurant-name-input, .home-links-input  {
        input {
         max-width: 488px;
@@ -40,14 +41,13 @@
         flex: 0 0 60%;
         margin-top: 1rem;
         align-content: flex-start;
-        .display-edit-button {
-            max-width: 50px;
-            margin: 0 auto;
-        }
         .home-text-desc-display {
             word-break: break-all;
             word-wrap: break-word;
         }
+    }
+    .display-edit-button {
+        @include center-button-50px;
     }
 
     .home-description-head-container {
@@ -57,17 +57,23 @@
         align-self: flex-start;
     }
 
+    .name-button-state-container {
+        align-self: center;
+    }
+
     .description-input-button-container, .link-edit-container {
         display: flex;
+        .display-edit-button { margin-left: .5rem}
     }
+    .link-edit-container { flex-direction: row;}
 
     .home-label-text {
         font-size: 1.25rem;
         margin-right: 1rem;
     }
     .spinner-align-center {
-        align-self: flex-end;
-        margin-left: 2rem;
+        align-self: center;
+        margin-left: 0;
     }
     .spinner-align-desc {
         align-self: center;
@@ -110,13 +116,20 @@
         }
         .home-description-display {
             margin-right: 3%;
-            .display-edit-button {
-                margin: 0;
-            }
+        }
+        .display-edit-button {
+            margin: 0;
         }
         .home-description-head-container {
             @include row-flex(left);
             width: 60%;
+        }
+        .name-button-state-container {
+            align-self: flex-end;
+        }
+        .spinner-align-center {
+            align-self: flex-end;
+            margin-left: 2rem;
         }
     }
 }

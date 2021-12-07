@@ -86,3 +86,8 @@
     height: $height;
     width: calc(#{height} * 16 / 9);
 }
+
+@mixin center-button-50px{
+    max-width: 50px;
+    margin: 0 auto;
+}
