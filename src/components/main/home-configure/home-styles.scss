@@ -91,6 +91,10 @@
             box-shadow: none
         }
     }
+
+    .display-action-container {
+        @include row-flex(flex-start);
+    }
 }
 
 .background-photo-input {

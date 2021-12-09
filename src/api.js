@@ -96,3 +96,9 @@ export const addRestaurantLink = newLink => {
         links: firebase.firestore.FieldValue.arrayUnion(newLink)
     })
 }
+
+export const removeRestaurantLink = newLinksArray => {
+    return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
+    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+    .update({ links: newLinksArray })
+}
