@@ -102,3 +102,9 @@ export const removeRestaurantLink = newLinksArray => {
     .doc(process.env.REACT_APP_HOME_MAIN_DOC)
     .update({ links: newLinksArray })
 }
+
+export const updateHomePhoto = newPhoto => {
+    return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
+    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+    .update({ bpAddress: newPhoto })
+}

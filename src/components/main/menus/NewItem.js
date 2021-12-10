@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateMenuItemsInSection } from '../../../api'
-import { FOOD_KEY, ITEM_TYPES } from '../../../constants/constants'
+import { FOOD_KEY, ITEM_TYPES, menuImageCollection } from '../../../constants/constants'
 import { addItemSuccess } from '../../../redux/menus/menuActions'
 import { uploadImageFile, validateDescription, validateFormItemsExist, validatePrice } from '../../../utils'
 import ProgressBar from '../../utility/ProgressBar'
@@ -50,7 +50,7 @@ const NewItem = ({onDiscard, sectionIndex, currentMenu, isCurrent, menuList, ind
         if (validate()) {
             form.type = ITEM_TYPES.get(form.type) ? ITEM_TYPES.get(form.type) : FOOD_KEY;
             if (imageFile){
-                let address = await uploadImageFile(imageFile.name, imageFile)
+                let address = await uploadImageFile(imageFile.name, imageFile, menuImageCollection)
                 form.imageAddress = address;
             }
 

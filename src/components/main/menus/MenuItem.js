@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { circleSlashForCancelPaths, pencilOutlineSmallFull, saveIcon, trashSmallIcon } from '../../../constants/svg/svgs';
 import SaveDiscardButtons from '../../utility/SaveDiscardButtons';
-import { ITEM_TYPES } from '../../../constants/constants';
+import { ITEM_TYPES, menuImageCollection } from '../../../constants/constants';
 import { useDispatch } from 'react-redux';
 import { deleteItemSuccess, editItemSuccess } from '../../../redux/menus/menuActions';
 import ItemDisplay from './ItemDisplay';
@@ -67,7 +67,7 @@ const MenuItem = ({item, currentMenu, setSectionEdit, setSectionExit, isCurrent,
             menus[menuIndex].menus[sectionIndex].items[itemIndex].type = ITEM_TYPES.get(form.type);
 
             if (imageFile) {
-                let address = await uploadImageFile(imageFile.name, imageFile)
+                let address = await uploadImageFile(imageFile.name, imageFile, menuImageCollection)
                 menus[menuIndex].menus[sectionIndex].items[itemIndex].imageAddress = address;
             }
             

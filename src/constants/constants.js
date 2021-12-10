@@ -56,4 +56,8 @@ export const INVENTORY_COLS = Object.freeze({
     ACTIONS: "Actions"
 })
 
+export const menuImageCollection = "menu-images"
+
+export const homeImageCollection = "menu-home"
+
 export const defaultDropDownText = "No Filter"

@@ -21,7 +21,9 @@ const homeReducer = (state = initialState, action) => {
         case TYPES.ADD_RESTAURANT_LINK:
             return { ...state, data: { ...state.data, links: [...state.data.links, action.payload] } }
         case TYPES.REMOVE_RESTAURANT_LINK:
-            return { ...state, data: {...state.data, links: action.payload } }
+            return { ...state, data: { ...state.data, links: action.payload } }
+        case TYPES.UPDATE_HOME_PHOTO:
+            return { ...state, data: { ...state.data, bpAddress: action.payload } }
         default:
             return state;
     }

@@ -83,10 +83,10 @@ export const standardizeString = str => {
     return (str[0].toUpperCase() + str.slice(1)).trim()
 }
 
-export const uploadImageFile = async (name, file) => storage.ref(`menu-images/${name}`).put(file)
+export const uploadImageFile = async (name, file, collection) => storage.ref(`${collection}/${name}`).put(file)
     .then(response => {
         return storage
-            .ref("menu-images")
+            .ref(collection)
             .child(name)
             .getDownloadURL()
             .then(url => Promise.resolve(url))

@@ -98,15 +98,28 @@
 }
 
 .background-photo-input {
-   // background-image: url('https://linkedassets.s3.amazonaws.com/camping.jpg');
-    background-color: darkcyan;
+    background-color: darkgray;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     position: relative;
-    width: 100%;
-    // keep here for wider screens
-    padding-bottom: 33.33%;
+    width: auto;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @media  screen and (min-width: resolution("mobile")){
+        height: 100vh
+    }
+}
+
+#upload-button {
+    // adjust these for smaller screen sizes
+    height: 125px;
+    width: 162.5px;
+    padding-left: 10px;
+    padding-top: 4px;
 }
 
 @media screen and (min-width: resolution("mobile")){

@@ -49,6 +49,13 @@ export const removeRestaurantLinkAct = payload => {
     }
 }
 
+export const updateHomePhotoAct = payload => {
+    return {
+        type: TYPES.UPDATE_HOME_PHOTO,
+        payload: payload
+    }
+}
+
 
 export const retrieveHomeConfig = () => {
     return async (dispatch) => {

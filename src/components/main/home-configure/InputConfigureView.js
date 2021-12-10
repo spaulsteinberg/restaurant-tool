@@ -7,7 +7,7 @@ import InputRestaurantName from './InputRestaurantName';
 const InputConfigureView = ({data}) => {
     return (
         <React.Fragment>
-            <InputBackgroundPhoto />
+            <InputBackgroundPhoto photo={data.bpAddress} />
             <div className="home-input-container my-3">
                 <InputRestaurantName restName={data.name} />
                 <InputMainDescription restDescription={data.description}/>
