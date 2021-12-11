@@ -11,6 +11,7 @@ const InputBackgroundPhoto = ({photo}) => {
     const dispatch = useDispatch()
     const fileInputRef = useRef();
     const [uploadState, setUploadState] = useState({loading: false, success: null, error: null})
+    const [snackbarOpen, setSnackbarOpen] = useState(false)
 
     const handleButtonUploadClick = () => {
         fileInputRef.current.click()
@@ -31,12 +32,16 @@ const InputBackgroundPhoto = ({photo}) => {
                 console.log(err)
                 setUploadState({loading: false, success: null, error: 'There was an error uploading your image. Please try again.'})
             })
+            .finally(() => setSnackbarOpen(true))
         } catch (err){
             console.log(err)
             setUploadState({loading: true, success: null, error: 'There was an error uploading your image. Please try again.'})
+            setSnackbarOpen(true)
         }
         console.log("end upload")
     }
+
+    const handleClose = () => setSnackbarOpen(false)
     
     return (
         <div className="background-photo-input" style={{backgroundImage: `url(${photo})`}}>
@@ -45,7 +50,7 @@ const InputBackgroundPhoto = ({photo}) => {
                 imageIsUploading={uploadState.loading} 
                 handleButtonUploadClick={handleButtonUploadClick} 
                 handleInputChange={handleInputChange} />
-            <SelectPhotoFeedback loading={uploadState.loading} success={uploadState.success} error={uploadState.error} />
+            <SelectPhotoFeedback open={snackbarOpen} success={uploadState.success} error={uploadState.error} handleClose={handleClose} />
         </div>
     )
 }

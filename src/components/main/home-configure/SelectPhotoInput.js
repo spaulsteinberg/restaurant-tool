@@ -6,7 +6,7 @@ const SelectPhotoInput = ({fileInputRef, imageIsUploading, handleButtonUploadCli
 
     return (
         <React.Fragment>
-            <input multiple={false} type='file' hidden onChange={handleInputChange} ref={fileInputRef} />
+            <input type='file' hidden onChange={handleInputChange} ref={fileInputRef} />
             <Tooltip title="Click to choose a home screen button" placement='top' arrow>
                 <SelectPhotoButton onClick={handleButtonUploadClick} disabled={imageIsUploading} />
             </Tooltip>
