@@ -5,7 +5,7 @@ import UploadIcon from '../../utility/UploadIcon'
 
 const SelectPhotoButton = forwardRef((props, ref) => (
     <Button {...props} ref={ref}>
-        { props.disabled ? <Spinner animation="grow" variant="dark" /> : <UploadIcon width={100} height={100} />}
+        { props.disabled ? <Spinner animation="grow" variant="dark" /> : <UploadIcon width={props.width} height={props.height} /> }
     </Button>
 ))
 export default SelectPhotoButton

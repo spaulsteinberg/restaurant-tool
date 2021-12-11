@@ -6,12 +6,17 @@ import { updateHomePhotoAct } from '../../../redux/home/homeActions';
 import { uploadImageFile } from '../../../utils';
 import SelectPhotoFeedback from './SelectPhotoFeedback';
 import SelectPhotoInput from './SelectPhotoInput'
+import useWideView from '../../../hooks/useWideView';
 
 const InputBackgroundPhoto = ({photo}) => {
     const dispatch = useDispatch()
     const fileInputRef = useRef();
     const [uploadState, setUploadState] = useState({loading: false, success: null, error: null})
     const [snackbarOpen, setSnackbarOpen] = useState(false)
+
+    const mobileView = useWideView(500).wideView;
+    const tabletView = useWideView(768).wideView;
+    const wideView = useWideView(992).wideView;
 
     const handleButtonUploadClick = () => {
         fileInputRef.current.click()
@@ -49,7 +54,10 @@ const InputBackgroundPhoto = ({photo}) => {
                 fileInputRef={fileInputRef} 
                 imageIsUploading={uploadState.loading} 
                 handleButtonUploadClick={handleButtonUploadClick} 
-                handleInputChange={handleInputChange} />
+                handleInputChange={handleInputChange}
+                mobileView={mobileView}
+                tabletView={tabletView}
+                wideView={wideView} />
             <SelectPhotoFeedback open={snackbarOpen} success={uploadState.success} error={uploadState.error} handleClose={handleClose} />
         </div>
     )
