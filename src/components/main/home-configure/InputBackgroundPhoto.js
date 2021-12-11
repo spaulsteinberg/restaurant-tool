@@ -24,9 +24,17 @@ const InputBackgroundPhoto = ({photo}) => {
 
     const handleInputChange = async (event) => {
         console.log("beginning upload...")
+        const file = event?.target?.files[0];
+        if (!file) return
+        if (!file.name.match(/.(jpg|jpeg|png|gif)$/i)){
+            setUploadState({loading: false, success: null, error: 'Image must be in .jpg, .jpeg, .png, or .gif format.'})
+            return setSnackbarOpen(true)
+        }
+
         setUploadState({loading: true, success: null, error: null})
+        setSnackbarOpen(true)
         try {
-            const address = await uploadImageFile(event.target.files[0].name, event.target.files[0], homeImageCollection)
+            const address = await uploadImageFile(file.name, file, homeImageCollection)
             updateHomePhoto(address)
             .then(() => {
                 console.log("updated photo")
@@ -37,7 +45,6 @@ const InputBackgroundPhoto = ({photo}) => {
                 console.log(err)
                 setUploadState({loading: false, success: null, error: 'There was an error uploading your image. Please try again.'})
             })
-            .finally(() => setSnackbarOpen(true))
         } catch (err){
             console.log(err)
             setUploadState({loading: true, success: null, error: 'There was an error uploading your image. Please try again.'})
