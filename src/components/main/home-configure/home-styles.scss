@@ -148,6 +148,16 @@
     top: 75%;
 }
 
+.route-button-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    @media screen and (max-width: 300px) {
+        width: 80%;
+    }
+}
+
 @keyframes pulse {
     0% {
         @include create-box-shadow(0, white);

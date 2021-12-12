@@ -14,7 +14,7 @@ const HomeRouteButtons = ({routeButtons, sm, showModal, handleShowModal, handleC
 
 
     return (
-        <div className='mt-2'>
+        <div className='mt-2 route-button-container'>
             {
                 routeButtons
                 .map(btn => <RouteButton key={btn.display} btn={btn} sm={sm} handleClick={handleOnClickRoute} />)
