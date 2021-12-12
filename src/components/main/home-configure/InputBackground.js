@@ -9,6 +9,7 @@ import SelectPhotoInput from './SelectPhotoInput'
 import useWideView from '../../../hooks/useWideView';
 import HomeRouteButtons from './HomeRouteButtons';
 import OpenModalPrompt from './create-route-button/OpenModalPrompt';
+import ShowMoreWidescreenArrow from './ShowMoreWidescreenArrow';
 
 const InputBackground = ({photo, routeButtons}) => {
     const dispatch = useDispatch()
@@ -64,6 +65,8 @@ const InputBackground = ({photo, routeButtons}) => {
         console.log("end upload")
     }
 
+    const handleDownscrollClick = () => window.scrollBy(0, 300)
+
     const handleClose = () => setSnackbarOpen(false)
     
     return (
@@ -83,6 +86,7 @@ const InputBackground = ({photo, routeButtons}) => {
                 handleShowModal={handleShowModal}
                 handleClose={handleCloseModal}/>
             <OpenModalPrompt handleShowModal={handleShowModal} />
+            { mobileView ? <ShowMoreWidescreenArrow handleDownscrollClick={handleDownscrollClick} /> : null }
             <SelectPhotoFeedback open={snackbarOpen} success={uploadState.success} error={uploadState.error} handleClose={handleClose} />
         </div>
     )

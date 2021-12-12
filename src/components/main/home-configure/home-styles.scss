@@ -139,6 +139,27 @@
     }
 }
 
+.pulsating-button {
+    animation: pulse 2s infinite;
+}
+
+.widescreen-button-container {
+    position: absolute;
+    top: 75%;
+}
+
+@keyframes pulse {
+    0% {
+        @include create-box-shadow(0, white);
+    }
+    70% {
+        @include create-box-shadow(20px, white);
+    }
+    100% {
+        @include create-box-shadow(0, white);
+    }
+  }
+
 @media screen and (min-width: resolution("mobile")){
     .home-input-container {
         #restaurant-name-input {

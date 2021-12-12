@@ -97,3 +97,8 @@
         background-color: $variant;
     }
 }
+
+@mixin create-box-shadow($radius, $color) {
+    box-shadow: 0 0 $radius $color;
+    -moz-box-shadow: 0 0 $radius $color;
+}
