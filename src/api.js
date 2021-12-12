@@ -108,3 +108,11 @@ export const updateHomePhoto = newPhoto => {
     .doc(process.env.REACT_APP_HOME_MAIN_DOC)
     .update({ bpAddress: newPhoto })
 }
+
+export const addGotoLink = newLink => {
+    return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
+    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+    .update({
+        gotos: firebase.firestore.FieldValue.arrayUnion(newLink)
+    })
+}

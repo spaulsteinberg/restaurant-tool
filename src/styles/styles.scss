@@ -1,5 +1,6 @@
 @import './resets';
 @import './variables';
+@import './abstracts';
 
 .appWrapper {
     font-weight: $global-font-weight;
@@ -50,4 +51,32 @@
 .padded-true {
     padding-left: 12px;
     padding-right: 12px;
+}
+
+.route-button-primary {
+    @include set-hover-bg-color($BOOTSTRAP_PRIMARY);
+}
+.route-button-secondary {
+    @include set-hover-bg-color($BOOTSTRAP_SECONDARY);
+}
+.route-button-success {
+    @include set-hover-bg-color($BOOTSTRAP_SUCCESS);
+}
+.route-button-danger {
+    @include set-hover-bg-color($BOOTSTRAP_DANGER);
+}
+.route-button-info {
+    @include set-hover-bg-color($BOOTSTRAP_INFO);
+}
+.route-button-light {
+    @include set-hover-bg-color($BOOTSTRAP_LIGHT);
+}
+.route-button-dark {
+    @include set-hover-bg-color($BOOTSTRAP_DARK);
+}
+.route-button-white {
+    @include set-hover-bg-color($BOOTSTRAP_WHITE);
+}
+.route-button-none {
+    @include set-hover-bg-color("none")
 }

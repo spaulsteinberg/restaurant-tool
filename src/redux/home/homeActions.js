@@ -56,6 +56,13 @@ export const updateHomePhotoAct = payload => {
     }
 }
 
+export const addGotoLinkAct = payload => {
+    return {
+        type: TYPES.ADD_GOTO_LINK,
+        payload: payload
+    }
+}
+
 
 export const retrieveHomeConfig = () => {
     return async (dispatch) => {

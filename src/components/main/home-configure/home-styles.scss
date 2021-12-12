@@ -122,6 +122,23 @@
     padding-top: 4px;
 }
 
+.submit-new-goto-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    word-break: break-word;
+    .inner-container {
+        max-width: 250px;
+    }
+}
+
+.open-modal-prompt {
+    color: $BOOTSTRAP_DARK;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 @media screen and (min-width: resolution("mobile")){
     .home-input-container {
         #restaurant-name-input {

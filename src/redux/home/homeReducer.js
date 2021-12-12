@@ -24,6 +24,8 @@ const homeReducer = (state = initialState, action) => {
             return { ...state, data: { ...state.data, links: action.payload } }
         case TYPES.UPDATE_HOME_PHOTO:
             return { ...state, data: { ...state.data, bpAddress: action.payload } }
+        case TYPES.ADD_GOTO_LINK:
+            return { ...state, data: { ...state.data, gotos: [...state.data.gotos, action.payload] } }
         default:
             return state;
     }

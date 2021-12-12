@@ -91,3 +91,9 @@
     max-width: 50px;
     margin: 0 auto;
 }
+
+@mixin set-hover-bg-color($variant){
+    &:hover {
+        background-color: $variant;
+    }
+}

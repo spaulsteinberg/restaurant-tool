@@ -1,5 +1,5 @@
 import React from 'react'
-import InputBackgroundPhoto from './InputBackgroundPhoto';
+import InputBackground from './InputBackground';
 import InputLinks from './InputLinks';
 import InputMainDescription from './InputMainDescription';
 import InputRestaurantName from './InputRestaurantName';
@@ -7,7 +7,7 @@ import InputRestaurantName from './InputRestaurantName';
 const InputConfigureView = ({data}) => {
     return (
         <React.Fragment>
-            <InputBackgroundPhoto photo={data.bpAddress} />
+            <InputBackground photo={data.bpAddress} routeButtons={data.gotos} />
             <div className="home-input-container my-3">
                 <InputRestaurantName restName={data.name} />
                 <InputMainDescription restDescription={data.description}/>

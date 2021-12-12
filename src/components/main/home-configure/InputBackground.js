@@ -7,8 +7,10 @@ import { uploadImageFile } from '../../../utils';
 import SelectPhotoFeedback from './SelectPhotoFeedback';
 import SelectPhotoInput from './SelectPhotoInput'
 import useWideView from '../../../hooks/useWideView';
+import HomeRouteButtons from './HomeRouteButtons';
+import OpenModalPrompt from './create-route-button/OpenModalPrompt';
 
-const InputBackgroundPhoto = ({photo}) => {
+const InputBackground = ({photo, routeButtons}) => {
     const dispatch = useDispatch()
     const fileInputRef = useRef();
     const [uploadState, setUploadState] = useState({loading: false, success: null, error: null})
@@ -20,6 +22,15 @@ const InputBackgroundPhoto = ({photo}) => {
 
     const handleButtonUploadClick = () => {
         fileInputRef.current.click()
+    }
+
+    const [showModal, setShowModal] = useState(false)
+
+    const handleShowModal = () => setShowModal(true)
+
+    const handleCloseModal = event => {
+    //    event.preventDefault();
+        setShowModal(false)
     }
 
     const handleInputChange = async (event) => {
@@ -65,9 +76,16 @@ const InputBackgroundPhoto = ({photo}) => {
                 mobileView={mobileView}
                 tabletView={tabletView}
                 wideView={wideView} />
+            <HomeRouteButtons 
+                routeButtons={routeButtons} 
+                sm={!mobileView} 
+                showModal={showModal}
+                handleShowModal={handleShowModal}
+                handleClose={handleCloseModal}/>
+            <OpenModalPrompt handleShowModal={handleShowModal} />
             <SelectPhotoFeedback open={snackbarOpen} success={uploadState.success} error={uploadState.error} handleClose={handleClose} />
         </div>
     )
 }
 
-export default InputBackgroundPhoto
+export default InputBackground

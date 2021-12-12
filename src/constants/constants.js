@@ -61,3 +61,8 @@ export const menuImageCollection = "menu-images"
 export const homeImageCollection = "menu-home"
 
 export const defaultDropDownText = "No Filter"
+
+export const HOME_MODAL_ACTIONS = Object.freeze({
+    EDIT: "edit",
+    ADD: "add"
+})
