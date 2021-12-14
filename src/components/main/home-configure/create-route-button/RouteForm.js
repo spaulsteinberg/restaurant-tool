@@ -80,6 +80,23 @@ const RouteForm = ({handleOnClose, modalContentProps, initState = null}) => {
         })
     }
 
+    const handleRemoveButtonClick = (event) => {
+        event.preventDefault();
+        setRequestState({loading: true, error: null})
+        const filteredGotos = [...gotos.filter(goto => goto.display !== initState.display)]
+        editGotoLink(filteredGotos)
+        .then(res => {
+            console.log("edit success!")
+            dispatch(editGotoLinkAct(filteredGotos))
+            setRequestState({loading: false, error: null})
+            handleOnClose()
+        })
+        .catch(err => {
+            console.log(err)
+            setRequestState({loading: false, error: 'An error occurred! Please try again.'})
+        })
+    }
+
     return (
         <Formik
             innerRef={formRef}
@@ -182,7 +199,12 @@ const RouteForm = ({handleOnClose, modalContentProps, initState = null}) => {
                         labelText="Select amount of spacing:"
                     />
                     <PreviewButton values={values} />
-                    <SubmitAddFormButton loading={requestState.loading} error={requestState.error} hasManyLinks={modalContentProps?.length >= 4 && !initState}/>
+                    <SubmitAddFormButton 
+                        loading={requestState.loading} 
+                        error={requestState.error} 
+                        handleRemoveButtonClick={handleRemoveButtonClick}
+                        hasManyLinks={modalContentProps?.length >= 4 && !initState}
+                        showDeleteButton={initState ? true : false}/>
                 </Form>
             )}
         </Formik>

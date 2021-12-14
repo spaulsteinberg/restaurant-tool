@@ -128,7 +128,28 @@
     flex-wrap: wrap;
     word-break: break-word;
     .inner-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         max-width: 250px;
+        button:nth-child(1){
+            margin-bottom: 1rem;
+        }
+        @media screen and (min-width: 335px){
+            flex-direction: row;
+            button:nth-child(1){
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.linked-button {
+    background-color: transparent;
+    color: $BOOTSTRAP_DANGER;
+    &:hover {
+        color: white !important;
+        background-color: $BOOTSTRAP_DANGER;
     }
 }
 
