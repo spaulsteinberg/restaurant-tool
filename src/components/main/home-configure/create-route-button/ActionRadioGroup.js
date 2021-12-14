@@ -5,7 +5,7 @@ import Radio from '@material-ui/core/Radio';
 
 const ActionRadioGroup = ({ value, handleChange, addValue, editValue }) => {
     return (
-        <RadioGroup name="menus" aria-label="by-menu" value={value} onChange={handleChange}>
+        <RadioGroup name="val" aria-label="by-val" value={value} onChange={handleChange}>
             <FormControlLabel value={addValue} control={<Radio />} label={"Add"} />
             <FormControlLabel value={editValue} control={<Radio />} label={"Edit"} />
         </RadioGroup>

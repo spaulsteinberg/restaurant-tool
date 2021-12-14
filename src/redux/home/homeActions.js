@@ -63,6 +63,13 @@ export const addGotoLinkAct = payload => {
     }
 }
 
+export const editGotoLinkAct = payload => {
+    return {
+        type: TYPES.EDIT_GOTO_LINK,
+        payload: payload
+    }
+}
+
 
 export const retrieveHomeConfig = () => {
     return async (dispatch) => {

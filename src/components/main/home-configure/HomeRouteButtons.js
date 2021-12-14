@@ -20,7 +20,6 @@ const HomeRouteButtons = ({routeButtons, sm, showModal, handleShowModal, handleC
                 .map(btn => <RouteButton key={btn.display} btn={btn} sm={sm} handleClick={handleOnClickRoute} />)
             }
             { showModal ? <RouteButtonModal show={showModal} handleClose={handleClose} data={routeButtons} /> : null}
-            { /* add button option here */}
         </div>
     )
 }

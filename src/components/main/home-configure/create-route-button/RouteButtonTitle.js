@@ -6,7 +6,7 @@ const RouteButtonTitle = ({showActions, title}) => {
     return (
         <DialogTitle 
             id="form-dialog-button-title" 
-            className="text-center">
+            className="min-250-width text-center">
                 {showActions ? defaultTitle : title }
         </DialogTitle>
     )

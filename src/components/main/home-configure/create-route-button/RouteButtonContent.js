@@ -1,9 +1,10 @@
 import React from 'react'
 import DialogContent from '@material-ui/core/DialogContent';
 import ActionRadioGroup from './ActionRadioGroup';
-import AddRouteForm from './AddRouteForm';
+import RouteForm from './RouteForm';
+import EditRouteButtonForm from './EditRouteButtonForm';
 
-const RouteButtonContent = ({showActions, value, handleChange, addValue, editValue, modalContentProps, handleOnClose}) => {
+const RouteButtonContent = ({showActions, value, handleChange, addValue, editValue, modalContentProps, showEditForm, handleOnClose}) => {
     return (
         <DialogContent>
             {
@@ -15,8 +16,8 @@ const RouteButtonContent = ({showActions, value, handleChange, addValue, editVal
                         editValue={editValue} />
                     : 
                     value === addValue 
-                    ? <AddRouteForm handleOnClose={handleOnClose} modalContentProps={modalContentProps?.data}/> 
-                    : <p>put edit form here</p>
+                    ? <RouteForm handleOnClose={handleOnClose} modalContentProps={modalContentProps?.data}/> 
+                    : <EditRouteButtonForm handleOnClose={handleOnClose} modalContentProps={modalContentProps?.data} showEditForm={showEditForm} />
             }
         </DialogContent>
     )

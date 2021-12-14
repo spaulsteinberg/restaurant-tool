@@ -15,6 +15,8 @@ const RouteButtonModal = ({show, handleClose, data}) => {
 
     const [modalContentProps, setModalContentProps] = useState(propsInitialState)
 
+    const [showEditForm, setShowEditForm] = useState(false)
+
     const handleChange = event => {
         event.stopPropagation();
         setValue(event.target.value)
@@ -25,12 +27,24 @@ const RouteButtonModal = ({show, handleClose, data}) => {
         handleClose()
     }
 
+    const setActions = () => setShowActions(a => !a)
+
     const handleNextClick = () => {
         setModalContentProps({
-            title: value === HOME_MODAL_ACTIONS.ADD ? "Please make add selections: " : "Editing Route Buttons", 
-            data: data.map(d => d.display)
+            title: value === HOME_MODAL_ACTIONS.ADD ? "Please make add selections: " : "Edit Route: ", 
+            data: value === HOME_MODAL_ACTIONS.ADD ? data.map(d => d.display) : data
         })
         setShowActions(false)
+        setShowEditForm(false)
+    }
+
+    const handleSecondNextClickForEditing = () => {
+        setShowEditForm(true)
+        setShowActions(false)
+    }
+
+    const handleSecondBackClickForEditing = () => {
+        setShowEditForm(false)
     }
 
     return (
@@ -43,9 +57,18 @@ const RouteButtonModal = ({show, handleClose, data}) => {
                 addValue={HOME_MODAL_ACTIONS.ADD}
                 editValue={HOME_MODAL_ACTIONS.EDIT} 
                 modalContentProps={modalContentProps}
+                showEditForm={showEditForm}
                 handleOnClose={handleOnClose}
                 />
-            <RouteButtonActions showActions={showActions} handleNextClick={handleNextClick} />
+            <RouteButtonActions 
+                showActions={showActions} 
+                mode={value} 
+                hasButtons={data && data.length > 0}
+                showEditForm={showEditForm}
+                handleNextClick={handleNextClick} 
+                handleBackClick={setActions}
+                hsncfe={handleSecondNextClickForEditing}
+                hsbcfe={handleSecondBackClickForEditing} />
         </Dialog>
     )
 }

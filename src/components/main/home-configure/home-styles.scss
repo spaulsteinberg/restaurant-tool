@@ -149,12 +149,17 @@
 }
 
 .route-button-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    @include row-flex(center, true);
     width: 100%;
     @media screen and (max-width: 300px) {
         width: 80%;
+    }
+}
+
+.min-250-width {
+    min-width: 250px;
+    @media screen and (max-width: 320px) {
+        min-width: 0;
     }
 }
 

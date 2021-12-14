@@ -26,6 +26,8 @@ const homeReducer = (state = initialState, action) => {
             return { ...state, data: { ...state.data, bpAddress: action.payload } }
         case TYPES.ADD_GOTO_LINK:
             return { ...state, data: { ...state.data, gotos: [...state.data.gotos, action.payload] } }
+        case TYPES.EDIT_GOTO_LINK:
+            return { ...state, data: { ...state.data, gotos: action.payload}}
         default:
             return state;
     }

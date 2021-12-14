@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import LoadingSpinner from '../../../utility/LoadingSpinner'
 
-const SubmitAddFormButton = ({loading, error, hasManyLinks}) => {
+const SubmitAddFormButton = ({loading, error, hasManyLinks = false}) => {
     return (
         <div className='text-center submit-new-goto-container'>
             <div className='inner-container'>

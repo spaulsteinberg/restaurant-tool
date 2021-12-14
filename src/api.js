@@ -116,3 +116,11 @@ export const addGotoLink = newLink => {
         gotos: firebase.firestore.FieldValue.arrayUnion(newLink)
     })
 }
+
+export const editGotoLink = editedGotos => {
+    return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
+    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+    .update({
+        gotos: editedGotos
+    })
+}
