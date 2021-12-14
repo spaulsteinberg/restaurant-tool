@@ -154,7 +154,7 @@
 }
 
 .open-modal-prompt {
-    color: $BOOTSTRAP_DARK;
+    animation: flash 4s infinite;
     &:hover {
         cursor: pointer;
     }
@@ -193,6 +193,22 @@
     }
     100% {
         @include create-box-shadow(0, white);
+    }
+  }
+
+  @keyframes flash {
+    0% {
+        @include create-box-shadow(0, black);
+        color: white;
+        background-color: transparent;
+    }
+    70% {
+        @include create-box-shadow(10px, white);
+        color: black;
+    }
+    100% {
+        @include create-box-shadow(0, black);
+        color:white;
     }
   }
 
