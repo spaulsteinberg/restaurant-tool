@@ -109,7 +109,7 @@ const RouteForm = ({handleOnClose, modalContentProps, initState = null}) => {
                 route: Yup.string().trim().required("Please enter a valid relative route."),
                 display: Yup.string().required("Please enter a display name.")
                     .min(2, "Must be at least two characters long.")
-                    .max(20, "Cannot be more than 15 characters long."),
+                    .max(20, "Cannot be more than 20 characters long."),
                 text: Yup.string().trim().required("Please a text color for your button."),
                 background: Yup.string().required("Please select a valid background color."),
                 border: Yup.string().required("Please select a valid border."),

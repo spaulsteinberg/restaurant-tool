@@ -9,7 +9,7 @@ const InputConfigureView = ({data}) => {
         <React.Fragment>
             <InputBackground photo={data.bpAddress} routeButtons={data.gotos} />
             <div className="home-input-container my-3">
-                <InputRestaurantName restName={data.name} />
+                <InputRestaurantName restNameData={data.name} />
                 <InputMainDescription restDescription={data.description}/>
                 <InputLinks links={data.links} />
             </div>

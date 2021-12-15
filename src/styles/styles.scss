@@ -43,6 +43,69 @@
 .margin-top-2 { margin-top: 2rem;}
 .margin-top-3 { margin-top: 3rem;}
 
+.font-Arial { font-family: Arial, Helvetica, sans-serif;}
+.font-Tahoma { font-family: Tahoma, Verdana, sans-serif;}
+.font-Verdana { font-family: Verdana, sans-serif;}
+.font-Helvetica { font-family: Helvetica, Arial, sans-serif;}
+.font-Tebuchet_MS { font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
+.font-Times_New_Roman { font-family: 'Times New Roman', Times, serif;}
+.font-Georgia { font-family: Georgia, 'Times New Roman', Times, serif;}
+.font-Courier_New { font-family: 'Courier New', Courier, monospace}
+.font-Garamond { font-family: Garamond, serif}
+.font-Brush_Script_MT { font-family: Brush Script MT, cursive;}
+
+.weight-100 { font-weight: 100; }
+.weight-200 { font-weight: 200; }
+.weight-300 { font-weight: 300; }
+.weight-400 { font-weight: 400; }
+.weight-500 { font-weight: 500; }
+.weight-600 { font-weight: 600; }
+.weight-700 { font-weight: 700; }
+.weight-800 { font-weight: 800; }
+.weight-900 { font-weight: 900; }
+
+.height-16px { font-size: 16px; }
+.height-32px { font-size: 32px; }
+.height-48px { 
+    font-size: 32px; 
+    @media screen and (min-width: 380px){
+        font-size: 40px; 
+    }
+    @media screen and (min-width: resolution("mobile")){
+        font-size: 48px; 
+    }
+}
+.height-64px { 
+    font-size: 32px; 
+
+    @media screen and (min-width: 380px){
+        font-size: 40px; 
+    }
+
+    @media screen and (min-width: resolution("mobile")){
+        font-size: 58px; 
+    }
+
+    @media screen and (min-width: 600px){
+        font-size: 64px; 
+    }
+}
+.height-80px { 
+    font-size: 32px; 
+    @media screen and (min-width: 380px){
+        font-size: 40px; 
+    }
+    @media screen and (min-width: resolution("mobile")){
+        font-size: 58px; 
+    }
+    @media screen and (min-width: 600px){
+        font-size: 64px; 
+    }
+    @media screen and (min-width: resolution("tablet")){
+        font-size: 80px; 
+    }
+}
+
 
 .padded-false {
     padding: 0;

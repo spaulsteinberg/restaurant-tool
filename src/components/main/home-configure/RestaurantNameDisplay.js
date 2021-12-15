@@ -1,13 +1,16 @@
 import React from 'react'
 import EditIconButton from '../../utility/EditIconButton'
 
-const RestaurantNameDisplay = ({ restaurantName, handleSetEditable }) => {
+const RestaurantNameDisplay = ({ config, handleSetEditable, previewMode = false }) => {
+
     return (
         <React.Fragment>
-            <div className="input-container">
-                <h1>{restaurantName}</h1>
+            <div className={previewMode ? "" : "input-container"}>
+                <h1 className={`text-${config.color} height-${config.height} weight-${config.weight} font-${config.font}`}>
+                    {config.display}
+                </h1>
             </div>
-            <EditIconButton className="button-styles" text="" onClick={handleSetEditable} />
+            { previewMode ? null : <EditIconButton className="button-styles" text="" onClick={handleSetEditable} />}
         </React.Fragment>
     )
 }
