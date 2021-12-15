@@ -10,8 +10,11 @@ import useWideView from '../../../hooks/useWideView';
 import HomeRouteButtons from './HomeRouteButtons';
 import OpenModalPrompt from './create-route-button/OpenModalPrompt';
 import ShowMoreWidescreenArrow from './ShowMoreWidescreenArrow';
+import InputRestaurantName from './InputRestaurantName';
+import useHeightView from '../../../hooks/useHeightView';
 
-const InputBackground = ({photo, routeButtons}) => {
+
+const InputBackground = ({photo, routeButtons, restNameData}) => {
     const dispatch = useDispatch()
     const fileInputRef = useRef();
     const [uploadState, setUploadState] = useState({loading: false, success: null, error: null})
@@ -20,6 +23,7 @@ const InputBackground = ({photo, routeButtons}) => {
     const mobileView = useWideView(500).wideView;
     const tabletView = useWideView(768).wideView;
     const wideView = useWideView(992).wideView;
+    const height = useHeightView(420);
 
     const handleButtonUploadClick = () => {
         fileInputRef.current.click()
@@ -71,6 +75,7 @@ const InputBackground = ({photo, routeButtons}) => {
     
     return (
         <div className="background-photo-input" style={{backgroundImage: `url(${photo})`}}>
+            <InputRestaurantName restNameData={restNameData} />
             <SelectPhotoInput 
                 fileInputRef={fileInputRef} 
                 imageIsUploading={uploadState.loading} 
@@ -86,7 +91,7 @@ const InputBackground = ({photo, routeButtons}) => {
                 handleShowModal={handleShowModal}
                 handleClose={handleCloseModal}/>
             <OpenModalPrompt handleShowModal={handleShowModal} />
-            { mobileView ? <ShowMoreWidescreenArrow handleDownscrollClick={handleDownscrollClick} /> : null }
+            { mobileView && height ? <ShowMoreWidescreenArrow handleDownscrollClick={handleDownscrollClick} /> : null }
             <SelectPhotoFeedback open={snackbarOpen} success={uploadState.success} error={uploadState.error} handleClose={handleClose} />
         </div>
     )
