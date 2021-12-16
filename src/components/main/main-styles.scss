@@ -60,6 +60,11 @@
 }
 
 /************* Profile styles *************/
+
+.manage-permissions-toggle {
+    text-decoration: underline;
+    color: $BOOTSTRAP_PRIMARY;
+}
 .gradient-profile {
     background: #C6FFDD;
     background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);

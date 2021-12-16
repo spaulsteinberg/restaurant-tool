@@ -4,6 +4,7 @@ import goalReducer from './goals/goalReducer';
 import { menuReducer } from './menus/menuReducer';
 import inventoryReducer from './inventory/inventoryReducer';
 import homeReducer from './home/homeReducer';
+import userStoreReducer from './user/userReducer';
 
 const rootReducer = combineReducers({
     orders: orderReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     menus: menuReducer,
     inventory: inventoryReducer,
     home: homeReducer,
+    users: userStoreReducer,
 });
 
 export default rootReducer;

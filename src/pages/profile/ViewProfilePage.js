@@ -7,11 +7,13 @@ import ProfileGoalTransition from '../../components/main/profile/ProfileGoalTran
 import ViewProfileReadOnlyDisplayEmail from '../../components/main/profile/ViewProfileReadOnlyDisplayEmail';
 import ViewProfileFormBody from '../../components/main/profile/ViewProfileFormBody';
 import ViewProfileHeader from '../../components/main/profile/ViewProfileHeader';
+import useRoles from '../../hooks/useRoles';
 
 const ViewProfilePage = () => {
     const {currentUser} = useAuth();
     const {user, setOrCreateUserProfile, getUserFromProfile, userExistsInLocalStorage, profileError} = useUserContext();
     const [edit, setEdit] = useState(false);
+    const roles = useRoles()
     // if the user is not null/undefined, has keys and there is no error grabbing the profile have the current state be that user. else empty form
     const emptyFormState = {firstName: '', lastName: '', restaurant: '', title: ''}
     const initialState = user && Object.keys(user).length !== 0 && !profileError ? user : emptyFormState
@@ -117,6 +119,8 @@ const ViewProfilePage = () => {
                             loading={loading}
                             error={error}
                             success={success}
+                            isAdmin={roles?.admin}
+                            email={currentUser.email}
                             handleCancelClick={handleCancelClick}
                             handleEditClick={handleEditClick}
                         />

@@ -30,13 +30,13 @@ export const updateMenuItemsInSection = (menus, updateId) => {
 export const updateCurrentMenu = (updateIdOld, updateIdNew) => {
     let batch = db.batch();
 
-    if (updateIdOld){
+    if (updateIdOld) {
         let updateOldRef = db.collection(process.env.REACT_APP_MENU_DB_COLLECTION).doc(updateIdOld);
-        batch.update(updateOldRef, {"current": false});
+        batch.update(updateOldRef, { "current": false });
     }
-    
+
     let updateNewRef = db.collection(process.env.REACT_APP_MENU_DB_COLLECTION).doc(updateIdNew);
-    batch.update(updateNewRef, {"current": true});
+    batch.update(updateNewRef, { "current": true });
 
     return batch.commit();
 }
@@ -64,8 +64,8 @@ export const editInventoryItemReq = (id, count, cost) => {
 
 export const removeInventoryItemReq = id => {
     return db.collection(process.env.REACT_APP_INVENTORY_DB_COLLECTION)
-    .doc(id)
-    .delete()
+        .doc(id)
+        .delete()
 }
 
 export const addInventoryItemReq = item => {
@@ -75,52 +75,52 @@ export const addInventoryItemReq = item => {
 
 export const editRestaurantName = newName => {
     return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
-    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
-    .update({
-        name: newName
-    })
+        .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+        .update({
+            name: newName
+        })
 }
 
 export const editRestaurantDescription = newDescription => {
     return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
-    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
-    .update({
-        description: newDescription
-    })
+        .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+        .update({
+            description: newDescription
+        })
 }
 
 export const addRestaurantLink = newLink => {
     return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
-    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
-    .update({
-        links: firebase.firestore.FieldValue.arrayUnion(newLink)
-    })
+        .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+        .update({
+            links: firebase.firestore.FieldValue.arrayUnion(newLink)
+        })
 }
 
 export const removeRestaurantLink = newLinksArray => {
     return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
-    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
-    .update({ links: newLinksArray })
+        .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+        .update({ links: newLinksArray })
 }
 
 export const updateHomePhoto = newPhoto => {
     return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
-    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
-    .update({ bpAddress: newPhoto })
+        .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+        .update({ bpAddress: newPhoto })
 }
 
 export const addGotoLink = newLink => {
     return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
-    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
-    .update({
-        gotos: firebase.firestore.FieldValue.arrayUnion(newLink)
-    })
+        .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+        .update({
+            gotos: firebase.firestore.FieldValue.arrayUnion(newLink)
+        })
 }
 
 export const editGotoLink = editedGotos => {
     return db.collection(process.env.REACT_APP_HOME_DB_COLLECTION)
-    .doc(process.env.REACT_APP_HOME_MAIN_DOC)
-    .update({
-        gotos: editedGotos
-    })
+        .doc(process.env.REACT_APP_HOME_MAIN_DOC)
+        .update({
+            gotos: editedGotos
+        })
 }
