@@ -97,9 +97,10 @@
     position: absolute;
     top: 8px;
     left: 0;
-    width: 100vw;
+    width: 100%;
     justify-content: center;
     align-items: flex-end;
+    margin: 0;
     h1 {
         margin-right: .5rem;
     }
@@ -115,6 +116,13 @@
         position: static;
         top: 0;
         left: 0;
+        margin: 1rem 0;
+    }
+     @media screen and (max-width: 500px){
+        position: static;
+        top: 0;
+        left: 0;
+        margin: 1rem 0;
     }
 }
 
@@ -129,12 +137,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     @media  screen and (min-width: resolution("mobile")){
-        height: 100vh
+        height: 100vh;
+        justify-content: center;
     }
     @media screen and (max-height: 460px){
         justify-content: flex-start;
+        height: 150vh
     }
 }
 
