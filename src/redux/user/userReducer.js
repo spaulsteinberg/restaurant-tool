@@ -14,6 +14,8 @@ const userStoreReducer = (state = initialState, action) => {
             return { ...state, loading: false, data: action.payload, error: null }
         case TYPES.GET_USERS_ERROR:
             return { ...state, loading: false, data: null, error: action.payload }
+        case TYPES.SAVE_USERS:
+            return { ...state, data: action.payload}
         default:
             return state;
     }

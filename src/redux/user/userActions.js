@@ -21,6 +21,13 @@ export const getUsersError = error => {
     }
 }
 
+export const saveUsers = users => {
+    return {
+        type: TYPES.SAVE_USERS,
+        payload: users
+    }
+}
+
 export const getUsersRequest = (isAdmin, email) => {
     return async (dispatch) => {
         if (!isAdmin) dispatch(getUsersError("User has insufficient permissions."));
@@ -30,8 +37,9 @@ export const getUsersRequest = (isAdmin, email) => {
         .get()
         .then(snapshot => {
             if (snapshot && snapshot.docs){
-                console.log(snapshot)
-                dispatch(getUsersSuccess(snapshot.docs.map(s => s.data())))
+                dispatch(getUsersSuccess(snapshot.docs.map(s => {
+                    return { id: s.id, ...s.data()}
+                })))
             } else {
                 console.log("no users found.")
                 dispatch(getUsersError("No users found!"))

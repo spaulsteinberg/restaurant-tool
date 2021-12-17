@@ -15,16 +15,16 @@ const EditUserPermissions = ({open, handleClose, isAdmin, email}) => {
     const usersState = useSelector(state => state.users)
 
     useEffect(() => {
-        dispatch(getUsersRequest(isAdmin, email))
-    }, [dispatch, isAdmin, email])
+        !usersState.data && dispatch(getUsersRequest(isAdmin, email))
+    }, [usersState.data, dispatch, isAdmin, email])
 
     return (
         <Dialog open={open} onClose={handleClose}>
             <DialogTitle>{ usersState.loading ? "Loading Users" : "Viewing Current Users" }</DialogTitle>
             <DialogContent>
                 <PermissionsLoading loading={usersState.loading} />
-                <PermissionsContent data={usersState.data} />
-                <PermissionsError error={usersState.error} />
+                { !usersState.loading ? <PermissionsContent data={usersState.data} isAdmin={isAdmin} /> : null}
+                { !usersState.loading ? <PermissionsError error={usersState.error} /> : null }
             </DialogContent>
         </Dialog>
     )
