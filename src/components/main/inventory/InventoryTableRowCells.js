@@ -8,7 +8,7 @@ import { editInventoryItem, removeInventoryItem } from '../../../redux/inventory
 import useWideView from '../../../hooks/useWideView';
 
 
-const InventoryTableRowCells = ({item}) => {
+const InventoryTableRowCells = ({item, userHasWritePermissions}) => {
 
     const [edit, setEdit] = useState(false)
     const [editItemForm, setEditItemForm] = useState({count: '', cost: ''})
@@ -85,8 +85,8 @@ const InventoryTableRowCells = ({item}) => {
                     <>
                         <TableCell component="th" scope="row" align="left" style={{ paddingLeft: "2rem" }} width="25%">{item.consumable}</TableCell>
                         {
-                            !edit 
-                            ? <InventoryCellDisplay item={item} editClick={handleEditClick} removeClick={handleRemoveClick} wideView={wideView} loading={loading}/>
+                            !edit
+                            ? <InventoryCellDisplay item={item} editClick={handleEditClick} removeClick={handleRemoveClick} wideView={wideView} loading={loading} userHasWritePermissions={userHasWritePermissions} />
                             : <InventoryCellAction 
                                     handleSave={handleSaveClick} 
                                     handleDiscard={handleCancelEditClick} 

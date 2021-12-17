@@ -7,7 +7,7 @@ import InventoryFilterCategory from './InventoryFilterCategory'
 import SearchInventory from './SearchInventory'
 
 
-const InventoryTableActionBar = ({value, handleSearchChange, handleFilterChange, categoryList, categoryValue}) => {
+const InventoryTableActionBar = ({value, handleSearchChange, handleFilterChange, categoryList, categoryValue, userHasWritePermissions}) => {
 
     const {wideView} = useWideView(500);
     const [show, setShow] = useState(false);
@@ -43,7 +43,7 @@ const InventoryTableActionBar = ({value, handleSearchChange, handleFilterChange,
                     </React.Fragment>
             }
             <div className="add-inventory-item-container">
-                <InventoryAddItem wideView={wideView} onClick={handleOpen}/>
+                { userHasWritePermissions && <InventoryAddItem wideView={wideView} onClick={handleOpen}/> } 
             </div>
             <InventoryAddModal show={show} handleClose={() => setShow(false)} itemsPresent={names}/>
         </div>

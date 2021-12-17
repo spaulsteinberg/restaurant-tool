@@ -3,11 +3,11 @@ import TableCell from '@material-ui/core/TableCell';
 import PropTypes from 'prop-types';
 import SortableIcon from './SortableIcon';
 
-const TableHeader = ({columnNames, click, active, ...rest}) => {
+const TableHeader = ({columnNames, click, userHasWritePermissions, active, ...rest}) => {
     return (
         <>
             {columnNames.map((column, i) => 
-                <TableCell key={column.name} className={`${active === i ? "table-header table-active-column" : "table-header"} ${column.sortable && "sortable-table-header"}`} onClick={click} {...rest}>{column.name}
+                <TableCell key={column.name} className={`${active === i ? "table-header table-active-column" : "table-header"} ${column.sortable && "sortable-table-header"} ${ i === 0 ? "text-left" : userHasWritePermissions ? "text-center" : "text-end"}`} onClick={click} {...rest}>{column.name}
                         {column.sortable && 
                             <sup>
                                 <SortableIcon direction={active === i ? 0 : 1} fill={active === i ? "#0d6efd" : "black"}/>

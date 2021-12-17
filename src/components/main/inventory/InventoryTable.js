@@ -8,19 +8,22 @@ import SortableIcon from '../../utility/SortableIcon';
 import { TableColumnSortable } from '../../../models/main/tableColums';
 import { INVENTORY_COLS, defaultDropDownText } from '../../../constants/constants';
 
-const InventoryTable = ({inventory}) => {
+const InventoryTable = ({inventory, userHasWritePermissions}) => {
 
-    
     const [searchValue, setSearchValue] = useState('');
     const [categoryValue, setCategoryFilterValue] = useState(defaultDropDownText);
     const [availableCategories, setAvailableCategories] = useState(Object.keys(inventory.categories))
     const [tableItems, setTableItems] = useState([...inventory.names]);
 
-    const columnNames = [
+    const columnNames =  userHasWritePermissions ? [
         new TableColumnSortable(INVENTORY_COLS.ITEM, true),
         new TableColumnSortable(INVENTORY_COLS.STOCK, true),
         new TableColumnSortable(INVENTORY_COLS.COST, true),
         new TableColumnSortable(INVENTORY_COLS.ACTIONS, false),
+    ] : [
+        new TableColumnSortable(INVENTORY_COLS.ITEM, true),
+        new TableColumnSortable(INVENTORY_COLS.STOCK, true),
+        new TableColumnSortable(INVENTORY_COLS.COST, true),
     ]
 
     // sorting values and states
@@ -105,12 +108,13 @@ const InventoryTable = ({inventory}) => {
                 handleFilterChange={handleFilterChange}
                 categoryList={availableCategories}
                 categoryValue={categoryValue}
+                userHasWritePermissions={userHasWritePermissions}
                 />
             <Paper>
                 <TableContainer>
                     <Table>
-                        <InventoryTableHeader active={activeColumn.index} click={activateColumn} columnNames={columnNames}/>
-                        <InventoryTableBody itemKeys={tableItems.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)} />
+                        <InventoryTableHeader active={activeColumn.index} click={activateColumn} columnNames={columnNames} userHasWritePermissions={userHasWritePermissions} />
+                        <InventoryTableBody itemKeys={tableItems.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)} userHasWritePermissions={userHasWritePermissions} />
                     </Table>
                 </TableContainer>
                 <TablePagination
