@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateMenuItemsInSection } from '../../../api'
+import { updateMenuItemsInSection } from '../../../api/menuApi';
 import { FOOD_KEY, ITEM_TYPES, menuImageCollection } from '../../../constants/constants'
 import { addItemSuccess } from '../../../redux/menus/menuActions'
 import { uploadImageFile, validateDescription, validateFormItemsExist, validatePrice } from '../../../utils'

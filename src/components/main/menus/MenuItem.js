@@ -8,7 +8,7 @@ import ItemDisplay from './ItemDisplay';
 import ProgressBar from '../../utility/ProgressBar';
 import ItemForm from './ItemForm';
 import EditIconButton from '../../utility/EditIconButton';
-import { updateMenuItem, updateMenuItemsInSection } from '../../../api';
+import { updateMenuItem, updateMenuItemsInSection } from '../../../api/menuApi';
 import { uploadImageFile, validateDescription, validateFormItemsExist, validatePrice } from '../../../utils';
 import RemoveItemButton from '../../utility/RemoveItemButton';
 

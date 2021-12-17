@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { addMainMenuSuccess, postDeleteMainMenu } from '../../../redux/menus/menuActions';
 import AddMainMenuForm from './AddMainMenuForm';
 import { validateDescription } from '../../../utils';
-import { addMainMenuToMenuList } from '../../../api';
+import { addMainMenuToMenuList } from '../../../api/menuApi';
 import { useHistory } from 'react-router-dom';
 import MenuSelectionItem from './MenuSelectionItem';
 import MenuSelectionButton from './MenuSelectionButton';

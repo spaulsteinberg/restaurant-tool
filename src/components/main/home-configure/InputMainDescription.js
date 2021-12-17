@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { editRestaurantDescription } from '../../../api'
+import { editRestaurantDescription } from '../../../api/homeApi';
 import { editRestaurantDescriptionAct } from '../../../redux/home/homeActions'
 import DescriptionDisplay from './DescriptionDisplay'
 import DescriptionInput from './DescriptionInput'

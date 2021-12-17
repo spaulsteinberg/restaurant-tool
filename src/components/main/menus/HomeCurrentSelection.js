@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import SetCurrentMenuForm from './SetCurrentMenuForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCurrentMenu } from '../../../api';
+import { updateCurrentMenu } from '../../../api/menuApi';
 import { updateCurrentMenuTag } from '../../../redux/menus/menuActions';
 import { Alert } from 'react-bootstrap';
 import LoadingSpinner from '../../utility/LoadingSpinner';

@@ -9,7 +9,7 @@ import SaveButton from '../../utility/SaveButton';
 import RemoveItemButton from '../../utility/RemoveItemButton';
 import ProgressBar from '../../utility/ProgressBar';
 import { circleSlashForCancelPaths } from '../../../constants/svg/svgs';
-import { addInventoryItemReq } from '../../../api';
+import { addInventoryItemReq } from '../../../api/inventoryApi';
 import { useDispatch } from 'react-redux';
 import { addInventoryItem } from '../../../redux/inventory/inventoryActions';
 import { standardizeString } from '../../../utils';

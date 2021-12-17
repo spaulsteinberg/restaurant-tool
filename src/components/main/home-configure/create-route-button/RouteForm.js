@@ -6,7 +6,7 @@ import ChooseRouteAttrSelect from './ChooseRouteAttrSelect'
 import ChooseRouteAttrInput from './ChooseRouteAttrInput'
 import PreviewButton from './PreviewButton'
 import SubmitAddFormButton from './SubmitAddFormButton'
-import { addGotoLink, editGotoLink } from '../../../../api'
+import { addGotoLink, editGotoLink } from '../../../../api/homeApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { addGotoLinkAct, editGotoLinkAct } from '../../../../redux/home/homeActions'
 

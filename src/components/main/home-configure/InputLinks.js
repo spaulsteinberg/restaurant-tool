@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { addRestaurantLink, removeRestaurantLink } from '../../../api'
+import { addRestaurantLink, removeRestaurantLink } from '../../../api/homeApi';
 import { useDispatch } from 'react-redux'
 import { addRestaurantLinkAct, removeRestaurantLinkAct } from '../../../redux/home/homeActions'
 import LinkDisplay from './LinkDisplay'

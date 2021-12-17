@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux';
-import { updateHomePhoto } from '../../../api';
+import { updateHomePhoto } from '../../../api/homeApi';
 import { homeImageCollection } from '../../../constants/constants';
 import { updateHomePhotoAct } from '../../../redux/home/homeActions';
 import { uploadImageFile } from '../../../utils';

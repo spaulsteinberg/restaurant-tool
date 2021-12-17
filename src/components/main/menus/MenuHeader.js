@@ -4,7 +4,7 @@ import { circleSlashForCancelPaths, pencilOutlineFull, saveIcon } from '../../..
 import HeaderForm from './HeaderForm'
 import HeaderDisplay from './HeaderDisplay'
 import { MAIN_MENU } from '../../../constants/constants'
-import { updateMainMenuTitleAndDescription, updateMenuItem } from '../../../api'
+import { updateMainMenuTitleAndDescription, updateMenuItem } from '../../../api/menuApi';
 import ProgressBar from '../../utility/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteMenuSection, editItemSuccess, editMainMenuSuccess, updateContext } from '../../../redux/menus/menuActions'

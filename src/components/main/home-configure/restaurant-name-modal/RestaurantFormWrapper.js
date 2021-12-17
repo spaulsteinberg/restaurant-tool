@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
-import { editRestaurantName } from '../../../../api'
+import { editRestaurantName } from '../../../../api/homeApi'
 import { editRestaurantNameAct } from '../../../../redux/home/homeActions'
 
 

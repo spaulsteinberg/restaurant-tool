@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TableCell from '@material-ui/core/TableCell'
 import InventoryCellDisplay from './InventoryCellDisplay';
 import InventoryCellAction from './InventoryCellAction';
-import { editInventoryItemReq, removeInventoryItemReq } from '../../../api';
+import { editInventoryItemReq, removeInventoryItemReq } from '../../../api/inventoryApi';
 import { useDispatch } from 'react-redux';
 import { editInventoryItem, removeInventoryItem } from '../../../redux/inventory/inventoryActions';
 import useWideView from '../../../hooks/useWideView';

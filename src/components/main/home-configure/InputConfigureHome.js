@@ -15,7 +15,7 @@ const InputConfigureHome = () => {
 
     useEffect(() => {
         theme.dispatch({type: UNSET_PADDED})
-        dispatch(retrieveHomeConfig())
+        !homeState.data && dispatch(retrieveHomeConfig())
         return () => {
             theme.dispatch({type: SET_PADDED})
         }
