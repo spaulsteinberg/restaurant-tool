@@ -21,11 +21,9 @@ const RestaurantFormWrapper = ({ data, handleClose }) => {
             onSubmit={(values) => {
                 const request = { ...values }
                 request.font = request.font.replaceAll(" ", "_");
-                console.log("submitted!", request)
                 setSubmitState({ loading: true, error: null })
                 editRestaurantName(request)
                     .then(res => {
-                        console.log("success!")
                         setSubmitState({ loading: false, error: null })
                         dispatch(editRestaurantNameAct(request))
                         handleClose()

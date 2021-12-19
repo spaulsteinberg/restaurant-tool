@@ -5,6 +5,7 @@ import { loadAllMenus, updateContext } from '../../redux/menus/menuActions';
 import LoadingSpinner from '../../components/utility/LoadingSpinner';
 import ViewMenu from '../../components/main/menus/ViewMenu';
 import { useLocation, useHistory } from "react-router-dom";
+import useRoles from '../../hooks/useRoles';
 
 
 const MenuViewPage = () => {
@@ -12,6 +13,7 @@ const MenuViewPage = () => {
     const menus = useSelector(state => state.menus.menuList);
     const current = useSelector(state => state.menus.current);
     const menuCall = useSelector(state => state.menus.get);
+    const roles = useRoles()
     const location = useLocation();
     const history = useHistory()
 
@@ -53,7 +55,7 @@ const MenuViewPage = () => {
     return (
         <div>
             { menuCall.loading ? <LoadingSpinner alignment="centered" marginTop="2rem">Loading Menus</LoadingSpinner>
-              : menuCall.success ? <ViewMenu names={menuNames} selected={selectedMenu?.name} handleMenuChange={handleMenuDropdownChange} menu={selectedMenu} menus={menus}/> 
+              : menuCall.success ? <ViewMenu names={menuNames} selected={selectedMenu?.name} handleMenuChange={handleMenuDropdownChange} menu={selectedMenu} menus={menus} userCanEdit={roles?.admin || roles?.write} /> 
               : menuCall.error ? <Alert variant="danger" className="mt-4">{menuCall.error}</Alert>
               : null
             }

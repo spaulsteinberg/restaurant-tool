@@ -41,7 +41,6 @@ export const getUsersRequest = (isAdmin, email) => {
                     return { id: s.id, ...s.data()}
                 })))
             } else {
-                console.log("no users found.")
                 dispatch(getUsersError("No users found!"))
             }
         })

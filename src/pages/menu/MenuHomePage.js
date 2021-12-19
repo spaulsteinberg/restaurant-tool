@@ -41,8 +41,8 @@ const MenuHomePage = () => {
             {
                 menuFetch.success && !menuFetch.loading &&
                 <React.Fragment>
-                    <HomeCurrentSelection menus={menuList} />
-                    <AddOrRemoveMenuSelection menus={menuList} current={current}/>
+                    { roles?.write || roles?.admin ? <HomeCurrentSelection menus={menuList} /> : null }
+                    { roles?.write || roles?.admin ? <AddOrRemoveMenuSelection menus={menuList} current={current}/> : null}
                     <ViewEditMenuSelection handleViewClick={handleViewClick} />
                     { roles?.admin ? <ConfigureHomeSelection /> : null }
                 </React.Fragment>

@@ -48,7 +48,6 @@ const RouteForm = ({handleOnClose, modalContentProps, initState = null}) => {
         const request = translateMarginField(values, marginOptions)
         addGotoLink(request)
         .then(res => {
-            console.log("success!")
             dispatch(addGotoLinkAct(request))
             setRequestState({loading: false, error: null})
             handleOnClose();
@@ -69,7 +68,6 @@ const RouteForm = ({handleOnClose, modalContentProps, initState = null}) => {
         gotoCopy[indx] = request
         editGotoLink(gotoCopy)
         .then(res => {
-            console.log("edit success!")
             dispatch(editGotoLinkAct(gotoCopy))
             setRequestState({loading: false, error: null})
             handleOnClose()
@@ -86,7 +84,6 @@ const RouteForm = ({handleOnClose, modalContentProps, initState = null}) => {
         const filteredGotos = [...gotos.filter(goto => goto.display !== initState.display)]
         editGotoLink(filteredGotos)
         .then(res => {
-            console.log("edit success!")
             dispatch(editGotoLinkAct(filteredGotos))
             setRequestState({loading: false, error: null})
             handleOnClose()

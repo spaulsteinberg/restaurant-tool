@@ -39,7 +39,6 @@ const InputBackground = ({photo, routeButtons, restNameData}) => {
     }
 
     const handleInputChange = async (event) => {
-        console.log("beginning upload...")
         const file = event?.target?.files[0];
         if (!file) return
         if (!file.name.match(/.(jpg|jpeg|png|gif)$/i)){
@@ -53,7 +52,6 @@ const InputBackground = ({photo, routeButtons, restNameData}) => {
             const address = await uploadImageFile(file.name, file, homeImageCollection)
             updateHomePhoto(address)
             .then(() => {
-                console.log("updated photo")
                 dispatch(updateHomePhotoAct(address))
                 setUploadState({loading: false, success: 'Image uploaded successfully!', error: ''})
             })
@@ -66,7 +64,6 @@ const InputBackground = ({photo, routeButtons, restNameData}) => {
             setUploadState({loading: true, success: null, error: 'There was an error uploading your image. Please try again.'})
             setSnackbarOpen(true)
         }
-        console.log("end upload")
     }
 
     const handleDownscrollClick = () => window.scrollBy(0, 300)
