@@ -7,3 +7,24 @@
 .card-wrapper {
     @include card-dimensions;
 }
+
+.signup-permission-label {
+    margin-right: 1rem
+}
+
+.signup-permissions-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: .125rem;
+}
+
+@media screen and (min-width: resolution("mobile")){
+    .signup-permissions-group {
+        flex-direction: row;
+        align-items: flex-end;
+        div, label {
+            margin-bottom: 0 !important;
+        }
+    }
+}

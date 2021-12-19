@@ -1,10 +1,10 @@
 import React from 'react'
-import CredentialFormInput from './CredentialFormInput'
+import AuthFormInput from '../AuthFormInput'
 
 const CredentialFormInputs = ({form, handleInputChange, placeholderText}) => {
     return (
         <React.Fragment>
-            <CredentialFormInput
+            <AuthFormInput
                 value={form.email}
                 name="email"
                 type="email"
@@ -13,7 +13,7 @@ const CredentialFormInputs = ({form, handleInputChange, placeholderText}) => {
                 labelText="Email"
                 required groupId="email-group"
                 labelId="email" />
-            <CredentialFormInput
+            <AuthFormInput
                 value={form.password}
                 name="password"
                 type="password"
@@ -23,7 +23,8 @@ const CredentialFormInputs = ({form, handleInputChange, placeholderText}) => {
                 labelText="Password"
                 groupId="password-group"
                 labelId="password" />
-            <CredentialFormInput type="password"
+            <AuthFormInput 
+                type="password"
                 aria-labelledby="password-confirm"
                 name="confirm"
                 value={form.confirm}

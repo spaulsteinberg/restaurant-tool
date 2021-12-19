@@ -11,9 +11,9 @@ import {
     MenuHomePage,
     MenuViewPage,
     ConfigureHomePage,
+    SignUp,
     PageNotFound
 } from '../pages';
-import SignUp from './auth/SignUp';
 import PrivateRoute from './utility/PrivateRoute';
 import Login from './auth/Login';
 import '../components/main/main-styles.scss'

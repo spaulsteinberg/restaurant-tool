@@ -13,10 +13,9 @@ export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
 
-    const signup = (email, password) => {
+    const signup = (email, password, roles = null) => {
         return auth.createUserWithEmailAndPassword(email, password)
                     .then(async userCredentials => {
-                        console.log(userCredentials, userCredentials.user.uid)
                         await db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
                             .doc(userCredentials.user.uid)
                             .set({
@@ -25,7 +24,7 @@ export const AuthProvider = ({children}) => {
                                 lastName: '',
                                 restaurant: '',
                                 title: '',
-                                roles: { read: true, write: false, admin: false }
+                                roles: { read: true, write: roles ? roles.write : false, admin: roles ? roles.admin : null }
                             }, { merge: true })
                     })
                     .catch(err => {
