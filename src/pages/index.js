@@ -1,6 +1,6 @@
 import DashboardPage from "./dashboard/DashboardPage";
 import ViewProfilePage from "./profile/ViewProfilePage";
-import UpdateCredentialsPage from "./profile/UpdateCredentialsPage";
+import UpdateCredentialsPage from "./credentials/UpdateCredentialsPage";
 import OrdersPage from "./orders/OrdersPage";
 import OrderReceiptPage from "./orders/OrderReceiptPage";
 import InventoryPage from "./inventory/InventoryPage";
