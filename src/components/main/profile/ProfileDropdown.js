@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useUserContext } from '../../../contexts/UserContext';
+import { userLogout } from '../../../redux/globalActionTypes';
 
 const ProfileDropdown = ({isCollapsed}) => {
 
@@ -10,11 +12,13 @@ const ProfileDropdown = ({isCollapsed}) => {
     const { clearUserDataFromLocalStorage } = useUserContext();
     const [error, setError] = useState("");
     const history = useHistory();
+    const dispatch = useDispatch()
 
     const handleLogout = async () => {
         setError('')
         try {
             await logout();
+            dispatch(userLogout())
             clearUserDataFromLocalStorage();
             history.push('/login');
         } catch (err) {

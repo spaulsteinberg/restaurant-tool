@@ -36,8 +36,9 @@ export const getUsersRequest = (isAdmin, email) => {
         .where("email", "!=", email)
         .get()
         .then(snapshot => {
+            // if docs exist, filter out the super user and then map the data for the store array
             if (snapshot && snapshot.docs){
-                dispatch(getUsersSuccess(snapshot.docs.map(s => {
+                dispatch(getUsersSuccess(snapshot.docs.filter(doc => doc.data()?.roles?.super_user !== true).map(s => {
                     return { id: s.id, ...s.data()}
                 })))
             } else {

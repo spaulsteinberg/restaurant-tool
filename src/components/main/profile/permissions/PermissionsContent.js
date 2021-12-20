@@ -11,7 +11,7 @@ const PermissionsContent = ({ data, isAdmin }) => {
     const dispatch = useDispatch()
 
     const [permissionState, setPermissionState]
-        = useState(data ? data.map(d => { return { id: d.id, email: d.email, write: d.roles?.write, admin: d.roles?.admin } }) : null)
+        = useState(data ? data.map(d => { return { id: d.id, email: d.email, write: d.roles?.write ? d.roles.write : false, admin: d.roles?.admin ? d.roles.admin : false } }) : null)
 
     const [submitState, setSubmitState] = useState({loading: false, success: null, error: null})
 

@@ -23,7 +23,7 @@ const EditUserPermissions = ({open, handleClose, isAdmin, email}) => {
             <DialogTitle>{ usersState.loading ? "Loading Users" : "Viewing Current Users" }</DialogTitle>
             <DialogContent>
                 <PermissionsLoading loading={usersState.loading} />
-                { !usersState.loading ? <PermissionsContent data={usersState.data} isAdmin={isAdmin} /> : null}
+                { !usersState.loading && usersState.data ? <PermissionsContent data={usersState.data} isAdmin={isAdmin} /> : null}
                 { !usersState.loading ? <PermissionsError error={usersState.error} /> : null }
             </DialogContent>
         </Dialog>

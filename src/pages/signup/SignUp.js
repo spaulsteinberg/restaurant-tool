@@ -12,6 +12,8 @@ import SignUpFooter from '../../components/auth/signup/SignUpFooter';
 import SignUpLoading from '../../components/auth/signup/SignUpLoading';
 import SignUpError from '../../components/auth/signup/SignUpError';
 import SignUpPermissions from '../../components/auth/signup/SignUpPermissions';
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../../redux/globalActionTypes';
 
 const SignUp = () => {
 
@@ -23,6 +25,7 @@ const SignUp = () => {
     const { signup, logout } = useAuth();
     const { clearUserDataFromLocalStorage } = useUserContext();
     const history = useHistory();
+    const dispatch = useDispatch()
 
     const handleInputChange = event => {
         let { name, value } = event.target;
@@ -54,6 +57,7 @@ const SignUp = () => {
             setErrorState('');
             await signup(form.email, form.password, optionalPermissions);
             await logout();
+            dispatch(userLogout())
             clearUserDataFromLocalStorage();
             history.push('/login');
         } catch (err) {
