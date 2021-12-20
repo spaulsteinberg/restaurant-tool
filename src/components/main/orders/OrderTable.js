@@ -2,15 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import {TablePagination} from '@material-ui/core';
 import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { firstNameComparator, lastNameComparator, dateComparator, costComparator } from '../../../utils';
 import OrderTableBody from './OrderTableBody';
-import TableHeader from '../../utility/TableHeader';
 import { TableColumnSortable } from '../../../models/main/tableColums';
 import SortableIcon from '../../utility/SortableIcon';
 import Disclaimer from '../../utility/Disclaimer';
+import OrderTableHeader from './OrderTableHeader';
 
 const tableFilter = (orders, toSearch) => [...orders].filter(order => order.receiptNumber.toLowerCase().includes(toSearch.toLowerCase()))
 
@@ -84,11 +82,7 @@ const OrderTable = ({orders, searchValue}) => {
         <Paper>
             <TableContainer>
                 <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableHeader columnNames={columnNames} click={handleColumnClick} active={activeColumn} />
-                        </TableRow>
-                    </TableHead>
+                    <OrderTableHeader cols={columnNames} handleClick={handleColumnClick} active={activeColumn} />
                     <OrderTableBody orders={innerOrderState.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)} />
                 </Table>
             </TableContainer>

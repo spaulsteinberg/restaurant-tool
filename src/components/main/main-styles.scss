@@ -19,6 +19,7 @@
     } 
 }
 
+
 .alignTextLeft {
     text-align: left;
 }
@@ -457,6 +458,10 @@
     margin: 3rem auto;
 }
 
+.itable-header-cell {
+    padding-left: 2rem !important;
+}
+
 .search-inventory-input-container {
     margin: alignment("centered");
     display: flex;
@@ -495,6 +500,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    padding-left: 1rem;
 }
 
 .inventory-modal-styles {
