@@ -22,7 +22,7 @@ export const UserProvider = (props) => {
     const userExistsInLocalStorage = () => !user || JSON.stringify(user) === '{}' ? false : true
 
     const updateUserContextEmail = (email, key) => {
-        db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
+        return db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
             .doc(key)
             .set({email: email}, {merge: true})
             .then(() => userDispatch({type: UPDATE_USER_EMAIL, payload: email}))

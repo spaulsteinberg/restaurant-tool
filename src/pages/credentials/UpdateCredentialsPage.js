@@ -11,6 +11,7 @@ import CredentialFormInputs from '../../components/auth/credentials/CredentialFo
 import CredentialUpdateButton from '../../components/auth/credentials/CredentialUpdateButton';
 import CredentialLoadingState from '../../components/auth/credentials/CredentialLoadingState';
 import CredentialErrorState from '../../components/auth/credentials/CredentialErrorState';
+import Disclaimer from '../../components/utility/Disclaimer';
 
 const UpdateCredentialsPage = () => {
 
@@ -47,19 +48,21 @@ const UpdateCredentialsPage = () => {
         // set load state after the initial checks
         setLoadState(true)
         const promisesToResolve = [];
-        let shouldChangeEmailContext = false;
-        if (form.email !== currentUser.email) {
-            promisesToResolve.push(updateEmail(form.email))
-            shouldChangeEmailContext = true;
-        }
+        let passChange = false
+
         if (form.password) {
+            passChange = true
             promisesToResolve.push(updatePassword(form.password))
+        }
+
+        if (!passChange && form.email !== currentUser.email) {
+            promisesToResolve.push(updateEmail(form.email))
+            promisesToResolve.push(updateUserContextEmail(form.email, currentUser.uid))
         }
 
         Promise.all(promisesToResolve)
             .then(() => {
                 setLoadState(false)
-                shouldChangeEmailContext && updateUserContextEmail(form.email, currentUser.uid)
                 history.push("/")
             })
             .catch(err => {
@@ -72,6 +75,7 @@ const UpdateCredentialsPage = () => {
         <React.Fragment>
             <Card className="card-wrapper alignTextLeft my-4">
                 <CredentialsHeader />
+                <Disclaimer classes="text-center text-info px-1">*Only one credential will be changed at a time. Passwords have priority over email. If you would like to update both, come back to this page.</Disclaimer>
                 <Form className="mx-4">
                     <CredentialFormInputs form={form} handleInputChange={handleInputChange} placeholderText={placeholderText} />
                     <CredentialUpdateButton handleSubmit={handleSubmit} />
