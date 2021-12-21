@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { EMAIL_REGEX } from '../../constants/constants'
 import { useUserContext } from '../../contexts/UserContext';
 import useRoles from '../../hooks/useRoles';
 import NewUserSignup from '../../components/auth/credentials/NewUserSignup';
-import CredentialsHeader from '../../components/auth/credentials/CredentialsHeader';
-import CredentialFormInputs from '../../components/auth/credentials/CredentialFormInputs';
-import CredentialUpdateButton from '../../components/auth/credentials/CredentialUpdateButton';
-import CredentialLoadingState from '../../components/auth/credentials/CredentialLoadingState';
-import CredentialErrorState from '../../components/auth/credentials/CredentialErrorState';
 import Disclaimer from '../../components/utility/Disclaimer';
+import AuthHeader from '../../components/auth/AuthHeader';
+import CredentialForm from '../../components/auth/credentials/CredentialForm';
+
 
 const UpdateCredentialsPage = () => {
 
@@ -74,14 +72,9 @@ const UpdateCredentialsPage = () => {
     return (
         <React.Fragment>
             <Card className="card-wrapper alignTextLeft my-4">
-                <CredentialsHeader />
+                <AuthHeader headerText="Update Credentials" />
                 <Disclaimer classes="text-center text-info px-1">*Only one credential will be changed at a time. Passwords have priority over email. If you would like to update both, come back to this page.</Disclaimer>
-                <Form className="mx-4">
-                    <CredentialFormInputs form={form} handleInputChange={handleInputChange} placeholderText={placeholderText} />
-                    <CredentialUpdateButton handleSubmit={handleSubmit} />
-                    <CredentialLoadingState isLoading={isLoading} />
-                    <CredentialErrorState error={error} />
-                </Form>
+                <CredentialForm form={form} isLoading={isLoading} error={error} handleInputChange={handleInputChange} handleSubmit={handleSubmit} placeholderText={placeholderText} />
             </Card>
             <NewUserSignup canSignUpUser={roles?.admin} />
         </React.Fragment>

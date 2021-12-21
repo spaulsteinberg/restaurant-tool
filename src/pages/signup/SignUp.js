@@ -5,15 +5,15 @@ import { useAuth } from '../../contexts/AuthContext';
 import {EMAIL_REGEX} from '../../constants/constants';
 import '../../components/auth/auth-styles.scss';
 import { useUserContext } from '../../contexts/UserContext';
-import SignUpHeader from '../../components/auth/signup/SignUpHeader';
 import SignUpForm from '../../components/auth/signup/SignUpForm';
 import SignUpButton from '../../components/auth/signup/SignUpButton';
 import SignUpFooter from '../../components/auth/signup/SignUpFooter';
-import SignUpLoading from '../../components/auth/signup/SignUpLoading';
-import SignUpError from '../../components/auth/signup/SignUpError';
 import SignUpPermissions from '../../components/auth/signup/SignUpPermissions';
 import { useDispatch } from 'react-redux';
 import { userLogout } from '../../redux/globalActionTypes';
+import AuthHeader from '../../components/auth/AuthHeader';
+import AuthLoadingStateSpinner from '../../components/auth/AuthLoadingStateSpinner';
+import AuthErrorState from '../../components/auth/AuthErrorState';
 
 const SignUp = () => {
 
@@ -69,12 +69,12 @@ const SignUp = () => {
     return (
         <React.Fragment>
             <Card className="card-wrapper my-4" id="sign-up">
-                <SignUpHeader />
+                <AuthHeader headerText="Sign Up" />
                 <SignUpForm form={form} handleInputChange={handleInputChange} />
                 <SignUpPermissions write={optionalPermissions.write} admin={optionalPermissions.admin} handleChange={handleCheckChange}/>
                 <SignUpButton handleSubmit={handleSubmit} />
-                <SignUpLoading isLoading={isLoading} />
-                <SignUpError error={error} />
+                <AuthLoadingStateSpinner isLoading={isLoading} loadText="Loading..." />
+                <AuthErrorState error={error} margin="mx-4" />
             </Card>
             <SignUpFooter />
         </React.Fragment>

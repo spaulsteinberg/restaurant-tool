@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
-import ResetPassword from './auth/ResetPassword';
 import { 
     DashboardPage, 
     ViewProfilePage, 
@@ -12,10 +11,11 @@ import {
     MenuViewPage,
     ConfigureHomePage,
     SignUp,
+    Login,
+    ResetPassword,
     PageNotFound
 } from '../pages';
 import PrivateRoute from './utility/PrivateRoute';
-import Login from './auth/Login';
 import '../components/main/main-styles.scss'
 import PrivateAdminRoute from './utility/PrivateAdminRoute';
 
