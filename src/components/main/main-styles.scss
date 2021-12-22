@@ -65,6 +65,9 @@
 .manage-permissions-toggle {
     text-decoration: underline;
     color: $BOOTSTRAP_PRIMARY;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .manage-permissions-save-container {
