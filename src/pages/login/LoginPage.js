@@ -6,8 +6,10 @@ import { useUserContext } from '../../contexts/UserContext';
 import AuthHeader from '../../components/auth/AuthHeader';
 import '../../components/auth/auth-styles.scss';
 import LoginForm from '../../components/auth/login/LoginForm';
+import { useDispatch } from 'react-redux';
+import { fetchUserPermissions } from '../../redux/permissions/permissionActions';
 
-const Login = () => {
+const LoginPage = () => {
 
     const initialState = { email: '', password: '' }
     const [form, setFormValues] = useState(initialState);
@@ -16,6 +18,7 @@ const Login = () => {
     const { login } = useAuth();
     const { getUserFromProfile } = useUserContext();
     const history = useHistory();
+    const dispatch = useDispatch()
 
     const handleInputChange = event => {
         let { name, value } = event.target;
@@ -34,6 +37,7 @@ const Login = () => {
         try {
             let [uid, email] = await login(form.email, form.password);
             await getUserFromProfile(uid, email);
+            dispatch(fetchUserPermissions(uid, email))
             setLoadState(false)
             history.push("/")
         } catch (err) {
@@ -52,4 +56,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default LoginPage;

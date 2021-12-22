@@ -15,7 +15,7 @@ import AuthHeader from '../../components/auth/AuthHeader';
 import AuthLoadingStateSpinner from '../../components/auth/AuthLoadingStateSpinner';
 import AuthErrorState from '../../components/auth/AuthErrorState';
 
-const SignUp = () => {
+const SignUpPage = () => {
 
     const initialState = { email: '', password: '', confirm: ''}
     const [form, setFormValues] = useState(initialState);
@@ -81,4 +81,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp;
+export default SignUpPage;

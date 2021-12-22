@@ -10,9 +10,9 @@ import {
     MenuHomePage,
     MenuViewPage,
     ConfigureHomePage,
-    SignUp,
-    Login,
-    ResetPassword,
+    SignUpPage,
+    LoginPage,
+    ResetPasswordPage,
     PageNotFound
 } from '../pages';
 import PrivateRoute from './utility/PrivateRoute';
@@ -26,7 +26,7 @@ const AppRouting = () => {
         { path: "/orders", component: OrdersPage },
         { path: "/profile/view", component: ViewProfilePage },
         { path: "/profile/update", component: UpdateCredentialsPage },
-        { path: "/profile/signup", component: SignUp },
+        { path: "/profile/signup", component: SignUpPage },
         { path: '/orders/order/:id', component: OrderReceiptPage },
         { path: '/menus', component: MenuHomePage },
         { path: "/menus/view", component: MenuViewPage },
@@ -36,8 +36,8 @@ const AppRouting = () => {
         { path: "/menus/configure/home", component: ConfigureHomePage}
     ]
     const publicRoutes = [
-        { path: "/login", component: Login }, 
-        { path: "/forgot-password", component: ResetPassword }, 
+        { path: "/login", component: LoginPage }, 
+        { path: "/forgot-password", component: ResetPasswordPage }, 
         { path: "*", component: PageNotFound }
     ];
 

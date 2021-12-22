@@ -50,8 +50,9 @@ export const UserProvider = (props) => {
             .get()
             .then(doc => {
                 if (doc.exists){
-                    getUserCallToDispatch(doc.data(), email)
-                    resolve(doc.data())
+                    const { roles, ...rest} = doc.data();
+                    getUserCallToDispatch(rest, email)
+                    resolve(rest)
                 } else {
                     resolve(null)
                 }

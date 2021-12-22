@@ -1,38 +1,41 @@
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getPermissionsFromUserObject } from "../api/userApi";
 import { useAuth } from "../contexts/AuthContext";
-import { useUserContext } from "../contexts/UserContext";
 import { userLogout } from "../redux/globalActionTypes";
+import { getPermissionsSuccess } from "../redux/permissions/permissionActions";
 
 const useRoles = () => {
     const dispatch = useDispatch()
+    const permissions = useSelector(state => state.permissions?.roles)
     const [roles, setRoles] = useState();
     const { currentUser, logout } = useAuth();
-    const { user, getUserRoles } = useUserContext();
 
     useEffect(
         () => {
             const fetchRoles = async () => {
                 if (currentUser?.email) {
-                    if (JSON.stringify(user) === '{}') {
-                        let roles = await getUserRoles(currentUser.email);
+                    // no store
+                    if (!permissions) {
+                        let roles = await getPermissionsFromUserObject(currentUser.uid)
                         // set roles or if none exist logout user
-                        if (roles) setRoles(roles)
+                        if (roles && roles.data()) {
+                            setRoles(roles.data().roles)
+                            dispatch(getPermissionsSuccess({roles: roles.data().roles, email: currentUser.email}))
+                        }
                         else {
+                            console.error("Permissions call failed. Please try logging back in.")
                             dispatch(userLogout())
                             logout()
                         }
-                    } else if (!user?.roles) {
-                        // user has no assigned roles and needs to contact admin
-                        dispatch(userLogout())
-                        logout();
                     } else {
-                        setRoles(user.roles)
+                        console.log("[ROLES] -- already exists")
+                        setRoles(permissions)
                     }
                 }
             }
             fetchRoles();
-        }, [currentUser, user, logout, getUserRoles, dispatch])
+        }, [currentUser, logout, dispatch, permissions])
     return roles
 }
 

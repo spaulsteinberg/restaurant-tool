@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import AuthHeader from '../../components/auth/AuthHeader';
 import ResetPasswordForm from '../../components/auth/reset-password/ResetPasswordForm';
 
-const ResetPassword = () => {
+const ResetPasswordPage = () => {
 
     const [email, setEmailValue] = useState('');
     const [error, setErrorState] = useState('');
@@ -52,4 +52,4 @@ const ResetPassword = () => {
     )
 }
 
-export default ResetPassword;
+export default ResetPasswordPage;

@@ -6,6 +6,7 @@ import inventoryReducer from './inventory/inventoryReducer';
 import homeReducer from './home/homeReducer';
 import userStoreReducer from './user/userReducer';
 import { USER_LOGOUT } from './globalActionTypes';
+import permissionReducer from './permissions/permissionReducer';
 
 const appReducer = combineReducers({
     orders: orderReducer,
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
     inventory: inventoryReducer,
     home: homeReducer,
     users: userStoreReducer,
+    permissions: permissionReducer
 });
 
 const rootReducer = (state, action) => {

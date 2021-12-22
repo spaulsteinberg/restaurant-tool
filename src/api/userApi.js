@@ -11,4 +11,6 @@ const updatePermissions = (newPermissions, isAdmin) => {
     return batch.commit()
 }
 
-export { updatePermissions }
+const getPermissionsFromUserObject = async (uid) => db.collection(process.env.REACT_APP_USER_DB_COLLECTION).doc(uid).get()
+
+export { updatePermissions, getPermissionsFromUserObject }

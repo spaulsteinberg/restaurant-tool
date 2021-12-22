@@ -8,9 +8,9 @@ import MenuViewPage from "./menu/MenuViewPage";
 import MenuHomePage from "./menu/MenuHomePage";
 import PageNotFound from "./not-found/PageNotFound";
 import ConfigureHomePage from "./home-configure/ConfigureHomePage";
-import SignUp from "./signup/SignUp";
-import Login from "./login/Login";
-import ResetPassword from "./reset-password/ResetPassword";
+import SignUpPage from "./signup/SignUpPage";
+import LoginPage from "./login/LoginPage";
+import ResetPasswordPage from "./reset-password/ResetPasswordPage";
 
 export { 
     DashboardPage, 
@@ -22,8 +22,8 @@ export {
     MenuViewPage,
     MenuHomePage,
     ConfigureHomePage,
-    SignUp,
-    Login,
-    ResetPassword,
+    SignUpPage,
+    LoginPage,
+    ResetPasswordPage,
     PageNotFound
 }
