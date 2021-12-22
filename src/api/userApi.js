@@ -13,4 +13,10 @@ const updatePermissions = (newPermissions, isAdmin) => {
 
 const getPermissionsFromUserObject = async (uid) => db.collection(process.env.REACT_APP_USER_DB_COLLECTION).doc(uid).get()
 
-export { updatePermissions, getPermissionsFromUserObject }
+const updateUserEmailOnUser = (uid, email) => {
+    return db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
+        .doc(uid)
+        .set({email: email}, {merge: true})
+}
+
+export { updatePermissions, getPermissionsFromUserObject, updateUserEmailOnUser }

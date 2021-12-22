@@ -19,6 +19,8 @@ const permissionReducer = (state = initialState, action) => {
             return { ...state, loading: false, roles: action.payload.roles, email: action.payload.email, error: null }
         case TYPES.GET_PERMISSIONS_ERROR:
             return { ...state, loading: false, roles: null, error: action.payload }
+        case TYPES.SET_PERMISSION_EMAIL:
+            return { ...state, email: action.payload }
         default:
             return state;
     }

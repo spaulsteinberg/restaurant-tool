@@ -29,7 +29,7 @@ const ViewProfilePage = () => {
         if (!userExistsInLocalStorage()) {
             setFetchingProfileDirectly(true)
             setFetchProfileError(false)
-            getUserFromProfile(currentUser.uid, currentUser.email)
+            getUserFromProfile(currentUser.uid)
             .then(data => {
                 data ? setFormState(data) : setFormState({firstName: '', lastName: '', restaurant: '', title: ''})
             })
@@ -59,11 +59,10 @@ const ViewProfilePage = () => {
         if (edit) {
             const requestObj = {
                 ...user,
-                firstName: form.firstName,
-                restaurant: form.restaurant,
-                email: currentUser.email,
-                title: form.title,
-                lastName: form.lastName,
+                firstName: form.firstName.trim(),
+                restaurant: form.restaurant.trim(),
+                title: form.title.trim(),
+                lastName: form.lastName.trim(),
             }
             if (JSON.stringify(requestObj) === JSON.stringify(initialState)) return setEdit(prevState => !prevState)
             try {

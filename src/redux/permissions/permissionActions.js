@@ -21,6 +21,13 @@ export const getPermissionsError = error => {
     }
 }
 
+export const setPermissionsEmail = payload => {
+    return {
+        type: TYPES.SET_PERMISSION_EMAIL,
+        payload: payload
+    }
+}
+
 export const fetchUserPermissions = (uid, email) => {
     return async (dispatch) => {
         dispatch(getPermissions())

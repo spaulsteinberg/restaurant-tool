@@ -36,7 +36,7 @@ const LoginPage = () => {
         }
         try {
             let [uid, email] = await login(form.email, form.password);
-            await getUserFromProfile(uid, email);
+            await getUserFromProfile(uid);
             dispatch(fetchUserPermissions(uid, email))
             setLoadState(false)
             history.push("/")

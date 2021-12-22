@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { userReducer, ADD_USER, CLEAR_USER, UPDATE_USER_EMAIL } from '../reducers/userReducer';
+import { userReducer, ADD_USER, CLEAR_USER } from '../reducers/userReducer';
 import {db} from '../firebase';
 
 const UserContext = React.createContext();
@@ -21,18 +21,15 @@ export const UserProvider = (props) => {
 
     const userExistsInLocalStorage = () => !user || JSON.stringify(user) === '{}' ? false : true
 
-    const updateUserContextEmail = (email, key) => {
-        return db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
-            .doc(key)
-            .set({email: email}, {merge: true})
-            .then(() => userDispatch({type: UPDATE_USER_EMAIL, payload: email}))
-            .catch(err => Promise.reject(err))
-    }
-
     const setOrCreateUserProfile = (payload, key) => {
        db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
          .doc(key)
-         .set(payload)
+         .update({
+            firstName: payload.firstName,
+            restaurant: payload.restaurant,
+            title: payload.title,
+            lastName: payload.lastName
+         })
          .then(() => {
             userDispatch({type: ADD_USER, payload: payload});
             Promise.resolve();
@@ -40,9 +37,9 @@ export const UserProvider = (props) => {
          .catch(err => Promise.reject(err))
     }
     
-    const getUserCallToDispatch = (payload, email) => userDispatch({ type: ADD_USER, payload: {...payload, email} })
+    const getUserCallToDispatch = (payload) => userDispatch({ type: ADD_USER, payload: payload })
 
-    const getUserFromProfile = (uid, email) => {
+    const getUserFromProfile = uid => {
         setProfileError(false)
         return new Promise((resolve, reject) => {
             db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
@@ -50,8 +47,8 @@ export const UserProvider = (props) => {
             .get()
             .then(doc => {
                 if (doc.exists){
-                    const { roles, ...rest} = doc.data();
-                    getUserCallToDispatch(rest, email)
+                    const { roles, email, ...rest} = doc.data();
+                    getUserCallToDispatch(rest)
                     resolve(rest)
                 } else {
                     resolve(null)
@@ -61,37 +58,15 @@ export const UserProvider = (props) => {
         })
     }
 
-    const getUserRoles = (email) => new Promise((resolve, reject) => {
-            db.collection(process.env.REACT_APP_USER_DB_COLLECTION)
-            .where("email", "==", email)
-            .get()
-            .then(snapshot => {
-                // result will be an array but with only one item
-                let roles = null;
-                snapshot.forEach(doc => {
-                    let info = doc.data();
-                    getUserCallToDispatch(info, email)
-                    roles = info.roles;
-                });
-                resolve(roles)
-            })
-            .catch(err => {
-                console.log(err)
-                reject(err)
-            })
-        })
-
     useEffect(() => {
         localStorage.setItem(process.env.REACT_APP_LOCAL_USER_INFO, JSON.stringify(user))
     }, [user])
 
     const value = {
-        getUserRoles,
         clearUserDataFromLocalStorage,
         getUserCallToDispatch,
         userDispatch,
         setOrCreateUserProfile,
-        updateUserContextEmail,
         userExistsInLocalStorage,
         profileError,
         getUserFromProfile,

@@ -3,24 +3,26 @@ import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { EMAIL_REGEX } from '../../constants/constants'
-import { useUserContext } from '../../contexts/UserContext';
 import useRoles from '../../hooks/useRoles';
 import NewUserSignup from '../../components/auth/credentials/NewUserSignup';
 import Disclaimer from '../../components/utility/Disclaimer';
 import AuthHeader from '../../components/auth/AuthHeader';
 import CredentialForm from '../../components/auth/credentials/CredentialForm';
+import { updateUserEmailOnUser } from '../../api/userApi';
+import { setPermissionsEmail } from '../../redux/permissions/permissionActions';
+import { useDispatch } from 'react-redux';
 
 
 const UpdateCredentialsPage = () => {
 
     const { currentUser, updateEmail, updatePassword } = useAuth();
-    const { updateUserContextEmail } = useUserContext();
     const initialState = { email: currentUser.email, password: '', confirm: '' }
     const [form, setFormValues] = useState(initialState);
     const [error, setErrorState] = useState('');
     const [isLoading, setLoadState] = useState(false);
     const history = useHistory();
     const roles = useRoles()
+    const dispatch = useDispatch()
     const placeholderText = "Leave blank to keep the same"
 
     const handleInputChange = event => {
@@ -55,17 +57,19 @@ const UpdateCredentialsPage = () => {
 
         if (!passChange && form.email !== currentUser.email) {
             promisesToResolve.push(updateEmail(form.email))
-            promisesToResolve.push(updateUserContextEmail(form.email, currentUser.uid))
+            promisesToResolve.push(updateUserEmailOnUser(currentUser.uid, form.email))
         }
 
         Promise.all(promisesToResolve)
             .then(() => {
                 setLoadState(false)
+                dispatch(setPermissionsEmail(form.email))
                 history.push("/")
             })
             .catch(err => {
+                console.log(err)
                 setLoadState(false)
-                setErrorState("Failed to update Account.")
+                setErrorState(`Failed to update Account. -- ${err?.message}`)
             })
     }
 
