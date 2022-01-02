@@ -1,6 +1,4 @@
-<div align="center">
 # Restaurant Tool - Rapid Restaurant Ordering
- </div> 
 Tool for tracking orders, analyzing trends, inventory, menu creation, custom home page generation, goal-tracking, and more! Just reach out to create an account, then get started immediately with your admin tool to configure your custom site!
 
 ## Build Your Restaurants Site At Your Own Pace
