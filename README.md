@@ -1,70 +1,42 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Your Admin tool controls the heart and soul of your website: How you configure your menus, ordering, and home screen are how you present your restaurant to customers - and you should have full control over that. Build your website at your own pace on
+this user-friendly interface. Check out the descriptions, screenshots, and videos below to learn more!
 
-In the project directory, you can run:
+## The Dashboard
 
-### `npm start`
+On a successful login, the dashboard is the first thing you see. Get weekly revenue, order, and average sale price statistics at a glance with the dashboard top bar. Look below on desktop and scroll down on a mobile screen to get analytical charts on orders, revenue, and food and beverage consumption. These are helpful to make business decisions based off what sells, and what flops with your customers. Additionally, the progress of any personal order/revenue goals will be displayed on this screen.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Ordering Table
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+View orders by a weekly, monthly, tri-monthly, or yearly basis. Visible in the table is the receipt number, name on the order, email, date, amount, and link to view the full receipt. Features include ascending/descending sort and search bar based off receipt number to quickly locate unique orders. Orders are displayed in a user-friendly Material UI table with row and pagination options. Clicking on the 'View Order' link will show a more detailed order view than the table, along with the exact time and credit card (last 4 digits) used to complete the order. 
 
-### `npm test`
+## Inventory Tracker
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Search whats in stock, add to your inventory, and/or edit what you have. The Inventory tab allows you to do it all. Search by item name or filter by category for a more thorough search. Users with write or admin privileges are able to add new inventory items, edit the quantity or price of each item, or delete items. Items are displayed in a user-friendly Material UI table with row and pagination options.
 
-### `npm run build`
+## Profile Page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Profile pages are user-specific. Any authenticated user can add their first and last names, restaurant name, and title. Emails are not editable, since they are what is primarily used to determine a unique user. Admin users will also be able to edit user permissions on this page via the permissions modal.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Goal Setting
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create individual goals by choosing a subject, timeable, and deliverable. Progress on these goals can be viewed in the dashboard. You can also view, edit, and delete goals. This feature is completely on an individual basis and is optional.
 
-### `npm run eject`
+## Menu Management
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The menu feature is what allows you to create the menus your customers see in realtime. What one might see here depends on access levels - A read-only user can only view the existing menus. A read/write user can view and edit menu items, change the current visible menu, and add/remove menus. Admin users have access to all of those features, in addition to configuring the home screen for the client view (see "Home Screen Creation" below). Menus are completely customizable and are progagated in realtime to the client. Menu titles, descriptions, sub-sections, and items are all easy to edit or remove. Tagging items with categories, pricing, etc. are all vital to accurate revenue and statistics, along with ensuring accurate pricing information on the client-side. Menus can be added and removed, and setting the current menu is as easy as moving a radio button. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Home Screen Creation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+An intriguing home screen goes a long way to bringing and keeping users to your website, and is usually their first impression. This can have a significant effect on sales, so it is important that its done right. Here, you can set up a clear, attention grabbing background picture, a clear and suffice banner name, hoverable relative button links, a restaurant description, and helpful links. All of this is optional, of course, since it is up to the user to design their own page. Editable sections are clearly illustrated, and interactive modals exist to preview changes and find out what looks and fits best.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Security
 
-## Learn More
+All features are managed through Google Firebase Authentication, and includes logins, signing up new users, password reset, and updating existing credentials. Signing up new users requires authenticated admin permissions, while updating existing credentials can be done by any authenticated user. See more on permission creation below at "Managing Users and Permissions".
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Managing Users and Permissions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Adding and removing authenticated users is easy. Simply sign up the new user with an 
+optional set of permissions, and they will be given all allowed access. Permissions can be edited by any user with admin status via the profile page. Only admins can view and edit users, which does not include the super user (whoever created the main tool account).
