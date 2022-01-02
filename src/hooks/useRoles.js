@@ -29,7 +29,6 @@ const useRoles = () => {
                             logout()
                         }
                     } else {
-                        console.log("[ROLES] -- already exists")
                         setRoles(permissions)
                     }
                 }
