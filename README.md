@@ -12,6 +12,8 @@ On a successful login, the dashboard is the first thing you see. Get weekly reve
 
 ## Ordering Table
 
+![Ordering Demo](img/order-demo.gif)
+
 View orders by a weekly, monthly, tri-monthly, or yearly basis. Visible in the table is the receipt number, name on the order, email, date, amount, and link to view the full receipt. Features include ascending/descending sort and search bar based off receipt number to quickly locate unique orders. Orders are displayed in a user-friendly Material UI table with row and pagination options. Clicking on the 'View Order' link will show a more detailed order view than the table, along with the exact time and credit card (last 4 digits) used to complete the order. 
 
 ## Inventory Tracker
