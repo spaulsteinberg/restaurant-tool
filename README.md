@@ -18,6 +18,8 @@ View orders by a weekly, monthly, tri-monthly, or yearly basis. Visible in the t
 
 ## Inventory Tracker
 
+![Inventory Demo](img/inventory-demo.gif)
+
 Search whats in stock, add to your inventory, and/or edit what you have. The Inventory tab allows you to do it all. Search by item name or filter by category for a more thorough search. Users with write or admin privileges are able to add new inventory items, edit the quantity or price of each item, or delete items. Items are displayed in a user-friendly Material UI table with row and pagination options.
 
 ## Profile Page
