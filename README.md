@@ -6,7 +6,7 @@ this user-friendly interface. Check out the descriptions, screenshots, and video
 
 ## The Dashboard
 
-![Login to Dashboard](img/login_to_dash.gif)
+![Login to Dashboard](img/login_to_dash_vid.gif)
 
 On a successful login, the dashboard is the first thing you see. Get weekly revenue, order, and average sale price statistics at a glance with the dashboard top bar. Look below on desktop and scroll down on a mobile screen to get analytical charts on orders, revenue, and food and beverage consumption. These are helpful to make business decisions based off what sells, and what flops with your customers. Additionally, the progress of any personal order/revenue goals will be displayed on this screen.
 
