@@ -47,6 +47,8 @@ Profile pages are user-specific. Any authenticated user can add their first and 
 <a name="menu-management"></a>
 ## Menu Management
 
+![Menu Demo](img/menu-demo.gif)
+
 The menu feature is what allows you to create the menus your customers see in realtime. What one might see here depends on access levels - A read-only user can only view the existing menus. A read/write user can view and edit menu items, change the current visible menu, and add/remove menus. Admin users have access to all of those features, in addition to configuring the home screen for the client view (see "Home Screen Creation" below). Menus are completely customizable and are progagated in realtime to the client. Menu titles, descriptions, sub-sections, and items are all easy to edit or remove. Tagging items with categories, pricing, etc. are all vital to accurate revenue and statistics, along with ensuring accurate pricing information on the client-side. Menus can be added and removed, and setting the current menu is as easy as moving a radio button. 
 
 <a name="home-screen"></a>
