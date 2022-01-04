@@ -4,8 +4,7 @@
 - [Dashboard](#dashboard)
 - [Ordering Table](#ordering)
 - [Inventory Tracker](#inventory)
-- [Profile Page](#profile)
-- [Goal Setting](#goal-setting)
+- [Profile and Goals](#profile-goals)
 - [Menu Management](#menu-management)
 - [Home Screen Creation](#home-screen)
 - [Security](#security)
@@ -38,15 +37,10 @@ View orders by a weekly, monthly, tri-monthly, or yearly basis. Visible in the t
 
 Search whats in stock, add to your inventory, and/or edit what you have. The Inventory tab allows you to do it all. Search by item name or filter by category for a more thorough search. Users with write or admin privileges are able to add new inventory items, edit the quantity or price of each item, or delete items. Items are displayed in a user-friendly Material UI table with row and pagination options.
 
-<a name="profile"></a>
-## Profile Page
+<a name="profile-goals"></a>
+## Profile and Goals
 
-Profile pages are user-specific. Any authenticated user can add their first and last names, restaurant name, and title. Emails are not editable, since they are what is primarily used to determine a unique user. Admin users will also be able to edit user permissions on this page via the permissions modal.
-
-<a name="goal-setting"></a>
-## Goal Setting
-
-Create individual goals by choosing a subject, timeable, and deliverable. Progress on these goals can be viewed in the dashboard. You can also view, edit, and delete goals. This feature is completely on an individual basis and is optional.
+Profile pages are user-specific. Any authenticated user can add their first and last names, restaurant name, and title. Emails are not editable, since they are used to determine a unique user. Admin users will also be able to edit user permissions on this page via the permissions modal. Goals are created by choosing a subject, timeable, and deliverable. Progress on these goals can be viewed in the dashboard. You can also view, edit, and delete goals. This feature is completely on an individual basis and is optional.
 
 <a name="menu-management"></a>
 ## Menu Management
