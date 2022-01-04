@@ -40,6 +40,8 @@ Search whats in stock, add to your inventory, and/or edit what you have. The Inv
 <a name="profile-goals"></a>
 ## Profile and Goals
 
+![Profile Demo](img/profile-demo.gif)
+
 Profile pages are user-specific. Any authenticated user can add their first and last names, restaurant name, and title. Emails are not editable, since they are used to determine a unique user. Admin users will also be able to edit user permissions on this page via the permissions modal. Goals are created by choosing a subject, timeable, and deliverable. Progress on these goals can be viewed in the dashboard. You can also view, edit, and delete goals. This feature is completely on an individual basis and is optional.
 
 <a name="menu-management"></a>
