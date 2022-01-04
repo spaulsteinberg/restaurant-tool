@@ -7,8 +7,7 @@
 - [Profile and Goals](#profile-goals)
 - [Menu Management](#menu-management)
 - [Home Screen Creation](#home-screen)
-- [Security](#security)
-- [Managing Users and Permissions](#managing-users-permissions)
+- [Security, Users, and Permissions](#security)
 
 <a name="overview"></a>
 ## Overview
