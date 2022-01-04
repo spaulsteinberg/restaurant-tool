@@ -57,12 +57,6 @@ The menu feature is what allows you to create the menus your customers see in re
 An intriguing home screen goes a long way to bringing and keeping users to your website, and is usually their first impression. This can have a significant effect on sales, so it is important that its done right. Here, you can set up a clear, attention grabbing background picture, a clear and suffice banner name, hoverable relative button links, a restaurant description, and helpful links. All of this is optional, of course, since it is up to the user to design their own page. Editable sections are clearly illustrated, and interactive modals exist to preview changes and find out what looks and fits best.
 
 <a name="security"></a>
-## Security
+## Security, Users, and Permissions
 
-All features are managed through Google Firebase Authentication, and includes logins, signing up new users, password reset, and updating existing credentials. Signing up new users requires authenticated admin permissions, while updating existing credentials can be done by any authenticated user. See more on permission creation below at "Managing Users and Permissions".
-
-<a name="managing-users-permissions"></a>
-## Managing Users and Permissions
-
-Adding and removing authenticated users is easy. Simply sign up the new user with an 
-optional set of permissions, and they will be given all allowed access. Permissions can be edited by any user with admin status via the profile page. Only admins can view and edit users, which does not include the super user (whoever created the main tool account).
+All features are managed through Google Firebase Authentication, and includes logins, signing up new users, password reset, and updating existing credentials. Signing up new users requires authenticated admin permissions, while updating existing credentials can be done by any authenticated user. Adding and removing authenticated users is easy: Simply sign up the new user with an optional set of permissions, and they will be given all allowed access. Permissions can be edited by any user with admin status via the profile page. Only admins can view and edit users, which does not include the super user (whoever created the main tool account).
