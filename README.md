@@ -60,7 +60,7 @@ An intriguing home screen goes a long way to bringing and keeping users to a web
 
 All features are managed through Google Firebase Authentication, and includes logins, signing up new users, password resetting, and updating existing credentials. Signing up new users requires authenticated admin permissions, while updating existing credentials can be done by any authenticated user. Adding and removing authenticated users is easy: Simply sign up the new user with an optional set of permissions, and they will be given all allowed access. Permissions can be edited by any user with admin status via the profile page. Only admins can view and edit users, which does not include the super user (whoever created the main tool account).
 
-
+<a name="tools-and-technology"></a>
 ## Tools and Technology
 
-This project is completely written in React, with a few firebase functions here and there to add more security to data collections.
+This project is completely written in React, with Sass styling and a few firebase functions here and there to add more security to data collections.
