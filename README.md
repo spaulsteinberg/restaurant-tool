@@ -63,4 +63,4 @@ All features are managed through Google Firebase Authentication, and includes lo
 <a name="tools-and-technology"></a>
 ## Tools and Technology
 
-This project is completely written in React, with Sass styling and a few firebase functions here and there to add more security to data collections.
+This project is written in React, Firebase Authentication, Firebase Firestore DB, and Sass styling.
