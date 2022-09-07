@@ -1,3 +1,6 @@
+[Link to API](https://github.com/spaulsteinberg/restaurant-client-api)  
+[Link to Customer-Facing](https://github.com/spaulsteinberg/restaurant-customer)
+
 # Table of Contents
 
 - [Overview](#overview)
